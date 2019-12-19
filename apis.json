@@ -1,0 +1,70 @@
+{
+    "name": "Calendly",
+    "description": "Say goodbye to phone and email tag for finding the perfect meeting time with Calendly. It's 100% free, super easy to use and you'll love our customer service.",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/28421-calendly-com.jpg",
+    "tags": [
+        "api provider",
+        "calendars",
+        "have api",
+        "webhook implementations"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/calendly\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "Calendly",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/28421-calendly-com.jpg",
+            "humanURL": "https:\/\/calendly.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/calendly-openapi.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Blog",
+            "url": "https:\/\/blog.calendly.com\/"
+        },
+        {
+            "type": "Crunchbase",
+            "url": "https:\/\/crunchbase.com\/organization\/calendly"
+        },
+        {
+            "type": "Email",
+            "url": "hello@calendly.com"
+        },
+        {
+            "type": "Email",
+            "url": "support@calendly.com"
+        },
+        {
+            "type": "Integrations",
+            "url": "https:\/\/calendly.com\/pages\/integrations"
+        },
+        {
+            "type": "Pricing",
+            "url": "https:\/\/calendly.com\/pages\/pricing"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/Calendly"
+        },
+        {
+            "type": "Webhooks",
+            "url": "https:\/\/developer.calendly.com\/docs\/webhook-subscriptions"
+        },
+        {
+            "type": "Website",
+            "url": "https:\/\/calendly.com"
+        }
+    ]
+}
