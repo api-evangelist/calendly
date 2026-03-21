@@ -1,0 +1,254 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "calendly": "https://api.calendly.com/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "User": {
+      "@id": "calendly:User",
+      "@context": {
+        "name": "schema:name",
+        "email": "schema:email",
+        "slug": "calendly:slug",
+        "scheduling_url": {
+          "@id": "calendly:schedulingUrl",
+          "@type": "@id"
+        },
+        "timezone": "calendly:timezone",
+        "avatar_url": {
+          "@id": "schema:image",
+          "@type": "@id"
+        },
+        "current_organization": {
+          "@id": "schema:memberOf",
+          "@type": "@id"
+        },
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updated_at": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "EventType": {
+      "@id": "calendly:EventType",
+      "@context": {
+        "name": "schema:name",
+        "description_plain": "schema:description",
+        "slug": "calendly:slug",
+        "scheduling_url": {
+          "@id": "calendly:schedulingUrl",
+          "@type": "@id"
+        },
+        "duration": {
+          "@id": "schema:duration",
+          "@type": "xsd:integer"
+        },
+        "active": "calendly:active",
+        "kind": "calendly:kind",
+        "pooling_type": "calendly:poolingType",
+        "color": "calendly:color",
+        "secret": "calendly:secret",
+        "booking_method": "calendly:bookingMethod",
+        "custom_questions": {
+          "@id": "calendly:customQuestions",
+          "@container": "@set"
+        },
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updated_at": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "ScheduledEvent": {
+      "@id": "calendly:ScheduledEvent",
+      "@context": {
+        "name": "schema:name",
+        "status": "schema:eventStatus",
+        "start_time": {
+          "@id": "schema:startDate",
+          "@type": "xsd:dateTime"
+        },
+        "end_time": {
+          "@id": "schema:endDate",
+          "@type": "xsd:dateTime"
+        },
+        "event_type": {
+          "@id": "calendly:eventType",
+          "@type": "@id"
+        },
+        "location": "schema:location",
+        "event_memberships": {
+          "@id": "schema:organizer",
+          "@container": "@set"
+        },
+        "event_guests": {
+          "@id": "schema:attendee",
+          "@container": "@set"
+        },
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updated_at": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Invitee": {
+      "@id": "calendly:Invitee",
+      "@context": {
+        "name": "schema:name",
+        "email": "schema:email",
+        "first_name": "schema:givenName",
+        "last_name": "schema:familyName",
+        "status": "calendly:inviteeStatus",
+        "timezone": "calendly:timezone",
+        "event": {
+          "@id": "schema:subjectOf",
+          "@type": "@id"
+        },
+        "cancel_url": {
+          "@id": "calendly:cancelUrl",
+          "@type": "@id"
+        },
+        "reschedule_url": {
+          "@id": "calendly:rescheduleUrl",
+          "@type": "@id"
+        },
+        "rescheduled": "calendly:rescheduled",
+        "questions_and_answers": {
+          "@id": "calendly:questionsAndAnswers",
+          "@container": "@set"
+        },
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updated_at": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Organization": {
+      "@id": "calendly:Organization",
+      "@context": {
+        "name": "schema:name",
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updated_at": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "OrganizationMembership": {
+      "@id": "calendly:OrganizationMembership",
+      "@context": {
+        "role": "schema:roleName",
+        "user": {
+          "@id": "schema:member",
+          "@type": "@id"
+        },
+        "organization": {
+          "@id": "schema:memberOf",
+          "@type": "@id"
+        },
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updated_at": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "WebhookSubscription": {
+      "@id": "calendly:WebhookSubscription",
+      "@context": {
+        "callback_url": {
+          "@id": "calendly:callbackUrl",
+          "@type": "@id"
+        },
+        "events": {
+          "@id": "calendly:subscribedEvents",
+          "@container": "@set"
+        },
+        "scope": "calendly:scope",
+        "state": "calendly:state",
+        "organization": {
+          "@id": "schema:memberOf",
+          "@type": "@id"
+        },
+        "creator": {
+          "@id": "dcterms:creator",
+          "@type": "@id"
+        },
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updated_at": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "RoutingForm": {
+      "@id": "calendly:RoutingForm",
+      "@context": {
+        "name": "schema:name",
+        "organization": {
+          "@id": "schema:memberOf",
+          "@type": "@id"
+        },
+        "questions": {
+          "@id": "calendly:questions",
+          "@container": "@set"
+        },
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updated_at": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "AvailabilitySchedule": {
+      "@id": "calendly:AvailabilitySchedule",
+      "@context": {
+        "name": "schema:name",
+        "timezone": "calendly:timezone",
+        "default": "calendly:isDefault",
+        "rules": {
+          "@id": "calendly:availabilityRules",
+          "@container": "@set"
+        }
+      }
+    }
+  }
+}

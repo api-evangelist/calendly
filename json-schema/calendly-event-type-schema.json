@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://developer.calendly.com/schemas/calendly/event-type.json",
+  "title": "Calendly Event Type",
+  "description": "An event type defines a kind of meeting that can be scheduled through Calendly, including its name, duration, location configuration, custom questions, and availability settings.",
+  "type": "object",
+  "required": ["uri", "name", "active", "duration", "scheduling_url"],
+  "properties": {
+    "uri": {
+      "type": "string",
+      "format": "uri",
+      "description": "The canonical URI of the event type resource."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the event type displayed to invitees."
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Whether the event type is currently active and available for scheduling."
+    },
+    "booking_method": {
+      "type": "string",
+      "enum": ["instant", "poll"],
+      "description": "The booking method for the event type."
+    },
+    "slug": {
+      "type": "string",
+      "description": "The URL-friendly slug for the event type."
+    },
+    "scheduling_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The public URL of the event type's scheduling page."
+    },
+    "duration": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "The default duration of the event in minutes."
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["solo", "group"],
+      "description": "Whether the event type is for one-on-one or group meetings."
+    },
+    "pooling_type": {
+      "type": ["string", "null"],
+      "enum": ["round_robin", "collective", null],
+      "description": "For team event types, the strategy for assigning hosts to meetings."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["StandardEventType", "AdhocEventType"],
+      "description": "The type classification of the event type."
+    },
+    "color": {
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}$",
+      "description": "The hex color code associated with the event type for display purposes."
+    },
+    "description_plain": {
+      "type": ["string", "null"],
+      "description": "The plain text description of the event type."
+    },
+    "description_html": {
+      "type": ["string", "null"],
+      "description": "The HTML-formatted description of the event type."
+    },
+    "internal_note": {
+      "type": ["string", "null"],
+      "description": "An internal note visible only to the event host, not shown to invitees."
+    },
+    "profile": {
+      "$ref": "#/$defs/Profile"
+    },
+    "secret": {
+      "type": "boolean",
+      "description": "Whether the event type is hidden from the user's public scheduling page."
+    },
+    "deleted_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "The timestamp when the event type was deleted, if applicable."
+    },
+    "custom_questions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/CustomQuestion"
+      },
+      "description": "Custom questions displayed on the booking page for invitees to answer."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the event type was created."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the event type was last updated."
+    }
+  },
+  "$defs": {
+    "Profile": {
+      "type": "object",
+      "description": "The profile (user or team) associated with the event type.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["User", "Team"],
+          "description": "The type of profile that owns the event type."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the profile owner."
+        },
+        "owner": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI of the profile owner (user or organization)."
+        }
+      }
+    },
+    "CustomQuestion": {
+      "type": "object",
+      "description": "A custom question displayed on the event type booking page.",
+      "required": ["uuid", "name", "type", "enabled", "required"],
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "The UUID of the custom question."
+        },
+        "name": {
+          "type": "string",
+          "description": "The text of the question displayed to invitees."
+        },
+        "type": {
+          "type": "string",
+          "enum": ["string", "text", "phone_number", "single_select", "multi_select"],
+          "description": "The type of input expected for the answer."
+        },
+        "position": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The display order of the question on the booking page."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the question is currently enabled and visible."
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether the invitee must provide an answer to proceed with booking."
+        },
+        "answer_choices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The available answer choices for single_select and multi_select questions."
+        },
+        "include_other": {
+          "type": "boolean",
+          "description": "Whether an 'Other' free-text option is included for select-type questions."
+        }
+      }
+    }
+  }
+}

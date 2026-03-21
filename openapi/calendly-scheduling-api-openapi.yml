@@ -1,0 +1,2799 @@
+openapi: 3.1.0
+info:
+  title: Calendly Scheduling API
+  description: >-
+    The Calendly Scheduling API (v2) is a RESTful API that allows developers
+    to programmatically manage scheduling workflows. It provides endpoints for
+    managing users, organizations, event types, scheduled events, invitees,
+    routing forms, availability schedules, and webhook subscriptions. The API
+    uses JSON for request and response bodies, standard HTTP methods, and
+    supports authentication via personal access tokens and OAuth 2.1.
+    Developers can use it to create events on behalf of invitees, retrieve
+    scheduling data, and integrate Calendly functionality directly into their
+    applications.
+  version: '2.0.0'
+  contact:
+    name: Calendly Developer Support
+    url: https://developer.calendly.com/
+  termsOfService: https://calendly.com/pages/terms
+externalDocs:
+  description: Calendly API Documentation
+  url: https://developer.calendly.com/api-docs
+servers:
+  - url: https://api.calendly.com
+    description: Production Server
+tags:
+  - name: Users
+    description: >-
+      Endpoints for retrieving user information and managing user accounts
+      within Calendly.
+  - name: Event Types
+    description: >-
+      Endpoints for listing, retrieving, and managing event types that define
+      the kinds of meetings users can schedule.
+  - name: Scheduled Events
+    description: >-
+      Endpoints for listing, retrieving, and canceling scheduled events
+      (booked meetings).
+  - name: Invitees
+    description: >-
+      Endpoints for listing, retrieving, and creating invitees on scheduled
+      events.
+  - name: Availability
+    description: >-
+      Endpoints for viewing available times for event types and managing
+      user availability schedules.
+  - name: Organizations
+    description: >-
+      Endpoints for managing organization memberships, invitations, and
+      organization-level settings.
+  - name: Webhook Subscriptions
+    description: >-
+      Endpoints for creating, listing, retrieving, and deleting webhook
+      subscriptions that receive real-time event notifications.
+  - name: Routing Forms
+    description: >-
+      Endpoints for listing and retrieving routing forms and their
+      submissions.
+  - name: Data Compliance
+    description: >-
+      Endpoints for handling data compliance requests such as deletion
+      and retrieval of invitee data.
+  - name: Activity Log
+    description: >-
+      Endpoints for retrieving activity log entries for an organization.
+  - name: Shares
+    description: >-
+      Endpoints for creating and managing shareable scheduling links.
+  - name: Groups
+    description: >-
+      Endpoints for listing and retrieving organization groups.
+security:
+  - bearerAuth: []
+paths:
+  /users/me:
+    get:
+      operationId: getCurrentUser
+      summary: Get current user
+      description: >-
+        Returns information about the currently authenticated user, including
+        their URI, name, email, scheduling URL, timezone, and organization
+        membership.
+      tags:
+        - Users
+      responses:
+        '200':
+          description: Successfully retrieved the current user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resource:
+                    $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /users/{uuid}:
+    get:
+      operationId: getUser
+      summary: Get user
+      description: >-
+        Returns information about a specific user by their UUID, including
+        name, email, scheduling URL, timezone, and organization.
+      tags:
+        - Users
+      parameters:
+        - $ref: '#/components/parameters/UserUuid'
+      responses:
+        '200':
+          description: Successfully retrieved the user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resource:
+                    $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /event_types:
+    get:
+      operationId: listEventTypes
+      summary: List event types
+      description: >-
+        Returns a paginated list of event types for the specified user or
+        organization. Event types define the kinds of meetings that can be
+        scheduled, including their duration, location, and availability.
+      tags:
+        - Event Types
+      parameters:
+        - name: user
+          in: query
+          description: >-
+            The URI of the user whose event types to list. Required if
+            organization is not specified.
+          schema:
+            type: string
+            format: uri
+        - name: organization
+          in: query
+          description: >-
+            The URI of the organization whose event types to list. Required if
+            user is not specified.
+          schema:
+            type: string
+            format: uri
+        - name: active
+          in: query
+          description: >-
+            Filter by active status. When true, only active event types are
+            returned.
+          schema:
+            type: boolean
+        - name: sort
+          in: query
+          description: >-
+            Sort order for results. Use name:asc or name:desc.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Count'
+        - $ref: '#/components/parameters/PageToken'
+      responses:
+        '200':
+          description: Successfully retrieved the list of event types
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EventType'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /event_types/{uuid}:
+    get:
+      operationId: getEventType
+      summary: Get event type
+      description: >-
+        Returns detailed information about a specific event type by its UUID,
+        including its name, duration, scheduling URL, and configuration.
+      tags:
+        - Event Types
+      parameters:
+        - $ref: '#/components/parameters/EventTypeUuid'
+      responses:
+        '200':
+          description: Successfully retrieved the event type
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resource:
+                    $ref: '#/components/schemas/EventType'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /one_off_event_types:
+    post:
+      operationId: createOneOffEventType
+      summary: Create one-off event type
+      description: >-
+        Creates a single-use event type that can be used for a one-time
+        scheduling session. One-off event types are not listed on the users
+        scheduling page.
+      tags:
+        - Event Types
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - host
+                - duration
+                - date_setting
+              properties:
+                name:
+                  type: string
+                  description: >-
+                    The name of the one-off event type.
+                host:
+                  type: string
+                  format: uri
+                  description: >-
+                    The URI of the user who will host the event.
+                duration:
+                  type: integer
+                  description: >-
+                    The duration of the event in minutes.
+                  minimum: 1
+                date_setting:
+                  type: object
+                  description: >-
+                    Date range settings for the one-off event type.
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                        - date_range
+                    start_date:
+                      type: string
+                      format: date
+                    end_date:
+                      type: string
+                      format: date
+                location:
+                  type: object
+                  description: >-
+                    The location configuration for the event.
+      responses:
+        '201':
+          description: Successfully created the one-off event type
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resource:
+                    $ref: '#/components/schemas/EventType'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /event_type_available_times:
+    get:
+      operationId: listEventTypeAvailableTimes
+      summary: List event type available times
+      description: >-
+        Returns a list of available time slots for a specific event type within
+        a given date range. This endpoint is used to display bookable times to
+        potential invitees.
+      tags:
+        - Availability
+      parameters:
+        - name: event_type
+          in: query
+          required: true
+          description: >-
+            The URI of the event type to check availability for.
+          schema:
+            type: string
+            format: uri
+        - name: start_time
+          in: query
+          required: true
+          description: >-
+            The start of the time range to check, in UTC format.
+          schema:
+            type: string
+            format: date-time
+        - name: end_time
+          in: query
+          required: true
+          description: >-
+            The end of the time range to check, in UTC format.
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Successfully retrieved available times
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AvailableTime'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /user_busy_times:
+    get:
+      operationId: listUserBusyTimes
+      summary: List user busy times
+      description: >-
+        Returns a list of time periods during which a user is busy, based on
+        their connected calendars. Useful for checking a users availability
+        before scheduling.
+      tags:
+        - Availability
+      parameters:
+        - name: user
+          in: query
+          required: true
+          description: >-
+            The URI of the user whose busy times to retrieve.
+          schema:
+            type: string
+            format: uri
+        - name: start_time
+          in: query
+          required: true
+          description: >-
+            The start of the time range to check, in UTC format.
+          schema:
+            type: string
+            format: date-time
+        - name: end_time
+          in: query
+          required: true
+          description: >-
+            The end of the time range to check, in UTC format.
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Successfully retrieved busy times
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BusyTime'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /user_availability_schedules:
+    get:
+      operationId: listUserAvailabilitySchedules
+      summary: List user availability schedules
+      description: >-
+        Returns a list of availability schedules for a specific user. Availability
+        schedules define the recurring time windows when a user is available for
+        meetings.
+      tags:
+        - Availability
+      parameters:
+        - name: user
+          in: query
+          required: true
+          description: >-
+            The URI of the user whose availability schedules to retrieve.
+          schema:
+            type: string
+            format: uri
+      responses:
+        '200':
+          description: Successfully retrieved availability schedules
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AvailabilitySchedule'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /user_availability_schedules/{uuid}:
+    get:
+      operationId: getUserAvailabilitySchedule
+      summary: Get user availability schedule
+      description: >-
+        Returns a specific availability schedule by its UUID, including the
+        timezone and rules that define available time windows.
+      tags:
+        - Availability
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          description: >-
+            The UUID of the availability schedule.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the availability schedule
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resource:
+                    $ref: '#/components/schemas/AvailabilitySchedule'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /scheduled_events:
+    get:
+      operationId: listScheduledEvents
+      summary: List scheduled events
+      description: >-
+        Returns a paginated list of scheduled events for the specified user or
+        organization. Scheduled events represent booked meetings with start and
+        end times, locations, and associated invitees.
+      tags:
+        - Scheduled Events
+      parameters:
+        - name: user
+          in: query
+          description: >-
+            The URI of the user whose scheduled events to list.
+          schema:
+            type: string
+            format: uri
+        - name: organization
+          in: query
+          description: >-
+            The URI of the organization whose scheduled events to list.
+          schema:
+            type: string
+            format: uri
+        - name: invitee_email
+          in: query
+          description: >-
+            Filter by invitee email address.
+          schema:
+            type: string
+            format: email
+        - name: status
+          in: query
+          description: >-
+            Filter by event status.
+          schema:
+            type: string
+            enum:
+              - active
+              - canceled
+        - name: min_start_time
+          in: query
+          description: >-
+            Only return events starting on or after this time, in UTC format.
+          schema:
+            type: string
+            format: date-time
+        - name: max_start_time
+          in: query
+          description: >-
+            Only return events starting before this time, in UTC format.
+          schema:
+            type: string
+            format: date-time
+        - name: sort
+          in: query
+          description: >-
+            Sort order for results. Use start_time:asc or start_time:desc.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Count'
+        - $ref: '#/components/parameters/PageToken'
+      responses:
+        '200':
+          description: Successfully retrieved the list of scheduled events
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ScheduledEvent'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /scheduled_events/{uuid}:
+    get:
+      operationId: getScheduledEvent
+      summary: Get scheduled event
+      description: >-
+        Returns detailed information about a specific scheduled event by its
+        UUID, including start and end times, event type, location, and
+        cancellation details if applicable.
+      tags:
+        - Scheduled Events
+      parameters:
+        - $ref: '#/components/parameters/ScheduledEventUuid'
+      responses:
+        '200':
+          description: Successfully retrieved the scheduled event
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resource:
+                    $ref: '#/components/schemas/ScheduledEvent'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /scheduled_events/{uuid}/cancellation:
+    post:
+      operationId: cancelScheduledEvent
+      summary: Cancel scheduled event
+      description: >-
+        Cancels a scheduled event. Optionally include a reason for the
+        cancellation. This will trigger invitee.canceled webhook events
+        for all subscribed endpoints.
+      tags:
+        - Scheduled Events
+      parameters:
+        - $ref: '#/components/parameters/ScheduledEventUuid'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+                  description: >-
+                    The reason for canceling the event.
+                  maxLength: 10000
+      responses:
+        '200':
+          description: Successfully canceled the scheduled event
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resource:
+                    $ref: '#/components/schemas/Cancellation'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /scheduled_events/{event_uuid}/invitees:
+    get:
+      operationId: listEventInvitees
+      summary: List event invitees
+      description: >-
+        Returns a paginated list of invitees for a specific scheduled event.
+        Invitee data includes name, email, timezone, and answers to custom
+        questions from the booking page.
+      tags:
+        - Invitees
+      parameters:
+        - name: event_uuid
+          in: path
+          required: true
+          description: >-
+            The UUID of the scheduled event.
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: >-
+            Filter by invitee status.
+          schema:
+            type: string
+            enum:
+              - active
+              - canceled
+        - name: sort
+          in: query
+          description: >-
+            Sort order for results. Use created_at:asc or created_at:desc.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Count'
+        - $ref: '#/components/parameters/PageToken'
+      responses:
+        '200':
+          description: Successfully retrieved the list of invitees
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Invitee'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /scheduled_events/{event_uuid}/invitees/{invitee_uuid}:
+    get:
+      operationId: getEventInvitee
+      summary: Get event invitee
+      description: >-
+        Returns detailed information about a specific invitee for a scheduled
+        event, including their name, email, timezone, and answers to custom
+        questions on the event booking page.
+      tags:
+        - Invitees
+      parameters:
+        - name: event_uuid
+          in: path
+          required: true
+          description: >-
+            The UUID of the scheduled event.
+          schema:
+            type: string
+        - name: invitee_uuid
+          in: path
+          required: true
+          description: >-
+            The UUID of the invitee.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the invitee
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resource:
+                    $ref: '#/components/schemas/Invitee'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /invitees:
+    post:
+      operationId: createEventInvitee
+      summary: Create event invitee
+      description: >-
+        Creates a new invitee for a scheduled event, effectively booking a
+        meeting on behalf of the invitee. This is the core endpoint of the
+        Scheduling API, enabling programmatic event creation without redirects,
+        iframes, or the Calendly-hosted UI. Requires a paid Calendly plan.
+      tags:
+        - Invitees
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - event_type
+                - start_time
+                - invitee
+              properties:
+                event_type:
+                  type: string
+                  format: uri
+                  description: >-
+                    The URI of the event type to book.
+                start_time:
+                  type: string
+                  format: date-time
+                  description: >-
+                    The start time for the event in UTC. Must correspond to a
+                    valid available time slot.
+                invitee:
+                  type: object
+                  required:
+                    - name
+                    - email
+                  properties:
+                    name:
+                      type: string
+                      description: >-
+                        The full name of the invitee.
+                    email:
+                      type: string
+                      format: email
+                      description: >-
+                        The email address of the invitee.
+                    timezone:
+                      type: string
+                      description: >-
+                        The IANA timezone of the invitee.
+                  description: >-
+                    The invitee details for the booking.
+                questions_and_answers:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      question_uuid:
+                        type: string
+                        description: >-
+                          The UUID of the custom question.
+                      answer:
+                        type: string
+                        description: >-
+                          The answer to the custom question.
+                  description: >-
+                    Answers to custom questions on the event type booking page.
+      responses:
+        '201':
+          description: Successfully created the invitee and booked the event
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resource:
+                    $ref: '#/components/schemas/Invitee'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /webhook_subscriptions:
+    get:
+      operationId: listWebhookSubscriptions
+      summary: List webhook subscriptions
+      description: >-
+        Returns a paginated list of webhook subscriptions for the specified
+        user or organization. Each subscription defines the events to listen
+        for and the callback URL to notify.
+      tags:
+        - Webhook Subscriptions
+      parameters:
+        - name: user
+          in: query
+          description: >-
+            The URI of the user whose webhook subscriptions to list.
+          schema:
+            type: string
+            format: uri
+        - name: organization
+          in: query
+          required: true
+          description: >-
+            The URI of the organization whose webhook subscriptions to list.
+          schema:
+            type: string
+            format: uri
+        - name: scope
+          in: query
+          required: true
+          description: >-
+            The scope of the webhook subscription. Use user for subscriptions
+            scoped to a specific user, or organization for organization-wide
+            subscriptions.
+          schema:
+            type: string
+            enum:
+              - user
+              - organization
+        - $ref: '#/components/parameters/Count'
+        - $ref: '#/components/parameters/PageToken'
+      responses:
+        '200':
+          description: Successfully retrieved webhook subscriptions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/WebhookSubscription'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createWebhookSubscription
+      summary: Create webhook subscription
+      description: >-
+        Creates a new webhook subscription to receive real-time notifications
+        when scheduling events occur. You can subscribe to invitee.created,
+        invitee.canceled, and routing_form_submission.created events.
+      tags:
+        - Webhook Subscriptions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - url
+                - events
+                - organization
+                - scope
+              properties:
+                url:
+                  type: string
+                  format: uri
+                  description: >-
+                    The URL where webhook payloads will be delivered.
+                events:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                      - invitee.created
+                      - invitee.canceled
+                      - routing_form_submission.created
+                  description: >-
+                    The list of event types to subscribe to.
+                  minItems: 1
+                organization:
+                  type: string
+                  format: uri
+                  description: >-
+                    The URI of the organization for the subscription.
+                user:
+                  type: string
+                  format: uri
+                  description: >-
+                    The URI of the user for user-scoped subscriptions.
+                scope:
+                  type: string
+                  enum:
+                    - user
+                    - organization
+                  description: >-
+                    The scope of the webhook subscription.
+                signing_key:
+                  type: string
+                  description: >-
+                    A secret key used to sign webhook payloads for
+                    verification.
+      responses:
+        '201':
+          description: Successfully created the webhook subscription
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resource:
+                    $ref: '#/components/schemas/WebhookSubscription'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /webhook_subscriptions/{uuid}:
+    get:
+      operationId: getWebhookSubscription
+      summary: Get webhook subscription
+      description: >-
+        Returns detailed information about a specific webhook subscription
+        by its UUID, including the callback URL, subscribed events, and scope.
+      tags:
+        - Webhook Subscriptions
+      parameters:
+        - $ref: '#/components/parameters/WebhookSubscriptionUuid'
+      responses:
+        '200':
+          description: Successfully retrieved the webhook subscription
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resource:
+                    $ref: '#/components/schemas/WebhookSubscription'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteWebhookSubscription
+      summary: Delete webhook subscription
+      description: >-
+        Deletes a webhook subscription by its UUID. Once deleted, the
+        subscription will no longer receive event notifications.
+      tags:
+        - Webhook Subscriptions
+      parameters:
+        - $ref: '#/components/parameters/WebhookSubscriptionUuid'
+      responses:
+        '204':
+          description: Successfully deleted the webhook subscription
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /organization_memberships:
+    get:
+      operationId: listOrganizationMemberships
+      summary: List organization memberships
+      description: >-
+        Returns a paginated list of organization memberships. Each membership
+        represents a users role and status within an organization.
+      tags:
+        - Organizations
+      parameters:
+        - name: organization
+          in: query
+          required: true
+          description: >-
+            The URI of the organization whose memberships to list.
+          schema:
+            type: string
+            format: uri
+        - name: user
+          in: query
+          description: >-
+            Filter by user URI.
+          schema:
+            type: string
+            format: uri
+        - name: email
+          in: query
+          description: >-
+            Filter by user email address.
+          schema:
+            type: string
+            format: email
+        - $ref: '#/components/parameters/Count'
+        - $ref: '#/components/parameters/PageToken'
+      responses:
+        '200':
+          description: Successfully retrieved organization memberships
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OrganizationMembership'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /organization_memberships/{uuid}:
+    get:
+      operationId: getOrganizationMembership
+      summary: Get organization membership
+      description: >-
+        Returns detailed information about a specific organization membership,
+        including the users role and status within the organization.
+      tags:
+        - Organizations
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          description: >-
+            The UUID of the organization membership.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the organization membership
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resource:
+                    $ref: '#/components/schemas/OrganizationMembership'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteOrganizationMembership
+      summary: Remove organization membership
+      description: >-
+        Removes a user from an organization by deleting their membership.
+        This action cannot be undone.
+      tags:
+        - Organizations
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          description: >-
+            The UUID of the organization membership to remove.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Successfully removed the organization membership
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /organizations/{uuid}/invitations:
+    get:
+      operationId: listOrganizationInvitations
+      summary: List organization invitations
+      description: >-
+        Returns a paginated list of pending invitations for the specified
+        organization.
+      tags:
+        - Organizations
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          description: >-
+            The UUID of the organization.
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: >-
+            Filter invitations by status.
+          schema:
+            type: string
+            enum:
+              - pending
+              - accepted
+              - declined
+        - $ref: '#/components/parameters/Count'
+        - $ref: '#/components/parameters/PageToken'
+      responses:
+        '200':
+          description: Successfully retrieved organization invitations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OrganizationInvitation'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: inviteToOrganization
+      summary: Invite user to organization
+      description: >-
+        Sends an invitation to a user to join the organization. The invitee
+        will receive an email with instructions to accept the invitation.
+      tags:
+        - Organizations
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          description: >-
+            The UUID of the organization.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: >-
+                    The email address of the person to invite.
+      responses:
+        '201':
+          description: Successfully created the invitation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resource:
+                    $ref: '#/components/schemas/OrganizationInvitation'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /organizations/{org_uuid}/invitations/{invitation_uuid}:
+    get:
+      operationId: getOrganizationInvitation
+      summary: Get organization invitation
+      description: >-
+        Returns detailed information about a specific organization invitation.
+      tags:
+        - Organizations
+      parameters:
+        - name: org_uuid
+          in: path
+          required: true
+          description: >-
+            The UUID of the organization.
+          schema:
+            type: string
+        - name: invitation_uuid
+          in: path
+          required: true
+          description: >-
+            The UUID of the invitation.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the invitation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resource:
+                    $ref: '#/components/schemas/OrganizationInvitation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: revokeOrganizationInvitation
+      summary: Revoke organization invitation
+      description: >-
+        Revokes a pending organization invitation. The invitee will no longer
+        be able to accept the invitation.
+      tags:
+        - Organizations
+      parameters:
+        - name: org_uuid
+          in: path
+          required: true
+          description: >-
+            The UUID of the organization.
+          schema:
+            type: string
+        - name: invitation_uuid
+          in: path
+          required: true
+          description: >-
+            The UUID of the invitation to revoke.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Successfully revoked the invitation
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /routing_forms:
+    get:
+      operationId: listRoutingForms
+      summary: List routing forms
+      description: >-
+        Returns a paginated list of routing forms for the specified
+        organization. Routing forms are questionnaires that direct invitees
+        to the appropriate scheduling page based on their responses.
+      tags:
+        - Routing Forms
+      parameters:
+        - name: organization
+          in: query
+          required: true
+          description: >-
+            The URI of the organization whose routing forms to list.
+          schema:
+            type: string
+            format: uri
+        - $ref: '#/components/parameters/Count'
+        - $ref: '#/components/parameters/PageToken'
+      responses:
+        '200':
+          description: Successfully retrieved routing forms
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RoutingForm'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /routing_forms/{uuid}:
+    get:
+      operationId: getRoutingForm
+      summary: Get routing form
+      description: >-
+        Returns detailed information about a specific routing form, including
+        its questions and routing rules.
+      tags:
+        - Routing Forms
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          description: >-
+            The UUID of the routing form.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the routing form
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resource:
+                    $ref: '#/components/schemas/RoutingForm'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /routing_form_submissions:
+    get:
+      operationId: listRoutingFormSubmissions
+      summary: List routing form submissions
+      description: >-
+        Returns a paginated list of submissions for a specific routing form,
+        including the answers provided by each submitter.
+      tags:
+        - Routing Forms
+      parameters:
+        - name: routing_form
+          in: query
+          required: true
+          description: >-
+            The URI of the routing form whose submissions to list.
+          schema:
+            type: string
+            format: uri
+        - $ref: '#/components/parameters/Count'
+        - $ref: '#/components/parameters/PageToken'
+      responses:
+        '200':
+          description: Successfully retrieved routing form submissions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RoutingFormSubmission'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /routing_form_submissions/{uuid}:
+    get:
+      operationId: getRoutingFormSubmission
+      summary: Get routing form submission
+      description: >-
+        Returns detailed information about a specific routing form submission.
+      tags:
+        - Routing Forms
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          description: >-
+            The UUID of the routing form submission.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the routing form submission
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resource:
+                    $ref: '#/components/schemas/RoutingFormSubmission'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /data_compliance/deletion/invitees:
+    post:
+      operationId: deleteInviteeData
+      summary: Delete invitee data
+      description: >-
+        Submits a request to delete invitee data for data compliance purposes
+        such as GDPR. The deletion is processed asynchronously.
+      tags:
+        - Data Compliance
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - emails
+              properties:
+                emails:
+                  type: array
+                  items:
+                    type: string
+                    format: email
+                  description: >-
+                    The list of invitee email addresses to delete data for.
+      responses:
+        '202':
+          description: Deletion request accepted and will be processed
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /activity_log_entries:
+    get:
+      operationId: listActivityLogEntries
+      summary: List activity log entries
+      description: >-
+        Returns a paginated list of activity log entries for the specified
+        organization. Activity logs record actions taken by users within
+        the organization.
+      tags:
+        - Activity Log
+      parameters:
+        - name: organization
+          in: query
+          required: true
+          description: >-
+            The URI of the organization whose activity log to retrieve.
+          schema:
+            type: string
+            format: uri
+        - name: min_occurred_at
+          in: query
+          description: >-
+            Only return entries that occurred on or after this time.
+          schema:
+            type: string
+            format: date-time
+        - name: max_occurred_at
+          in: query
+          description: >-
+            Only return entries that occurred before this time.
+          schema:
+            type: string
+            format: date-time
+        - name: search_term
+          in: query
+          description: >-
+            Filter entries by a search term.
+          schema:
+            type: string
+        - name: sort
+          in: query
+          description: >-
+            Sort order for results.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Count'
+        - $ref: '#/components/parameters/PageToken'
+      responses:
+        '200':
+          description: Successfully retrieved activity log entries
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ActivityLogEntry'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /shares:
+    post:
+      operationId: createShare
+      summary: Create share
+      description: >-
+        Creates a shareable scheduling link that can be distributed to
+        potential invitees. Shares can include multiple event types and
+        custom availability settings.
+      tags:
+        - Shares
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - event_type
+              properties:
+                event_type:
+                  type: string
+                  format: uri
+                  description: >-
+                    The URI of the event type to create a share for.
+                max_spots:
+                  type: integer
+                  description: >-
+                    The maximum number of spots available for booking through
+                    this share.
+                  minimum: 1
+      responses:
+        '201':
+          description: Successfully created the share
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resource:
+                    $ref: '#/components/schemas/Share'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /groups:
+    get:
+      operationId: listGroups
+      summary: List groups
+      description: >-
+        Returns a paginated list of groups within the specified organization.
+        Groups allow organizing users into teams for scheduling purposes.
+      tags:
+        - Groups
+      parameters:
+        - name: organization
+          in: query
+          required: true
+          description: >-
+            The URI of the organization whose groups to list.
+          schema:
+            type: string
+            format: uri
+        - $ref: '#/components/parameters/Count'
+        - $ref: '#/components/parameters/PageToken'
+      responses:
+        '200':
+          description: Successfully retrieved groups
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Group'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /group_relationships:
+    get:
+      operationId: listGroupRelationships
+      summary: List group relationships
+      description: >-
+        Returns a paginated list of group memberships, showing which users
+        belong to which groups within an organization.
+      tags:
+        - Groups
+      parameters:
+        - name: group
+          in: query
+          description: >-
+            The URI of the group to list relationships for.
+          schema:
+            type: string
+            format: uri
+        - name: organization
+          in: query
+          required: true
+          description: >-
+            The URI of the organization.
+          schema:
+            type: string
+            format: uri
+        - $ref: '#/components/parameters/Count'
+        - $ref: '#/components/parameters/PageToken'
+      responses:
+        '200':
+          description: Successfully retrieved group relationships
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GroupRelationship'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        Personal access token or OAuth 2.1 access token. Include in the
+        Authorization header as Bearer {token}.
+  parameters:
+    UserUuid:
+      name: uuid
+      in: path
+      required: true
+      description: >-
+        The UUID of the user.
+      schema:
+        type: string
+    EventTypeUuid:
+      name: uuid
+      in: path
+      required: true
+      description: >-
+        The UUID of the event type.
+      schema:
+        type: string
+    ScheduledEventUuid:
+      name: uuid
+      in: path
+      required: true
+      description: >-
+        The UUID of the scheduled event.
+      schema:
+        type: string
+    WebhookSubscriptionUuid:
+      name: uuid
+      in: path
+      required: true
+      description: >-
+        The UUID of the webhook subscription.
+      schema:
+        type: string
+    Count:
+      name: count
+      in: query
+      description: >-
+        The number of results to return per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    PageToken:
+      name: page_token
+      in: query
+      description: >-
+        A token for fetching the next page of results from a previous
+        paginated response.
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: >-
+        The request was invalid or malformed. Check the request body and
+        parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: >-
+        Authentication failed. Verify that a valid access token is provided
+        in the Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: >-
+        The requested resource was not found. Verify the UUID or URI is correct.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    User:
+      type: object
+      description: >-
+        A Calendly user account with scheduling and organization information.
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: >-
+            The canonical URI of the user resource.
+        name:
+          type: string
+          description: >-
+            The full name of the user.
+        slug:
+          type: string
+          description: >-
+            The URL-friendly slug for the users scheduling page.
+        email:
+          type: string
+          format: email
+          description: >-
+            The email address of the user.
+        scheduling_url:
+          type: string
+          format: uri
+          description: >-
+            The URL of the users Calendly scheduling page.
+        timezone:
+          type: string
+          description: >-
+            The IANA timezone of the user.
+        avatar_url:
+          type: string
+          format: uri
+          description: >-
+            The URL of the users avatar image.
+        created_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the user was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the user was last updated.
+        current_organization:
+          type: string
+          format: uri
+          description: >-
+            The URI of the users current organization.
+    EventType:
+      type: object
+      description: >-
+        An event type defines a kind of meeting that can be scheduled, including
+        its duration, location, and availability configuration.
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: >-
+            The canonical URI of the event type resource.
+        name:
+          type: string
+          description: >-
+            The name of the event type.
+        active:
+          type: boolean
+          description: >-
+            Whether the event type is currently active and available for
+            scheduling.
+        booking_method:
+          type: string
+          enum:
+            - instant
+            - poll
+          description: >-
+            The booking method for the event type.
+        slug:
+          type: string
+          description: >-
+            The URL-friendly slug for the event type.
+        scheduling_url:
+          type: string
+          format: uri
+          description: >-
+            The URL of the event types scheduling page.
+        duration:
+          type: integer
+          description: >-
+            The default duration of the event in minutes.
+          minimum: 1
+        kind:
+          type: string
+          enum:
+            - solo
+            - group
+          description: >-
+            Whether the event type is for solo or group meetings.
+        pooling_type:
+          type: string
+          enum:
+            - round_robin
+            - collective
+          description: >-
+            For team event types, the pooling strategy for host assignment.
+        type:
+          type: string
+          enum:
+            - StandardEventType
+            - AdhocEventType
+          description: >-
+            The type classification of the event type.
+        color:
+          type: string
+          description: >-
+            The hex color code associated with the event type.
+        description_plain:
+          type: string
+          description: >-
+            The plain text description of the event type.
+        description_html:
+          type: string
+          description: >-
+            The HTML-formatted description of the event type.
+        internal_note:
+          type: string
+          description: >-
+            An internal note visible only to the event host.
+        profile:
+          type: object
+          description: >-
+            The profile associated with the event type.
+          properties:
+            type:
+              type: string
+              description: >-
+                The profile type (User or Team).
+            name:
+              type: string
+              description: >-
+                The profile name.
+            owner:
+              type: string
+              format: uri
+              description: >-
+                The URI of the profile owner.
+        secret:
+          type: boolean
+          description: >-
+            Whether the event type is hidden from the scheduling page.
+        deleted_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the event type was deleted, if applicable.
+        custom_questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomQuestion'
+          description: >-
+            Custom questions displayed on the booking page.
+        created_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the event type was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the event type was last updated.
+    CustomQuestion:
+      type: object
+      description: >-
+        A custom question displayed on the event type booking page.
+      properties:
+        uuid:
+          type: string
+          description: >-
+            The UUID of the custom question.
+        name:
+          type: string
+          description: >-
+            The text of the question.
+        type:
+          type: string
+          enum:
+            - string
+            - text
+            - phone_number
+            - single_select
+            - multi_select
+          description: >-
+            The type of input expected for the answer.
+        position:
+          type: integer
+          description: >-
+            The display order of the question.
+        enabled:
+          type: boolean
+          description: >-
+            Whether the question is currently enabled.
+        required:
+          type: boolean
+          description: >-
+            Whether an answer is required.
+        answer_choices:
+          type: array
+          items:
+            type: string
+          description: >-
+            The available answer choices for select-type questions.
+        include_other:
+          type: boolean
+          description: >-
+            Whether an Other option is included in select-type questions.
+    ScheduledEvent:
+      type: object
+      description: >-
+        A scheduled event represents a booked meeting with a specific start
+        time, end time, location, and associated invitees.
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: >-
+            The canonical URI of the scheduled event resource.
+        name:
+          type: string
+          description: >-
+            The name of the scheduled event.
+        status:
+          type: string
+          enum:
+            - active
+            - canceled
+          description: >-
+            The current status of the scheduled event.
+        start_time:
+          type: string
+          format: date-time
+          description: >-
+            The start time of the event in UTC.
+        end_time:
+          type: string
+          format: date-time
+          description: >-
+            The end time of the event in UTC.
+        event_type:
+          type: string
+          format: uri
+          description: >-
+            The URI of the event type this event was created from.
+        location:
+          $ref: '#/components/schemas/Location'
+        invitees_counter:
+          type: object
+          description: >-
+            A count of invitees by status.
+          properties:
+            total:
+              type: integer
+              description: >-
+                The total number of invitees.
+            active:
+              type: integer
+              description: >-
+                The number of active invitees.
+            limit:
+              type: integer
+              description: >-
+                The maximum number of invitees allowed.
+        cancellation:
+          $ref: '#/components/schemas/Cancellation'
+        created_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the event was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the event was last updated.
+        event_memberships:
+          type: array
+          items:
+            type: object
+            properties:
+              user:
+                type: string
+                format: uri
+                description: >-
+                  The URI of the event member.
+              user_email:
+                type: string
+                format: email
+                description: >-
+                  The email of the event member.
+              user_name:
+                type: string
+                description: >-
+                  The name of the event member.
+          description: >-
+            The list of users who are members (hosts) of this event.
+        event_guests:
+          type: array
+          items:
+            type: object
+            properties:
+              email:
+                type: string
+                format: email
+                description: >-
+                  The email address of the guest.
+              created_at:
+                type: string
+                format: date-time
+                description: >-
+                  When the guest was added.
+              updated_at:
+                type: string
+                format: date-time
+                description: >-
+                  When the guest record was last updated.
+          description: >-
+            Additional guests invited to the event.
+    Invitee:
+      type: object
+      description: >-
+        An invitee is a person who has booked or been booked for a scheduled
+        event, with their contact information and booking details.
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: >-
+            The canonical URI of the invitee resource.
+        email:
+          type: string
+          format: email
+          description: >-
+            The email address of the invitee.
+        first_name:
+          type: string
+          description: >-
+            The first name of the invitee.
+        last_name:
+          type: string
+          description: >-
+            The last name of the invitee.
+        name:
+          type: string
+          description: >-
+            The full name of the invitee.
+        status:
+          type: string
+          enum:
+            - active
+            - canceled
+          description: >-
+            The status of the invitee.
+        timezone:
+          type: string
+          description: >-
+            The IANA timezone of the invitee.
+        event:
+          type: string
+          format: uri
+          description: >-
+            The URI of the associated scheduled event.
+        text_reminder_number:
+          type: string
+          description: >-
+            The phone number for text reminders.
+        rescheduled:
+          type: boolean
+          description: >-
+            Whether this invitee was rescheduled from a previous event.
+        old_invitee:
+          type: string
+          format: uri
+          description: >-
+            The URI of the previous invitee if this was rescheduled.
+        new_invitee:
+          type: string
+          format: uri
+          description: >-
+            The URI of the new invitee if this invitee was rescheduled.
+        cancel_url:
+          type: string
+          format: uri
+          description: >-
+            The URL for the invitee to cancel the event.
+        reschedule_url:
+          type: string
+          format: uri
+          description: >-
+            The URL for the invitee to reschedule the event.
+        routing_form_submission:
+          type: string
+          format: uri
+          description: >-
+            The URI of the routing form submission that led to this booking.
+        cancellation:
+          $ref: '#/components/schemas/Cancellation'
+        payment:
+          type: object
+          description: >-
+            Payment information if the event type requires payment.
+          properties:
+            external_id:
+              type: string
+              description: >-
+                The external payment processor ID.
+            provider:
+              type: string
+              description: >-
+                The payment provider name.
+            amount:
+              type: number
+              description: >-
+                The payment amount.
+            currency:
+              type: string
+              description: >-
+                The payment currency code.
+            terms:
+              type: string
+              description: >-
+                The payment terms.
+            successful:
+              type: boolean
+              description: >-
+                Whether the payment was successful.
+        questions_and_answers:
+          type: array
+          items:
+            type: object
+            properties:
+              question:
+                type: string
+                description: >-
+                  The text of the custom question.
+              answer:
+                type: string
+                description: >-
+                  The invitees answer to the question.
+              position:
+                type: integer
+                description: >-
+                  The display position of the question.
+          description: >-
+            The invitees answers to custom questions on the booking page.
+        tracking:
+          type: object
+          description: >-
+            UTM and tracking parameters captured at booking time.
+          properties:
+            utm_campaign:
+              type: string
+              description: >-
+                The UTM campaign parameter.
+            utm_source:
+              type: string
+              description: >-
+                The UTM source parameter.
+            utm_medium:
+              type: string
+              description: >-
+                The UTM medium parameter.
+            utm_content:
+              type: string
+              description: >-
+                The UTM content parameter.
+            utm_term:
+              type: string
+              description: >-
+                The UTM term parameter.
+            salesforce_uuid:
+              type: string
+              description: >-
+                The Salesforce UUID if applicable.
+        created_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the invitee was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the invitee was last updated.
+    Location:
+      type: object
+      description: >-
+        The location configuration for a scheduled event, specifying where
+        the meeting takes place.
+      properties:
+        type:
+          type: string
+          description: >-
+            The type of location (e.g., physical, outbound_call, inbound_call,
+            google_conference, zoom, microsoft_teams_conference, custom).
+        location:
+          type: string
+          description: >-
+            The location details, such as an address or phone number.
+        join_url:
+          type: string
+          format: uri
+          description: >-
+            The URL to join the meeting for virtual locations.
+        status:
+          type: string
+          description: >-
+            The status of the conference link generation.
+        additional_info:
+          type: string
+          description: >-
+            Additional information about the location.
+    Cancellation:
+      type: object
+      description: >-
+        Information about a canceled event or invitee, including who canceled
+        and the reason.
+      properties:
+        canceled_by:
+          type: string
+          description: >-
+            The name or identifier of who canceled the event.
+        reason:
+          type: string
+          description: >-
+            The reason provided for the cancellation.
+        canceler_type:
+          type: string
+          enum:
+            - host
+            - invitee
+          description: >-
+            Whether the host or invitee canceled.
+        created_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the cancellation occurred.
+    WebhookSubscription:
+      type: object
+      description: >-
+        A webhook subscription that receives real-time notifications when
+        scheduling events occur in Calendly.
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: >-
+            The canonical URI of the webhook subscription resource.
+        callback_url:
+          type: string
+          format: uri
+          description: >-
+            The URL where webhook payloads are delivered.
+        created_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the subscription was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the subscription was last updated.
+        retry_started_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when retry attempts started, if applicable.
+        state:
+          type: string
+          enum:
+            - active
+            - disabled
+          description: >-
+            The current state of the webhook subscription.
+        events:
+          type: array
+          items:
+            type: string
+            enum:
+              - invitee.created
+              - invitee.canceled
+              - routing_form_submission.created
+          description: >-
+            The list of event types this subscription listens for.
+        scope:
+          type: string
+          enum:
+            - user
+            - organization
+          description: >-
+            The scope of the subscription.
+        organization:
+          type: string
+          format: uri
+          description: >-
+            The URI of the associated organization.
+        user:
+          type: string
+          format: uri
+          description: >-
+            The URI of the associated user for user-scoped subscriptions.
+        creator:
+          type: string
+          format: uri
+          description: >-
+            The URI of the user who created the subscription.
+    OrganizationMembership:
+      type: object
+      description: >-
+        A membership record representing a users role and status within a
+        Calendly organization.
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: >-
+            The canonical URI of the organization membership resource.
+        role:
+          type: string
+          enum:
+            - user
+            - admin
+            - owner
+          description: >-
+            The users role within the organization.
+        user:
+          $ref: '#/components/schemas/User'
+        organization:
+          type: string
+          format: uri
+          description: >-
+            The URI of the organization.
+        created_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the membership was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the membership was last updated.
+    OrganizationInvitation:
+      type: object
+      description: >-
+        An invitation for a user to join a Calendly organization.
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: >-
+            The canonical URI of the invitation resource.
+        email:
+          type: string
+          format: email
+          description: >-
+            The email address the invitation was sent to.
+        status:
+          type: string
+          enum:
+            - pending
+            - accepted
+            - declined
+          description: >-
+            The current status of the invitation.
+        organization:
+          type: string
+          format: uri
+          description: >-
+            The URI of the organization.
+        created_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the invitation was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the invitation was last updated.
+        last_sent_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the invitation was last sent.
+    RoutingForm:
+      type: object
+      description: >-
+        A routing form is a questionnaire that directs invitees to the
+        appropriate scheduling page based on their responses.
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: >-
+            The canonical URI of the routing form resource.
+        name:
+          type: string
+          description: >-
+            The name of the routing form.
+        organization:
+          type: string
+          format: uri
+          description: >-
+            The URI of the organization that owns the routing form.
+        questions:
+          type: array
+          items:
+            type: object
+            properties:
+              uuid:
+                type: string
+                description: >-
+                  The UUID of the question.
+              name:
+                type: string
+                description: >-
+                  The text of the question.
+              type:
+                type: string
+                description: >-
+                  The type of question.
+              required:
+                type: boolean
+                description: >-
+                  Whether an answer is required.
+              answer_choices:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    answer_choice_id:
+                      type: string
+                      description: >-
+                        The ID of the answer choice.
+                    label:
+                      type: string
+                      description: >-
+                        The display label.
+                description: >-
+                  The available answer choices.
+          description: >-
+            The questions in the routing form.
+        created_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the routing form was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the routing form was last updated.
+    RoutingFormSubmission:
+      type: object
+      description: >-
+        A submission to a routing form, capturing the answers provided by
+        a respondent.
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: >-
+            The canonical URI of the routing form submission resource.
+        routing_form:
+          type: string
+          format: uri
+          description: >-
+            The URI of the routing form that was submitted.
+        questions_and_answers:
+          type: array
+          items:
+            type: object
+            properties:
+              question_uuid:
+                type: string
+                description: >-
+                  The UUID of the question.
+              question:
+                type: string
+                description: >-
+                  The text of the question.
+              answer:
+                type: string
+                description: >-
+                  The respondents answer.
+          description: >-
+            The questions and answers from the submission.
+        tracking:
+          type: object
+          description: >-
+            UTM and tracking parameters captured at submission time.
+          properties:
+            utm_campaign:
+              type: string
+              description: >-
+                The UTM campaign parameter.
+            utm_source:
+              type: string
+              description: >-
+                The UTM source parameter.
+            utm_medium:
+              type: string
+              description: >-
+                The UTM medium parameter.
+        submitter:
+          type: string
+          format: uri
+          description: >-
+            The URI of the invitee created from this submission.
+        submitter_type:
+          type: string
+          description: >-
+            The type of submitter.
+        created_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the submission was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the submission was last updated.
+    AvailableTime:
+      type: object
+      description: >-
+        An available time slot for an event type that can be booked by an
+        invitee.
+      properties:
+        status:
+          type: string
+          enum:
+            - available
+          description: >-
+            The status of the time slot.
+        invitees_remaining:
+          type: integer
+          description: >-
+            The number of remaining spots for group events.
+        start_time:
+          type: string
+          format: date-time
+          description: >-
+            The start time of the available slot in UTC.
+        scheduling_url:
+          type: string
+          format: uri
+          description: >-
+            The URL to schedule at this specific time.
+    BusyTime:
+      type: object
+      description: >-
+        A time period during which a user is busy based on their connected
+        calendars.
+      properties:
+        type:
+          type: string
+          description: >-
+            The type of busy time (e.g., calendly or external).
+        start_time:
+          type: string
+          format: date-time
+          description: >-
+            The start of the busy period in UTC.
+        end_time:
+          type: string
+          format: date-time
+          description: >-
+            The end of the busy period in UTC.
+        buffered_start_time:
+          type: string
+          format: date-time
+          description: >-
+            The start time including buffer periods.
+        buffered_end_time:
+          type: string
+          format: date-time
+          description: >-
+            The end time including buffer periods.
+        event:
+          type: object
+          description: >-
+            Details about the event causing the busy time.
+          properties:
+            uri:
+              type: string
+              format: uri
+              description: >-
+                The URI of the event.
+    AvailabilitySchedule:
+      type: object
+      description: >-
+        An availability schedule defining recurring time windows when a user
+        is available for meetings.
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: >-
+            The canonical URI of the availability schedule resource.
+        name:
+          type: string
+          description: >-
+            The name of the availability schedule.
+        default:
+          type: boolean
+          description: >-
+            Whether this is the users default availability schedule.
+        timezone:
+          type: string
+          description: >-
+            The IANA timezone for the schedule.
+        rules:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                  - wday
+                  - date
+                description: >-
+                  The type of rule (recurring weekday or specific date).
+              wday:
+                type: string
+                enum:
+                  - sunday
+                  - monday
+                  - tuesday
+                  - wednesday
+                  - thursday
+                  - friday
+                  - saturday
+                description: >-
+                  The day of the week for wday-type rules.
+              date:
+                type: string
+                format: date
+                description: >-
+                  The specific date for date-type rules.
+              intervals:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    from:
+                      type: string
+                      description: >-
+                        The start time of the interval (HH:MM format).
+                    to:
+                      type: string
+                      description: >-
+                        The end time of the interval (HH:MM format).
+                description: >-
+                  The time intervals during which the user is available.
+          description: >-
+            The availability rules defining when the user is available.
+    ActivityLogEntry:
+      type: object
+      description: >-
+        An entry in the organization activity log recording an action taken
+        by a user.
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: >-
+            The canonical URI of the activity log entry.
+        occurred_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the activity occurred.
+        organization:
+          type: string
+          format: uri
+          description: >-
+            The URI of the organization.
+        actor:
+          type: object
+          description: >-
+            The user who performed the action.
+          properties:
+            uri:
+              type: string
+              format: uri
+              description: >-
+                The URI of the actor.
+            display_name:
+              type: string
+              description: >-
+                The display name of the actor.
+            organization:
+              type: string
+              format: uri
+              description: >-
+                The URI of the actors organization.
+            type:
+              type: string
+              description: >-
+                The type of actor.
+        action:
+          type: string
+          description: >-
+            The action that was performed.
+        namespace:
+          type: string
+          description: >-
+            The namespace or category of the action.
+        details:
+          type: object
+          description: >-
+            Additional details about the action.
+    Share:
+      type: object
+      description: >-
+        A shareable scheduling link that can be distributed to potential
+        invitees.
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: >-
+            The canonical URI of the share resource.
+        scheduling_url:
+          type: string
+          format: uri
+          description: >-
+            The shareable scheduling URL.
+        booking_url:
+          type: string
+          format: uri
+          description: >-
+            The direct booking URL.
+        event_type:
+          type: string
+          format: uri
+          description: >-
+            The URI of the associated event type.
+    Group:
+      type: object
+      description: >-
+        A group within an organization for organizing users into teams.
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: >-
+            The canonical URI of the group resource.
+        name:
+          type: string
+          description: >-
+            The name of the group.
+        organization:
+          type: string
+          format: uri
+          description: >-
+            The URI of the organization.
+        created_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the group was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the group was last updated.
+    GroupRelationship:
+      type: object
+      description: >-
+        A relationship between a user and a group within an organization.
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: >-
+            The canonical URI of the group relationship.
+        owner:
+          type: string
+          format: uri
+          description: >-
+            The URI of the user who is a member of the group.
+        group:
+          type: string
+          format: uri
+          description: >-
+            The URI of the group.
+        organization:
+          type: string
+          format: uri
+          description: >-
+            The URI of the organization.
+        created_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the relationship was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the relationship was last updated.
+    Pagination:
+      type: object
+      description: >-
+        Pagination information for paginated list responses.
+      properties:
+        count:
+          type: integer
+          description: >-
+            The number of results in the current page.
+        next_page:
+          type: string
+          format: uri
+          description: >-
+            The URL of the next page of results, if available.
+        previous_page:
+          type: string
+          format: uri
+          description: >-
+            The URL of the previous page of results, if available.
+        next_page_token:
+          type: string
+          description: >-
+            The token to fetch the next page of results.
+        previous_page_token:
+          type: string
+          description: >-
+            The token to fetch the previous page of results.
+    Error:
+      type: object
+      description: >-
+        An error response from the Calendly API.
+      properties:
+        title:
+          type: string
+          description: >-
+            A short summary of the error.
+        message:
+          type: string
+          description: >-
+            A detailed description of the error.
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              parameter:
+                type: string
+                description: >-
+                  The parameter that caused the error.
+              message:
+                type: string
+                description: >-
+                  A description of what was wrong with the parameter.
+          description: >-
+            Specific details about validation errors.

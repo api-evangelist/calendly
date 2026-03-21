@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://developer.calendly.com/schemas/calendly/scheduled-event.json",
+  "title": "Calendly Scheduled Event",
+  "description": "A scheduled event represents a booked meeting in Calendly with a specific start time, end time, location, host memberships, and associated invitees.",
+  "type": "object",
+  "required": ["uri", "name", "status", "start_time", "end_time", "event_type"],
+  "properties": {
+    "uri": {
+      "type": "string",
+      "format": "uri",
+      "description": "The canonical URI of the scheduled event resource."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the scheduled event, inherited from the event type."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "canceled"],
+      "description": "The current status of the scheduled event."
+    },
+    "start_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The start time of the event in UTC (ISO 8601 format)."
+    },
+    "end_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The end time of the event in UTC (ISO 8601 format)."
+    },
+    "event_type": {
+      "type": "string",
+      "format": "uri",
+      "description": "The URI of the event type this event was created from."
+    },
+    "location": {
+      "$ref": "#/$defs/Location"
+    },
+    "invitees_counter": {
+      "$ref": "#/$defs/InviteesCounter"
+    },
+    "cancellation": {
+      "$ref": "#/$defs/Cancellation"
+    },
+    "event_memberships": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/EventMembership"
+      },
+      "description": "The list of users who are members (hosts) of this event."
+    },
+    "event_guests": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/EventGuest"
+      },
+      "description": "Additional guests invited to the event beyond the primary invitee."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the event was created."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the event was last updated."
+    }
+  },
+  "$defs": {
+    "Location": {
+      "type": "object",
+      "description": "The location configuration for a scheduled event, specifying where the meeting takes place.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of location.",
+          "enum": [
+            "physical",
+            "outbound_call",
+            "inbound_call",
+            "google_conference",
+            "zoom",
+            "gotomeeting",
+            "microsoft_teams_conference",
+            "webex_conference",
+            "custom"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "The location details such as a physical address, phone number, or custom location string."
+        },
+        "join_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL to join the meeting for virtual conference locations."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of conference link generation (e.g., initiated, processing, pushed, failed)."
+        },
+        "additional_info": {
+          "type": "string",
+          "description": "Additional information about the location provided by the host."
+        }
+      }
+    },
+    "InviteesCounter": {
+      "type": "object",
+      "description": "A count of invitees by status for the scheduled event.",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The total number of invitees."
+        },
+        "active": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The number of active (non-canceled) invitees."
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The maximum number of invitees allowed for the event."
+        }
+      }
+    },
+    "Cancellation": {
+      "type": "object",
+      "description": "Information about the cancellation of an event or invitee.",
+      "properties": {
+        "canceled_by": {
+          "type": "string",
+          "description": "The name or identifier of the person who canceled."
+        },
+        "reason": {
+          "type": "string",
+          "maxLength": 10000,
+          "description": "The reason provided for the cancellation."
+        },
+        "canceler_type": {
+          "type": "string",
+          "enum": ["host", "invitee"],
+          "description": "Whether the host or the invitee canceled the event."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the cancellation occurred."
+        }
+      }
+    },
+    "EventMembership": {
+      "type": "object",
+      "description": "A user who is a member (host) of a scheduled event.",
+      "properties": {
+        "user": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI of the user who is a host of the event."
+        },
+        "user_email": {
+          "type": "string",
+          "format": "email",
+          "description": "The email address of the event host."
+        },
+        "user_name": {
+          "type": "string",
+          "description": "The name of the event host."
+        }
+      }
+    },
+    "EventGuest": {
+      "type": "object",
+      "description": "An additional guest invited to a scheduled event.",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "The email address of the guest."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the guest was added to the event."
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the guest record was last updated."
+        }
+      }
+    }
+  }
+}
