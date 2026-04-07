@@ -23,51 +23,51 @@ servers:
   - url: https://api.calendly.com
     description: Production Server
 tags:
-  - name: Users
+  - name: Activity Log
     description: >-
-      Endpoints for retrieving user information and managing user accounts
-      within Calendly.
-  - name: Event Types
-    description: >-
-      Endpoints for listing, retrieving, and managing event types that define
-      the kinds of meetings users can schedule.
-  - name: Scheduled Events
-    description: >-
-      Endpoints for listing, retrieving, and canceling scheduled events
-      (booked meetings).
-  - name: Invitees
-    description: >-
-      Endpoints for listing, retrieving, and creating invitees on scheduled
-      events.
+      Endpoints for retrieving activity log entries for an organization.
   - name: Availability
     description: >-
       Endpoints for viewing available times for event types and managing
       user availability schedules.
-  - name: Organizations
-    description: >-
-      Endpoints for managing organization memberships, invitations, and
-      organization-level settings.
-  - name: Webhook Subscriptions
-    description: >-
-      Endpoints for creating, listing, retrieving, and deleting webhook
-      subscriptions that receive real-time event notifications.
-  - name: Routing Forms
-    description: >-
-      Endpoints for listing and retrieving routing forms and their
-      submissions.
   - name: Data Compliance
     description: >-
       Endpoints for handling data compliance requests such as deletion
       and retrieval of invitee data.
-  - name: Activity Log
+  - name: Event Types
     description: >-
-      Endpoints for retrieving activity log entries for an organization.
-  - name: Shares
-    description: >-
-      Endpoints for creating and managing shareable scheduling links.
+      Endpoints for listing, retrieving, and managing event types that define
+      the kinds of meetings users can schedule.
   - name: Groups
     description: >-
       Endpoints for listing and retrieving organization groups.
+  - name: Invitees
+    description: >-
+      Endpoints for listing, retrieving, and creating invitees on scheduled
+      events.
+  - name: Organizations
+    description: >-
+      Endpoints for managing organization memberships, invitations, and
+      organization-level settings.
+  - name: Routing Forms
+    description: >-
+      Endpoints for listing and retrieving routing forms and their
+      submissions.
+  - name: Scheduled Events
+    description: >-
+      Endpoints for listing, retrieving, and canceling scheduled events
+      (booked meetings).
+  - name: Shares
+    description: >-
+      Endpoints for creating and managing shareable scheduling links.
+  - name: Users
+    description: >-
+      Endpoints for retrieving user information and managing user accounts
+      within Calendly.
+  - name: Webhook Subscriptions
+    description: >-
+      Endpoints for creating, listing, retrieving, and deleting webhook
+      subscriptions that receive real-time event notifications.
 security:
   - bearerAuth: []
 paths:

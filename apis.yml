@@ -1,18 +1,16 @@
 aid: calendly
-url: 
-  https://raw.githubusercontent.com/api-evangelist/calendly/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/calendly/refs/heads/main/apis.yml
 apis:
   - aid: calendly:scheduling-api
     name: Calendly Scheduling API
     tags:
-      - Scheduling
+      - Appointments
+      - Automation
+      - Booking
       - Calendars
       - Meetings
-      - Appointments
-      - Booking
-      - Automation
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+      - Scheduling
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.calendly.com
     humanURL: https://developer.calendly.com/api-docs
     properties:
@@ -29,12 +27,11 @@ apis:
   - aid: calendly:webhook-api
     name: Calendly Webhook API
     tags:
-      - Webhooks
       - Events
       - Notifications
       - Scheduling
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+      - Webhooks
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.calendly.com
     humanURL: https://developer.calendly.com/api-docs
     properties:
@@ -53,11 +50,10 @@ apis:
     name: Calendly Embed API
     tags:
       - Embedding
-      - Widgets
       - Scheduling
       - Web Components
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+      - Widgets
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com
     humanURL: https://developer.calendly.com/
     properties:
