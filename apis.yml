@@ -1,5 +1,6 @@
 aid: calendly
-url: https://raw.githubusercontent.com/api-evangelist/calendly/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/calendly/refs/heads/main/apis.yml
 apis:
   - aid: calendly:scheduling-api
     name: Calendly Scheduling API
@@ -10,7 +11,8 @@ apis:
       - Appointments
       - Booking
       - Automation
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.calendly.com
     humanURL: https://developer.calendly.com/api-docs
     properties:
@@ -19,14 +21,11 @@ apis:
       - url: openapi/calendly-scheduling-api-openapi.yml
         type: OpenAPI
     description: >-
-      The Calendly Scheduling API (v2) is a RESTful API that allows developers
-      to programmatically manage scheduling workflows. It provides endpoints for
-      managing users, organizations, event types, scheduled events, invitees,
-      and routing forms. The API uses JSON for request and response bodies,
-      standard HTTP methods, and supports authentication via personal access
-      tokens and OAuth 2.1. Developers can use it to create events on behalf of
-      invitees, retrieve scheduling data, and integrate Calendly functionality
-      directly into their applications.
+      The Calendly Scheduling API (v2) is a RESTful API that allows developers to
+      programmatically manage scheduling workflows. It provides endpoints for managing
+      users, organizations, event types, scheduled events, invitees, and routing forms.
+      The API uses JSON for request and response bodies, standard HTTP methods, and
+      supports authentication via personal access tokens and OAuth 2.1.
   - aid: calendly:webhook-api
     name: Calendly Webhook API
     tags:
@@ -34,7 +33,8 @@ apis:
       - Events
       - Notifications
       - Scheduling
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.calendly.com
     humanURL: https://developer.calendly.com/api-docs
     properties:
@@ -56,7 +56,8 @@ apis:
       - Widgets
       - Scheduling
       - Web Components
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com
     humanURL: https://developer.calendly.com/
     properties:
@@ -81,3 +82,6 @@ common:
   - type: JSONSchema
     url: json-schema/calendly-invitee-schema.json
 modified: '2026-03-20'
+description: >-
+  Calendly is a scheduling automation platform that helps individuals, teams, and
+  organizations automate the meeting lifecycle by removing the back-and-forth of scheduling.
