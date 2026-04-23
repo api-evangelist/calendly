@@ -16,7 +16,7 @@ Calendly is an online scheduling platform that eliminates the back-and-forth of 
 ## Timestamps
 
 - **Created:** 2026-03-20
-- **Modified:** 2026-03-20
+- **Modified:** 2026-04-23
 
 ## APIs
 
@@ -76,6 +76,6 @@ The Calendly Embed API allows developers to integrate Calendly scheduling pages 
 
 ## Maintainers
 
-**FN:** API Evangelist
+**FN:** Kin Lane
 
-**Email:** info@apievangelist.com
+**Email:** kin@apievangelist.com

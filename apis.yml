@@ -1,5 +1,24 @@
 aid: calendly
+name: Calendly
 url: https://raw.githubusercontent.com/api-evangelist/calendly/refs/heads/main/apis.yml
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+type: Index
+tags:
+  - Appointments
+  - Automation
+  - Booking
+  - Calendars
+  - Meetings
+  - Scheduling
+created: '2026-03-20'
+modified: '2026-04-23'
+specificationVersion: '0.19'
+description: >-
+  Calendly is a scheduling automation platform that helps individuals, teams, and
+  organizations automate the meeting lifecycle by removing the back-and-forth of
+  scheduling. Their developer platform provides APIs for programmatically managing
+  scheduling workflows, receiving real-time event notifications via webhooks, and
+  embedding scheduling interfaces directly into third-party applications.
 apis:
   - aid: calendly:scheduling-api
     name: Calendly Scheduling API
@@ -69,6 +88,20 @@ apis:
       seamless integration of Calendly booking flows within third-party
       applications.
 common:
+  - type: Portal
+    url: https://developer.calendly.com/
+  - type: Documentation
+    url: https://developer.calendly.com/api-docs
+  - type: Website
+    url: https://calendly.com/
+  - type: Privacy Policy
+    url: https://calendly.com/privacy
+  - type: Terms of Service
+    url: https://calendly.com/terms
+  - type: Blog
+    url: https://calendly.com/blog
+  - type: Login
+    url: https://calendly.com/login
   - type: JSON-LD
     url: json-ld/calendly-context.jsonld
   - type: JSONSchema
@@ -77,7 +110,6 @@ common:
     url: json-schema/calendly-scheduled-event-schema.json
   - type: JSONSchema
     url: json-schema/calendly-invitee-schema.json
-modified: '2026-03-20'
-description: >-
-  Calendly is a scheduling automation platform that helps individuals, teams, and
-  organizations automate the meeting lifecycle by removing the back-and-forth of scheduling.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
