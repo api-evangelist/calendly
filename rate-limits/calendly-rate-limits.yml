@@ -4,97 +4,55 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Calendly
 providerId: calendly
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
-  - Appointments
-  - Automation
-  - Booking
-  - Calendars
-  - Meetings
   - Scheduling
+  - SaaS
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Calendly API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+description: 'Calendly applies request rate limits to the v2 Scheduling API and the Webhook API. The
+  developer portal references rate limiting in its docs but the per-second / per-minute thresholds are
+  served from a JavaScript-rendered Stoplight viewer that is not directly extractable; consumers should
+  consult the live documentation for current numbers. Rate limits are scoped to the access token / OAuth
+  application and apply across the production API. The Free plan does not include API access, so rate
+  limits practically only affect Standard, Teams and Enterprise customers.'
+sources:
+  - https://developer.calendly.com/api-docs
+  - https://developer.calendly.com/getting-started
+  - https://calendly.stoplight.io/docs/api-docs
+notes: |
+  Specific per-second / per-minute thresholds are documented in Calendly's Stoplight-hosted reference
+  but were not extractable from the public HTML at reconciliation time. Treat the limits below as a
+  structural placeholder; replace with the published numbers when available.
 responseCodes:
   throttled: 429
   quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
+  - name: Scheduling API requests
+    scope: access-token
     metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Calendly Scheduling API
-      - Calendly Webhook API
-      - Calendly Embed API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Calendly Scheduling API
-      - Calendly Webhook API
-      - Calendly Embed API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Calendly Scheduling API
-      - Calendly Webhook API
-      - Calendly Embed API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Calendly Scheduling API
-      - Calendly Webhook API
-      - Calendly Embed API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Calendly Scheduling API
-      - Calendly Webhook API
-      - Calendly Embed API
+    limit: see developer.calendly.com Stoplight docs
+    notes: Rate is bound to the OAuth access token / personal access token. Exceeding it returns HTTP 429.
+  - name: Webhook delivery retries
+    scope: subscription
+    metric: retries_per_failed_event
+    limit: see developer.calendly.com webhook docs
+    notes: Calendly retries failed webhook deliveries with exponential backoff before disabling the subscription.
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Token-Scoped Limits
+    description: Rate limits are enforced per access token. OAuth applications should distribute calls
+      across user tokens rather than concentrating them on a single service token.
+  - name: Backoff on 429
+    description: When HTTP 429 is observed, retry with exponential backoff and jitter. Do not loop tightly.
+  - name: Webhook Retries
+    description: Calendly retries failed webhook POSTs on a backoff schedule and eventually disables the
+      subscription if the endpoint stays unreachable. Endpoints should respond 2xx promptly and process
+      asynchronously.
+  - name: Pagination Discipline
+    description: Use cursor pagination on list endpoints rather than aggressive polling to stay well under
+      the published ceiling.
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+  - FN: API Evangelist
+    url: http://apievangelist.com
+    email: info@apievangelist.com
