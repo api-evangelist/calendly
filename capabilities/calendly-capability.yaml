@@ -1,0 +1,1671 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Calendly Scheduling API
+  description: The Calendly Scheduling API (v2) is a RESTful API that allows developers to programmatically manage scheduling
+    workflows. It provides endpoints for managing users, organizations, event types, scheduled events, invitees, routing forms,
+    availability schedules, and webhook subscriptions. The API uses JSON for request and response bodies, standard HTTP methods,
+    and supports authentication via personal access tokens and OAuth 2.1. Developers can use it to create events on behalf
+    of invitees, retrieve scheduling data, and integrate Calendly functionality directly into their applications.
+  tags:
+  - Calendly
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: calendly
+    baseUri: https://api.calendly.com
+    description: Calendly Scheduling API HTTP API.
+    authentication:
+      type: bearer
+      token: '{{CALENDLY_TOKEN}}'
+    resources:
+    - name: users-me
+      path: /users/me
+      operations:
+      - name: getcurrentuser
+        method: GET
+        description: Get current user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: users-uuid
+      path: /users/{uuid}
+      operations:
+      - name: getuser
+        method: GET
+        description: Get user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: event-types
+      path: /event_types
+      operations:
+      - name: listeventtypes
+        method: GET
+        description: List event types
+        inputParameters:
+        - name: user
+          in: query
+          type: string
+          description: The URI of the user whose event types to list. Required if organization is not specified.
+        - name: organization
+          in: query
+          type: string
+          description: The URI of the organization whose event types to list. Required if user is not specified.
+        - name: active
+          in: query
+          type: boolean
+          description: Filter by active status. When true, only active event types are returned.
+        - name: sort
+          in: query
+          type: string
+          description: Sort order for results. Use name:asc or name:desc.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: event-types-uuid
+      path: /event_types/{uuid}
+      operations:
+      - name: geteventtype
+        method: GET
+        description: Get event type
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: one-off-event-types
+      path: /one_off_event_types
+      operations:
+      - name: createoneoffeventtype
+        method: POST
+        description: Create one-off event type
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: event-type-available-times
+      path: /event_type_available_times
+      operations:
+      - name: listeventtypeavailabletimes
+        method: GET
+        description: List event type available times
+        inputParameters:
+        - name: event_type
+          in: query
+          type: string
+          required: true
+          description: The URI of the event type to check availability for.
+        - name: start_time
+          in: query
+          type: string
+          required: true
+          description: The start of the time range to check, in UTC format.
+        - name: end_time
+          in: query
+          type: string
+          required: true
+          description: The end of the time range to check, in UTC format.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: user-busy-times
+      path: /user_busy_times
+      operations:
+      - name: listuserbusytimes
+        method: GET
+        description: List user busy times
+        inputParameters:
+        - name: user
+          in: query
+          type: string
+          required: true
+          description: The URI of the user whose busy times to retrieve.
+        - name: start_time
+          in: query
+          type: string
+          required: true
+          description: The start of the time range to check, in UTC format.
+        - name: end_time
+          in: query
+          type: string
+          required: true
+          description: The end of the time range to check, in UTC format.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: user-availability-schedules
+      path: /user_availability_schedules
+      operations:
+      - name: listuseravailabilityschedules
+        method: GET
+        description: List user availability schedules
+        inputParameters:
+        - name: user
+          in: query
+          type: string
+          required: true
+          description: The URI of the user whose availability schedules to retrieve.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: user-availability-schedules-uuid
+      path: /user_availability_schedules/{uuid}
+      operations:
+      - name: getuseravailabilityschedule
+        method: GET
+        description: Get user availability schedule
+        inputParameters:
+        - name: uuid
+          in: path
+          type: string
+          required: true
+          description: The UUID of the availability schedule.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: scheduled-events
+      path: /scheduled_events
+      operations:
+      - name: listscheduledevents
+        method: GET
+        description: List scheduled events
+        inputParameters:
+        - name: user
+          in: query
+          type: string
+          description: The URI of the user whose scheduled events to list.
+        - name: organization
+          in: query
+          type: string
+          description: The URI of the organization whose scheduled events to list.
+        - name: invitee_email
+          in: query
+          type: string
+          description: Filter by invitee email address.
+        - name: status
+          in: query
+          type: string
+          description: Filter by event status.
+        - name: min_start_time
+          in: query
+          type: string
+          description: Only return events starting on or after this time, in UTC format.
+        - name: max_start_time
+          in: query
+          type: string
+          description: Only return events starting before this time, in UTC format.
+        - name: sort
+          in: query
+          type: string
+          description: Sort order for results. Use start_time:asc or start_time:desc.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: scheduled-events-uuid
+      path: /scheduled_events/{uuid}
+      operations:
+      - name: getscheduledevent
+        method: GET
+        description: Get scheduled event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: scheduled-events-uuid-cancellation
+      path: /scheduled_events/{uuid}/cancellation
+      operations:
+      - name: cancelscheduledevent
+        method: POST
+        description: Cancel scheduled event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: scheduled-events-event-uuid-invitees
+      path: /scheduled_events/{event_uuid}/invitees
+      operations:
+      - name: listeventinvitees
+        method: GET
+        description: List event invitees
+        inputParameters:
+        - name: event_uuid
+          in: path
+          type: string
+          required: true
+          description: The UUID of the scheduled event.
+        - name: status
+          in: query
+          type: string
+          description: Filter by invitee status.
+        - name: sort
+          in: query
+          type: string
+          description: Sort order for results. Use created_at:asc or created_at:desc.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: scheduled-events-event-uuid-invitees-invitee-uui
+      path: /scheduled_events/{event_uuid}/invitees/{invitee_uuid}
+      operations:
+      - name: geteventinvitee
+        method: GET
+        description: Get event invitee
+        inputParameters:
+        - name: event_uuid
+          in: path
+          type: string
+          required: true
+          description: The UUID of the scheduled event.
+        - name: invitee_uuid
+          in: path
+          type: string
+          required: true
+          description: The UUID of the invitee.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: invitees
+      path: /invitees
+      operations:
+      - name: createeventinvitee
+        method: POST
+        description: Create event invitee
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: webhook-subscriptions
+      path: /webhook_subscriptions
+      operations:
+      - name: listwebhooksubscriptions
+        method: GET
+        description: List webhook subscriptions
+        inputParameters:
+        - name: user
+          in: query
+          type: string
+          description: The URI of the user whose webhook subscriptions to list.
+        - name: organization
+          in: query
+          type: string
+          required: true
+          description: The URI of the organization whose webhook subscriptions to list.
+        - name: scope
+          in: query
+          type: string
+          required: true
+          description: The scope of the webhook subscription. Use user for subscriptions scoped to a specific user, or organization
+            for organization-wide subscriptions.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createwebhooksubscription
+        method: POST
+        description: Create webhook subscription
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: webhook-subscriptions-uuid
+      path: /webhook_subscriptions/{uuid}
+      operations:
+      - name: getwebhooksubscription
+        method: GET
+        description: Get webhook subscription
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletewebhooksubscription
+        method: DELETE
+        description: Delete webhook subscription
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: organization-memberships
+      path: /organization_memberships
+      operations:
+      - name: listorganizationmemberships
+        method: GET
+        description: List organization memberships
+        inputParameters:
+        - name: organization
+          in: query
+          type: string
+          required: true
+          description: The URI of the organization whose memberships to list.
+        - name: user
+          in: query
+          type: string
+          description: Filter by user URI.
+        - name: email
+          in: query
+          type: string
+          description: Filter by user email address.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: organization-memberships-uuid
+      path: /organization_memberships/{uuid}
+      operations:
+      - name: getorganizationmembership
+        method: GET
+        description: Get organization membership
+        inputParameters:
+        - name: uuid
+          in: path
+          type: string
+          required: true
+          description: The UUID of the organization membership.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteorganizationmembership
+        method: DELETE
+        description: Remove organization membership
+        inputParameters:
+        - name: uuid
+          in: path
+          type: string
+          required: true
+          description: The UUID of the organization membership to remove.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: organizations-uuid-invitations
+      path: /organizations/{uuid}/invitations
+      operations:
+      - name: listorganizationinvitations
+        method: GET
+        description: List organization invitations
+        inputParameters:
+        - name: uuid
+          in: path
+          type: string
+          required: true
+          description: The UUID of the organization.
+        - name: status
+          in: query
+          type: string
+          description: Filter invitations by status.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: invitetoorganization
+        method: POST
+        description: Invite user to organization
+        inputParameters:
+        - name: uuid
+          in: path
+          type: string
+          required: true
+          description: The UUID of the organization.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: organizations-org-uuid-invitations-invitation-uu
+      path: /organizations/{org_uuid}/invitations/{invitation_uuid}
+      operations:
+      - name: getorganizationinvitation
+        method: GET
+        description: Get organization invitation
+        inputParameters:
+        - name: org_uuid
+          in: path
+          type: string
+          required: true
+          description: The UUID of the organization.
+        - name: invitation_uuid
+          in: path
+          type: string
+          required: true
+          description: The UUID of the invitation.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: revokeorganizationinvitation
+        method: DELETE
+        description: Revoke organization invitation
+        inputParameters:
+        - name: org_uuid
+          in: path
+          type: string
+          required: true
+          description: The UUID of the organization.
+        - name: invitation_uuid
+          in: path
+          type: string
+          required: true
+          description: The UUID of the invitation to revoke.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: routing-forms
+      path: /routing_forms
+      operations:
+      - name: listroutingforms
+        method: GET
+        description: List routing forms
+        inputParameters:
+        - name: organization
+          in: query
+          type: string
+          required: true
+          description: The URI of the organization whose routing forms to list.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: routing-forms-uuid
+      path: /routing_forms/{uuid}
+      operations:
+      - name: getroutingform
+        method: GET
+        description: Get routing form
+        inputParameters:
+        - name: uuid
+          in: path
+          type: string
+          required: true
+          description: The UUID of the routing form.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: routing-form-submissions
+      path: /routing_form_submissions
+      operations:
+      - name: listroutingformsubmissions
+        method: GET
+        description: List routing form submissions
+        inputParameters:
+        - name: routing_form
+          in: query
+          type: string
+          required: true
+          description: The URI of the routing form whose submissions to list.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: routing-form-submissions-uuid
+      path: /routing_form_submissions/{uuid}
+      operations:
+      - name: getroutingformsubmission
+        method: GET
+        description: Get routing form submission
+        inputParameters:
+        - name: uuid
+          in: path
+          type: string
+          required: true
+          description: The UUID of the routing form submission.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: data-compliance-deletion-invitees
+      path: /data_compliance/deletion/invitees
+      operations:
+      - name: deleteinviteedata
+        method: POST
+        description: Delete invitee data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: activity-log-entries
+      path: /activity_log_entries
+      operations:
+      - name: listactivitylogentries
+        method: GET
+        description: List activity log entries
+        inputParameters:
+        - name: organization
+          in: query
+          type: string
+          required: true
+          description: The URI of the organization whose activity log to retrieve.
+        - name: min_occurred_at
+          in: query
+          type: string
+          description: Only return entries that occurred on or after this time.
+        - name: max_occurred_at
+          in: query
+          type: string
+          description: Only return entries that occurred before this time.
+        - name: search_term
+          in: query
+          type: string
+          description: Filter entries by a search term.
+        - name: sort
+          in: query
+          type: string
+          description: Sort order for results.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: shares
+      path: /shares
+      operations:
+      - name: createshare
+        method: POST
+        description: Create share
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: groups
+      path: /groups
+      operations:
+      - name: listgroups
+        method: GET
+        description: List groups
+        inputParameters:
+        - name: organization
+          in: query
+          type: string
+          required: true
+          description: The URI of the organization whose groups to list.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: group-relationships
+      path: /group_relationships
+      operations:
+      - name: listgrouprelationships
+        method: GET
+        description: List group relationships
+        inputParameters:
+        - name: group
+          in: query
+          type: string
+          description: The URI of the group to list relationships for.
+        - name: organization
+          in: query
+          type: string
+          required: true
+          description: The URI of the organization.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: calendly-rest
+    description: REST adapter for Calendly Scheduling API.
+    resources:
+    - path: /users/me
+      name: getcurrentuser
+      operations:
+      - method: GET
+        name: getcurrentuser
+        description: Get current user
+        call: calendly.getcurrentuser
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /users/{uuid}
+      name: getuser
+      operations:
+      - method: GET
+        name: getuser
+        description: Get user
+        call: calendly.getuser
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /event_types
+      name: listeventtypes
+      operations:
+      - method: GET
+        name: listeventtypes
+        description: List event types
+        call: calendly.listeventtypes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /event_types/{uuid}
+      name: geteventtype
+      operations:
+      - method: GET
+        name: geteventtype
+        description: Get event type
+        call: calendly.geteventtype
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /one_off_event_types
+      name: createoneoffeventtype
+      operations:
+      - method: POST
+        name: createoneoffeventtype
+        description: Create one-off event type
+        call: calendly.createoneoffeventtype
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /event_type_available_times
+      name: listeventtypeavailabletimes
+      operations:
+      - method: GET
+        name: listeventtypeavailabletimes
+        description: List event type available times
+        call: calendly.listeventtypeavailabletimes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /user_busy_times
+      name: listuserbusytimes
+      operations:
+      - method: GET
+        name: listuserbusytimes
+        description: List user busy times
+        call: calendly.listuserbusytimes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /user_availability_schedules
+      name: listuseravailabilityschedules
+      operations:
+      - method: GET
+        name: listuseravailabilityschedules
+        description: List user availability schedules
+        call: calendly.listuseravailabilityschedules
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /user_availability_schedules/{uuid}
+      name: getuseravailabilityschedule
+      operations:
+      - method: GET
+        name: getuseravailabilityschedule
+        description: Get user availability schedule
+        call: calendly.getuseravailabilityschedule
+        with:
+          uuid: rest.uuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /scheduled_events
+      name: listscheduledevents
+      operations:
+      - method: GET
+        name: listscheduledevents
+        description: List scheduled events
+        call: calendly.listscheduledevents
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /scheduled_events/{uuid}
+      name: getscheduledevent
+      operations:
+      - method: GET
+        name: getscheduledevent
+        description: Get scheduled event
+        call: calendly.getscheduledevent
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /scheduled_events/{uuid}/cancellation
+      name: cancelscheduledevent
+      operations:
+      - method: POST
+        name: cancelscheduledevent
+        description: Cancel scheduled event
+        call: calendly.cancelscheduledevent
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /scheduled_events/{event_uuid}/invitees
+      name: listeventinvitees
+      operations:
+      - method: GET
+        name: listeventinvitees
+        description: List event invitees
+        call: calendly.listeventinvitees
+        with:
+          event_uuid: rest.event_uuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /scheduled_events/{event_uuid}/invitees/{invitee_uuid}
+      name: geteventinvitee
+      operations:
+      - method: GET
+        name: geteventinvitee
+        description: Get event invitee
+        call: calendly.geteventinvitee
+        with:
+          event_uuid: rest.event_uuid
+          invitee_uuid: rest.invitee_uuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /invitees
+      name: createeventinvitee
+      operations:
+      - method: POST
+        name: createeventinvitee
+        description: Create event invitee
+        call: calendly.createeventinvitee
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /webhook_subscriptions
+      name: listwebhooksubscriptions
+      operations:
+      - method: GET
+        name: listwebhooksubscriptions
+        description: List webhook subscriptions
+        call: calendly.listwebhooksubscriptions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /webhook_subscriptions
+      name: createwebhooksubscription
+      operations:
+      - method: POST
+        name: createwebhooksubscription
+        description: Create webhook subscription
+        call: calendly.createwebhooksubscription
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /webhook_subscriptions/{uuid}
+      name: getwebhooksubscription
+      operations:
+      - method: GET
+        name: getwebhooksubscription
+        description: Get webhook subscription
+        call: calendly.getwebhooksubscription
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /webhook_subscriptions/{uuid}
+      name: deletewebhooksubscription
+      operations:
+      - method: DELETE
+        name: deletewebhooksubscription
+        description: Delete webhook subscription
+        call: calendly.deletewebhooksubscription
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /organization_memberships
+      name: listorganizationmemberships
+      operations:
+      - method: GET
+        name: listorganizationmemberships
+        description: List organization memberships
+        call: calendly.listorganizationmemberships
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /organization_memberships/{uuid}
+      name: getorganizationmembership
+      operations:
+      - method: GET
+        name: getorganizationmembership
+        description: Get organization membership
+        call: calendly.getorganizationmembership
+        with:
+          uuid: rest.uuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /organization_memberships/{uuid}
+      name: deleteorganizationmembership
+      operations:
+      - method: DELETE
+        name: deleteorganizationmembership
+        description: Remove organization membership
+        call: calendly.deleteorganizationmembership
+        with:
+          uuid: rest.uuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /organizations/{uuid}/invitations
+      name: listorganizationinvitations
+      operations:
+      - method: GET
+        name: listorganizationinvitations
+        description: List organization invitations
+        call: calendly.listorganizationinvitations
+        with:
+          uuid: rest.uuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /organizations/{uuid}/invitations
+      name: invitetoorganization
+      operations:
+      - method: POST
+        name: invitetoorganization
+        description: Invite user to organization
+        call: calendly.invitetoorganization
+        with:
+          uuid: rest.uuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /organizations/{org_uuid}/invitations/{invitation_uuid}
+      name: getorganizationinvitation
+      operations:
+      - method: GET
+        name: getorganizationinvitation
+        description: Get organization invitation
+        call: calendly.getorganizationinvitation
+        with:
+          org_uuid: rest.org_uuid
+          invitation_uuid: rest.invitation_uuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /organizations/{org_uuid}/invitations/{invitation_uuid}
+      name: revokeorganizationinvitation
+      operations:
+      - method: DELETE
+        name: revokeorganizationinvitation
+        description: Revoke organization invitation
+        call: calendly.revokeorganizationinvitation
+        with:
+          org_uuid: rest.org_uuid
+          invitation_uuid: rest.invitation_uuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /routing_forms
+      name: listroutingforms
+      operations:
+      - method: GET
+        name: listroutingforms
+        description: List routing forms
+        call: calendly.listroutingforms
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /routing_forms/{uuid}
+      name: getroutingform
+      operations:
+      - method: GET
+        name: getroutingform
+        description: Get routing form
+        call: calendly.getroutingform
+        with:
+          uuid: rest.uuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /routing_form_submissions
+      name: listroutingformsubmissions
+      operations:
+      - method: GET
+        name: listroutingformsubmissions
+        description: List routing form submissions
+        call: calendly.listroutingformsubmissions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /routing_form_submissions/{uuid}
+      name: getroutingformsubmission
+      operations:
+      - method: GET
+        name: getroutingformsubmission
+        description: Get routing form submission
+        call: calendly.getroutingformsubmission
+        with:
+          uuid: rest.uuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /data_compliance/deletion/invitees
+      name: deleteinviteedata
+      operations:
+      - method: POST
+        name: deleteinviteedata
+        description: Delete invitee data
+        call: calendly.deleteinviteedata
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /activity_log_entries
+      name: listactivitylogentries
+      operations:
+      - method: GET
+        name: listactivitylogentries
+        description: List activity log entries
+        call: calendly.listactivitylogentries
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /shares
+      name: createshare
+      operations:
+      - method: POST
+        name: createshare
+        description: Create share
+        call: calendly.createshare
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /groups
+      name: listgroups
+      operations:
+      - method: GET
+        name: listgroups
+        description: List groups
+        call: calendly.listgroups
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /group_relationships
+      name: listgrouprelationships
+      operations:
+      - method: GET
+        name: listgrouprelationships
+        description: List group relationships
+        call: calendly.listgrouprelationships
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: calendly-mcp
+    transport: http
+    description: MCP adapter for Calendly Scheduling API for AI agent use.
+    tools:
+    - name: getcurrentuser
+      description: Get current user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.getcurrentuser
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getuser
+      description: Get user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.getuser
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listeventtypes
+      description: List event types
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.listeventtypes
+      with:
+        user: tools.user
+        organization: tools.organization
+        active: tools.active
+        sort: tools.sort
+      inputParameters:
+      - name: user
+        type: string
+        description: The URI of the user whose event types to list. Required if organization is not specified.
+      - name: organization
+        type: string
+        description: The URI of the organization whose event types to list. Required if user is not specified.
+      - name: active
+        type: boolean
+        description: Filter by active status. When true, only active event types are returned.
+      - name: sort
+        type: string
+        description: Sort order for results. Use name:asc or name:desc.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: geteventtype
+      description: Get event type
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.geteventtype
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createoneoffeventtype
+      description: Create one-off event type
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: calendly.createoneoffeventtype
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listeventtypeavailabletimes
+      description: List event type available times
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.listeventtypeavailabletimes
+      with:
+        event_type: tools.event_type
+        start_time: tools.start_time
+        end_time: tools.end_time
+      inputParameters:
+      - name: event_type
+        type: string
+        description: The URI of the event type to check availability for.
+        required: true
+      - name: start_time
+        type: string
+        description: The start of the time range to check, in UTC format.
+        required: true
+      - name: end_time
+        type: string
+        description: The end of the time range to check, in UTC format.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listuserbusytimes
+      description: List user busy times
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.listuserbusytimes
+      with:
+        user: tools.user
+        start_time: tools.start_time
+        end_time: tools.end_time
+      inputParameters:
+      - name: user
+        type: string
+        description: The URI of the user whose busy times to retrieve.
+        required: true
+      - name: start_time
+        type: string
+        description: The start of the time range to check, in UTC format.
+        required: true
+      - name: end_time
+        type: string
+        description: The end of the time range to check, in UTC format.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listuseravailabilityschedules
+      description: List user availability schedules
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.listuseravailabilityschedules
+      with:
+        user: tools.user
+      inputParameters:
+      - name: user
+        type: string
+        description: The URI of the user whose availability schedules to retrieve.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getuseravailabilityschedule
+      description: Get user availability schedule
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.getuseravailabilityschedule
+      with:
+        uuid: tools.uuid
+      inputParameters:
+      - name: uuid
+        type: string
+        description: The UUID of the availability schedule.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listscheduledevents
+      description: List scheduled events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.listscheduledevents
+      with:
+        user: tools.user
+        organization: tools.organization
+        invitee_email: tools.invitee_email
+        status: tools.status
+        min_start_time: tools.min_start_time
+        max_start_time: tools.max_start_time
+        sort: tools.sort
+      inputParameters:
+      - name: user
+        type: string
+        description: The URI of the user whose scheduled events to list.
+      - name: organization
+        type: string
+        description: The URI of the organization whose scheduled events to list.
+      - name: invitee_email
+        type: string
+        description: Filter by invitee email address.
+      - name: status
+        type: string
+        description: Filter by event status.
+      - name: min_start_time
+        type: string
+        description: Only return events starting on or after this time, in UTC format.
+      - name: max_start_time
+        type: string
+        description: Only return events starting before this time, in UTC format.
+      - name: sort
+        type: string
+        description: Sort order for results. Use start_time:asc or start_time:desc.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getscheduledevent
+      description: Get scheduled event
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.getscheduledevent
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancelscheduledevent
+      description: Cancel scheduled event
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: calendly.cancelscheduledevent
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listeventinvitees
+      description: List event invitees
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.listeventinvitees
+      with:
+        event_uuid: tools.event_uuid
+        status: tools.status
+        sort: tools.sort
+      inputParameters:
+      - name: event_uuid
+        type: string
+        description: The UUID of the scheduled event.
+        required: true
+      - name: status
+        type: string
+        description: Filter by invitee status.
+      - name: sort
+        type: string
+        description: Sort order for results. Use created_at:asc or created_at:desc.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: geteventinvitee
+      description: Get event invitee
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.geteventinvitee
+      with:
+        event_uuid: tools.event_uuid
+        invitee_uuid: tools.invitee_uuid
+      inputParameters:
+      - name: event_uuid
+        type: string
+        description: The UUID of the scheduled event.
+        required: true
+      - name: invitee_uuid
+        type: string
+        description: The UUID of the invitee.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createeventinvitee
+      description: Create event invitee
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: calendly.createeventinvitee
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listwebhooksubscriptions
+      description: List webhook subscriptions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.listwebhooksubscriptions
+      with:
+        user: tools.user
+        organization: tools.organization
+        scope: tools.scope
+      inputParameters:
+      - name: user
+        type: string
+        description: The URI of the user whose webhook subscriptions to list.
+      - name: organization
+        type: string
+        description: The URI of the organization whose webhook subscriptions to list.
+        required: true
+      - name: scope
+        type: string
+        description: The scope of the webhook subscription. Use user for subscriptions scoped to a specific user, or organization
+          for organization-wide subscriptions.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createwebhooksubscription
+      description: Create webhook subscription
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: calendly.createwebhooksubscription
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getwebhooksubscription
+      description: Get webhook subscription
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.getwebhooksubscription
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletewebhooksubscription
+      description: Delete webhook subscription
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: calendly.deletewebhooksubscription
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listorganizationmemberships
+      description: List organization memberships
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.listorganizationmemberships
+      with:
+        organization: tools.organization
+        user: tools.user
+        email: tools.email
+      inputParameters:
+      - name: organization
+        type: string
+        description: The URI of the organization whose memberships to list.
+        required: true
+      - name: user
+        type: string
+        description: Filter by user URI.
+      - name: email
+        type: string
+        description: Filter by user email address.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getorganizationmembership
+      description: Get organization membership
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.getorganizationmembership
+      with:
+        uuid: tools.uuid
+      inputParameters:
+      - name: uuid
+        type: string
+        description: The UUID of the organization membership.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deleteorganizationmembership
+      description: Remove organization membership
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: calendly.deleteorganizationmembership
+      with:
+        uuid: tools.uuid
+      inputParameters:
+      - name: uuid
+        type: string
+        description: The UUID of the organization membership to remove.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listorganizationinvitations
+      description: List organization invitations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.listorganizationinvitations
+      with:
+        uuid: tools.uuid
+        status: tools.status
+      inputParameters:
+      - name: uuid
+        type: string
+        description: The UUID of the organization.
+        required: true
+      - name: status
+        type: string
+        description: Filter invitations by status.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: invitetoorganization
+      description: Invite user to organization
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: calendly.invitetoorganization
+      with:
+        uuid: tools.uuid
+      inputParameters:
+      - name: uuid
+        type: string
+        description: The UUID of the organization.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getorganizationinvitation
+      description: Get organization invitation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.getorganizationinvitation
+      with:
+        org_uuid: tools.org_uuid
+        invitation_uuid: tools.invitation_uuid
+      inputParameters:
+      - name: org_uuid
+        type: string
+        description: The UUID of the organization.
+        required: true
+      - name: invitation_uuid
+        type: string
+        description: The UUID of the invitation.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: revokeorganizationinvitation
+      description: Revoke organization invitation
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: calendly.revokeorganizationinvitation
+      with:
+        org_uuid: tools.org_uuid
+        invitation_uuid: tools.invitation_uuid
+      inputParameters:
+      - name: org_uuid
+        type: string
+        description: The UUID of the organization.
+        required: true
+      - name: invitation_uuid
+        type: string
+        description: The UUID of the invitation to revoke.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listroutingforms
+      description: List routing forms
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.listroutingforms
+      with:
+        organization: tools.organization
+      inputParameters:
+      - name: organization
+        type: string
+        description: The URI of the organization whose routing forms to list.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getroutingform
+      description: Get routing form
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.getroutingform
+      with:
+        uuid: tools.uuid
+      inputParameters:
+      - name: uuid
+        type: string
+        description: The UUID of the routing form.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listroutingformsubmissions
+      description: List routing form submissions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.listroutingformsubmissions
+      with:
+        routing_form: tools.routing_form
+      inputParameters:
+      - name: routing_form
+        type: string
+        description: The URI of the routing form whose submissions to list.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getroutingformsubmission
+      description: Get routing form submission
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.getroutingformsubmission
+      with:
+        uuid: tools.uuid
+      inputParameters:
+      - name: uuid
+        type: string
+        description: The UUID of the routing form submission.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deleteinviteedata
+      description: Delete invitee data
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: calendly.deleteinviteedata
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listactivitylogentries
+      description: List activity log entries
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.listactivitylogentries
+      with:
+        organization: tools.organization
+        min_occurred_at: tools.min_occurred_at
+        max_occurred_at: tools.max_occurred_at
+        search_term: tools.search_term
+        sort: tools.sort
+      inputParameters:
+      - name: organization
+        type: string
+        description: The URI of the organization whose activity log to retrieve.
+        required: true
+      - name: min_occurred_at
+        type: string
+        description: Only return entries that occurred on or after this time.
+      - name: max_occurred_at
+        type: string
+        description: Only return entries that occurred before this time.
+      - name: search_term
+        type: string
+        description: Filter entries by a search term.
+      - name: sort
+        type: string
+        description: Sort order for results.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createshare
+      description: Create share
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: calendly.createshare
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listgroups
+      description: List groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.listgroups
+      with:
+        organization: tools.organization
+      inputParameters:
+      - name: organization
+        type: string
+        description: The URI of the organization whose groups to list.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listgrouprelationships
+      description: List group relationships
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: calendly.listgrouprelationships
+      with:
+        group: tools.group
+        organization: tools.organization
+      inputParameters:
+      - name: group
+        type: string
+        description: The URI of the group to list relationships for.
+      - name: organization
+        type: string
+        description: The URI of the organization.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    CALENDLY_TOKEN: CALENDLY_TOKEN
