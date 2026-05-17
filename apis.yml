@@ -94,15 +94,15 @@ common:
     url: https://developer.calendly.com/api-docs
   - type: Website
     url: https://calendly.com/
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://calendly.com/privacy
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://calendly.com/terms
   - type: Blog
     url: https://calendly.com/blog
   - type: Login
     url: https://calendly.com/login
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/calendly-context.jsonld
   - type: JSONSchema
     url: json-schema/calendly-event-type-schema.json
