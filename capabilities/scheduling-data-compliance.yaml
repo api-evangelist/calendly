@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Calendly Scheduling API — Data Compliance
+  description: 'Calendly Scheduling API — Data Compliance. 1 operations. Lead operation: Delete invitee data. Self-contained
+    Naftiko capability covering one Calendly business surface.'
+  tags:
+  - Calendly
+  - Data Compliance
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CALENDLY_API_KEY: CALENDLY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: scheduling-data-compliance
+    baseUri: https://api.calendly.com
+    description: Calendly Scheduling API — Data Compliance business capability. Self-contained, no shared references.
+    resources:
+    - name: data_compliance-deletion-invitees
+      path: /data_compliance/deletion/invitees
+      operations:
+      - name: deleteinviteedata
+        method: POST
+        description: Delete invitee data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.CALENDLY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: scheduling-data-compliance-rest
+    port: 8080
+    description: REST adapter for Calendly Scheduling API — Data Compliance. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/data-compliance/deletion/invitees
+      name: data-compliance-deletion-invitees
+      description: REST surface for data_compliance-deletion-invitees.
+      operations:
+      - method: POST
+        name: deleteinviteedata
+        description: Delete invitee data
+        call: scheduling-data-compliance.deleteinviteedata
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: scheduling-data-compliance-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Calendly Scheduling API — Data Compliance. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: delete-invitee-data
+      description: Delete invitee data
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: scheduling-data-compliance.deleteinviteedata
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

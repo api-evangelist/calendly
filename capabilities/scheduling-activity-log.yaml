@@ -1,0 +1,104 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Calendly Scheduling API — Activity Log
+  description: 'Calendly Scheduling API — Activity Log. 1 operations. Lead operation: List activity log entries. Self-contained
+    Naftiko capability covering one Calendly business surface.'
+  tags:
+  - Calendly
+  - Activity Log
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CALENDLY_API_KEY: CALENDLY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: scheduling-activity-log
+    baseUri: https://api.calendly.com
+    description: Calendly Scheduling API — Activity Log business capability. Self-contained, no shared references.
+    resources:
+    - name: activity_log_entries
+      path: /activity_log_entries
+      operations:
+      - name: listactivitylogentries
+        method: GET
+        description: List activity log entries
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organization
+          in: query
+          type: string
+          description: The URI of the organization whose activity log to retrieve.
+          required: true
+        - name: min_occurred_at
+          in: query
+          type: string
+          description: Only return entries that occurred on or after this time.
+        - name: max_occurred_at
+          in: query
+          type: string
+          description: Only return entries that occurred before this time.
+        - name: search_term
+          in: query
+          type: string
+          description: Filter entries by a search term.
+        - name: sort
+          in: query
+          type: string
+          description: Sort order for results.
+    authentication:
+      type: bearer
+      token: '{{env.CALENDLY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: scheduling-activity-log-rest
+    port: 8080
+    description: REST adapter for Calendly Scheduling API — Activity Log. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/activity-log-entries
+      name: activity-log-entries
+      description: REST surface for activity_log_entries.
+      operations:
+      - method: GET
+        name: listactivitylogentries
+        description: List activity log entries
+        call: scheduling-activity-log.listactivitylogentries
+        with:
+          organization: rest.organization
+          min_occurred_at: rest.min_occurred_at
+          max_occurred_at: rest.max_occurred_at
+          search_term: rest.search_term
+          sort: rest.sort
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: scheduling-activity-log-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Calendly Scheduling API — Activity Log. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-activity-log-entries
+      description: List activity log entries
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: scheduling-activity-log.listactivitylogentries
+      with:
+        organization: tools.organization
+        min_occurred_at: tools.min_occurred_at
+        max_occurred_at: tools.max_occurred_at
+        search_term: tools.search_term
+        sort: tools.sort
+      outputParameters:
+      - type: object
+        mapping: $.

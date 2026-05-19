@@ -1,0 +1,189 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Calendly Scheduling API — Scheduled Events
+  description: 'Calendly Scheduling API — Scheduled Events. 3 operations. Lead operation: List scheduled events. Self-contained
+    Naftiko capability covering one Calendly business surface.'
+  tags:
+  - Calendly
+  - Scheduled Events
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CALENDLY_API_KEY: CALENDLY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: scheduling-scheduled-events
+    baseUri: https://api.calendly.com
+    description: Calendly Scheduling API — Scheduled Events business capability. Self-contained, no shared references.
+    resources:
+    - name: scheduled_events
+      path: /scheduled_events
+      operations:
+      - name: listscheduledevents
+        method: GET
+        description: List scheduled events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user
+          in: query
+          type: string
+          description: The URI of the user whose scheduled events to list.
+        - name: organization
+          in: query
+          type: string
+          description: The URI of the organization whose scheduled events to list.
+        - name: invitee_email
+          in: query
+          type: string
+          description: Filter by invitee email address.
+        - name: status
+          in: query
+          type: string
+          description: Filter by event status.
+        - name: min_start_time
+          in: query
+          type: string
+          description: Only return events starting on or after this time, in UTC format.
+        - name: max_start_time
+          in: query
+          type: string
+          description: Only return events starting before this time, in UTC format.
+        - name: sort
+          in: query
+          type: string
+          description: Sort order for results. Use start_time:asc or start_time:desc.
+    - name: scheduled_events-uuid
+      path: /scheduled_events/{uuid}
+      operations:
+      - name: getscheduledevent
+        method: GET
+        description: Get scheduled event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: scheduled_events-uuid-cancellation
+      path: /scheduled_events/{uuid}/cancellation
+      operations:
+      - name: cancelscheduledevent
+        method: POST
+        description: Cancel scheduled event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: bearer
+      token: '{{env.CALENDLY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: scheduling-scheduled-events-rest
+    port: 8080
+    description: REST adapter for Calendly Scheduling API — Scheduled Events. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/scheduled-events
+      name: scheduled-events
+      description: REST surface for scheduled_events.
+      operations:
+      - method: GET
+        name: listscheduledevents
+        description: List scheduled events
+        call: scheduling-scheduled-events.listscheduledevents
+        with:
+          user: rest.user
+          organization: rest.organization
+          invitee_email: rest.invitee_email
+          status: rest.status
+          min_start_time: rest.min_start_time
+          max_start_time: rest.max_start_time
+          sort: rest.sort
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/scheduled-events/{uuid}
+      name: scheduled-events-uuid
+      description: REST surface for scheduled_events-uuid.
+      operations:
+      - method: GET
+        name: getscheduledevent
+        description: Get scheduled event
+        call: scheduling-scheduled-events.getscheduledevent
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/scheduled-events/{uuid}/cancellation
+      name: scheduled-events-uuid-cancellation
+      description: REST surface for scheduled_events-uuid-cancellation.
+      operations:
+      - method: POST
+        name: cancelscheduledevent
+        description: Cancel scheduled event
+        call: scheduling-scheduled-events.cancelscheduledevent
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: scheduling-scheduled-events-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Calendly Scheduling API — Scheduled Events. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-scheduled-events
+      description: List scheduled events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: scheduling-scheduled-events.listscheduledevents
+      with:
+        user: tools.user
+        organization: tools.organization
+        invitee_email: tools.invitee_email
+        status: tools.status
+        min_start_time: tools.min_start_time
+        max_start_time: tools.max_start_time
+        sort: tools.sort
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-scheduled-event
+      description: Get scheduled event
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: scheduling-scheduled-events.getscheduledevent
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancel-scheduled-event
+      description: Cancel scheduled event
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: scheduling-scheduled-events.cancelscheduledevent
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

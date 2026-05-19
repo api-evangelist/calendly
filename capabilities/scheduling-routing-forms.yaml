@@ -1,0 +1,206 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Calendly Scheduling API — Routing Forms
+  description: 'Calendly Scheduling API — Routing Forms. 4 operations. Lead operation: List routing form submissions. Self-contained
+    Naftiko capability covering one Calendly business surface.'
+  tags:
+  - Calendly
+  - Routing Forms
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CALENDLY_API_KEY: CALENDLY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: scheduling-routing-forms
+    baseUri: https://api.calendly.com
+    description: Calendly Scheduling API — Routing Forms business capability. Self-contained, no shared references.
+    resources:
+    - name: routing_form_submissions
+      path: /routing_form_submissions
+      operations:
+      - name: listroutingformsubmissions
+        method: GET
+        description: List routing form submissions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: routing_form
+          in: query
+          type: string
+          description: The URI of the routing form whose submissions to list.
+          required: true
+    - name: routing_form_submissions-uuid
+      path: /routing_form_submissions/{uuid}
+      operations:
+      - name: getroutingformsubmission
+        method: GET
+        description: Get routing form submission
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: uuid
+          in: path
+          type: string
+          description: The UUID of the routing form submission.
+          required: true
+    - name: routing_forms
+      path: /routing_forms
+      operations:
+      - name: listroutingforms
+        method: GET
+        description: List routing forms
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organization
+          in: query
+          type: string
+          description: The URI of the organization whose routing forms to list.
+          required: true
+    - name: routing_forms-uuid
+      path: /routing_forms/{uuid}
+      operations:
+      - name: getroutingform
+        method: GET
+        description: Get routing form
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: uuid
+          in: path
+          type: string
+          description: The UUID of the routing form.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.CALENDLY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: scheduling-routing-forms-rest
+    port: 8080
+    description: REST adapter for Calendly Scheduling API — Routing Forms. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/routing-form-submissions
+      name: routing-form-submissions
+      description: REST surface for routing_form_submissions.
+      operations:
+      - method: GET
+        name: listroutingformsubmissions
+        description: List routing form submissions
+        call: scheduling-routing-forms.listroutingformsubmissions
+        with:
+          routing_form: rest.routing_form
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/routing-form-submissions/{uuid}
+      name: routing-form-submissions-uuid
+      description: REST surface for routing_form_submissions-uuid.
+      operations:
+      - method: GET
+        name: getroutingformsubmission
+        description: Get routing form submission
+        call: scheduling-routing-forms.getroutingformsubmission
+        with:
+          uuid: rest.uuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/routing-forms
+      name: routing-forms
+      description: REST surface for routing_forms.
+      operations:
+      - method: GET
+        name: listroutingforms
+        description: List routing forms
+        call: scheduling-routing-forms.listroutingforms
+        with:
+          organization: rest.organization
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/routing-forms/{uuid}
+      name: routing-forms-uuid
+      description: REST surface for routing_forms-uuid.
+      operations:
+      - method: GET
+        name: getroutingform
+        description: Get routing form
+        call: scheduling-routing-forms.getroutingform
+        with:
+          uuid: rest.uuid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: scheduling-routing-forms-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Calendly Scheduling API — Routing Forms. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-routing-form-submissions
+      description: List routing form submissions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: scheduling-routing-forms.listroutingformsubmissions
+      with:
+        routing_form: tools.routing_form
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-routing-form-submission
+      description: Get routing form submission
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: scheduling-routing-forms.getroutingformsubmission
+      with:
+        uuid: tools.uuid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-routing-forms
+      description: List routing forms
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: scheduling-routing-forms.listroutingforms
+      with:
+        organization: tools.organization
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-routing-form
+      description: Get routing form
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: scheduling-routing-forms.getroutingform
+      with:
+        uuid: tools.uuid
+      outputParameters:
+      - type: object
+        mapping: $.

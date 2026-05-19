@@ -1,0 +1,183 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Calendly Scheduling API — Invitees
+  description: 'Calendly Scheduling API — Invitees. 3 operations. Lead operation: Create event invitee. Self-contained Naftiko
+    capability covering one Calendly business surface.'
+  tags:
+  - Calendly
+  - Invitees
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CALENDLY_API_KEY: CALENDLY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: scheduling-invitees
+    baseUri: https://api.calendly.com
+    description: Calendly Scheduling API — Invitees business capability. Self-contained, no shared references.
+    resources:
+    - name: invitees
+      path: /invitees
+      operations:
+      - name: createeventinvitee
+        method: POST
+        description: Create event invitee
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: scheduled_events-event_uuid-invitees
+      path: /scheduled_events/{event_uuid}/invitees
+      operations:
+      - name: listeventinvitees
+        method: GET
+        description: List event invitees
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: event_uuid
+          in: path
+          type: string
+          description: The UUID of the scheduled event.
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Filter by invitee status.
+        - name: sort
+          in: query
+          type: string
+          description: Sort order for results. Use created_at:asc or created_at:desc.
+    - name: scheduled_events-event_uuid-invitees-invitee_uuid
+      path: /scheduled_events/{event_uuid}/invitees/{invitee_uuid}
+      operations:
+      - name: geteventinvitee
+        method: GET
+        description: Get event invitee
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: event_uuid
+          in: path
+          type: string
+          description: The UUID of the scheduled event.
+          required: true
+        - name: invitee_uuid
+          in: path
+          type: string
+          description: The UUID of the invitee.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.CALENDLY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: scheduling-invitees-rest
+    port: 8080
+    description: REST adapter for Calendly Scheduling API — Invitees. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/invitees
+      name: invitees
+      description: REST surface for invitees.
+      operations:
+      - method: POST
+        name: createeventinvitee
+        description: Create event invitee
+        call: scheduling-invitees.createeventinvitee
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/scheduled-events/{event-uuid}/invitees
+      name: scheduled-events-event-uuid-invitees
+      description: REST surface for scheduled_events-event_uuid-invitees.
+      operations:
+      - method: GET
+        name: listeventinvitees
+        description: List event invitees
+        call: scheduling-invitees.listeventinvitees
+        with:
+          event_uuid: rest.event_uuid
+          status: rest.status
+          sort: rest.sort
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/scheduled-events/{event-uuid}/invitees/{invitee-uuid}
+      name: scheduled-events-event-uuid-invitees-invitee-uuid
+      description: REST surface for scheduled_events-event_uuid-invitees-invitee_uuid.
+      operations:
+      - method: GET
+        name: geteventinvitee
+        description: Get event invitee
+        call: scheduling-invitees.geteventinvitee
+        with:
+          event_uuid: rest.event_uuid
+          invitee_uuid: rest.invitee_uuid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: scheduling-invitees-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Calendly Scheduling API — Invitees. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: create-event-invitee
+      description: Create event invitee
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: scheduling-invitees.createeventinvitee
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-event-invitees
+      description: List event invitees
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: scheduling-invitees.listeventinvitees
+      with:
+        event_uuid: tools.event_uuid
+        status: tools.status
+        sort: tools.sort
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-event-invitee
+      description: Get event invitee
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: scheduling-invitees.geteventinvitee
+      with:
+        event_uuid: tools.event_uuid
+        invitee_uuid: tools.invitee_uuid
+      outputParameters:
+      - type: object
+        mapping: $.
