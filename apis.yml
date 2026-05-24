@@ -127,6 +127,8 @@ common:
     url: json-schema/calendly-scheduled-event-schema.json
   - type: JSONSchema
     url: json-schema/calendly-invitee-schema.json
+  - type: LLMsTxt
+    url: https://developer.calendly.com/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
