@@ -1,7 +1,7 @@
 aid: calendly
 name: Calendly
 url: https://raw.githubusercontent.com/api-evangelist/calendly/refs/heads/main/apis.yml
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 type: Index
 tags:
   - Appointments
@@ -28,7 +28,7 @@ apis:
       - Calendars
       - Meetings
       - Scheduling
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://api.calendly.com
     humanURL: https://developer.calendly.com/api-docs
     properties:
@@ -48,7 +48,7 @@ apis:
       - Notifications
       - Scheduling
       - Webhooks
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://api.calendly.com
     humanURL: https://developer.calendly.com/api-docs
     properties:
@@ -68,7 +68,7 @@ apis:
       - Scheduling
       - Web Components
       - Widgets
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com
     humanURL: https://developer.calendly.com/
     properties:
