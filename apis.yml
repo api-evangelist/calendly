@@ -81,6 +81,12 @@ apis:
       and provides JavaScript callbacks for tracking when events are scheduled, allowing seamless integration of
       Calendly booking flows within third-party applications.
 common:
+  - type: VulnerabilityDisclosure
+    url: security/calendly-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/calendly-domain-security.yml
+  - type: Authentication
+    url: authentication/calendly-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/calendly
   - type: LinkedIn

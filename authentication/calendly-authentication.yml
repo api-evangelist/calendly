@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/calendly-scheduling-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Personal access token or OAuth 2.1 access token. Include in the Authorization
+    header as Bearer {token}.
+  sources:
+  - openapi/calendly-scheduling-api-openapi.yml
