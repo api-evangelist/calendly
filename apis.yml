@@ -81,6 +81,8 @@ apis:
       and provides JavaScript callbacks for tracking when events are scheduled, allowing seamless integration of
       Calendly booking flows within third-party applications.
 common:
+  - type: AgenticAccess
+    url: agentic-access/calendly-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/calendly-vulnerability-disclosure.yml
   - type: DomainSecurity
