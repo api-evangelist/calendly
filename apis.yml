@@ -1,7 +1,20 @@
 aid: calendly
 name: Calendly
 url: https://raw.githubusercontent.com/api-evangelist/calendly/refs/heads/main/apis.yml
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/calendly.png
 type: Index
 tags:
   - Appointments
@@ -19,67 +32,196 @@ description: >-
   managing scheduling workflows, receiving real-time event notifications via webhooks, and embedding scheduling
   interfaces directly into third-party applications.
 apis:
-  - aid: calendly:scheduling-api
-    name: Calendly Scheduling API
-    tags:
-      - Appointments
-      - Automation
-      - Booking
-      - Calendars
-      - Meetings
-      - Scheduling
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.calendly.com
-    humanURL: https://developer.calendly.com/api-docs
-    properties:
-      - url: https://developer.calendly.com/api-docs
-        type: Documentation
-      - url: openapi/calendly-scheduling-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      The Calendly Scheduling API (v2) is a RESTful API that allows developers to programmatically manage scheduling
-      workflows. It provides endpoints for managing users, organizations, event types, scheduled events, invitees, and
-      routing forms. The API uses JSON for request and response bodies, standard HTTP methods, and supports
-      authentication via personal access tokens and OAuth 2.1.
-  - aid: calendly:webhook-api
-    name: Calendly Webhook API
-    tags:
-      - Events
-      - Notifications
-      - Scheduling
-      - Webhooks
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.calendly.com
-    humanURL: https://developer.calendly.com/api-docs
-    properties:
-      - url: https://developer.calendly.com/api-docs
-        type: Documentation
-      - url: asyncapi/calendly-webhook-api-asyncapi.yml
-        type: AsyncAPI
-    description: >-
-      The Calendly Webhook API enables developers to receive real-time notifications when scheduling events occur in
-      Calendly. By creating webhook subscriptions, applications can automatically receive data whenever invitees
-      schedule, cancel, or reschedule meetings. This eliminates the need for polling the API and allows for event-driven
-      integrations that respond immediately to changes in scheduling activity.
-  - aid: calendly:embed-api
-    name: Calendly Embed API
-    tags:
-      - Embedding
-      - Scheduling
-      - Web Components
-      - Widgets
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.example.com
-    humanURL: https://developer.calendly.com/
-    properties:
-      - url: https://developer.calendly.com/
-        type: Documentation
-    description: >-
-      The Calendly Embed API allows developers to integrate Calendly scheduling pages directly into their websites and
-      applications. It supports inline embeds, popup widgets, and popup text options, giving developers flexibility in
-      how they present scheduling interfaces to users. The Embed API enables customization of the embedded experience
-      and provides JavaScript callbacks for tracking when events are scheduled, allowing seamless integration of
-      Calendly booking flows within third-party applications.
+- aid: calendly:webhook-api
+  name: Calendly Webhook API
+  tags:
+  - Events
+  - Notifications
+  - Scheduling
+  - Webhooks
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  baseURL: https://api.calendly.com
+  humanURL: https://developer.calendly.com/api-docs
+  properties:
+  - url: https://developer.calendly.com/api-docs
+    type: Documentation
+  - url: asyncapi/calendly-webhook-api-asyncapi.yml
+    type: AsyncAPI
+  description: >-
+    The Calendly Webhook API enables developers to receive real-time notifications when scheduling events
+    occur in Calendly. By creating webhook subscriptions, applications can automatically receive data
+    whenever invitees schedule, cancel, or reschedule meetings. This eliminates the need for polling the
+    API and allows for event-driven integrations that respond immediately to changes in scheduling activity.
+- aid: calendly:embed-api
+  name: Calendly Embed API
+  tags:
+  - Embedding
+  - Scheduling
+  - Web Components
+  - Widgets
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  baseURL: https://api.example.com
+  humanURL: https://developer.calendly.com/
+  properties:
+  - url: https://developer.calendly.com/
+    type: Documentation
+  description: >-
+    The Calendly Embed API allows developers to integrate Calendly scheduling pages directly into their
+    websites and applications. It supports inline embeds, popup widgets, and popup text options, giving
+    developers flexibility in how they present scheduling interfaces to users. The Embed API enables customization
+    of the embedded experience and provides JavaScript callbacks for tracking when events are scheduled,
+    allowing seamless integration of Calendly booking flows within third-party applications.
+- aid: calendly:calendly-activity-log-api
+  name: Calendly Activity Log API
+  description: Endpoints for retrieving activity log entries for an organization.
+  humanURL: https://developer.calendly.com/api-docs
+  baseURL: https://api.calendly.com
+  tags:
+  - Activity Log
+  properties:
+  - type: OpenAPI
+    url: openapi/calendly-activity-log-api-openapi.yml
+  - type: Documentation
+    url: https://developer.calendly.com/api-docs
+- aid: calendly:calendly-availability-api
+  name: Calendly Availability API
+  description: >-
+    Endpoints for viewing available times for event types and managing user availability schedules.
+  humanURL: https://developer.calendly.com/api-docs
+  baseURL: https://api.calendly.com
+  tags:
+  - Availability
+  properties:
+  - type: OpenAPI
+    url: openapi/calendly-availability-api-openapi.yml
+  - type: Documentation
+    url: https://developer.calendly.com/api-docs
+- aid: calendly:calendly-data-compliance-api
+  name: Calendly Data Compliance API
+  description: >-
+    Endpoints for handling data compliance requests such as deletion and retrieval of invitee data.
+  humanURL: https://developer.calendly.com/api-docs
+  baseURL: https://api.calendly.com
+  tags:
+  - Data Compliance
+  properties:
+  - type: OpenAPI
+    url: openapi/calendly-data-compliance-api-openapi.yml
+  - type: Documentation
+    url: https://developer.calendly.com/api-docs
+- aid: calendly:calendly-event-types-api
+  name: Calendly Event Types API
+  description: >-
+    Endpoints for listing, retrieving, and managing event types that define the kinds of meetings users
+    can schedule.
+  humanURL: https://developer.calendly.com/api-docs
+  baseURL: https://api.calendly.com
+  tags:
+  - Event Types
+  properties:
+  - type: OpenAPI
+    url: openapi/calendly-event-types-api-openapi.yml
+  - type: Documentation
+    url: https://developer.calendly.com/api-docs
+- aid: calendly:calendly-groups-api
+  name: Calendly Groups API
+  description: Endpoints for listing and retrieving organization groups.
+  humanURL: https://developer.calendly.com/api-docs
+  baseURL: https://api.calendly.com
+  tags:
+  - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/calendly-groups-api-openapi.yml
+  - type: Documentation
+    url: https://developer.calendly.com/api-docs
+- aid: calendly:calendly-invitees-api
+  name: Calendly Invitees API
+  description: Endpoints for listing, retrieving, and creating invitees on scheduled events.
+  humanURL: https://developer.calendly.com/api-docs
+  baseURL: https://api.calendly.com
+  tags:
+  - Invitees
+  properties:
+  - type: OpenAPI
+    url: openapi/calendly-invitees-api-openapi.yml
+  - type: Documentation
+    url: https://developer.calendly.com/api-docs
+- aid: calendly:calendly-organizations-api
+  name: Calendly Organizations API
+  description: >-
+    Endpoints for managing organization memberships, invitations, and organization-level settings.
+  humanURL: https://developer.calendly.com/api-docs
+  baseURL: https://api.calendly.com
+  tags:
+  - Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/calendly-organizations-api-openapi.yml
+  - type: Documentation
+    url: https://developer.calendly.com/api-docs
+- aid: calendly:calendly-routing-forms-api
+  name: Calendly Routing Forms API
+  description: Endpoints for listing and retrieving routing forms and their submissions.
+  humanURL: https://developer.calendly.com/api-docs
+  baseURL: https://api.calendly.com
+  tags:
+  - Routing Forms
+  properties:
+  - type: OpenAPI
+    url: openapi/calendly-routing-forms-api-openapi.yml
+  - type: Documentation
+    url: https://developer.calendly.com/api-docs
+- aid: calendly:calendly-scheduled-events-api
+  name: Calendly Scheduled Events API
+  description: Endpoints for listing, retrieving, and canceling scheduled events (booked meetings).
+  humanURL: https://developer.calendly.com/api-docs
+  baseURL: https://api.calendly.com
+  tags:
+  - Scheduled Events
+  properties:
+  - type: OpenAPI
+    url: openapi/calendly-scheduled-events-api-openapi.yml
+  - type: Documentation
+    url: https://developer.calendly.com/api-docs
+- aid: calendly:calendly-shares-api
+  name: Calendly Shares API
+  description: Endpoints for creating and managing shareable scheduling links.
+  humanURL: https://developer.calendly.com/api-docs
+  baseURL: https://api.calendly.com
+  tags:
+  - Shares
+  properties:
+  - type: OpenAPI
+    url: openapi/calendly-shares-api-openapi.yml
+  - type: Documentation
+    url: https://developer.calendly.com/api-docs
+- aid: calendly:calendly-users-api
+  name: Calendly Users API
+  description: Endpoints for retrieving user information and managing user accounts within Calendly.
+  humanURL: https://developer.calendly.com/api-docs
+  baseURL: https://api.calendly.com
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/calendly-users-api-openapi.yml
+  - type: Documentation
+    url: https://developer.calendly.com/api-docs
+- aid: calendly:calendly-webhook-subscriptions-api
+  name: Calendly Webhook Subscriptions API
+  description: >-
+    Endpoints for creating, listing, retrieving, and deleting webhook subscriptions that receive real-time
+    event notifications.
+  humanURL: https://developer.calendly.com/api-docs
+  baseURL: https://api.calendly.com
+  tags:
+  - Webhook Subscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/calendly-webhook-subscriptions-api-openapi.yml
+  - type: Documentation
+    url: https://developer.calendly.com/api-docs
 common:
   - type: AgenticAccess
     url: agentic-access/calendly-agentic-access.yml
