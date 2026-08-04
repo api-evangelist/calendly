@@ -1,0 +1,36 @@
+{
+  "provider": "calendly",
+  "sources": [
+    "calendly-activity-log-api-openapi.yml",
+    "calendly-availability-api-openapi.yml",
+    "calendly-data-compliance-api-openapi.yml",
+    "calendly-event-types-api-openapi.yml",
+    "calendly-groups-api-openapi.yml",
+    "calendly-invitees-api-openapi.yml",
+    "calendly-organizations-api-openapi.yml",
+    "calendly-routing-forms-api-openapi.yml",
+    "calendly-scheduled-events-api-openapi.yml",
+    "calendly-shares-api-openapi.yml",
+    "calendly-users-api-openapi.yml",
+    "calendly-webhook-subscriptions-api-openapi.yml"
+  ],
+  "outputs": [
+    "calendly-activity-log-api-openapi.yml",
+    "calendly-availability-api-openapi.yml",
+    "calendly-data-compliance-api-openapi.yml",
+    "calendly-event-types-api-openapi.yml",
+    "calendly-groups-api-openapi.yml",
+    "calendly-invitees-api-openapi.yml",
+    "calendly-organizations-api-openapi.yml",
+    "calendly-routing-forms-api-openapi.yml",
+    "calendly-scheduled-events-api-openapi.yml",
+    "calendly-shares-api-openapi.yml",
+    "calendly-users-api-openapi.yml",
+    "calendly-webhook-subscriptions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
