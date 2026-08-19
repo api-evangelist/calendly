@@ -1,0 +1,215 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Calendly Scheduling Activity Log Organizations API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organizations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List organization memberships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.calendly.com/organization_memberships",
+            "params": [
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query",
+                "description": "The URI of the organization whose memberships to list."
+              },
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user URI."
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user email address."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "A token for fetching the next page of results from a previous paginated response."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of organization memberships. Each membership represents a users role and status within an organization."
+        },
+        {
+          "info": {
+            "name": "Get organization membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.calendly.com/organization_memberships/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the organization membership."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific organization membership, including the users role and status within the organization."
+        },
+        {
+          "info": {
+            "name": "Remove organization membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.calendly.com/organization_memberships/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the organization membership to remove."
+              }
+            ]
+          },
+          "docs": "Removes a user from an organization by deleting their membership. This action cannot be undone."
+        },
+        {
+          "info": {
+            "name": "List organization invitations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.calendly.com/organizations/:uuid/invitations",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the organization."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter invitations by status."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "A token for fetching the next page of results from a previous paginated response."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of pending invitations for the specified organization."
+        },
+        {
+          "info": {
+            "name": "Invite user to organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.calendly.com/organizations/:uuid/invitations",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends an invitation to a user to join the organization. The invitee will receive an email with instructions to accept the invitation."
+        },
+        {
+          "info": {
+            "name": "Get organization invitation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.calendly.com/organizations/:org_uuid/invitations/:invitation_uuid",
+            "params": [
+              {
+                "name": "org_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the organization."
+              },
+              {
+                "name": "invitation_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the invitation."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific organization invitation."
+        },
+        {
+          "info": {
+            "name": "Revoke organization invitation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.calendly.com/organizations/:org_uuid/invitations/:invitation_uuid",
+            "params": [
+              {
+                "name": "org_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the organization."
+              },
+              {
+                "name": "invitation_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the invitation to revoke."
+              }
+            ]
+          },
+          "docs": "Revokes a pending organization invitation. The invitee will no longer be able to accept the invitation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

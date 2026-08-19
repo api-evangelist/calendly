@@ -1,0 +1,242 @@
+{
+  "item": [
+    {
+      "id": "5e2f07ec-d612-4c2f-984e-ed131b3945b3",
+      "name": "Shares",
+      "description": {
+        "content": "Endpoints for creating and managing shareable scheduling links.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fdc36882-f254-4690-a700-25caa60e7659",
+          "name": "Create share",
+          "request": {
+            "name": "Create share",
+            "description": {
+              "content": "Creates a shareable scheduling link that can be distributed to potential invitees. Shares can include multiple event types and custom availability settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shares"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event_type\": \"<uri>\",\n  \"max_spots\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a6f616b7-15fd-4057-b3c4-a26c2f49a26c",
+              "name": "Successfully created the share",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shares"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event_type\": \"<uri>\",\n  \"max_spots\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": {\n    \"uri\": \"http://xbICSfyLoReMUYRdwtWUKiejPVxjVAS.blq7DT5NDL+fRQwsHvxTFcJZVDYNKlg,yWCaiGf+79WE.nJUG\",\n    \"scheduling_url\": \"http://UMLzuuPXnJfQOYfKWXLGVPf.cziLUdgq7DkPLNWpY.JEMe6uEsSDzsADUpLHHXjUQorO7s3ytv7Eu29s4x\",\n    \"booking_url\": \"https://WAlcgYpMXzNVlmLqgFmgJoQubGpqsa.xjcDW7Yk80uc,K9sgI,lEqmKxO6txEcwgJ-jvV2Qpx6WVgYuNlGNoLh+e6rfl.CLPP5\",\n    \"event_type\": \"https://ThdgbIDJLUBOcNzAYW.bycHnHxakQCMZfRz,mDpF3MwVLQ3RuKw\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74e3d7cd-c8ed-4616-876e-f8f80da838f9",
+              "name": "The request was invalid or malformed. Check the request body and parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shares"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event_type\": \"<uri>\",\n  \"max_spots\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a8421bf-fbbe-47a0-a233-8accd4910fe9",
+              "name": "Authentication failed. Verify that a valid access token is provided in the Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shares"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event_type\": \"<uri>\",\n  \"max_spots\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.calendly.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b352fbb4-38cd-412e-b7a3-fa006dc8b1a2",
+    "name": "Calendly Scheduling Activity Log Shares API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Calendly Scheduling API (v2) is a RESTful API that allows developers to programmatically manage scheduling workflows. It provides endpoints for managing users, organizations, event types, scheduled events, invitees, routing forms, availability schedules, and webhook subscriptions. The API uses JSON for request and response bodies, standard HTTP methods, and supports authentication via personal access tokens and OAuth 2.1. Developers can use it to create events on behalf of invitees, retrieve scheduling data, and integrate Calendly functionality directly into their applications.\n\nContact Support:\n Name: Calendly Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

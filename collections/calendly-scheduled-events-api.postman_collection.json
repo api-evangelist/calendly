@@ -1,0 +1,793 @@
+{
+  "item": [
+    {
+      "id": "3296abba-7b9a-4787-9fd3-7093c3655649",
+      "name": "Scheduled Events",
+      "description": {
+        "content": "Endpoints for listing, retrieving, and canceling scheduled events (booked meetings).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "07821ba6-b045-40fb-b573-3a5996c45cbd",
+          "name": "List scheduled events",
+          "request": {
+            "name": "List scheduled events",
+            "description": {
+              "content": "Returns a paginated list of scheduled events for the specified user or organization. Scheduled events represent booked meetings with start and end times, locations, and associated invitees.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "scheduled_events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<uri>",
+                  "description": "The URI of the user whose scheduled events to list."
+                },
+                {
+                  "disabled": false,
+                  "key": "organization",
+                  "value": "<uri>",
+                  "description": "The URI of the organization whose scheduled events to list."
+                },
+                {
+                  "disabled": false,
+                  "key": "invitee_email",
+                  "value": "<email>",
+                  "description": "Filter by invitee email address."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by event status."
+                },
+                {
+                  "disabled": false,
+                  "key": "min_start_time",
+                  "value": "<dateTime>",
+                  "description": "Only return events starting on or after this time, in UTC format."
+                },
+                {
+                  "disabled": false,
+                  "key": "max_start_time",
+                  "value": "<dateTime>",
+                  "description": "Only return events starting before this time, in UTC format."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sort order for results. Use start_time:asc or start_time:desc."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "20",
+                  "description": "The number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "A token for fetching the next page of results from a previous paginated response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f1f94ce2-5eb6-439c-857f-f355e5e72959",
+              "name": "Successfully retrieved the list of scheduled events",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled_events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "invitee_email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "min_start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "max_start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"collection\": [\n    {\n      \"uri\": \"http://cbyKNLJYlNYwNcpBPCESvgjbQMFRKUhOo.sphDCvcG3PuJKD,tQjDL1DTWD5PGILZfJurNTGoXDbPi1h78sg\",\n      \"name\": \"string\",\n      \"status\": \"canceled\",\n      \"start_time\": \"1958-05-29T00:19:04.700Z\",\n      \"end_time\": \"2007-06-17T19:20:10.443Z\",\n      \"event_type\": \"https://BRKW.twvjuZJaXTsBYgBfGg\",\n      \"location\": {\n        \"type\": \"string\",\n        \"location\": \"string\",\n        \"join_url\": \"https://berfwmbcuYregZdOhFVsQMuNnetQw.fkjtjF,Uu.h7cygYEXtBtsW1kH0htSmy1ZoxQOhcwTXTKCtCP-lX1lAB4z6Yxn84oNuY3eMS6KgbfP\",\n        \"status\": \"string\",\n        \"additional_info\": \"string\"\n      },\n      \"invitees_counter\": {\n        \"total\": 5499,\n        \"active\": 9369,\n        \"limit\": 9102\n      },\n      \"cancellation\": {\n        \"canceled_by\": \"string\",\n        \"reason\": \"string\",\n        \"canceler_type\": \"invitee\",\n        \"created_at\": \"1967-05-19T23:31:40.340Z\"\n      },\n      \"created_at\": \"1968-07-04T18:50:37.489Z\",\n      \"updated_at\": \"2003-03-03T13:25:38.144Z\",\n      \"event_memberships\": [\n        {\n          \"user\": \"https://PTCSS.isnPSEUk5YrFUkyMjcwlafsoyIqRetHCEGD24ngUUyq\",\n          \"user_email\": \"hXH3@OEKjiYjzgzkwFUZUWhll.sjn\",\n          \"user_name\": \"string\"\n        },\n        {\n          \"user\": \"http://DQePxXKBmGKsyhSeQsQtjcJnPjNEoQ.sifqwC-ngVJQcG1P58F7eVlyHGCBg8Lpk0qE6EgR-kTGiAhG6V4B67xNFQnGxI\",\n          \"user_email\": \"9wv@XacuAoGAckPirgouNAuyaCStOQcvr.bg\",\n          \"user_name\": \"string\"\n        }\n      ],\n      \"event_guests\": [\n        {\n          \"email\": \"wIVxIAyhVD@SCRkHUOLIphThFadmD.wr\",\n          \"created_at\": \"1968-07-09T06:25:43.716Z\",\n          \"updated_at\": \"1991-08-20T17:27:34.117Z\"\n        },\n        {\n          \"email\": \"xJIOxZwJzhJ@mPFJlXaFHwOVxBpNOaKWNwwXvNof.je\",\n          \"created_at\": \"2001-01-15T09:00:16.085Z\",\n          \"updated_at\": \"1985-03-21T18:50:38.944Z\"\n        }\n      ]\n    },\n    {\n      \"uri\": \"http://XPkRVnBcDUpHhOzfp.toNtECo.DUEh5xMM-0jBFqaVefgUDG1DVWCDrHtEuPWP8zbBh\",\n      \"name\": \"string\",\n      \"status\": \"active\",\n      \"start_time\": \"1975-01-04T23:16:37.450Z\",\n      \"end_time\": \"1986-02-15T03:08:24.579Z\",\n      \"event_type\": \"http://ibJXhNsr.ugA2ZqYK8abgoZ-aGoxv2r16WbQXho\",\n      \"location\": {\n        \"type\": \"string\",\n        \"location\": \"string\",\n        \"join_url\": \"https://jhVPfKLuimbiCEplwbYOk.qfiigNOl3jd+LuGNNGp7aWQjHCcPHWKnROPxCsElP1AdtEH2ALT8OzS+kAVnAv+hUl5\",\n        \"status\": \"string\",\n        \"additional_info\": \"string\"\n      },\n      \"invitees_counter\": {\n        \"total\": 9403,\n        \"active\": 3842,\n        \"limit\": 8508\n      },\n      \"cancellation\": {\n        \"canceled_by\": \"string\",\n        \"reason\": \"string\",\n        \"canceler_type\": \"invitee\",\n        \"created_at\": \"2001-11-03T07:26:13.849Z\"\n      },\n      \"created_at\": \"1973-11-22T05:26:00.998Z\",\n      \"updated_at\": \"2021-07-11T09:39:09.639Z\",\n      \"event_memberships\": [\n        {\n          \"user\": \"http://Dmcxibmxd.xdlwXXvflmVY.WLbsPKUcGqUHVo.6ut65\",\n          \"user_email\": \"ytnj7@aXRkQUsCh.ztwk\",\n          \"user_name\": \"string\"\n        },\n        {\n          \"user\": \"https://iquJgcNlxXQoFdgiBOcEQtOFffgyDATSH.fjxmLA-.T.1ncXieaoQnWYY1anoJt8zguUnEaqY4rymi2JCbu7OWyZ5afU8Wngf+6U6ORm8fJr71ba\",\n          \"user_email\": \"vZeXU3BZwDrsk@sVCzQRufZiceuJQfBCBGsfeMUmAz.zgra\",\n          \"user_name\": \"string\"\n        }\n      ],\n      \"event_guests\": [\n        {\n          \"email\": \"EcVBiN-Ss27w58M@PRUeGNcArPxQH.sz\",\n          \"created_at\": \"1973-06-20T11:15:49.440Z\",\n          \"updated_at\": \"1997-12-25T23:26:34.818Z\"\n        },\n        {\n          \"email\": \"2631qAW@BHmxvLPIloFXFOIBLub.kn\",\n          \"created_at\": \"1999-04-28T12:48:37.111Z\",\n          \"updated_at\": \"1953-11-24T15:22:17.617Z\"\n        }\n      ]\n    }\n  ],\n  \"pagination\": {\n    \"count\": 9260,\n    \"next_page\": \"https://hFgcqsBOluh.dpaWIA\",\n    \"previous_page\": \"https://ekZVKQosCSgniFDwzNTxFD.essF1-oF7YH0gBNgJoplMWusyZE1z0eY2NUzGLAT0Iow1xePpxs.WiiRmfyxWR4ujERR-kF\",\n    \"next_page_token\": \"string\",\n    \"previous_page_token\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94b35f51-bed6-447f-b1f3-38d09d1a3ea1",
+              "name": "Authentication failed. Verify that a valid access token is provided in the Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled_events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "invitee_email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "min_start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "max_start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "32585f77-4a01-4d73-a90c-44c03b67c5af",
+          "name": "Get scheduled event",
+          "request": {
+            "name": "Get scheduled event",
+            "description": {
+              "content": "Returns detailed information about a specific scheduled event by its UUID, including start and end times, event type, location, and cancellation details if applicable.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "scheduled_events",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) The UUID of the scheduled event."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fcb9d9c9-3107-4efc-8485-cd30e4551c94",
+              "name": "Successfully retrieved the scheduled event",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled_events",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The UUID of the scheduled event."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": {\n    \"uri\": \"http://MDVlvfwCIhRCSjyevJaU.hznMDgJxz.XAz0vcjdpO+r\",\n    \"name\": \"string\",\n    \"status\": \"active\",\n    \"start_time\": \"1976-11-20T20:35:07.954Z\",\n    \"end_time\": \"1959-03-19T12:15:20.828Z\",\n    \"event_type\": \"http://HwGVjYPBxWKKeyhVlAkeCELbmaZMBxk.fxKkt4UXflbcEs73+h7S\",\n    \"location\": {\n      \"type\": \"string\",\n      \"location\": \"string\",\n      \"join_url\": \"https://NpFnSDwZuJ.kygFE-dX6Rcd6up+PtBCgWKEVz5o14UAaG6KQ5pSivWXLD0.hSj7Ay-QKPrjJiaOQu7\",\n      \"status\": \"string\",\n      \"additional_info\": \"string\"\n    },\n    \"invitees_counter\": {\n      \"total\": 3560,\n      \"active\": 8919,\n      \"limit\": 4241\n    },\n    \"cancellation\": {\n      \"canceled_by\": \"string\",\n      \"reason\": \"string\",\n      \"canceler_type\": \"host\",\n      \"created_at\": \"1974-03-31T21:35:38.085Z\"\n    },\n    \"created_at\": \"1948-12-04T19:20:16.829Z\",\n    \"updated_at\": \"1962-12-02T20:09:15.082Z\",\n    \"event_memberships\": [\n      {\n        \"user\": \"http://aDDkpEGibxxxTTkiCRR.jwTJHmL.0pFD\",\n        \"user_email\": \"cHUoys8nsDzc3@WucuMsNXeg.syux\",\n        \"user_name\": \"string\"\n      },\n      {\n        \"user\": \"https://WyidamZcOWINDUcyfzpVMK.eygECHF3WejqkAFmJRNhucQV\",\n        \"user_email\": \"5ss@hjOObrNVVMWWYotx.jvnq\",\n        \"user_name\": \"string\"\n      }\n    ],\n    \"event_guests\": [\n      {\n        \"email\": \"kn8PHvXw@BbyAkOtFVkci.zbpg\",\n        \"created_at\": \"2026-04-01T20:51:00.793Z\",\n        \"updated_at\": \"2016-11-11T12:56:45.505Z\"\n      },\n      {\n        \"email\": \"PQawsZF4TbSAlE5@uLKBgKXvLFFzYLyiOszTUkCnLOqgBucVD.sx\",\n        \"created_at\": \"1949-03-28T23:26:59.497Z\",\n        \"updated_at\": \"2015-06-21T02:10:53.702Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59e24569-fe60-49a8-8875-b841414e8cab",
+              "name": "Authentication failed. Verify that a valid access token is provided in the Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled_events",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The UUID of the scheduled event."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d934ebf-7e6a-4e84-aea5-1857fa75fe98",
+              "name": "The requested resource was not found. Verify the UUID or URI is correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled_events",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The UUID of the scheduled event."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c9d4ad6-e53f-47f9-b5b3-36aa7a654aaa",
+          "name": "Cancel scheduled event",
+          "request": {
+            "name": "Cancel scheduled event",
+            "description": {
+              "content": "Cancels a scheduled event. Optionally include a reason for the cancellation. This will trigger invitee.canceled webhook events for all subscribed endpoints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "scheduled_events",
+                ":uuid",
+                "cancellation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) The UUID of the scheduled event."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "083dd581-c330-4af7-acff-c53e67a86ad3",
+              "name": "Successfully canceled the scheduled event",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled_events",
+                    ":uuid",
+                    "cancellation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The UUID of the scheduled event."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": {\n    \"canceled_by\": \"string\",\n    \"reason\": \"string\",\n    \"canceler_type\": \"host\",\n    \"created_at\": \"2003-04-15T08:14:45.704Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "020074e5-8afe-476a-b3ff-e9fc272e131c",
+              "name": "The request was invalid or malformed. Check the request body and parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled_events",
+                    ":uuid",
+                    "cancellation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The UUID of the scheduled event."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7735daf6-1a30-425e-999d-4c2480b21e52",
+              "name": "Authentication failed. Verify that a valid access token is provided in the Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled_events",
+                    ":uuid",
+                    "cancellation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The UUID of the scheduled event."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59bde609-7532-47e2-b4b3-d680462199d6",
+              "name": "The requested resource was not found. Verify the UUID or URI is correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled_events",
+                    ":uuid",
+                    "cancellation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The UUID of the scheduled event."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.calendly.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f79c39c8-1490-46d0-9807-29fe0392cd21",
+    "name": "Calendly Scheduling Activity Log Scheduled Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Calendly Scheduling API (v2) is a RESTful API that allows developers to programmatically manage scheduling workflows. It provides endpoints for managing users, organizations, event types, scheduled events, invitees, routing forms, availability schedules, and webhook subscriptions. The API uses JSON for request and response bodies, standard HTTP methods, and supports authentication via personal access tokens and OAuth 2.1. Developers can use it to create events on behalf of invitees, retrieve scheduling data, and integrate Calendly functionality directly into their applications.\n\nContact Support:\n Name: Calendly Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

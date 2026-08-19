@@ -1,0 +1,120 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Calendly Scheduling Activity Log Webhook Subscriptions API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhook Subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List webhook subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.calendly.com/webhook_subscriptions",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "The URI of the user whose webhook subscriptions to list."
+              },
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query",
+                "description": "The URI of the organization whose webhook subscriptions to list."
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "The scope of the webhook subscription. Use user for subscriptions scoped to a specific user, or organization for organization-wide subscriptions."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "A token for fetching the next page of results from a previous paginated response."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of webhook subscriptions for the specified user or organization. Each subscription defines the events to listen for and the callback URL to notify."
+        },
+        {
+          "info": {
+            "name": "Create webhook subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.calendly.com/webhook_subscriptions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new webhook subscription to receive real-time notifications when scheduling events occur. You can subscribe to invitee.created, invitee.canceled, and routing_form_submission.created events."
+        },
+        {
+          "info": {
+            "name": "Get webhook subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.calendly.com/webhook_subscriptions/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the webhook subscription."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific webhook subscription by its UUID, including the callback URL, subscribed events, and scope."
+        },
+        {
+          "info": {
+            "name": "Delete webhook subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.calendly.com/webhook_subscriptions/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the webhook subscription."
+              }
+            ]
+          },
+          "docs": "Deletes a webhook subscription by its UUID. Once deleted, the subscription will no longer receive event notifications."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

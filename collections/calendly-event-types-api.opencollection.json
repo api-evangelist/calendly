@@ -1,0 +1,107 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Calendly Scheduling Activity Log Event Types API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Event Types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List event types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.calendly.com/event_types",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "The URI of the user whose event types to list. Required if organization is not specified."
+              },
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query",
+                "description": "The URI of the organization whose event types to list. Required if user is not specified."
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Filter by active status. When true, only active event types are returned."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for results. Use name:asc or name:desc."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "A token for fetching the next page of results from a previous paginated response."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of event types for the specified user or organization. Event types define the kinds of meetings that can be scheduled, including their duration, location, and availability."
+        },
+        {
+          "info": {
+            "name": "Get event type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.calendly.com/event_types/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the event type."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific event type by its UUID, including its name, duration, scheduling URL, and configuration."
+        },
+        {
+          "info": {
+            "name": "Create one-off event type",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.calendly.com/one_off_event_types",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a single-use event type that can be used for a one-time scheduling session. One-off event types are not listed on the users scheduling page."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

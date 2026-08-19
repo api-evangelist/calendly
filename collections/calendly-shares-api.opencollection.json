@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Calendly Scheduling Activity Log Shares API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Shares",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create share",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.calendly.com/shares",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a shareable scheduling link that can be distributed to potential invitees. Shares can include multiple event types and custom availability settings."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

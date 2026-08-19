@@ -1,0 +1,124 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Calendly Scheduling Activity Log Availability API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Availability",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List event type available times",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.calendly.com/event_type_available_times",
+            "params": [
+              {
+                "name": "event_type",
+                "value": "",
+                "type": "query",
+                "description": "The URI of the event type to check availability for."
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query",
+                "description": "The start of the time range to check, in UTC format."
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query",
+                "description": "The end of the time range to check, in UTC format."
+              }
+            ]
+          },
+          "docs": "Returns a list of available time slots for a specific event type within a given date range. This endpoint is used to display bookable times to potential invitees."
+        },
+        {
+          "info": {
+            "name": "List user busy times",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.calendly.com/user_busy_times",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "The URI of the user whose busy times to retrieve."
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query",
+                "description": "The start of the time range to check, in UTC format."
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query",
+                "description": "The end of the time range to check, in UTC format."
+              }
+            ]
+          },
+          "docs": "Returns a list of time periods during which a user is busy, based on their connected calendars. Useful for checking a users availability before scheduling."
+        },
+        {
+          "info": {
+            "name": "List user availability schedules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.calendly.com/user_availability_schedules",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "The URI of the user whose availability schedules to retrieve."
+              }
+            ]
+          },
+          "docs": "Returns a list of availability schedules for a specific user. Availability schedules define the recurring time windows when a user is available for meetings."
+        },
+        {
+          "info": {
+            "name": "Get user availability schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.calendly.com/user_availability_schedules/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the availability schedule."
+              }
+            ]
+          },
+          "docs": "Returns a specific availability schedule by its UUID, including the timezone and rules that define available time windows."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,823 @@
+{
+  "item": [
+    {
+      "id": "d1aac0ec-b71d-4694-99d1-834af68cef48",
+      "name": "Availability",
+      "description": {
+        "content": "Endpoints for viewing available times for event types and managing user availability schedules.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a3bc4773-6ca5-4b8c-9348-8a3a58c1f0b4",
+          "name": "List event type available times",
+          "request": {
+            "name": "List event type available times",
+            "description": {
+              "content": "Returns a list of available time slots for a specific event type within a given date range. This endpoint is used to display bookable times to potential invitees.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "event_type_available_times"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "event_type",
+                  "value": "<uri>",
+                  "description": "(Required) The URI of the event type to check availability for."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<dateTime>",
+                  "description": "(Required) The start of the time range to check, in UTC format."
+                },
+                {
+                  "disabled": false,
+                  "key": "end_time",
+                  "value": "<dateTime>",
+                  "description": "(Required) The end of the time range to check, in UTC format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c1d07884-5ee3-43fd-ad71-973e31039fc8",
+              "name": "Successfully retrieved available times",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event_type_available_times"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "event_type",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"collection\": [\n    {\n      \"status\": \"available\",\n      \"invitees_remaining\": 2649,\n      \"start_time\": \"2008-04-02T16:44:00.010Z\",\n      \"scheduling_url\": \"http://MbDrQaBnjWAAWZdHPOjYrrBS.gfdmjC4H44f9zKJFC-po0uSW1xxXEdpTH9Ypom0YShl++tgEGoiJv.7SthjL4\"\n    },\n    {\n      \"status\": \"available\",\n      \"invitees_remaining\": 1598,\n      \"start_time\": \"1998-09-21T20:48:24.327Z\",\n      \"scheduling_url\": \"https://KBpnyPhpfNjgRQSvsNTLEnmHPfjQmkoWT.rcqsuaA,PkosGQHVdHAgEFqU0iHpQ7LFgk0o5P\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79f2efbb-b29e-42c7-bf61-d08e6258319e",
+              "name": "The request was invalid or malformed. Check the request body and parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event_type_available_times"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "event_type",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98a55ddb-caad-418f-943a-b7746f4d0051",
+              "name": "Authentication failed. Verify that a valid access token is provided in the Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event_type_available_times"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "event_type",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4baf9f01-29a9-4961-9624-40423114e513",
+          "name": "List user busy times",
+          "request": {
+            "name": "List user busy times",
+            "description": {
+              "content": "Returns a list of time periods during which a user is busy, based on their connected calendars. Useful for checking a users availability before scheduling.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "user_busy_times"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<uri>",
+                  "description": "(Required) The URI of the user whose busy times to retrieve."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<dateTime>",
+                  "description": "(Required) The start of the time range to check, in UTC format."
+                },
+                {
+                  "disabled": false,
+                  "key": "end_time",
+                  "value": "<dateTime>",
+                  "description": "(Required) The end of the time range to check, in UTC format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2bd9b26e-7281-474f-9faa-b6f218b602ff",
+              "name": "Successfully retrieved busy times",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user_busy_times"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"collection\": [\n    {\n      \"type\": \"string\",\n      \"start_time\": \"2023-07-16T11:11:57.826Z\",\n      \"end_time\": \"2023-06-27T08:37:54.865Z\",\n      \"buffered_start_time\": \"1954-06-12T09:12:59.855Z\",\n      \"buffered_end_time\": \"1964-11-20T16:31:41.879Z\",\n      \"event\": {\n        \"uri\": \"https://vPoTrAMIcloaXfkPrmkVJqi.tmappnm.2dbtzQrw+gTOYJeG.AgYKR1t7\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"start_time\": \"2011-11-02T17:02:12.699Z\",\n      \"end_time\": \"1973-02-01T08:47:43.532Z\",\n      \"buffered_start_time\": \"1997-11-30T14:07:55.863Z\",\n      \"buffered_end_time\": \"2006-12-13T15:22:16.303Z\",\n      \"event\": {\n        \"uri\": \"https://CXwLQvpohaPwlLddzgFAqfuB.koptsVPxbtvCSXkI\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf0fc7ec-82db-4ffa-b09b-bba397f6b267",
+              "name": "The request was invalid or malformed. Check the request body and parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user_busy_times"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00c37df5-9ddb-4158-bda9-a2ef4ffc10aa",
+              "name": "Authentication failed. Verify that a valid access token is provided in the Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user_busy_times"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7b7273c-7646-4d9f-b286-d1c6bb0ec514",
+          "name": "List user availability schedules",
+          "request": {
+            "name": "List user availability schedules",
+            "description": {
+              "content": "Returns a list of availability schedules for a specific user. Availability schedules define the recurring time windows when a user is available for meetings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "user_availability_schedules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<uri>",
+                  "description": "(Required) The URI of the user whose availability schedules to retrieve."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0a5e6ab0-5083-4898-b628-0f6bc51a988c",
+              "name": "Successfully retrieved availability schedules",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user_availability_schedules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user",
+                      "value": "<uri>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"collection\": [\n    {\n      \"uri\": \"http://OiuRVIMWUyRtZwk.nvXkIrngnIckxRM3FgDMvI9eZwAS14wYnS,GrFkF6AqgEHz5N.QNf2\",\n      \"name\": \"string\",\n      \"default\": true,\n      \"timezone\": \"string\",\n      \"rules\": [\n        {\n          \"type\": \"date\",\n          \"wday\": \"friday\",\n          \"date\": \"2008-09-29\",\n          \"intervals\": [\n            {\n              \"from\": \"string\",\n              \"to\": \"string\"\n            },\n            {\n              \"from\": \"string\",\n              \"to\": \"string\"\n            }\n          ]\n        },\n        {\n          \"type\": \"wday\",\n          \"wday\": \"saturday\",\n          \"date\": \"2014-07-09\",\n          \"intervals\": [\n            {\n              \"from\": \"string\",\n              \"to\": \"string\"\n            },\n            {\n              \"from\": \"string\",\n              \"to\": \"string\"\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"uri\": \"http://uySrAuAgIUq.hlfq38CcgPIGOJxVsjrNGkzU6az9+Y\",\n      \"name\": \"string\",\n      \"default\": false,\n      \"timezone\": \"string\",\n      \"rules\": [\n        {\n          \"type\": \"wday\",\n          \"wday\": \"friday\",\n          \"date\": \"1991-10-30\",\n          \"intervals\": [\n            {\n              \"from\": \"string\",\n              \"to\": \"string\"\n            },\n            {\n              \"from\": \"string\",\n              \"to\": \"string\"\n            }\n          ]\n        },\n        {\n          \"type\": \"wday\",\n          \"wday\": \"tuesday\",\n          \"date\": \"2015-03-22\",\n          \"intervals\": [\n            {\n              \"from\": \"string\",\n              \"to\": \"string\"\n            },\n            {\n              \"from\": \"string\",\n              \"to\": \"string\"\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4567a51d-991a-4637-8eab-d1086b49309e",
+              "name": "Authentication failed. Verify that a valid access token is provided in the Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user_availability_schedules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user",
+                      "value": "<uri>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "99c8a28f-c5ac-4332-9f7c-c808aa974711",
+          "name": "Get user availability schedule",
+          "request": {
+            "name": "Get user availability schedule",
+            "description": {
+              "content": "Returns a specific availability schedule by its UUID, including the timezone and rules that define available time windows.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "user_availability_schedules",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) The UUID of the availability schedule."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a471133c-e79a-490a-adf4-872bc02f6bac",
+              "name": "Successfully retrieved the availability schedule",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user_availability_schedules",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The UUID of the availability schedule."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": {\n    \"uri\": \"https://XTvogt.mdsLx4ReX5gTlocIjzwUuLxgfDX\",\n    \"name\": \"string\",\n    \"default\": false,\n    \"timezone\": \"string\",\n    \"rules\": [\n      {\n        \"type\": \"date\",\n        \"wday\": \"friday\",\n        \"date\": \"1958-04-10\",\n        \"intervals\": [\n          {\n            \"from\": \"string\",\n            \"to\": \"string\"\n          },\n          {\n            \"from\": \"string\",\n            \"to\": \"string\"\n          }\n        ]\n      },\n      {\n        \"type\": \"wday\",\n        \"wday\": \"thursday\",\n        \"date\": \"1979-06-13\",\n        \"intervals\": [\n          {\n            \"from\": \"string\",\n            \"to\": \"string\"\n          },\n          {\n            \"from\": \"string\",\n            \"to\": \"string\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d62daa52-4329-49c8-8129-21dbbcd4a16e",
+              "name": "Authentication failed. Verify that a valid access token is provided in the Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user_availability_schedules",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The UUID of the availability schedule."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45f78a02-779f-49ed-805e-21398eaf5cb5",
+              "name": "The requested resource was not found. Verify the UUID or URI is correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user_availability_schedules",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The UUID of the availability schedule."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.calendly.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1503f633-3ab7-43bb-967b-f8169f7f4622",
+    "name": "Calendly Scheduling Activity Log Availability API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Calendly Scheduling API (v2) is a RESTful API that allows developers to programmatically manage scheduling workflows. It provides endpoints for managing users, organizations, event types, scheduled events, invitees, routing forms, availability schedules, and webhook subscriptions. The API uses JSON for request and response bodies, standard HTTP methods, and supports authentication via personal access tokens and OAuth 2.1. Developers can use it to create events on behalf of invitees, retrieve scheduling data, and integrate Calendly functionality directly into their applications.\n\nContact Support:\n Name: Calendly Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

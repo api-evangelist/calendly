@@ -1,0 +1,133 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Calendly Scheduling Activity Log Scheduled Events API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Scheduled Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List scheduled events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.calendly.com/scheduled_events",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "The URI of the user whose scheduled events to list."
+              },
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query",
+                "description": "The URI of the organization whose scheduled events to list."
+              },
+              {
+                "name": "invitee_email",
+                "value": "",
+                "type": "query",
+                "description": "Filter by invitee email address."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by event status."
+              },
+              {
+                "name": "min_start_time",
+                "value": "",
+                "type": "query",
+                "description": "Only return events starting on or after this time, in UTC format."
+              },
+              {
+                "name": "max_start_time",
+                "value": "",
+                "type": "query",
+                "description": "Only return events starting before this time, in UTC format."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for results. Use start_time:asc or start_time:desc."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "A token for fetching the next page of results from a previous paginated response."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of scheduled events for the specified user or organization. Scheduled events represent booked meetings with start and end times, locations, and associated invitees."
+        },
+        {
+          "info": {
+            "name": "Get scheduled event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.calendly.com/scheduled_events/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the scheduled event."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific scheduled event by its UUID, including start and end times, event type, location, and cancellation details if applicable."
+        },
+        {
+          "info": {
+            "name": "Cancel scheduled event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.calendly.com/scheduled_events/:uuid/cancellation",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the scheduled event."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels a scheduled event. Optionally include a reason for the cancellation. This will trigger invitee.canceled webhook events for all subscribed endpoints."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

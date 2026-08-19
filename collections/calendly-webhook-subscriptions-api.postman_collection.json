@@ -1,0 +1,832 @@
+{
+  "item": [
+    {
+      "id": "01b9b929-93e1-4b34-ad71-8cf72724b106",
+      "name": "Webhook Subscriptions",
+      "description": {
+        "content": "Endpoints for creating, listing, retrieving, and deleting webhook subscriptions that receive real-time event notifications.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "10083c5c-26c1-4c97-a01b-a50e1198bb54",
+          "name": "List webhook subscriptions",
+          "request": {
+            "name": "List webhook subscriptions",
+            "description": {
+              "content": "Returns a paginated list of webhook subscriptions for the specified user or organization. Each subscription defines the events to listen for and the callback URL to notify.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "webhook_subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<uri>",
+                  "description": "The URI of the user whose webhook subscriptions to list."
+                },
+                {
+                  "disabled": false,
+                  "key": "organization",
+                  "value": "<uri>",
+                  "description": "(Required) The URI of the organization whose webhook subscriptions to list."
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "(Required) The scope of the webhook subscription. Use user for subscriptions scoped to a specific user, or organization for organization-wide subscriptions."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "20",
+                  "description": "The number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "A token for fetching the next page of results from a previous paginated response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "02369ac9-0672-45f6-9da4-3b3dd48d79f6",
+              "name": "Successfully retrieved webhook subscriptions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhook_subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"collection\": [\n    {\n      \"uri\": \"https://gVpkFjIaYbwQDiyOzHzeYZHRpdzOj.yptzleB7Ytv05uFSdjXaev-GlwbVLm1\",\n      \"callback_url\": \"https://mOWhRDKTLsqeCglX.mewp4+HI6QL-myn4nlSMGHtedkJgIX4wrI0kNbALM7Tib9UJK7rHFrFfX\",\n      \"created_at\": \"1953-03-10T12:34:28.722Z\",\n      \"updated_at\": \"1953-09-13T06:44:14.659Z\",\n      \"retry_started_at\": \"1972-03-19T06:46:42.365Z\",\n      \"state\": \"active\",\n      \"events\": [\n        \"invitee.canceled\",\n        \"invitee.canceled\"\n      ],\n      \"scope\": \"organization\",\n      \"organization\": \"https://CFF.oosaLoj.tbm7RZAc5fThevapNKdKMNzVsO5lwF+\",\n      \"user\": \"https://AHXdXPAIDGJVVHtKNfMJkgeMULVXk.jvmv8HXRT5FYRylfBAqF-\",\n      \"creator\": \"http://TXitGFaYutK.bys.3gtq3hptf2LTamaeTMnSAA6m8\"\n    },\n    {\n      \"uri\": \"https://jmIzDGRBgjXDswpeQPNC.ehWl\",\n      \"callback_url\": \"http://dkOtUtBxeURQBJgTHvAoZQweLTfa.tnqmaJRZuRDFa317M+G+jVmG34VpRR\",\n      \"created_at\": \"2001-01-08T06:49:39.966Z\",\n      \"updated_at\": \"2006-12-22T03:05:22.159Z\",\n      \"retry_started_at\": \"2022-06-13T07:47:37.156Z\",\n      \"state\": \"active\",\n      \"events\": [\n        \"routing_form_submission.created\",\n        \"invitee.created\"\n      ],\n      \"scope\": \"user\",\n      \"organization\": \"http://NSQEwZp.cwjSzDzEjc85Gnp7xSSMsj\",\n      \"user\": \"http://qJRzBTkpQnqoL.ithMLlJs6nsLWT9Yk88IwHIhmvwNCgIqCQYvpA0Bgntlr\",\n      \"creator\": \"https://yzRqiqicPxvYfFmaTXvs.ijpHPeBm\"\n    }\n  ],\n  \"pagination\": {\n    \"count\": 552,\n    \"next_page\": \"https://Of.dwjfAKsYNILF-YcZGmxuTXbI0.TsG8Sjk4qhM92BFU+.2iu3IHpdMybz,l+N,DqKQ\",\n    \"previous_page\": \"https://BBUBsdgFHBl.txcRyxuiON,zx-Xik8iK2hy,ZCbq3semqlvqBvueu11JC9CC6BnRtNPWIQ3\",\n    \"next_page_token\": \"string\",\n    \"previous_page_token\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a13a564-457f-4661-bc65-130dfb8adc6e",
+              "name": "Authentication failed. Verify that a valid access token is provided in the Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhook_subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0860b62b-9b55-4ade-a7d3-bd962dfe07c9",
+          "name": "Create webhook subscription",
+          "request": {
+            "name": "Create webhook subscription",
+            "description": {
+              "content": "Creates a new webhook subscription to receive real-time notifications when scheduling events occur. You can subscribe to invitee.created, invitee.canceled, and routing_form_submission.created events.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "webhook_subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"<uri>\",\n  \"events\": [\n    \"<string>\"\n  ],\n  \"organization\": \"<uri>\",\n  \"scope\": \"<string>\",\n  \"user\": \"<uri>\",\n  \"signing_key\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f644edbc-397a-4a28-b33c-d1a0f1046950",
+              "name": "Successfully created the webhook subscription",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhook_subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<uri>\",\n  \"events\": [\n    \"<string>\"\n  ],\n  \"organization\": \"<uri>\",\n  \"scope\": \"<string>\",\n  \"user\": \"<uri>\",\n  \"signing_key\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": {\n    \"uri\": \"http://AlzvmdsvcGOnO.bivobOu+9gMghNjR9H-dbx4ZDXsRx7qd3McZpqJKII8yhfV6sDEj4af8QUR,7lyDDn0Lo5Kh3Q99F\",\n    \"callback_url\": \"https://DH.nahCgZ9fIDDJ+j6g7OiDeuRdHezJeyHFpbSGmDlzZ-V9XXjUBfE,x+BCYVh2b1OrT6gm-JpShXpBPQ\",\n    \"created_at\": \"2018-11-02T09:33:33.986Z\",\n    \"updated_at\": \"1950-06-16T15:50:06.823Z\",\n    \"retry_started_at\": \"1968-10-10T08:25:29.368Z\",\n    \"state\": \"active\",\n    \"events\": [\n      \"invitee.created\",\n      \"routing_form_submission.created\"\n    ],\n    \"scope\": \"organization\",\n    \"organization\": \"http://iSjafzDFOt.tyF7CykdkQTcMINSpKV7hv2lRzoarVjzyha4IZopLc8p-kJ.Et,uixN\",\n    \"user\": \"https://fMTAShZcfIXdfr.uwlqdA.TlERAaN+pjYI3\",\n    \"creator\": \"https://dtTiDdInqbbkOyMOooLmCYbgjXrdwhLt.qfzK5aKyO4WzoEE,0Z4V+9tukq7Ail6yWPaYS,0R598gP.N8tFW1+LPIgn9rLrB6WzvwKCVp,F.U+E\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c337064-cdee-4a96-82f5-7f4942094b47",
+              "name": "The request was invalid or malformed. Check the request body and parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhook_subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<uri>\",\n  \"events\": [\n    \"<string>\"\n  ],\n  \"organization\": \"<uri>\",\n  \"scope\": \"<string>\",\n  \"user\": \"<uri>\",\n  \"signing_key\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34c5c3d9-5115-4a92-b657-6c5b10c6d913",
+              "name": "Authentication failed. Verify that a valid access token is provided in the Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhook_subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<uri>\",\n  \"events\": [\n    \"<string>\"\n  ],\n  \"organization\": \"<uri>\",\n  \"scope\": \"<string>\",\n  \"user\": \"<uri>\",\n  \"signing_key\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a1b79ff-e09e-4cf5-a8ad-8958b045dd84",
+          "name": "Get webhook subscription",
+          "request": {
+            "name": "Get webhook subscription",
+            "description": {
+              "content": "Returns detailed information about a specific webhook subscription by its UUID, including the callback URL, subscribed events, and scope.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "webhook_subscriptions",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) The UUID of the webhook subscription."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1dfb034d-606c-48ce-ae2b-eb056693fd76",
+              "name": "Successfully retrieved the webhook subscription",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhook_subscriptions",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The UUID of the webhook subscription."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": {\n    \"uri\": \"http://AlzvmdsvcGOnO.bivobOu+9gMghNjR9H-dbx4ZDXsRx7qd3McZpqJKII8yhfV6sDEj4af8QUR,7lyDDn0Lo5Kh3Q99F\",\n    \"callback_url\": \"https://DH.nahCgZ9fIDDJ+j6g7OiDeuRdHezJeyHFpbSGmDlzZ-V9XXjUBfE,x+BCYVh2b1OrT6gm-JpShXpBPQ\",\n    \"created_at\": \"2018-11-02T09:33:33.986Z\",\n    \"updated_at\": \"1950-06-16T15:50:06.823Z\",\n    \"retry_started_at\": \"1968-10-10T08:25:29.368Z\",\n    \"state\": \"active\",\n    \"events\": [\n      \"invitee.created\",\n      \"routing_form_submission.created\"\n    ],\n    \"scope\": \"organization\",\n    \"organization\": \"http://iSjafzDFOt.tyF7CykdkQTcMINSpKV7hv2lRzoarVjzyha4IZopLc8p-kJ.Et,uixN\",\n    \"user\": \"https://fMTAShZcfIXdfr.uwlqdA.TlERAaN+pjYI3\",\n    \"creator\": \"https://dtTiDdInqbbkOyMOooLmCYbgjXrdwhLt.qfzK5aKyO4WzoEE,0Z4V+9tukq7Ail6yWPaYS,0R598gP.N8tFW1+LPIgn9rLrB6WzvwKCVp,F.U+E\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8236fa81-f5f1-42df-a54f-9736f694abbb",
+              "name": "Authentication failed. Verify that a valid access token is provided in the Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhook_subscriptions",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The UUID of the webhook subscription."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f57e4248-ebfd-4512-8df2-86921bdc9c84",
+              "name": "The requested resource was not found. Verify the UUID or URI is correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhook_subscriptions",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The UUID of the webhook subscription."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff6852e8-6de8-47df-b54e-97a3f205098f",
+          "name": "Delete webhook subscription",
+          "request": {
+            "name": "Delete webhook subscription",
+            "description": {
+              "content": "Deletes a webhook subscription by its UUID. Once deleted, the subscription will no longer receive event notifications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "webhook_subscriptions",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) The UUID of the webhook subscription."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4fb35790-81a1-4d5a-9a68-c9597c3e6268",
+              "name": "Successfully deleted the webhook subscription",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhook_subscriptions",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The UUID of the webhook subscription."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6b17ad12-29f3-46f1-bf73-b79e760cdf27",
+              "name": "Authentication failed. Verify that a valid access token is provided in the Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhook_subscriptions",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The UUID of the webhook subscription."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aea56e05-e795-4716-a1f0-9c93696f6e6f",
+              "name": "The requested resource was not found. Verify the UUID or URI is correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhook_subscriptions",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The UUID of the webhook subscription."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.calendly.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6e07c5b6-a791-43cf-ba38-9a091f13d3c5",
+    "name": "Calendly Scheduling Activity Log Webhook Subscriptions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Calendly Scheduling API (v2) is a RESTful API that allows developers to programmatically manage scheduling workflows. It provides endpoints for managing users, organizations, event types, scheduled events, invitees, routing forms, availability schedules, and webhook subscriptions. The API uses JSON for request and response bodies, standard HTTP methods, and supports authentication via personal access tokens and OAuth 2.1. Developers can use it to create events on behalf of invitees, retrieve scheduling data, and integrate Calendly functionality directly into their applications.\n\nContact Support:\n Name: Calendly Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

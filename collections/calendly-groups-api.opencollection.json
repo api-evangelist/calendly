@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Calendly Scheduling Activity Log Groups API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.calendly.com/groups",
+            "params": [
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query",
+                "description": "The URI of the organization whose groups to list."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "A token for fetching the next page of results from a previous paginated response."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of groups within the specified organization. Groups allow organizing users into teams for scheduling purposes."
+        },
+        {
+          "info": {
+            "name": "List group relationships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.calendly.com/group_relationships",
+            "params": [
+              {
+                "name": "group",
+                "value": "",
+                "type": "query",
+                "description": "The URI of the group to list relationships for."
+              },
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query",
+                "description": "The URI of the organization."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "A token for fetching the next page of results from a previous paginated response."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of group memberships, showing which users belong to which groups within an organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

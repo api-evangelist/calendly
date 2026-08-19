@@ -1,0 +1,650 @@
+{
+  "item": [
+    {
+      "id": "cf678e0e-5e92-4112-8f47-311ccc481487",
+      "name": "Event Types",
+      "description": {
+        "content": "Endpoints for listing, retrieving, and managing event types that define the kinds of meetings users can schedule.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6874da9d-51cb-4afd-b9a5-ab6b037fe903",
+          "name": "List event types",
+          "request": {
+            "name": "List event types",
+            "description": {
+              "content": "Returns a paginated list of event types for the specified user or organization. Event types define the kinds of meetings that can be scheduled, including their duration, location, and availability.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "event_types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<uri>",
+                  "description": "The URI of the user whose event types to list. Required if organization is not specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "organization",
+                  "value": "<uri>",
+                  "description": "The URI of the organization whose event types to list. Required if user is not specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>",
+                  "description": "Filter by active status. When true, only active event types are returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sort order for results. Use name:asc or name:desc."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "20",
+                  "description": "The number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "A token for fetching the next page of results from a previous paginated response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a0f0795a-68af-466f-afc1-ae92927aabdc",
+              "name": "Successfully retrieved the list of event types",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"collection\": [\n    {\n      \"uri\": \"https://lGIYlYJUuDqz.ecgqu7c8AC1\",\n      \"name\": \"string\",\n      \"active\": false,\n      \"booking_method\": \"poll\",\n      \"slug\": \"string\",\n      \"scheduling_url\": \"http://oLTayiWJTgyBwUd.oqIR0i8nsHuUOm4Al.gwFmEP9matOMNAqAONGR+QdCv5YMdBQixJGMbQ\",\n      \"duration\": 3770,\n      \"kind\": \"group\",\n      \"pooling_type\": \"collective\",\n      \"type\": \"AdhocEventType\",\n      \"color\": \"string\",\n      \"description_plain\": \"string\",\n      \"description_html\": \"string\",\n      \"internal_note\": \"string\",\n      \"profile\": {\n        \"type\": \"string\",\n        \"name\": \"string\",\n        \"owner\": \"https://QyibLlCRQsncZTS.grIQY1Oaa8mksYU\"\n      },\n      \"secret\": true,\n      \"deleted_at\": \"1953-03-12T15:12:26.724Z\",\n      \"custom_questions\": [\n        {\n          \"uuid\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"multi_select\",\n          \"position\": 5353,\n          \"enabled\": true,\n          \"required\": true,\n          \"answer_choices\": [\n            \"string\",\n            \"string\"\n          ],\n          \"include_other\": false\n        },\n        {\n          \"uuid\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"single_select\",\n          \"position\": 2807,\n          \"enabled\": true,\n          \"required\": true,\n          \"answer_choices\": [\n            \"string\",\n            \"string\"\n          ],\n          \"include_other\": true\n        }\n      ],\n      \"created_at\": \"1985-08-27T06:06:46.640Z\",\n      \"updated_at\": \"2005-08-04T10:07:47.524Z\"\n    },\n    {\n      \"uri\": \"https://QRJymWJEJrUCdEW.rbvlGQWMKNhLssC8iVDw,Y0G\",\n      \"name\": \"string\",\n      \"active\": false,\n      \"booking_method\": \"instant\",\n      \"slug\": \"string\",\n      \"scheduling_url\": \"http://ZVBkTQhCKfhoAgc.tnl5J-B6dtd5TmowuycnuQNH+HMt8-XSBmkdER6fQvl7h,\",\n      \"duration\": 9719,\n      \"kind\": \"group\",\n      \"pooling_type\": \"round_robin\",\n      \"type\": \"AdhocEventType\",\n      \"color\": \"string\",\n      \"description_plain\": \"string\",\n      \"description_html\": \"string\",\n      \"internal_note\": \"string\",\n      \"profile\": {\n        \"type\": \"string\",\n        \"name\": \"string\",\n        \"owner\": \"https://gyHDwkEiFGefFZZKvUuJzlQNIoi.tdpxnIh2TK,jSKrIcKwECd7S\"\n      },\n      \"secret\": true,\n      \"deleted_at\": \"1959-02-18T23:44:32.172Z\",\n      \"custom_questions\": [\n        {\n          \"uuid\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"multi_select\",\n          \"position\": 3829,\n          \"enabled\": true,\n          \"required\": false,\n          \"answer_choices\": [\n            \"string\",\n            \"string\"\n          ],\n          \"include_other\": false\n        },\n        {\n          \"uuid\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"multi_select\",\n          \"position\": 3287,\n          \"enabled\": true,\n          \"required\": true,\n          \"answer_choices\": [\n            \"string\",\n            \"string\"\n          ],\n          \"include_other\": true\n        }\n      ],\n      \"created_at\": \"2013-09-26T11:56:31.714Z\",\n      \"updated_at\": \"1969-05-24T03:02:51.308Z\"\n    }\n  ],\n  \"pagination\": {\n    \"count\": 5730,\n    \"next_page\": \"http://qsGcutzp.lflny5y4y6pp,1JArkV6O+J6xXfu5led,cM7wutAahC2\",\n    \"previous_page\": \"http://PJfHFVPtNDKfT.uaa9PfcnMZGaHGnaMurF+rhCpcx-e4rAG,NHEvV22kXHIteCYDkz4NIgTYBujjff7lL2I\",\n    \"next_page_token\": \"string\",\n    \"previous_page_token\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "914fad92-a171-4d20-aaa4-439bc0409f50",
+              "name": "Authentication failed. Verify that a valid access token is provided in the Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a8f07094-1b73-48d6-8287-f5c1a08bf3dd",
+          "name": "Get event type",
+          "request": {
+            "name": "Get event type",
+            "description": {
+              "content": "Returns detailed information about a specific event type by its UUID, including its name, duration, scheduling URL, and configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "event_types",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) The UUID of the event type."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1dab9323-b040-4833-b090-4f2ccbfaf598",
+              "name": "Successfully retrieved the event type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event_types",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The UUID of the event type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": {\n    \"uri\": \"http://UwNlGF.atmtNeuPmWVrIaxHbLCa\",\n    \"name\": \"string\",\n    \"active\": true,\n    \"booking_method\": \"poll\",\n    \"slug\": \"string\",\n    \"scheduling_url\": \"http://iIHOvsnfVhvuEy.uyoNa8thL+L\",\n    \"duration\": 9487,\n    \"kind\": \"group\",\n    \"pooling_type\": \"collective\",\n    \"type\": \"AdhocEventType\",\n    \"color\": \"string\",\n    \"description_plain\": \"string\",\n    \"description_html\": \"string\",\n    \"internal_note\": \"string\",\n    \"profile\": {\n      \"type\": \"string\",\n      \"name\": \"string\",\n      \"owner\": \"https://HQBDCTswSJEwlLwjlbUDahYFI.jxD1qguT7DmzFgqYO75ucv.elF\"\n    },\n    \"secret\": true,\n    \"deleted_at\": \"2009-10-01T06:33:21.315Z\",\n    \"custom_questions\": [\n      {\n        \"uuid\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"single_select\",\n        \"position\": 2758,\n        \"enabled\": true,\n        \"required\": false,\n        \"answer_choices\": [\n          \"string\",\n          \"string\"\n        ],\n        \"include_other\": false\n      },\n      {\n        \"uuid\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"multi_select\",\n        \"position\": 6764,\n        \"enabled\": false,\n        \"required\": true,\n        \"answer_choices\": [\n          \"string\",\n          \"string\"\n        ],\n        \"include_other\": false\n      }\n    ],\n    \"created_at\": \"1990-07-12T02:47:58.775Z\",\n    \"updated_at\": \"2025-07-26T13:24:38.458Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c064eb9c-f7d2-42ac-9cac-db07ce2b676d",
+              "name": "Authentication failed. Verify that a valid access token is provided in the Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event_types",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The UUID of the event type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5f3ae25-cc83-4192-a1fc-2b36785cc4ed",
+              "name": "The requested resource was not found. Verify the UUID or URI is correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event_types",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The UUID of the event type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ace98e6-371c-4375-ad68-950c73904bad",
+          "name": "Create one-off event type",
+          "request": {
+            "name": "Create one-off event type",
+            "description": {
+              "content": "Creates a single-use event type that can be used for a one-time scheduling session. One-off event types are not listed on the users scheduling page.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "one_off_event_types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"host\": \"<uri>\",\n  \"duration\": \"<integer>\",\n  \"date_setting\": {\n    \"type\": \"<string>\",\n    \"start_date\": \"<date>\",\n    \"end_date\": \"<date>\"\n  },\n  \"location\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "216c1bbf-1c7d-4565-ad86-aaf1692196de",
+              "name": "Successfully created the one-off event type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "one_off_event_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"host\": \"<uri>\",\n  \"duration\": \"<integer>\",\n  \"date_setting\": {\n    \"type\": \"<string>\",\n    \"start_date\": \"<date>\",\n    \"end_date\": \"<date>\"\n  },\n  \"location\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resource\": {\n    \"uri\": \"http://UwNlGF.atmtNeuPmWVrIaxHbLCa\",\n    \"name\": \"string\",\n    \"active\": true,\n    \"booking_method\": \"poll\",\n    \"slug\": \"string\",\n    \"scheduling_url\": \"http://iIHOvsnfVhvuEy.uyoNa8thL+L\",\n    \"duration\": 9487,\n    \"kind\": \"group\",\n    \"pooling_type\": \"collective\",\n    \"type\": \"AdhocEventType\",\n    \"color\": \"string\",\n    \"description_plain\": \"string\",\n    \"description_html\": \"string\",\n    \"internal_note\": \"string\",\n    \"profile\": {\n      \"type\": \"string\",\n      \"name\": \"string\",\n      \"owner\": \"https://HQBDCTswSJEwlLwjlbUDahYFI.jxD1qguT7DmzFgqYO75ucv.elF\"\n    },\n    \"secret\": true,\n    \"deleted_at\": \"2009-10-01T06:33:21.315Z\",\n    \"custom_questions\": [\n      {\n        \"uuid\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"single_select\",\n        \"position\": 2758,\n        \"enabled\": true,\n        \"required\": false,\n        \"answer_choices\": [\n          \"string\",\n          \"string\"\n        ],\n        \"include_other\": false\n      },\n      {\n        \"uuid\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"multi_select\",\n        \"position\": 6764,\n        \"enabled\": false,\n        \"required\": true,\n        \"answer_choices\": [\n          \"string\",\n          \"string\"\n        ],\n        \"include_other\": false\n      }\n    ],\n    \"created_at\": \"1990-07-12T02:47:58.775Z\",\n    \"updated_at\": \"2025-07-26T13:24:38.458Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e98d3cfd-a4ad-4a5e-a31d-4ca77b60d1e6",
+              "name": "The request was invalid or malformed. Check the request body and parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "one_off_event_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"host\": \"<uri>\",\n  \"duration\": \"<integer>\",\n  \"date_setting\": {\n    \"type\": \"<string>\",\n    \"start_date\": \"<date>\",\n    \"end_date\": \"<date>\"\n  },\n  \"location\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a14d8449-da29-4897-b182-70326f12b3b4",
+              "name": "Authentication failed. Verify that a valid access token is provided in the Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "one_off_event_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"host\": \"<uri>\",\n  \"duration\": \"<integer>\",\n  \"date_setting\": {\n    \"type\": \"<string>\",\n    \"start_date\": \"<date>\",\n    \"end_date\": \"<date>\"\n  },\n  \"location\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.calendly.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0813483f-2f0a-4dcb-b754-8791be3f6c20",
+    "name": "Calendly Scheduling Activity Log Event Types API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Calendly Scheduling API (v2) is a RESTful API that allows developers to programmatically manage scheduling workflows. It provides endpoints for managing users, organizations, event types, scheduled events, invitees, routing forms, availability schedules, and webhook subscriptions. The API uses JSON for request and response bodies, standard HTTP methods, and supports authentication via personal access tokens and OAuth 2.1. Developers can use it to create events on behalf of invitees, retrieve scheduling data, and integrate Calendly functionality directly into their applications.\n\nContact Support:\n Name: Calendly Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

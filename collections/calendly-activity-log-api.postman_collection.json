@@ -1,0 +1,263 @@
+{
+  "item": [
+    {
+      "id": "b24be2cd-2ec0-476c-bc54-274c0dd603d7",
+      "name": "Activity Log",
+      "description": {
+        "content": "Endpoints for retrieving activity log entries for an organization.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3494985c-dc42-4f46-997a-d7ee22f3bd64",
+          "name": "List activity log entries",
+          "request": {
+            "name": "List activity log entries",
+            "description": {
+              "content": "Returns a paginated list of activity log entries for the specified organization. Activity logs record actions taken by users within the organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "activity_log_entries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "organization",
+                  "value": "<uri>",
+                  "description": "(Required) The URI of the organization whose activity log to retrieve."
+                },
+                {
+                  "disabled": false,
+                  "key": "min_occurred_at",
+                  "value": "<dateTime>",
+                  "description": "Only return entries that occurred on or after this time."
+                },
+                {
+                  "disabled": false,
+                  "key": "max_occurred_at",
+                  "value": "<dateTime>",
+                  "description": "Only return entries that occurred before this time."
+                },
+                {
+                  "disabled": false,
+                  "key": "search_term",
+                  "value": "<string>",
+                  "description": "Filter entries by a search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sort order for results."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "20",
+                  "description": "The number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "A token for fetching the next page of results from a previous paginated response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fea2b29d-b8d9-46d2-99cf-ebc7b8cc4d58",
+              "name": "Successfully retrieved activity log entries",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "activity_log_entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "min_occurred_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "max_occurred_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "search_term",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"collection\": [\n    {\n      \"uri\": \"http://ufPeI.bypcli,QdRjF2hEwMX\",\n      \"occurred_at\": \"1950-11-22T06:02:56.976Z\",\n      \"organization\": \"http://xQCZPXQNaXLtzoHENVAdMavSsbtLjJAOB.rzalG+r\",\n      \"actor\": {\n        \"uri\": \"https://QjrDMtZ.jxjxY8jS9NnqPrAy.jt7DPDAi0xcost26ji5qyiemiTYZbOUDKPfuNGtqhzOU\",\n        \"display_name\": \"string\",\n        \"organization\": \"https://hGDvtPIsV.nwiZ6+2JzLOsXBTqsadaiYtm1PKlvzxjXD\",\n        \"type\": \"string\"\n      },\n      \"action\": \"string\",\n      \"namespace\": \"string\",\n      \"details\": {}\n    },\n    {\n      \"uri\": \"https://pnBKdIkMIwGHOVGfwxFqqupxs.xjrG4B,sw6MBX1FX+jgMci,SPRmDr.FjqrmBSbtCrdmt3IIUUQdQ-nyMMJnBeF+mhyiD1,\",\n      \"occurred_at\": \"2014-10-30T02:12:19.356Z\",\n      \"organization\": \"https://wnMHUK.zgDMJ\",\n      \"actor\": {\n        \"uri\": \"http://nkWmLNaNDexJTbLNIGHYiUEcmh.bzfyRTehJdFpj.M6nEZlDqU7NguwYATj\",\n        \"display_name\": \"string\",\n        \"organization\": \"http://zTznvsQWZzOoZWIDpgu.cewbbmyfsQEu0Bmnw40qsZkjkk6iCpTENgoFYo\",\n        \"type\": \"string\"\n      },\n      \"action\": \"string\",\n      \"namespace\": \"string\",\n      \"details\": {}\n    }\n  ],\n  \"pagination\": {\n    \"count\": 1431,\n    \"next_page\": \"http://BPPPcQNFIu.ilqsELON2\",\n    \"previous_page\": \"http://iCAroPHhCCkrB.dicgtpKeRrPAIWDfMk,6d1KAo2Egloy+d.+3Yr\",\n    \"next_page_token\": \"string\",\n    \"previous_page_token\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33e5a0d6-1b83-444a-ab34-ad816cdd26d6",
+              "name": "Authentication failed. Verify that a valid access token is provided in the Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "activity_log_entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "min_occurred_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "max_occurred_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "search_term",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.calendly.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "68358838-506e-4f56-8d2d-420a57a5baf4",
+    "name": "Calendly Scheduling Activity Log API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Calendly Scheduling API (v2) is a RESTful API that allows developers to programmatically manage scheduling workflows. It provides endpoints for managing users, organizations, event types, scheduled events, invitees, routing forms, availability schedules, and webhook subscriptions. The API uses JSON for request and response bodies, standard HTTP methods, and supports authentication via personal access tokens and OAuth 2.1. Developers can use it to create events on behalf of invitees, retrieve scheduling data, and integrate Calendly functionality directly into their applications.\n\nContact Support:\n Name: Calendly Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

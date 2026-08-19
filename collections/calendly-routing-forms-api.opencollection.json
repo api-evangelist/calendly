@@ -1,0 +1,124 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Calendly Scheduling Activity Log Routing Forms API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Routing Forms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List routing forms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.calendly.com/routing_forms",
+            "params": [
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query",
+                "description": "The URI of the organization whose routing forms to list."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "A token for fetching the next page of results from a previous paginated response."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of routing forms for the specified organization. Routing forms are questionnaires that direct invitees to the appropriate scheduling page based on their responses."
+        },
+        {
+          "info": {
+            "name": "Get routing form",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.calendly.com/routing_forms/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the routing form."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific routing form, including its questions and routing rules."
+        },
+        {
+          "info": {
+            "name": "List routing form submissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.calendly.com/routing_form_submissions",
+            "params": [
+              {
+                "name": "routing_form",
+                "value": "",
+                "type": "query",
+                "description": "The URI of the routing form whose submissions to list."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "A token for fetching the next page of results from a previous paginated response."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of submissions for a specific routing form, including the answers provided by each submitter."
+        },
+        {
+          "info": {
+            "name": "Get routing form submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.calendly.com/routing_form_submissions/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the routing form submission."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific routing form submission."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

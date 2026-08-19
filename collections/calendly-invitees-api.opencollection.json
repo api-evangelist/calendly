@@ -1,0 +1,107 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Calendly Scheduling Activity Log Invitees API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invitees",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List event invitees",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.calendly.com/scheduled_events/:event_uuid/invitees",
+            "params": [
+              {
+                "name": "event_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the scheduled event."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by invitee status."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for results. Use created_at:asc or created_at:desc."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "A token for fetching the next page of results from a previous paginated response."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of invitees for a specific scheduled event. Invitee data includes name, email, timezone, and answers to custom questions from the booking page."
+        },
+        {
+          "info": {
+            "name": "Get event invitee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.calendly.com/scheduled_events/:event_uuid/invitees/:invitee_uuid",
+            "params": [
+              {
+                "name": "event_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the scheduled event."
+              },
+              {
+                "name": "invitee_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the invitee."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific invitee for a scheduled event, including their name, email, timezone, and answers to custom questions on the event booking page."
+        },
+        {
+          "info": {
+            "name": "Create event invitee",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.calendly.com/invitees",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new invitee for a scheduled event, effectively booking a meeting on behalf of the invitee. This is the core endpoint of the Scheduling API, enabling programmatic event creation without redirects, iframes, or the Calendly-hosted UI. Requires a paid Calendly plan."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

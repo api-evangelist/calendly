@@ -1,0 +1,387 @@
+{
+  "item": [
+    {
+      "id": "b62b4523-9172-4357-a85a-a1cd4db6a8d2",
+      "name": "Groups",
+      "description": {
+        "content": "Endpoints for listing and retrieving organization groups.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8de980c8-af09-4447-a26a-37d436aa16d0",
+          "name": "List groups",
+          "request": {
+            "name": "List groups",
+            "description": {
+              "content": "Returns a paginated list of groups within the specified organization. Groups allow organizing users into teams for scheduling purposes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "organization",
+                  "value": "<uri>",
+                  "description": "(Required) The URI of the organization whose groups to list."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "20",
+                  "description": "The number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "A token for fetching the next page of results from a previous paginated response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "33a98ad0-cbe9-410d-9f0f-6c0b6f05d4cd",
+              "name": "Successfully retrieved groups",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"collection\": [\n    {\n      \"uri\": \"https://AiWlhUyAYpLBQ.btDAz\",\n      \"name\": \"string\",\n      \"organization\": \"http://gijMgjHplytKgkR.jdzfvPIlufawsSKLkNkhDoYXee3.FPBvFr6TMJZUXyVA\",\n      \"created_at\": \"2006-02-03T09:46:05.108Z\",\n      \"updated_at\": \"2022-11-13T20:13:28.582Z\"\n    },\n    {\n      \"uri\": \"http://MjZWCagyHnLVHWLTDEFjbAKoI.paxbjBnAPUah,qTYQY8vX-eXtj.XsrJcNuE7TVB59AsochNt94J.4wJ\",\n      \"name\": \"string\",\n      \"organization\": \"https://PZWtVnKQDKMHwOtYiQebURc.nobJP8uv0EwIi0T.0rcnKomYTcbWrfDUetmeTquMQDRQI,4FTW5StmSSA\",\n      \"created_at\": \"1957-05-24T13:09:53.912Z\",\n      \"updated_at\": \"2023-12-20T09:40:24.388Z\"\n    }\n  ],\n  \"pagination\": {\n    \"count\": 8917,\n    \"next_page\": \"https://BerjtVHkiLhNpwWdmVmsNcUDRfpiDuM.nrSKJNxTmjDrNNAw1\",\n    \"previous_page\": \"https://GIopCiludfotCmwNbe.igdW5FWwS50iQZSO.IzYYNsPyq7vtA\",\n    \"next_page_token\": \"string\",\n    \"previous_page_token\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44c89223-3906-4f43-85b8-2cd2c4f6cfec",
+              "name": "Authentication failed. Verify that a valid access token is provided in the Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "751b83da-cd8d-4ac4-8695-ca8368e0c256",
+          "name": "List group relationships",
+          "request": {
+            "name": "List group relationships",
+            "description": {
+              "content": "Returns a paginated list of group memberships, showing which users belong to which groups within an organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "group_relationships"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "group",
+                  "value": "<uri>",
+                  "description": "The URI of the group to list relationships for."
+                },
+                {
+                  "disabled": false,
+                  "key": "organization",
+                  "value": "<uri>",
+                  "description": "(Required) The URI of the organization."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "20",
+                  "description": "The number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "A token for fetching the next page of results from a previous paginated response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6fe9d32e-9df2-4f90-a356-7d41479b3082",
+              "name": "Successfully retrieved group relationships",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "group_relationships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "group",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"collection\": [\n    {\n      \"uri\": \"http://igfGApAAKvVdFCYQQ.hrcmKTilFaIJJgQsHkj9Eox3BUhaJORqB1i.tYVFgAQJ1sNzzD+zNYb1gRSgxZ\",\n      \"owner\": \"http://oqEtsFfJWXV.egcXHH7.xat3iLB3v8CG5kN77eAj-vEb01QFymprQLKx+o\",\n      \"group\": \"https://MrClkMIqoZHEWQIJeflymmcHch.tgQ.IwMPX382mrJQi2jvbgz9gHsZjIBhg0.U2F1\",\n      \"organization\": \"http://GGBl.guflGODAO2CNycodoNrWC1QN4qgLLMLprMd8UGO1e0dQH6CR4ZHgbmymoLxkJ+nB\",\n      \"created_at\": \"1972-07-12T17:24:00.230Z\",\n      \"updated_at\": \"1973-02-17T15:38:55.287Z\"\n    },\n    {\n      \"uri\": \"http://MWAkxinxKSm.wldrlmY6\",\n      \"owner\": \"https://TorRgyggjJZpsYK.yeW9SRYFIhr,qUM84D2QkW5ql1x.VcV1VFGgea4x4XxQINXsQ2wZTpX0Oz0IgAFENeORs\",\n      \"group\": \"http://TXCfcAicEpGchQaLJslPUWgAooQfP.gnnl1dK9RKnegFOe5XE\",\n      \"organization\": \"https://NrGJAIDdIFfnTu.llGjVKFx1syhFwiIatGmNVkcOMjJYvrjAcic-7leSnWylFdToQPcWyqCM+QCGM558nNbS,sKZ\",\n      \"created_at\": \"2005-07-28T13:00:26.992Z\",\n      \"updated_at\": \"1998-09-11T22:51:53.764Z\"\n    }\n  ],\n  \"pagination\": {\n    \"count\": 7145,\n    \"next_page\": \"https://uaaqpIKDHQPojuOCwqnojtpgNDDQKGswG.eehcY7Jg8ITCg2,HxKg1vgPIDYAIaAe8farJfnGDAdxTR50hy5mvktqbeJ\",\n    \"previous_page\": \"http://BnCwOleaik.fnfyvfgyer6gpY2rjaiQAphIUi5SG1S2j7ZBNeVpjvRoBsFs5fmXf2dg1\",\n    \"next_page_token\": \"string\",\n    \"previous_page_token\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3076aa98-cb21-4e3d-851a-18c56ec9526e",
+              "name": "Authentication failed. Verify that a valid access token is provided in the Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "group_relationships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "group",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.calendly.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "49dc8748-d6be-48d6-b952-4ee34078eb00",
+    "name": "Calendly Scheduling Activity Log Groups API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Calendly Scheduling API (v2) is a RESTful API that allows developers to programmatically manage scheduling workflows. It provides endpoints for managing users, organizations, event types, scheduled events, invitees, routing forms, availability schedules, and webhook subscriptions. The API uses JSON for request and response bodies, standard HTTP methods, and supports authentication via personal access tokens and OAuth 2.1. Developers can use it to create events on behalf of invitees, retrieve scheduling data, and integrate Calendly functionality directly into their applications.\n\nContact Support:\n Name: Calendly Developer Support",
+      "type": "text/plain"
+    }
+  }
+}
