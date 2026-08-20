@@ -35,6 +35,11 @@ apis:
 - aid: calendly:webhook-api
   name: Calendly Webhook API
   tags:
+  - Event
+  - Notification
+  - Scheduling
+  - Webhook
+  tags_raw:
   - Events
   - Notifications
   - Scheduling
@@ -129,6 +134,8 @@ apis:
   humanURL: https://developer.calendly.com/api-docs
   baseURL: https://api.calendly.com
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -154,6 +161,8 @@ apis:
   humanURL: https://developer.calendly.com/api-docs
   baseURL: https://api.calendly.com
   tags:
+  - Organization
+  tags_raw:
   - Organizations
   properties:
   - type: OpenAPI
@@ -202,6 +211,8 @@ apis:
   humanURL: https://developer.calendly.com/api-docs
   baseURL: https://api.calendly.com
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
