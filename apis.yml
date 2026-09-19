@@ -32,6 +32,13 @@ tags:
   - Appointments
   - Automation
   - Booking
+  - Calendar
+  - Meetings
+  - Scheduling
+tags_raw:
+  - Appointments
+  - Automation
+  - Booking
   - Calendars
   - Meetings
   - Scheduling
@@ -72,6 +79,11 @@ apis:
 - aid: calendly:embed-api
   name: Calendly Embed API
   tags:
+  - Embeddings
+  - Scheduling
+  - Web Components
+  - Widgets
+  tags_raw:
   - Embedding
   - Scheduling
   - Web Components
@@ -211,6 +223,8 @@ apis:
   humanURL: https://developer.calendly.com/api-docs
   baseURL: https://api.calendly.com
   tags:
+  - Share
+  tags_raw:
   - Shares
   properties:
   - type: OpenAPI
