@@ -28,6 +28,9 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/calendly.png
 type: Index
+x-docs-platform: fern
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-09-21
 tags:
   - Appointments
   - Automation
