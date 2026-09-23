@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Calendly Scheduling Activity Log Routing Forms API
-  description: The Calendly Scheduling API (v2) is a RESTful API that allows developers to programmatically manage scheduling workflows. It provides endpoints for managing users, organizations, event types, scheduled events, invitees, routing forms, availability schedules, and webhook subscriptions. The API uses JSON for request and response bodies, standard HTTP methods, and supports authentication via personal access tokens and OAuth 2.1. Developers can use it to create events on behalf of invitees, retrieve scheduling data, and integrate Calendly functionality directly into their applications.
+  title: Calendly Scheduling Routing Forms API
+  description: The Calendly Scheduling API (v2) is a RESTful API that allows developers to programmatically manage scheduling workflows.
   version: 2.0.0
   contact:
     name: Calendly Developer Support
@@ -153,80 +153,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
-    RoutingForm:
-      type: object
-      description: A routing form is a questionnaire that directs invitees to the appropriate scheduling page based on their responses.
-      properties:
-        uri:
-          type: string
-          format: uri
-          description: The canonical URI of the routing form resource.
-        name:
-          type: string
-          description: The name of the routing form.
-        organization:
-          type: string
-          format: uri
-          description: The URI of the organization that owns the routing form.
-        questions:
-          type: array
-          items:
-            type: object
-            properties:
-              uuid:
-                type: string
-                description: The UUID of the question.
-              name:
-                type: string
-                description: The text of the question.
-              type:
-                type: string
-                description: The type of question.
-              required:
-                type: boolean
-                description: Whether an answer is required.
-              answer_choices:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    answer_choice_id:
-                      type: string
-                      description: The ID of the answer choice.
-                    label:
-                      type: string
-                      description: The display label.
-                description: The available answer choices.
-          description: The questions in the routing form.
-        created_at:
-          type: string
-          format: date-time
-          description: The timestamp when the routing form was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: The timestamp when the routing form was last updated.
-    Pagination:
-      type: object
-      description: Pagination information for paginated list responses.
-      properties:
-        count:
-          type: integer
-          description: The number of results in the current page.
-        next_page:
-          type: string
-          format: uri
-          description: The URL of the next page of results, if available.
-        previous_page:
-          type: string
-          format: uri
-          description: The URL of the previous page of results, if available.
-        next_page_token:
-          type: string
-          description: The token to fetch the next page of results.
-        previous_page_token:
-          type: string
-          description: The token to fetch the previous page of results.
     RoutingFormSubmission:
       type: object
       description: A submission to a routing form, capturing the answers provided by a respondent.
@@ -304,7 +230,87 @@ components:
                 type: string
                 description: A description of what was wrong with the parameter.
           description: Specific details about validation errors.
+    Pagination:
+      type: object
+      description: Pagination information for paginated list responses.
+      properties:
+        count:
+          type: integer
+          description: The number of results in the current page.
+        next_page:
+          type: string
+          format: uri
+          description: The URL of the next page of results, if available.
+        previous_page:
+          type: string
+          format: uri
+          description: The URL of the previous page of results, if available.
+        next_page_token:
+          type: string
+          description: The token to fetch the next page of results.
+        previous_page_token:
+          type: string
+          description: The token to fetch the previous page of results.
+    RoutingForm:
+      type: object
+      description: A routing form is a questionnaire that directs invitees to the appropriate scheduling page based on their responses.
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: The canonical URI of the routing form resource.
+        name:
+          type: string
+          description: The name of the routing form.
+        organization:
+          type: string
+          format: uri
+          description: The URI of the organization that owns the routing form.
+        questions:
+          type: array
+          items:
+            type: object
+            properties:
+              uuid:
+                type: string
+                description: The UUID of the question.
+              name:
+                type: string
+                description: The text of the question.
+              type:
+                type: string
+                description: The type of question.
+              required:
+                type: boolean
+                description: Whether an answer is required.
+              answer_choices:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    answer_choice_id:
+                      type: string
+                      description: The ID of the answer choice.
+                    label:
+                      type: string
+                      description: The display label.
+                description: The available answer choices.
+          description: The questions in the routing form.
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the routing form was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: The timestamp when the routing form was last updated.
   parameters:
+    PageToken:
+      name: page_token
+      in: query
+      description: A token for fetching the next page of results from a previous paginated response.
+      schema:
+        type: string
     Count:
       name: count
       in: query
@@ -314,12 +320,6 @@ components:
         minimum: 1
         maximum: 100
         default: 20
-    PageToken:
-      name: page_token
-      in: query
-      description: A token for fetching the next page of results from a previous paginated response.
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

@@ -1,18 +1,7 @@
 {
   "provider": "calendly",
   "sources": [
-    "calendly-activity-log-api-openapi.yml",
-    "calendly-availability-api-openapi.yml",
-    "calendly-data-compliance-api-openapi.yml",
-    "calendly-event-types-api-openapi.yml",
-    "calendly-groups-api-openapi.yml",
-    "calendly-invitees-api-openapi.yml",
-    "calendly-organizations-api-openapi.yml",
-    "calendly-routing-forms-api-openapi.yml",
-    "calendly-scheduled-events-api-openapi.yml",
-    "calendly-shares-api-openapi.yml",
-    "calendly-users-api-openapi.yml",
-    "calendly-webhook-subscriptions-api-openapi.yml"
+    "_original/calendly-scheduling-api-openapi.yml"
   ],
   "outputs": [
     "calendly-activity-log-api-openapi.yml",
@@ -31,6 +20,23 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "calendly-scheduling-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "calendly-activity-log-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "calendly-availability-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "calendly-data-compliance-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "calendly-event-types-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "calendly-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "calendly-invitees-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "calendly-organizations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "calendly-routing-forms-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "calendly-scheduled-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "calendly-shares-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "calendly-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "calendly-webhook-subscriptions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

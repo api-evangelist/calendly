@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Calendly Scheduling Activity Log Scheduled Events API
-  description: The Calendly Scheduling API (v2) is a RESTful API that allows developers to programmatically manage scheduling workflows. It provides endpoints for managing users, organizations, event types, scheduled events, invitees, routing forms, availability schedules, and webhook subscriptions. The API uses JSON for request and response bodies, standard HTTP methods, and supports authentication via personal access tokens and OAuth 2.1. Developers can use it to create events on behalf of invitees, retrieve scheduling data, and integrate Calendly functionality directly into their applications.
+  title: Calendly Scheduling Scheduled Events API
+  description: The Calendly Scheduling API (v2) is a RESTful API that allows developers to programmatically manage scheduling workflows.
   version: 2.0.0
   contact:
     name: Calendly Developer Support
@@ -144,27 +144,26 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed. Verify that a valid access token is provided in the Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was invalid or malformed. Check the request body and parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found. Verify the UUID or URI is correct.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Cancellation:
-      type: object
-      description: Information about a canceled event or invitee, including who canceled and the reason.
-      properties:
-        canceled_by:
-          type: string
-          description: The name or identifier of who canceled the event.
-        reason:
-          type: string
-          description: The reason provided for the cancellation.
-        canceler_type:
-          type: string
-          enum:
-          - host
-          - invitee
-          description: Whether the host or invitee canceled.
-        created_at:
-          type: string
-          format: date-time
-          description: The timestamp when the cancellation occurred.
     Location:
       type: object
       description: The location configuration for a scheduled event, specifying where the meeting takes place.
@@ -185,27 +184,26 @@ components:
         additional_info:
           type: string
           description: Additional information about the location.
-    Pagination:
+    Cancellation:
       type: object
-      description: Pagination information for paginated list responses.
+      description: Information about a canceled event or invitee, including who canceled and the reason.
       properties:
-        count:
-          type: integer
-          description: The number of results in the current page.
-        next_page:
+        canceled_by:
           type: string
-          format: uri
-          description: The URL of the next page of results, if available.
-        previous_page:
+          description: The name or identifier of who canceled the event.
+        reason:
           type: string
-          format: uri
-          description: The URL of the previous page of results, if available.
-        next_page_token:
+          description: The reason provided for the cancellation.
+        canceler_type:
           type: string
-          description: The token to fetch the next page of results.
-        previous_page_token:
+          enum:
+          - host
+          - invitee
+          description: Whether the host or invitee canceled.
+        created_at:
           type: string
-          description: The token to fetch the previous page of results.
+          format: date-time
+          description: The timestamp when the cancellation occurred.
     ScheduledEvent:
       type: object
       description: A scheduled event represents a booked meeting with a specific start time, end time, location, and associated invitees.
@@ -317,26 +315,34 @@ components:
                 type: string
                 description: A description of what was wrong with the parameter.
           description: Specific details about validation errors.
-  responses:
-    Unauthorized:
-      description: Authentication failed. Verify that a valid access token is provided in the Authorization header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was invalid or malformed. Check the request body and parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found. Verify the UUID or URI is correct.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Pagination:
+      type: object
+      description: Pagination information for paginated list responses.
+      properties:
+        count:
+          type: integer
+          description: The number of results in the current page.
+        next_page:
+          type: string
+          format: uri
+          description: The URL of the next page of results, if available.
+        previous_page:
+          type: string
+          format: uri
+          description: The URL of the previous page of results, if available.
+        next_page_token:
+          type: string
+          description: The token to fetch the next page of results.
+        previous_page_token:
+          type: string
+          description: The token to fetch the previous page of results.
   parameters:
+    PageToken:
+      name: page_token
+      in: query
+      description: A token for fetching the next page of results from a previous paginated response.
+      schema:
+        type: string
     Count:
       name: count
       in: query
@@ -346,12 +352,6 @@ components:
         minimum: 1
         maximum: 100
         default: 20
-    PageToken:
-      name: page_token
-      in: query
-      description: A token for fetching the next page of results from a previous paginated response.
-      schema:
-        type: string
     ScheduledEventUuid:
       name: uuid
       in: path
