@@ -184,57 +184,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
-    BusyTime:
-      type: object
-      description: A time period during which a user is busy based on their connected calendars.
-      properties:
-        type:
-          type: string
-          description: The type of busy time (e.g., calendly or external).
-        start_time:
-          type: string
-          format: date-time
-          description: The start of the busy period in UTC.
-        end_time:
-          type: string
-          format: date-time
-          description: The end of the busy period in UTC.
-        buffered_start_time:
-          type: string
-          format: date-time
-          description: The start time including buffer periods.
-        buffered_end_time:
-          type: string
-          format: date-time
-          description: The end time including buffer periods.
-        event:
-          type: object
-          description: Details about the event causing the busy time.
-          properties:
-            uri:
-              type: string
-              format: uri
-              description: The URI of the event.
-    AvailableTime:
-      type: object
-      description: An available time slot for an event type that can be booked by an invitee.
-      properties:
-        status:
-          type: string
-          enum:
-          - available
-          description: The status of the time slot.
-        invitees_remaining:
-          type: integer
-          description: The number of remaining spots for group events.
-        start_time:
-          type: string
-          format: date-time
-          description: The start time of the available slot in UTC.
-        scheduling_url:
-          type: string
-          format: uri
-          description: The URL to schedule at this specific time.
     Error:
       type: object
       description: An error response from the Calendly API.
@@ -257,6 +206,26 @@ components:
                 type: string
                 description: A description of what was wrong with the parameter.
           description: Specific details about validation errors.
+    AvailableTime:
+      type: object
+      description: An available time slot for an event type that can be booked by an invitee.
+      properties:
+        status:
+          type: string
+          enum:
+          - available
+          description: The status of the time slot.
+        invitees_remaining:
+          type: integer
+          description: The number of remaining spots for group events.
+        start_time:
+          type: string
+          format: date-time
+          description: The start time of the available slot in UTC.
+        scheduling_url:
+          type: string
+          format: uri
+          description: The URL to schedule at this specific time.
     AvailabilitySchedule:
       type: object
       description: An availability schedule defining recurring time windows when a user is available for meetings.
@@ -313,6 +282,37 @@ components:
                       description: The end time of the interval (HH:MM format).
                 description: The time intervals during which the user is available.
           description: The availability rules defining when the user is available.
+    BusyTime:
+      type: object
+      description: A time period during which a user is busy based on their connected calendars.
+      properties:
+        type:
+          type: string
+          description: The type of busy time (e.g., calendly or external).
+        start_time:
+          type: string
+          format: date-time
+          description: The start of the busy period in UTC.
+        end_time:
+          type: string
+          format: date-time
+          description: The end of the busy period in UTC.
+        buffered_start_time:
+          type: string
+          format: date-time
+          description: The start time including buffer periods.
+        buffered_end_time:
+          type: string
+          format: date-time
+          description: The end time including buffer periods.
+        event:
+          type: object
+          description: Details about the event causing the busy time.
+          properties:
+            uri:
+              type: string
+              format: uri
+              description: The URI of the event.
   securitySchemes:
     bearerAuth:
       type: http
