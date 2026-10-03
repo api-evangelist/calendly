@@ -144,32 +144,9 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    Count:
-      name: count
-      in: query
-      description: The number of results to return per page.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 20
-    ScheduledEventUuid:
-      name: uuid
-      in: path
-      required: true
-      description: The UUID of the scheduled event.
-      schema:
-        type: string
-    PageToken:
-      name: page_token
-      in: query
-      description: A token for fetching the next page of results from a previous paginated response.
-      schema:
-        type: string
   responses:
-    Unauthorized:
-      description: Authentication failed. Verify that a valid access token is provided in the Authorization header.
+    NotFound:
+      description: The requested resource was not found. Verify the UUID or URI is correct.
       content:
         application/json:
           schema:
@@ -180,53 +157,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found. Verify the UUID or URI is correct.
+    Unauthorized:
+      description: Authentication failed. Verify that a valid access token is provided in the Authorization header.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
-    Cancellation:
-      type: object
-      description: Information about a canceled event or invitee, including who canceled and the reason.
-      properties:
-        canceled_by:
-          type: string
-          description: The name or identifier of who canceled the event.
-        reason:
-          type: string
-          description: The reason provided for the cancellation.
-        canceler_type:
-          type: string
-          enum:
-          - host
-          - invitee
-          description: Whether the host or invitee canceled.
-        created_at:
-          type: string
-          format: date-time
-          description: The timestamp when the cancellation occurred.
-    Location:
-      type: object
-      description: The location configuration for a scheduled event, specifying where the meeting takes place.
-      properties:
-        type:
-          type: string
-          description: The type of location (e.g., physical, outbound_call, inbound_call, google_conference, zoom, microsoft_teams_conference, custom).
-        location:
-          type: string
-          description: The location details, such as an address or phone number.
-        join_url:
-          type: string
-          format: uri
-          description: The URL to join the meeting for virtual locations.
-        status:
-          type: string
-          description: The status of the conference link generation.
-        additional_info:
-          type: string
-          description: Additional information about the location.
     ScheduledEvent:
       type: object
       description: A scheduled event represents a booked meeting with a specific start time, end time, location, and associated invitees.
@@ -316,6 +253,67 @@ components:
                 format: date-time
                 description: When the guest record was last updated.
           description: Additional guests invited to the event.
+    Location:
+      type: object
+      description: The location configuration for a scheduled event, specifying where the meeting takes place.
+      properties:
+        type:
+          type: string
+          description: The type of location (e.g., physical, outbound_call, inbound_call, google_conference, zoom, microsoft_teams_conference, custom).
+        location:
+          type: string
+          description: The location details, such as an address or phone number.
+        join_url:
+          type: string
+          format: uri
+          description: The URL to join the meeting for virtual locations.
+        status:
+          type: string
+          description: The status of the conference link generation.
+        additional_info:
+          type: string
+          description: Additional information about the location.
+    Cancellation:
+      type: object
+      description: Information about a canceled event or invitee, including who canceled and the reason.
+      properties:
+        canceled_by:
+          type: string
+          description: The name or identifier of who canceled the event.
+        reason:
+          type: string
+          description: The reason provided for the cancellation.
+        canceler_type:
+          type: string
+          enum:
+          - host
+          - invitee
+          description: Whether the host or invitee canceled.
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the cancellation occurred.
+    Pagination:
+      type: object
+      description: Pagination information for paginated list responses.
+      properties:
+        count:
+          type: integer
+          description: The number of results in the current page.
+        next_page:
+          type: string
+          format: uri
+          description: The URL of the next page of results, if available.
+        previous_page:
+          type: string
+          format: uri
+          description: The URL of the previous page of results, if available.
+        next_page_token:
+          type: string
+          description: The token to fetch the next page of results.
+        previous_page_token:
+          type: string
+          description: The token to fetch the previous page of results.
     Error:
       type: object
       description: An error response from the Calendly API.
@@ -338,27 +336,29 @@ components:
                 type: string
                 description: A description of what was wrong with the parameter.
           description: Specific details about validation errors.
-    Pagination:
-      type: object
-      description: Pagination information for paginated list responses.
-      properties:
-        count:
-          type: integer
-          description: The number of results in the current page.
-        next_page:
-          type: string
-          format: uri
-          description: The URL of the next page of results, if available.
-        previous_page:
-          type: string
-          format: uri
-          description: The URL of the previous page of results, if available.
-        next_page_token:
-          type: string
-          description: The token to fetch the next page of results.
-        previous_page_token:
-          type: string
-          description: The token to fetch the previous page of results.
+  parameters:
+    ScheduledEventUuid:
+      name: uuid
+      in: path
+      required: true
+      description: The UUID of the scheduled event.
+      schema:
+        type: string
+    PageToken:
+      name: page_token
+      in: query
+      description: A token for fetching the next page of results from a previous paginated response.
+      schema:
+        type: string
+    Count:
+      name: count
+      in: query
+      description: The number of results to return per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
   securitySchemes:
     bearerAuth:
       type: http
