@@ -263,6 +263,9 @@ apis:
   - type: Documentation
     url: https://developer.calendly.com/api-docs
 common:
+  - type: CapabilityMap
+    url: capabilities/calendly-capability-edges.yml
+    name: Calendly Business Capability Map
   - type: AgenticAccess
     url: agentic-access/calendly-agentic-access.yml
   - type: VulnerabilityDisclosure

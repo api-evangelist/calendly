@@ -1,0 +1,37 @@
+slug: calendly
+provider: Calendly
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Webhook Subscriptions
+  spec_file: calendly-webhook-subscriptions-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.75
+  evidence: 'POST /webhook_subscriptions  createWebhookSubscription  Create webhook subscription; vendor:
+    ''receiving real-time event notifications via webhooks'''
+  reason: Full CRUD lifecycle over outbound webhook subscriptions on a developer platform matches Webhook
+    & Event Subscription Management directly, though such endpoints are also plain integration plumbing,
+    so confidence is moderate.
+- tag: Data Compliance
+  spec_file: calendly-data-compliance-api-openapi.yml
+  capability_id: BC-130.50
+  capability_id_l1: BC-130
+  capability_name: Privacy & Data Protection Management
+  confidence: 0.72
+  evidence: POST /data_compliance/deletion/invitees deleteInviteeData Delete invitee data
+  reason: The sole operation executes erasure of a data subject's (invitee's) personal data under a path
+    explicitly namespaced 'data_compliance', which realises GDPR-style data subject rights handling. Confidence
+    held moderate because the surface is one endpoint and could alternatively be framed as the vendor's
+    service-privacy commitment mechanism (BC-4290.50).
