@@ -251,61 +251,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found. Verify the UUID or URI is correct.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was invalid or malformed. Check the request body and parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. Verify that a valid access token is provided in the Authorization header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    OrganizationInvitation:
-      type: object
-      description: An invitation for a user to join a Calendly organization.
-      properties:
-        uri:
-          type: string
-          format: uri
-          description: The canonical URI of the invitation resource.
-        email:
-          type: string
-          format: email
-          description: The email address the invitation was sent to.
-        status:
-          type: string
-          enum:
-          - pending
-          - accepted
-          - declined
-          description: The current status of the invitation.
-        organization:
-          type: string
-          format: uri
-          description: The URI of the organization.
-        created_at:
-          type: string
-          format: date-time
-          description: The timestamp when the invitation was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: The timestamp when the invitation was last updated.
-        last_sent_at:
-          type: string
-          format: date-time
-          description: The timestamp when the invitation was last sent.
     User:
       type: object
       description: A Calendly user account with scheduling and organization information.
@@ -376,27 +322,6 @@ components:
           type: string
           format: date-time
           description: The timestamp when the membership was last updated.
-    Pagination:
-      type: object
-      description: Pagination information for paginated list responses.
-      properties:
-        count:
-          type: integer
-          description: The number of results in the current page.
-        next_page:
-          type: string
-          format: uri
-          description: The URL of the next page of results, if available.
-        previous_page:
-          type: string
-          format: uri
-          description: The URL of the previous page of results, if available.
-        next_page_token:
-          type: string
-          description: The token to fetch the next page of results.
-        previous_page_token:
-          type: string
-          description: The token to fetch the previous page of results.
     Error:
       type: object
       description: An error response from the Calendly API.
@@ -419,13 +344,82 @@ components:
                 type: string
                 description: A description of what was wrong with the parameter.
           description: Specific details about validation errors.
+    OrganizationInvitation:
+      type: object
+      description: An invitation for a user to join a Calendly organization.
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: The canonical URI of the invitation resource.
+        email:
+          type: string
+          format: email
+          description: The email address the invitation was sent to.
+        status:
+          type: string
+          enum:
+          - pending
+          - accepted
+          - declined
+          description: The current status of the invitation.
+        organization:
+          type: string
+          format: uri
+          description: The URI of the organization.
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the invitation was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: The timestamp when the invitation was last updated.
+        last_sent_at:
+          type: string
+          format: date-time
+          description: The timestamp when the invitation was last sent.
+    Pagination:
+      type: object
+      description: Pagination information for paginated list responses.
+      properties:
+        count:
+          type: integer
+          description: The number of results in the current page.
+        next_page:
+          type: string
+          format: uri
+          description: The URL of the next page of results, if available.
+        previous_page:
+          type: string
+          format: uri
+          description: The URL of the previous page of results, if available.
+        next_page_token:
+          type: string
+          description: The token to fetch the next page of results.
+        previous_page_token:
+          type: string
+          description: The token to fetch the previous page of results.
+  responses:
+    BadRequest:
+      description: The request was invalid or malformed. Check the request body and parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found. Verify the UUID or URI is correct.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. Verify that a valid access token is provided in the Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    PageToken:
-      name: page_token
-      in: query
-      description: A token for fetching the next page of results from a previous paginated response.
-      schema:
-        type: string
     Count:
       name: count
       in: query
@@ -435,6 +429,12 @@ components:
         minimum: 1
         maximum: 100
         default: 20
+    PageToken:
+      name: page_token
+      in: query
+      description: A token for fetching the next page of results from a previous paginated response.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

@@ -149,15 +149,38 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    EventTypeUuid:
+      name: uuid
+      in: path
+      required: true
+      description: The UUID of the event type.
+      schema:
+        type: string
+    Count:
+      name: count
+      in: query
+      description: The number of results to return per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    PageToken:
+      name: page_token
+      in: query
+      description: A token for fetching the next page of results from a previous paginated response.
+      schema:
+        type: string
   responses:
-    NotFound:
-      description: The requested resource was not found. Verify the UUID or URI is correct.
+    BadRequest:
+      description: The request was invalid or malformed. Check the request body and parameters.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was invalid or malformed. Check the request body and parameters.
+    NotFound:
+      description: The requested resource was not found. Verify the UUID or URI is correct.
       content:
         application/json:
           schema:
@@ -169,6 +192,64 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      description: An error response from the Calendly API.
+      properties:
+        title:
+          type: string
+          description: A short summary of the error.
+        message:
+          type: string
+          description: A detailed description of the error.
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              parameter:
+                type: string
+                description: The parameter that caused the error.
+              message:
+                type: string
+                description: A description of what was wrong with the parameter.
+          description: Specific details about validation errors.
+    CustomQuestion:
+      type: object
+      description: A custom question displayed on the event type booking page.
+      properties:
+        uuid:
+          type: string
+          description: The UUID of the custom question.
+        name:
+          type: string
+          description: The text of the question.
+        type:
+          type: string
+          enum:
+          - string
+          - text
+          - phone_number
+          - single_select
+          - multi_select
+          description: The type of input expected for the answer.
+        position:
+          type: integer
+          description: The display order of the question.
+        enabled:
+          type: boolean
+          description: Whether the question is currently enabled.
+        required:
+          type: boolean
+          description: Whether an answer is required.
+        answer_choices:
+          type: array
+          items:
+            type: string
+          description: The available answer choices for select-type questions.
+        include_other:
+          type: boolean
+          description: Whether an Other option is included in select-type questions.
     EventType:
       type: object
       description: An event type defines a kind of meeting that can be scheduled, including its duration, location, and availability configuration.
@@ -285,87 +366,6 @@ components:
         previous_page_token:
           type: string
           description: The token to fetch the previous page of results.
-    CustomQuestion:
-      type: object
-      description: A custom question displayed on the event type booking page.
-      properties:
-        uuid:
-          type: string
-          description: The UUID of the custom question.
-        name:
-          type: string
-          description: The text of the question.
-        type:
-          type: string
-          enum:
-          - string
-          - text
-          - phone_number
-          - single_select
-          - multi_select
-          description: The type of input expected for the answer.
-        position:
-          type: integer
-          description: The display order of the question.
-        enabled:
-          type: boolean
-          description: Whether the question is currently enabled.
-        required:
-          type: boolean
-          description: Whether an answer is required.
-        answer_choices:
-          type: array
-          items:
-            type: string
-          description: The available answer choices for select-type questions.
-        include_other:
-          type: boolean
-          description: Whether an Other option is included in select-type questions.
-    Error:
-      type: object
-      description: An error response from the Calendly API.
-      properties:
-        title:
-          type: string
-          description: A short summary of the error.
-        message:
-          type: string
-          description: A detailed description of the error.
-        details:
-          type: array
-          items:
-            type: object
-            properties:
-              parameter:
-                type: string
-                description: The parameter that caused the error.
-              message:
-                type: string
-                description: A description of what was wrong with the parameter.
-          description: Specific details about validation errors.
-  parameters:
-    PageToken:
-      name: page_token
-      in: query
-      description: A token for fetching the next page of results from a previous paginated response.
-      schema:
-        type: string
-    Count:
-      name: count
-      in: query
-      description: The number of results to return per page.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 20
-    EventTypeUuid:
-      name: uuid
-      in: path
-      required: true
-      description: The UUID of the event type.
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

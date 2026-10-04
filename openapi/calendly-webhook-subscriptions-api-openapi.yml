@@ -186,6 +186,15 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   parameters:
+    Count:
+      name: count
+      in: query
+      description: The number of results to return per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
     WebhookSubscriptionUuid:
       name: uuid
       in: path
@@ -199,15 +208,6 @@ components:
       description: A token for fetching the next page of results from a previous paginated response.
       schema:
         type: string
-    Count:
-      name: count
-      in: query
-      description: The number of results to return per page.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 20
   schemas:
     WebhookSubscription:
       type: object
@@ -266,27 +266,6 @@ components:
           type: string
           format: uri
           description: The URI of the user who created the subscription.
-    Pagination:
-      type: object
-      description: Pagination information for paginated list responses.
-      properties:
-        count:
-          type: integer
-          description: The number of results in the current page.
-        next_page:
-          type: string
-          format: uri
-          description: The URL of the next page of results, if available.
-        previous_page:
-          type: string
-          format: uri
-          description: The URL of the previous page of results, if available.
-        next_page_token:
-          type: string
-          description: The token to fetch the next page of results.
-        previous_page_token:
-          type: string
-          description: The token to fetch the previous page of results.
     Error:
       type: object
       description: An error response from the Calendly API.
@@ -309,6 +288,27 @@ components:
                 type: string
                 description: A description of what was wrong with the parameter.
           description: Specific details about validation errors.
+    Pagination:
+      type: object
+      description: Pagination information for paginated list responses.
+      properties:
+        count:
+          type: integer
+          description: The number of results in the current page.
+        next_page:
+          type: string
+          format: uri
+          description: The URL of the next page of results, if available.
+        previous_page:
+          type: string
+          format: uri
+          description: The URL of the previous page of results, if available.
+        next_page_token:
+          type: string
+          description: The token to fetch the next page of results.
+        previous_page_token:
+          type: string
+          description: The token to fetch the previous page of results.
   securitySchemes:
     bearerAuth:
       type: http
