@@ -263,6 +263,12 @@ apis:
   - type: Documentation
     url: https://developer.calendly.com/api-docs
 common:
+  - type: Plans
+    url: plans/calendly-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/calendly-rate-limits.yml
+  - type: FinOps
+    url: finops/calendly-finops.yml
   - type: CapabilityMap
     url: capabilities/calendly-capability-edges.yml
     name: Calendly Business Capability Map
