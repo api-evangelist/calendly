@@ -39,7 +39,7 @@
     app_slug: calendly
     beta: false
     builder: unknown (not in the directory record)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: calendly-n8n
   label: n8n
@@ -67,7 +67,7 @@
     other_nodes:
     - Calendly/v1
     - Calendly/v2
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: calendly-pipedream
   label: Pipedream
@@ -93,5 +93,5 @@
     actions: true
     sources: true
     builder: Pipedream repo (component)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
