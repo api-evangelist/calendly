@@ -167,12 +167,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    NotFound:
-      description: The requested resource was not found. Verify the UUID or URI is correct.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     BadRequest:
       description: The request was invalid or malformed. Check the request body and parameters.
       content:
@@ -185,7 +179,26 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found. Verify the UUID or URI is correct.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
+    PageToken:
+      name: page_token
+      in: query
+      description: A token for fetching the next page of results from a previous paginated response.
+      schema:
+        type: string
+    WebhookSubscriptionUuid:
+      name: uuid
+      in: path
+      required: true
+      description: The UUID of the webhook subscription.
+      schema:
+        type: string
     Count:
       name: count
       in: query
@@ -195,20 +208,50 @@ components:
         minimum: 1
         maximum: 100
         default: 20
-    WebhookSubscriptionUuid:
-      name: uuid
-      in: path
-      required: true
-      description: The UUID of the webhook subscription.
-      schema:
-        type: string
-    PageToken:
-      name: page_token
-      in: query
-      description: A token for fetching the next page of results from a previous paginated response.
-      schema:
-        type: string
   schemas:
+    Pagination:
+      type: object
+      description: Pagination information for paginated list responses.
+      properties:
+        count:
+          type: integer
+          description: The number of results in the current page.
+        next_page:
+          type: string
+          format: uri
+          description: The URL of the next page of results, if available.
+        previous_page:
+          type: string
+          format: uri
+          description: The URL of the previous page of results, if available.
+        next_page_token:
+          type: string
+          description: The token to fetch the next page of results.
+        previous_page_token:
+          type: string
+          description: The token to fetch the previous page of results.
+    Error:
+      type: object
+      description: An error response from the Calendly API.
+      properties:
+        title:
+          type: string
+          description: A short summary of the error.
+        message:
+          type: string
+          description: A detailed description of the error.
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              parameter:
+                type: string
+                description: The parameter that caused the error.
+              message:
+                type: string
+                description: A description of what was wrong with the parameter.
+          description: Specific details about validation errors.
     WebhookSubscription:
       type: object
       description: A webhook subscription that receives real-time notifications when scheduling events occur in Calendly.
@@ -266,49 +309,6 @@ components:
           type: string
           format: uri
           description: The URI of the user who created the subscription.
-    Error:
-      type: object
-      description: An error response from the Calendly API.
-      properties:
-        title:
-          type: string
-          description: A short summary of the error.
-        message:
-          type: string
-          description: A detailed description of the error.
-        details:
-          type: array
-          items:
-            type: object
-            properties:
-              parameter:
-                type: string
-                description: The parameter that caused the error.
-              message:
-                type: string
-                description: A description of what was wrong with the parameter.
-          description: Specific details about validation errors.
-    Pagination:
-      type: object
-      description: Pagination information for paginated list responses.
-      properties:
-        count:
-          type: integer
-          description: The number of results in the current page.
-        next_page:
-          type: string
-          format: uri
-          description: The URL of the next page of results, if available.
-        previous_page:
-          type: string
-          format: uri
-          description: The URL of the previous page of results, if available.
-        next_page_token:
-          type: string
-          description: The token to fetch the next page of results.
-        previous_page_token:
-          type: string
-          description: The token to fetch the previous page of results.
   securitySchemes:
     bearerAuth:
       type: http

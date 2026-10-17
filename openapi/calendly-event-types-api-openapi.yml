@@ -149,7 +149,32 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    BadRequest:
+      description: The request was invalid or malformed. Check the request body and parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. Verify that a valid access token is provided in the Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found. Verify the UUID or URI is correct.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
+    PageToken:
+      name: page_token
+      in: query
+      description: A token for fetching the next page of results from a previous paginated response.
+      schema:
+        type: string
     EventTypeUuid:
       name: uuid
       in: path
@@ -166,54 +191,28 @@ components:
         minimum: 1
         maximum: 100
         default: 20
-    PageToken:
-      name: page_token
-      in: query
-      description: A token for fetching the next page of results from a previous paginated response.
-      schema:
-        type: string
-  responses:
-    BadRequest:
-      description: The request was invalid or malformed. Check the request body and parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found. Verify the UUID or URI is correct.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. Verify that a valid access token is provided in the Authorization header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
+    Pagination:
       type: object
-      description: An error response from the Calendly API.
+      description: Pagination information for paginated list responses.
       properties:
-        title:
+        count:
+          type: integer
+          description: The number of results in the current page.
+        next_page:
           type: string
-          description: A short summary of the error.
-        message:
+          format: uri
+          description: The URL of the next page of results, if available.
+        previous_page:
           type: string
-          description: A detailed description of the error.
-        details:
-          type: array
-          items:
-            type: object
-            properties:
-              parameter:
-                type: string
-                description: The parameter that caused the error.
-              message:
-                type: string
-                description: A description of what was wrong with the parameter.
-          description: Specific details about validation errors.
+          format: uri
+          description: The URL of the previous page of results, if available.
+        next_page_token:
+          type: string
+          description: The token to fetch the next page of results.
+        previous_page_token:
+          type: string
+          description: The token to fetch the previous page of results.
     CustomQuestion:
       type: object
       description: A custom question displayed on the event type booking page.
@@ -345,27 +344,28 @@ components:
           type: string
           format: date-time
           description: The timestamp when the event type was last updated.
-    Pagination:
+    Error:
       type: object
-      description: Pagination information for paginated list responses.
+      description: An error response from the Calendly API.
       properties:
-        count:
-          type: integer
-          description: The number of results in the current page.
-        next_page:
+        title:
           type: string
-          format: uri
-          description: The URL of the next page of results, if available.
-        previous_page:
+          description: A short summary of the error.
+        message:
           type: string
-          format: uri
-          description: The URL of the previous page of results, if available.
-        next_page_token:
-          type: string
-          description: The token to fetch the next page of results.
-        previous_page_token:
-          type: string
-          description: The token to fetch the previous page of results.
+          description: A detailed description of the error.
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              parameter:
+                type: string
+                description: The parameter that caused the error.
+              message:
+                type: string
+                description: A description of what was wrong with the parameter.
+          description: Specific details about validation errors.
   securitySchemes:
     bearerAuth:
       type: http
