@@ -1,0 +1,439 @@
+openapi: 3.2.0
+info:
+  title: Calendly Activity Log API
+  version: 1.0.0
+servers:
+- url: https://api.calendly.com
+  description: https://api.calendly.com
+tags:
+- name: activityLog
+paths:
+  /activity_log_entries:
+    get:
+      operationId: activityLog_list-activity-log-entries
+      summary: List activity log entries
+      description: '> This endpoint requires an Enterprise subscription.
+
+
+        > `activity_log:read`
+
+
+        Returns a list of activity log entries'
+      tags:
+      - activityLog
+      parameters:
+      - name: organization
+        in: query
+        description: Return activity log entries from the organization associated with this URI
+        required: true
+        schema:
+          type: string
+          format: uri
+      - name: search_term
+        in: query
+        description: "Filters entries based on the search term.\n\nSupported operators:\n  - `|` - to allow filtering by one term or another. Example: `this | that`\n  - `+` - to allow filtering by one term and another. Example: `this + that`\n  - `\"` - to allow filtering by an exact search term. Example: `\"email@website.com\"`\n  - `-` - to omit specific terms from results. Example: `Added -User`\n  - `()` - to allow specifying precedence during a search. Example: `(this + that) OR (person + place)`\n  - `*` - to allow prefix searching. Example `*@other-website.com`\n"
+        required: false
+        schema:
+          type: string
+          maxLength: 300
+      - name: actor
+        in: query
+        description: Return entries from the user(s) associated with the provided URIs
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            format: uri
+      - name: sort
+        in: query
+        description: Order results by the specified field and direction. List of {field}:{direction} values.
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActivityLogEntriesGetParametersSortSchemaItems'
+          default:
+          - occurred_at:desc
+      - name: min_occurred_at
+        in: query
+        description: 'Include entries that occurred after this time (sample time format: "2020-01-02T03:04:05.678Z"). This time should use the UTC timezone.'
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: max_occurred_at
+        in: query
+        description: 'Include entries that occurred prior to this time (sample time format: "2020-01-02T03:04:05.678Z"). This time should use the UTC timezone.'
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: page_token
+        in: query
+        description: The token to pass to get the next portion of the collection
+        required: false
+        schema:
+          type: string
+      - name: count
+        in: query
+        description: The number of rows to return
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 20
+      - name: namespace
+        in: query
+        description: The categories of the entries
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: action
+        in: query
+        description: The action(s) associated with the entries
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/activityLog_list-activity-log-entries_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-activity-log-entriesRequestBadRequestError'
+        '403':
+          description: Permission Denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-activity-log-entriesRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-activity-log-entriesRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-activity-log-entriesRequestInternalServerError'
+      security:
+      - oauth2: []
+components:
+  schemas:
+    List-activity-log-entriesRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ActivityLogEntriesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ActivityLogEntriesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-activity-log-entriesRequestBadRequestError
+    InsufficientScopeErrorTitle:
+      type: string
+      enum:
+      - Insufficient scope
+      title: InsufficientScopeErrorTitle
+    EnterpriseOwnerAdminError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EnterpriseOwnerAdminErrorTitle'
+        message:
+          $ref: '#/components/schemas/EnterpriseOwnerAdminErrorMessage'
+      description: Permission Denied
+      title: EnterpriseOwnerAdminError
+    InsufficientScopeError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InsufficientScopeErrorTitle'
+        message:
+          $ref: '#/components/schemas/InsufficientScopeErrorMessage'
+        required_scopes:
+          type: array
+          items:
+            type: string
+            pattern: ^[a-z_]+:(read|write)$
+      required:
+      - title
+      - message
+      - required_scopes
+      description: Caller does not have required oauth scopes
+      title: InsufficientScopeError
+    Actor:
+      type: object
+      properties:
+        uri:
+          type: string
+          description: Canonical reference (unique identifier) for the user
+        type:
+          type: string
+          description: The type of actor
+        organization:
+          $ref: '#/components/schemas/ActorOrganization'
+        group:
+          $ref: '#/components/schemas/ActorGroup'
+          description: User group information about the actor
+        display_name:
+          type: string
+          description: The user's name (human-readable format)
+        alternative_identifier:
+          type: string
+          description: Username of the actor
+      required:
+      - type
+      description: "The Calendly actor that took the action creating the activity log entry\n\nSpecific actors:\n\n<details>\n<summary>Calendly System</summary>\n\nUsed when an action is performed by the Calendly system and not triggered directly by a user interaction.\n\nExample:\n```json\n{\n    \"display_name\": \"Calendly System\",\n    \"type\": \"System\"\n}\n```\n\n</details>\n\n<br />\n\n<details>\n<summary>Calendly Support</summary>\nUsed when an action is performed by Calendly support.\n\nExample:\n```json\n{\n  \"display_name\": \"Calendly Support\",\n  \"organization\": {\n    \"uri\": \"https://api.calendly.com/organizations/AAAAAAAAAAAAAAAA\"\n  },\n  \"type\": \"User\",\n  \"uri\": \"https://api.calendly.com/users/AAAAAAAAAAAAAAAA\"\n}\n```\n</details>\n"
+      title: Actor
+    List-activity-log-entriesRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ActivityLogEntriesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ActivityLogEntriesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-activity-log-entriesRequestNotFoundError
+    ActivityLogEntriesGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: ActivityLogEntriesGetResponsesContentApplicationJsonSchemaTitle
+    ActivityLogEntriesGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: ActivityLogEntriesGetResponsesContentApplicationJsonSchemaMessage
+    ActivityLogEntriesGetParametersSortSchemaItems:
+      type: string
+      enum:
+      - action:asc
+      - action:desc
+      - actor.display_name:asc
+      - actor.display_name:desc
+      - actor.uri:asc
+      - actor.uri:desc
+      - namespace:asc
+      - namespace:desc
+      - occurred_at:asc
+      - occurred_at:desc
+      title: ActivityLogEntriesGetParametersSortSchemaItems
+    InsufficientScopeErrorMessage:
+      type: string
+      enum:
+      - This operation requires the scopes listed in the 'required_scopes' array.
+      title: InsufficientScopeErrorMessage
+    EnterpriseOwnerAdminErrorMessage:
+      type: string
+      enum:
+      - Please upgrade your Calendly account to Enterprise.
+      - You do not have permission to access this resource.
+      title: EnterpriseOwnerAdminErrorMessage
+    EntryDetails:
+      type: object
+      properties: {}
+      title: EntryDetails
+    List-activity-log-entriesRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/EnterpriseOwnerAdminError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: List-activity-log-entriesRequestForbiddenError
+    activityLog_list-activity-log-entries_Response_200:
+      type: object
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entry'
+          description: The set of activity log entries matching the criteria
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        last_event_time:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: 'The date and time of the newest entry (format: "2020-01-02T03:04:05.678Z") in the collection array.'
+        total_count:
+          type: integer
+          minimum: 0
+          description: Total number of records based on search criteria
+        exceeds_max_total_count:
+          type: boolean
+          description: If there are more search results than the total_count field indicates, pagination will continue to return results past the total_count field value.
+      required:
+      - collection
+      - pagination
+      - total_count
+      - exceeds_max_total_count
+      description: Activity log response
+      title: activityLog_list-activity-log-entries_Response_200
+    ActorOrganization:
+      type: object
+      properties:
+        uri:
+          type: string
+          description: Canonical reference (unique identifier) for the organization
+        role:
+          type: string
+          description: The actors' role in the organization
+      title: ActorOrganization
+    List-activity-log-entriesRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ActivityLogEntriesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ActivityLogEntriesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-activity-log-entriesRequestInternalServerError
+    EnterpriseOwnerAdminErrorTitle:
+      type: string
+      enum:
+      - Permission Denied
+      title: EnterpriseOwnerAdminErrorTitle
+    Entry:
+      type: object
+      properties:
+        occurred_at:
+          type: string
+          format: date-time
+          description: 'The date and time of the entry (format: "2020-01-02T03:04:05.678Z").'
+        actor:
+          $ref: '#/components/schemas/Actor'
+        details:
+          $ref: '#/components/schemas/EntryDetails'
+        fully_qualified_name:
+          type: string
+          pattern: ^[A-Za-z0-9\-_]+\.[A-Za-z0-9\-_]+$
+          minLength: 3
+        uri:
+          type: string
+        namespace:
+          type: string
+          pattern: ^[A-Za-z0-9\-_]+$
+          minLength: 1
+        action:
+          type: string
+          pattern: ^[A-Za-z0-9\-_]+$
+          minLength: 1
+        organization:
+          type: string
+      required:
+      - occurred_at
+      - details
+      - fully_qualified_name
+      - uri
+      - namespace
+      - action
+      - organization
+      description: Object for a created activity log record
+      title: Entry
+    ActorGroup:
+      type: object
+      properties:
+        uri:
+          type: string
+          description: Canonical reference (unique identifier) for the user group
+        name:
+          type: string
+          description: Name of the user group
+        role:
+          type: string
+          description: The actor's role in the user group
+      description: User group information about the actor
+      title: ActorGroup
+    ErrorResponseDetailsItem:
+      type: object
+      properties:
+        parameter:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+      title: ErrorResponseDetailsItem
+    Pagination:
+      type: object
+      properties:
+        count:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: The number of rows to return
+        next_page:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URI to return the next page of an ordered list ("null" indicates no additional results are available)
+        previous_page:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URI to return the previous page of an ordered list ("null" indicates no additional results are available)
+        next_page_token:
+          type:
+          - string
+          - 'null'
+          description: Token to return the next page of an ordered list ("null" indicates no additional results are available)
+        previous_page_token:
+          type:
+          - string
+          - 'null'
+          description: Token to return the previous page of an ordered list ("null" indicates no additional results are available)
+      required:
+      - count
+      - next_page
+      - previous_page
+      - next_page_token
+      - previous_page_token
+      title: Pagination
+  securitySchemes:
+    oauth2:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0
+    personal_access_token:
+      type: http
+      scheme: bearer
+      description: Personal Access Token

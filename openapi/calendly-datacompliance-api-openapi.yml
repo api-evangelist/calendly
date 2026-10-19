@@ -1,0 +1,387 @@
+openapi: 3.2.0
+info:
+  title: Calendly Data Compliance API
+  version: 1.0.0
+servers:
+- url: https://api.calendly.com
+  description: https://api.calendly.com
+tags:
+- name: dataCompliance
+paths:
+  /data_compliance/deletion/invitees:
+    post:
+      operationId: dataCompliance_delete-invitee-data
+      summary: Delete Invitee Data
+      description: 'To submit a request to remove invitee data from all previously booked events in your organization, use this endpoint. Requests for data deletion can take up to 7 days to complete.
+
+
+        > This endpoint requires an Enterprise subscription.
+
+
+        > `data_compliance:write`'
+      tags:
+      - dataCompliance
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dataCompliance_delete-invitee-data_Response_202'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-invitee-dataRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-invitee-dataRequestUnauthorizedError'
+        '403':
+          description: Forbidden or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-invitee-dataRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-invitee-dataRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-invitee-dataRequestInternalServerError'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                emails:
+                  type: array
+                  items:
+                    type: string
+                    format: email
+              required:
+              - emails
+      security:
+      - oauth2: []
+  /data_compliance/deletion/events:
+    post:
+      operationId: dataCompliance_delete-scheduled-event-data
+      summary: Delete Scheduled Event Data
+      description: '> This endpoint requires an Enterprise subscription.
+
+
+        > `data_compliance:write`
+
+
+        To submit a request to remove scheduled events data within a time range for your organization, use this endpoint. Requests for data deletion can take up to 7 days to complete.
+
+
+        Time range can be no greater than 24 months and must occur in the past.'
+      tags:
+      - dataCompliance
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dataCompliance_delete-scheduled-event-data_Response_202'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-scheduled-event-dataRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-scheduled-event-dataRequestUnauthorizedError'
+        '403':
+          description: Forbidden or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-scheduled-event-dataRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-scheduled-event-dataRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-scheduled-event-dataRequestInternalServerError'
+      requestBody:
+        description: The start and end times that delineate the time range for scheduled events data deletion.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                start_time:
+                  type: string
+                  format: date-time
+                  description: The scheduled events UTC timestamp at which data deletion should begin.
+                end_time:
+                  type: string
+                  format: date-time
+                  description: The scheduled events UTC timestamp at which data deletion should end.
+              required:
+              - start_time
+              - end_time
+      security:
+      - oauth2: []
+components:
+  schemas:
+    InsufficientScopeErrorTitle:
+      type: string
+      enum:
+      - Insufficient scope
+      title: InsufficientScopeErrorTitle
+    InsufficientScopeError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InsufficientScopeErrorTitle'
+        message:
+          $ref: '#/components/schemas/InsufficientScopeErrorMessage'
+        required_scopes:
+          type: array
+          items:
+            type: string
+            pattern: ^[a-z_]+:(read|write)$
+      required:
+      - title
+      - message
+      - required_scopes
+      description: Caller does not have required oauth scopes
+      title: InsufficientScopeError
+    Delete-invitee-dataRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/DataComplianceDeletionInviteesPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/DataComplianceDeletionInviteesPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Delete-invitee-dataRequestInternalServerError
+    dataCompliance_delete-scheduled-event-data_Response_202:
+      type: object
+      properties: {}
+      title: dataCompliance_delete-scheduled-event-data_Response_202
+    DataComplianceDeletionInviteesPostResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: DataComplianceDeletionInviteesPostResponsesContentApplicationJsonSchemaMessage
+    dataCompliance_delete-invitee-data_Response_202:
+      type: object
+      properties: {}
+      title: dataCompliance_delete-invitee-data_Response_202
+    DataComplianceDeletionEventsPostResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: DataComplianceDeletionEventsPostResponsesContentApplicationJsonSchemaMessage
+    InsufficientScopeErrorMessage:
+      type: string
+      enum:
+      - This operation requires the scopes listed in the 'required_scopes' array.
+      title: InsufficientScopeErrorMessage
+    Delete-scheduled-event-dataRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/DataComplianceError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Delete-scheduled-event-dataRequestForbiddenError
+    Delete-scheduled-event-dataRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/DataComplianceDeletionEventsPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/DataComplianceDeletionEventsPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Delete-scheduled-event-dataRequestNotFoundError
+    Delete-invitee-dataRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/DataComplianceDeletionInviteesPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/DataComplianceDeletionInviteesPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Delete-invitee-dataRequestBadRequestError
+    DataComplianceDeletionInviteesPostResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: DataComplianceDeletionInviteesPostResponsesContentApplicationJsonSchemaTitle
+    Delete-scheduled-event-dataRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/DataComplianceDeletionEventsPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/DataComplianceDeletionEventsPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Delete-scheduled-event-dataRequestBadRequestError
+    DataComplianceDeletionEventsPostResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: DataComplianceDeletionEventsPostResponsesContentApplicationJsonSchemaTitle
+    Delete-scheduled-event-dataRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/DataComplianceDeletionEventsPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/DataComplianceDeletionEventsPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Delete-scheduled-event-dataRequestUnauthorizedError
+    Delete-scheduled-event-dataRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/DataComplianceDeletionEventsPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/DataComplianceDeletionEventsPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Delete-scheduled-event-dataRequestInternalServerError
+    DataComplianceError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/DataComplianceErrorTitle'
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Forbidden
+      title: DataComplianceError
+    Delete-invitee-dataRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/DataComplianceDeletionInviteesPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/DataComplianceDeletionInviteesPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Delete-invitee-dataRequestUnauthorizedError
+    Delete-invitee-dataRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/DataComplianceDeletionInviteesPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/DataComplianceDeletionInviteesPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Delete-invitee-dataRequestNotFoundError
+    Delete-invitee-dataRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/DataComplianceError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Delete-invitee-dataRequestForbiddenError
+    DataComplianceErrorTitle:
+      type: string
+      enum:
+      - Permission Denied
+      title: DataComplianceErrorTitle
+    ErrorResponseDetailsItem:
+      type: object
+      properties:
+        parameter:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+      title: ErrorResponseDetailsItem
+  securitySchemes:
+    oauth2:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0
+    personal_access_token:
+      type: http
+      scheme: bearer
+      description: Personal Access Token

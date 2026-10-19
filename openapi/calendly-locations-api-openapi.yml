@@ -1,0 +1,265 @@
+openapi: 3.2.0
+info:
+  title: Calendly Locations API
+  version: 1.0.0
+servers:
+- url: https://api.calendly.com
+  description: https://api.calendly.com
+tags:
+- name: Locations
+paths:
+  /locations:
+    get:
+      operationId: locations_list-user-locations
+      summary: List User Meeting Locations
+      description: 'Returns configured location information for a given user.
+
+
+        > `locations:read`'
+      tags:
+      - Locations
+      parameters:
+      - name: user
+        in: query
+        description: The URI associated with the user
+        required: true
+        schema:
+          type: string
+          format: uri
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/locations_list-user-locations_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-user-locationsRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-user-locationsRequestUnauthorizedError'
+        '403':
+          description: Caller not authorized to perform this action or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-user-locationsRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-user-locationsRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-user-locationsRequestInternalServerError'
+      security:
+      - oauth2: []
+components:
+  schemas:
+    List-user-locationsRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/LocationsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/LocationsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-user-locationsRequestInternalServerError
+    InsufficientScopeErrorTitle:
+      type: string
+      enum:
+      - Insufficient scope
+      title: InsufficientScopeErrorTitle
+    locations_list-user-locations_Response_200:
+      type: object
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeetingLocation'
+          description: The collection of user meeting locations
+      required:
+      - collection
+      description: Service response
+      title: locations_list-user-locations_Response_200
+    InsufficientScopeError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InsufficientScopeErrorTitle'
+        message:
+          $ref: '#/components/schemas/InsufficientScopeErrorMessage'
+        required_scopes:
+          type: array
+          items:
+            type: string
+            pattern: ^[a-z_]+:(read|write)$
+      required:
+      - title
+      - message
+      - required_scopes
+      description: Caller does not have required oauth scopes
+      title: InsufficientScopeError
+    LocationsError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/LocationsErrorTitle'
+        message:
+          $ref: '#/components/schemas/LocationsErrorMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Caller not authorized to perform this action
+      title: LocationsError
+    List-user-locationsRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/LocationsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/LocationsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-user-locationsRequestNotFoundError
+    LocationsGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: LocationsGetResponsesContentApplicationJsonSchemaTitle
+    LocationsErrorTitle:
+      type: string
+      enum:
+      - Permission Denied
+      title: LocationsErrorTitle
+    MeetingLocationKind:
+      type: string
+      enum:
+      - ask_invitee
+      - custom
+      - google_conference
+      - gotomeeting_conference
+      - inbound_call
+      - microsoft_teams_conference
+      - outbound_call
+      - physical
+      - webex_conference
+      - zoom_conference
+      description: The type of location configuration
+      title: MeetingLocationKind
+    LocationsGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: LocationsGetResponsesContentApplicationJsonSchemaMessage
+    List-user-locationsRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/LocationsError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: List-user-locationsRequestForbiddenError
+    List-user-locationsRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/LocationsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/LocationsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-user-locationsRequestUnauthorizedError
+    List-user-locationsRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/LocationsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/LocationsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-user-locationsRequestBadRequestError
+    LocationsErrorMessage:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      - This user is not in your organization
+      title: LocationsErrorMessage
+    MeetingLocation:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/MeetingLocationKind'
+          description: The type of location configuration
+        connected:
+          type: boolean
+          description: Indicates if the location configuration is connected (only valid for web conferencing)
+      required:
+      - kind
+      description: A configuration for an EventType's location
+      title: MeetingLocation
+    InsufficientScopeErrorMessage:
+      type: string
+      enum:
+      - This operation requires the scopes listed in the 'required_scopes' array.
+      title: InsufficientScopeErrorMessage
+    ErrorResponseDetailsItem:
+      type: object
+      properties:
+        parameter:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+      title: ErrorResponseDetailsItem
+  securitySchemes:
+    oauth2:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0
+    personal_access_token:
+      type: http
+      scheme: bearer
+      description: Personal Access Token

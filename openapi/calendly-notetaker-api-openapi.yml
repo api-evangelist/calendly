@@ -1,0 +1,1620 @@
+openapi: 3.2.0
+info:
+  title: Calendly Notetaker API
+  version: 1.0.0
+servers:
+- url: https://api.calendly.com
+  description: https://api.calendly.com
+tags:
+- name: notetaker
+paths:
+  /meeting_recaps/{uuid}:
+    delete:
+      operationId: notetaker_delete-meeting-recaps-uuid
+      summary: Delete Recap
+      description: 'Delete an existing Recap
+
+
+        **Note:**
+
+        Requires paid plan
+
+
+        > `meeting_recaps:write`'
+      tags:
+      - notetaker
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-meeting-recaps-uuidRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-meeting-recaps-uuidRequestUnauthorizedError'
+        '403':
+          description: Permission Denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-meeting-recaps-uuidRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-meeting-recaps-uuidRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-meeting-recaps-uuidRequestInternalServerError'
+      security:
+      - oauth2: []
+    get:
+      operationId: notetaker_get-meeting-recaps-uuid-recap
+      summary: Get Recap
+      description: 'Returns the recap associated with a meeting if it is available.
+
+
+        **Note:**
+
+        Requires paid plan
+
+
+        > `meeting_recaps:read`'
+      tags:
+      - notetaker
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notetaker_get-meeting-recaps-uuid-recap_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-meeting-recaps-uuid-recapRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-meeting-recaps-uuid-recapRequestUnauthorizedError'
+        '403':
+          description: Permission Denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-meeting-recaps-uuid-recapRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-meeting-recaps-uuid-recapRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-meeting-recaps-uuid-recapRequestInternalServerError'
+      security:
+      - oauth2: []
+    patch:
+      operationId: notetaker_update-meeting-recaps-uuid
+      summary: Update Recap
+      description: 'Update an existing Recap. You may send any combination of the optional body fields; omitted fields are left unchanged. Unknown top-level properties are rejected.
+
+
+        **Note:**
+
+        Requires paid plan
+
+
+        > `meeting_recaps:write`'
+      tags:
+      - notetaker
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notetaker_update-meeting-recaps-uuid_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Update-meeting-recaps-uuidRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Update-meeting-recaps-uuidRequestUnauthorizedError'
+        '403':
+          description: Permission Denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Update-meeting-recaps-uuidRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Update-meeting-recaps-uuidRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Update-meeting-recaps-uuidRequestInternalServerError'
+      requestBody:
+        description: Optional markdown fields to update.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                summary_md:
+                  type:
+                  - string
+                  - 'null'
+                  description: Summary in Markdown.
+                action_items_md:
+                  type:
+                  - string
+                  - 'null'
+                  description: Action items in Markdown.
+                discussion_md:
+                  type:
+                  - string
+                  - 'null'
+                  description: Discussion notes in Markdown.
+      security:
+      - oauth2: []
+  /meeting_recaps/{uuid}/transcript:
+    get:
+      operationId: notetaker_get-transcript-meeting-recaps
+      summary: Get Transcript
+      description: 'Returns the transcript associated with a meeting recap if it is available.
+
+
+        **Note:**
+
+        Requires paid plan
+
+
+        > `meeting_recaps:read`'
+      tags:
+      - notetaker
+      parameters:
+      - name: uuid
+        in: path
+        description: The meeting recap uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notetaker_get-transcript-meeting-recaps_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-transcript-meeting-recapsRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-transcript-meeting-recapsRequestUnauthorizedError'
+        '403':
+          description: Permission Denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-transcript-meeting-recapsRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-transcript-meeting-recapsRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-transcript-meeting-recapsRequestInternalServerError'
+      security:
+      - oauth2: []
+  /meeting_recaps:
+    get:
+      operationId: notetaker_list-meeting-recaps
+      summary: List Recaps
+      description: 'Returns a paginated list of meeting recaps accessible to the authenticated user. By default, returns **Available** recaps only. Use the `status` query parameter to retrieve `processing` or `unavailable` recaps. Supports additional filtering by scheduled event, attendee, or date range.
+
+
+        Returns both Calendly-scheduled and external event recaps in a single collection. The `event` field is null for external events where no Calendly scheduled event exists.
+
+
+        **Note:**
+
+        Requires paid plan
+
+
+        > `meeting_recaps:read`'
+      tags:
+      - notetaker
+      parameters:
+      - name: event
+        in: query
+        description: Filter results to recaps associated with a specific event scheduled via Calendly. This field corresponds to the `/scheduled_events` endpoint.
+        required: false
+        schema:
+          type: string
+          format: uri
+      - name: start_time
+        in: query
+        description: Return recaps for meetings that end after (or end at) this time (ISO 8601).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: end_time
+        in: query
+        description: Return recaps for meetings that start before (or start at) this time (ISO 8601).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: status
+        in: query
+        description: 'Filter by recap availability. When omitted, returns **Available** recaps only.
+
+
+          - `available` — completed recaps with summary content
+
+          - `processing` — recaps still being generated
+
+          - `unavailable` — recaps that cannot be retrieved'
+        required: false
+        schema:
+          $ref: '#/components/schemas/MeetingRecapsGetParametersStatus'
+      - name: attendee
+        in: query
+        description: Filter results to recaps that include a specific attendee email address.
+        required: false
+        schema:
+          type: string
+          format: email
+      - name: count
+        in: query
+        description: The number of rows to return
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+      - name: page_token
+        in: query
+        description: The token to pass to get the next or previous portion of the collection
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notetaker_list-meeting-recaps_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-meeting-recapsRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-meeting-recapsRequestUnauthorizedError'
+        '403':
+          description: Permission Denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-meeting-recapsRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-meeting-recapsRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-meeting-recapsRequestInternalServerError'
+      security:
+      - oauth2: []
+components:
+  schemas:
+    ZoomConferenceDataSettingsGlobalDialInNumbersItems:
+      type: object
+      properties:
+        number:
+          type: string
+          description: Phone number
+        country:
+          type: string
+          description: Country code
+        type:
+          type: string
+        city:
+          type: string
+        country_name:
+          type: string
+      title: ZoomConferenceDataSettingsGlobalDialInNumbersItems
+    InsufficientScopeError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InsufficientScopeErrorTitle'
+        message:
+          $ref: '#/components/schemas/InsufficientScopeErrorMessage'
+        required_scopes:
+          type: array
+          items:
+            type: string
+            pattern: ^[a-z_]+:(read|write)$
+      required:
+      - title
+      - message
+      - required_scopes
+      description: Caller does not have required oauth scopes
+      title: InsufficientScopeError
+    MeetingRecapsUuidGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: MeetingRecapsUuidGetResponsesContentApplicationJsonSchemaTitle
+    Update-meeting-recaps-uuidRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/MeetingRecapsUuidPatchResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/MeetingRecapsUuidPatchResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Update-meeting-recaps-uuidRequestNotFoundError
+    MeetingRecapsErrorMessage:
+      type: string
+      enum:
+      - Please upgrade to a paid Calendly account
+      - You do not have permission to access this resource
+      - Meeting recap access is not available. Required features are not enabled for your account
+      title: MeetingRecapsErrorMessage
+    InviteeSpecifiedLocationType:
+      type: string
+      enum:
+      - ask_invitee
+      description: The event location selected by the invitee
+      title: InviteeSpecifiedLocationType
+    ZoomConferenceDataId:
+      oneOf:
+      - type: string
+      - type: integer
+      description: The conference ID provided by Zoom
+      title: ZoomConferenceDataId
+    Delete-meeting-recaps-uuidRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/MeetingRecapsError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Delete-meeting-recaps-uuidRequestForbiddenError
+    Notetaker_list-meeting-recaps_Response_200:
+      type: object
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeetingRecapListItem'
+          description: The set of meeting recaps matching the criteria
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - collection
+      - pagination
+      description: Service response
+      title: Notetaker_list-meeting-recaps_Response_200
+    MicrosoftTeamsConferenceData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The conference ID provided by Microsoft Teams
+        audioConferencing:
+          oneOf:
+          - $ref: '#/components/schemas/MicrosoftTeamsConferenceDataAudioConferencing'
+          - type: 'null'
+      description: The conference metadata supplied by Microsoft Teams
+      title: MicrosoftTeamsConferenceData
+    Update-meeting-recaps-uuidRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/MeetingRecapsUuidPatchResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/MeetingRecapsUuidPatchResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Update-meeting-recaps-uuidRequestInternalServerError
+    MeetingRecapsUuidDeleteResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: MeetingRecapsUuidDeleteResponsesContentApplicationJsonSchemaTitle
+    Notetaker_get-transcript-meeting-recaps_Response_200:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/Transcript'
+      required:
+      - resource
+      title: Notetaker_get-transcript-meeting-recaps_Response_200
+    Delete-meeting-recaps-uuidRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/MeetingRecapsUuidDeleteResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/MeetingRecapsUuidDeleteResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Delete-meeting-recaps-uuidRequestUnauthorizedError
+    GotoMeetingConference:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/GotoMeetingConferenceType'
+          description: The event location is a GoToMeeting conference
+        status:
+          oneOf:
+          - $ref: '#/components/schemas/GotoMeetingConferenceStatus'
+          - type: 'null'
+          description: Indicates the current status of the GoToMeeting conference<br/>&nbsp; * Expect only `pushed` status to have non-`null` values for `join_url` & `data` fields.<br/>&nbsp; - `processing` Location details generation pending<br/>&nbsp; - `initiated` Requesting location details from GoToMeeting<br/>&nbsp; - `pushed` Location details are available<br/>&nbsp; - `failed` Error occurred or event has been canceled<br/>&nbsp; - `null` Location details are no longer available
+        join_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: GoToMeeting conference meeting url
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/GotoMeetingConferenceData'
+          - type: 'null'
+          description: The conference metadata supplied by GoToMeeting
+      required:
+      - type
+      - status
+      - join_url
+      - data
+      description: Details about an Event that will take place using a GotoMeeting conference. Location details will not be available 6 months after event has occurred.
+      title: GotoMeetingConference
+    List-meeting-recapsRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/MeetingRecapsError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: List-meeting-recapsRequestForbiddenError
+    InboundCall:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/InboundCallType'
+          description: "\t\nIndicates that the invitee will call the event host"
+        location:
+          type: string
+          description: The phone number the invitee will use to call the event host (publisher)
+        additional_info:
+          type: string
+      required:
+      - type
+      - location
+      description: Invitee will call meeting publisher at the specified phone number
+      title: InboundCall
+    MeetingRecapsUuidTranscriptGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: MeetingRecapsUuidTranscriptGetResponsesContentApplicationJsonSchemaTitle
+    InboundCallType:
+      type: string
+      enum:
+      - inbound_call
+      description: "\t\nIndicates that the invitee will call the event host"
+      title: InboundCallType
+    Get-meeting-recaps-uuid-recapRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/MeetingRecapsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/MeetingRecapsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-meeting-recaps-uuid-recapRequestUnauthorizedError
+    GoogleConferenceStatus:
+      type: string
+      enum:
+      - processing
+      - initiated
+      - pushed
+      - failed
+      description: Indicates the current status of the Google conference<br/>&nbsp; * Expect only `pushed` status to have a non-`null` value for the `join_url` field.<br/>&nbsp; - `processing` Location details generation pending<br/>&nbsp; - `initiated` Requesting location details from Google<br/>&nbsp; - `pushed` Location details are available<br/>&nbsp; - `failed` Error occurred or event has been canceled<br/>&nbsp; - `null` Location details are no longer available
+      title: GoogleConferenceStatus
+    GoogleConferenceType:
+      type: string
+      enum:
+      - google_conference
+      description: The event location is a Google Meet or Hangouts conference
+      title: GoogleConferenceType
+    WebExConference:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/WebExConferenceType'
+          description: The event location is a WebEx conference
+        status:
+          oneOf:
+          - $ref: '#/components/schemas/WebExConferenceStatus'
+          - type: 'null'
+          description: Indicates the current status of the WebEx conference<br/>&nbsp; * Expect only `pushed` status to have non-`null` values for `join_url` & `data` fields.<br/>&nbsp; - `processing` Location details generation pending<br/>&nbsp; - `initiated` Requesting location details from WebEx<br/>&nbsp; - `pushed` Location details are available<br/>&nbsp; - `failed` Error occurred or event has been canceled<br/>&nbsp; - `null` Location details are no longer available
+        join_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: WebEx conference meeting url
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/WebExConferenceData'
+          - type: 'null'
+          description: The conference metadata supplied by GoToMeeting
+      required:
+      - type
+      - status
+      - join_url
+      - data
+      description: Details about an Event that will take place using a WebEx conference. Location details will not be available 6 months after event has occurred.
+      title: WebExConference
+    InPersonMeetingType:
+      type: string
+      enum:
+      - physical
+      description: Indicates that the event will be an in-person meeting.
+      title: InPersonMeetingType
+    CustomLocation:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/CustomLocationType'
+          description: The event location doesn't fall into a standard category defined by the event host (publisher)
+        location:
+          type:
+          - string
+          - 'null'
+          description: The location description provided by the event host (publisher)
+      required:
+      - type
+      - location
+      description: Use this to describe an existing Calendly-supported event location.
+      title: CustomLocation
+    Get-meeting-recaps-uuid-recapRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/MeetingRecapsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/MeetingRecapsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-meeting-recaps-uuid-recapRequestNotFoundError
+    MeetingRecapsUuidTranscriptGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: MeetingRecapsUuidTranscriptGetResponsesContentApplicationJsonSchemaMessage
+    Get-meeting-recaps-uuid-recapRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/MeetingRecapsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/MeetingRecapsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-meeting-recaps-uuid-recapRequestInternalServerError
+    Delete-meeting-recaps-uuidRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/MeetingRecapsUuidDeleteResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/MeetingRecapsUuidDeleteResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Delete-meeting-recaps-uuidRequestInternalServerError
+    MicrosoftTeamsConferenceStatus:
+      type: string
+      enum:
+      - processing
+      - initiated
+      - pushed
+      - failed
+      description: Indicates the current status of the Microsoft Teams conference<br/>&nbsp; * Expect only `pushed` status to have non-`null` values for `join_url` & `data` fields.<br/>&nbsp; - `processing` Location details generation pending<br/>&nbsp; - `initiated` Requesting location details from MS Teams<br/>&nbsp; - `pushed` Location details are available<br/>&nbsp; - `failed` Error occurred or event has been canceled<br/>&nbsp; - `null` Location details are no longer available
+      title: MicrosoftTeamsConferenceStatus
+    ZoomConferenceStatus:
+      type: string
+      enum:
+      - processing
+      - initiated
+      - pushed
+      - failed
+      description: Indicates the current status of the Zoom conference<br/>&nbsp; * Expect only `pushed` status to have non-`null` values for `join_url` & `data` fields.<br/>&nbsp; - `processing` Location details generation pending<br/>&nbsp; - `initiated` Requesting location details from Zoom<br/>&nbsp; - `pushed` Location details are available<br/>&nbsp; - `failed` Error occurred or event has been canceled<br/>&nbsp; - `null` Location details are no longer available
+      title: ZoomConferenceStatus
+    Get-transcript-meeting-recapsRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/MeetingRecapsUuidTranscriptGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/MeetingRecapsUuidTranscriptGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-transcript-meeting-recapsRequestInternalServerError
+    ZoomConference:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ZoomConferenceType'
+          description: The event location is a Zoom conference
+        status:
+          oneOf:
+          - $ref: '#/components/schemas/ZoomConferenceStatus'
+          - type: 'null'
+          description: Indicates the current status of the Zoom conference<br/>&nbsp; * Expect only `pushed` status to have non-`null` values for `join_url` & `data` fields.<br/>&nbsp; - `processing` Location details generation pending<br/>&nbsp; - `initiated` Requesting location details from Zoom<br/>&nbsp; - `pushed` Location details are available<br/>&nbsp; - `failed` Error occurred or event has been canceled<br/>&nbsp; - `null` Location details are no longer available
+        join_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: Zoom meeting url
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/ZoomConferenceData'
+          - type: 'null'
+          description: The conference metadata supplied by Zoom
+      required:
+      - type
+      - status
+      - join_url
+      - data
+      description: Meeting will take place in a Zoom conference. Location details will not be available 6 months after event has occurred.
+      title: ZoomConference
+    List-meeting-recapsRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/MeetingRecapsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/MeetingRecapsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-meeting-recapsRequestBadRequestError
+    MicrosoftTeamsConferenceDataAudioConferencing:
+      type: object
+      properties:
+        conferenceId:
+          type: string
+        dialinUrl:
+          type: string
+          format: uri
+        tollNumber:
+          type: string
+      title: MicrosoftTeamsConferenceDataAudioConferencing
+    GotoMeetingConferenceData:
+      type: object
+      properties:
+        uniqueMeetingId:
+          type: number
+          format: double
+          description: Canonical reference (unique identifier) for the GoToMeeting conference
+        conferenceCallInfo:
+          type: string
+      description: The conference metadata supplied by GoToMeeting
+      title: GotoMeetingConferenceData
+    MeetingRecapsErrorTitle:
+      type: string
+      enum:
+      - Permission Denied
+      title: MeetingRecapsErrorTitle
+    MeetingRecapsUuidPatchResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: MeetingRecapsUuidPatchResponsesContentApplicationJsonSchemaTitle
+    OutboundCall:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/OutboundCallType'
+          description: Indicates that the event host (publisher) will call the invitee
+        location:
+          type:
+          - string
+          - 'null'
+          description: The phone number the event host (publisher) will use to call the invitee
+      required:
+      - type
+      - location
+      description: Meeting publisher will call the Invitee
+      title: OutboundCall
+    ZoomConferenceDataExtra:
+      type: object
+      properties:
+        intl_numbers_url:
+          type: string
+          format: uri
+          description: Zoom International Dial-in Numbers URL
+      title: ZoomConferenceDataExtra
+    Get-transcript-meeting-recapsRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/MeetingRecapsUuidTranscriptGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/MeetingRecapsUuidTranscriptGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-transcript-meeting-recapsRequestUnauthorizedError
+    Transcript:
+      type: object
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: Canonical reference (unique identifier) for the transcript
+        text:
+          type: string
+          description: 'Plain-text transcript. Each line is formatted as `Speaker: words`, with
+
+            segments separated by newlines.'
+      required:
+      - uri
+      - text
+      description: The meeting transcript as plain text.
+      title: Transcript
+    MeetingRecapsGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: MeetingRecapsGetResponsesContentApplicationJsonSchemaTitle
+    Delete-meeting-recaps-uuidRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/MeetingRecapsUuidDeleteResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/MeetingRecapsUuidDeleteResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Delete-meeting-recaps-uuidRequestBadRequestError
+    Notetaker_get-meeting-recaps-uuid-recap_Response_200:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/MeetingRecap'
+      required:
+      - resource
+      title: Notetaker_get-meeting-recaps-uuid-recap_Response_200
+    MeetingRecapsUuidPatchResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: MeetingRecapsUuidPatchResponsesContentApplicationJsonSchemaMessage
+    GoogleConference:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/GoogleConferenceType'
+          description: The event location is a Google Meet or Hangouts conference
+        status:
+          oneOf:
+          - $ref: '#/components/schemas/GoogleConferenceStatus'
+          - type: 'null'
+          description: Indicates the current status of the Google conference<br/>&nbsp; * Expect only `pushed` status to have a non-`null` value for the `join_url` field.<br/>&nbsp; - `processing` Location details generation pending<br/>&nbsp; - `initiated` Requesting location details from Google<br/>&nbsp; - `pushed` Location details are available<br/>&nbsp; - `failed` Error occurred or event has been canceled<br/>&nbsp; - `null` Location details are no longer available
+        join_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: Google conference meeting url
+      required:
+      - type
+      - status
+      - join_url
+      description: Details about an Event that will take place using a Google Meet / Hangout conference. Location details will not be available 6 months after event has occurred.
+      title: GoogleConference
+    WebExConferenceStatus:
+      type: string
+      enum:
+      - processing
+      - initiated
+      - pushed
+      - failed
+      description: Indicates the current status of the WebEx conference<br/>&nbsp; * Expect only `pushed` status to have non-`null` values for `join_url` & `data` fields.<br/>&nbsp; - `processing` Location details generation pending<br/>&nbsp; - `initiated` Requesting location details from WebEx<br/>&nbsp; - `pushed` Location details are available<br/>&nbsp; - `failed` Error occurred or event has been canceled<br/>&nbsp; - `null` Location details are no longer available
+      title: WebExConferenceStatus
+    Delete-meeting-recaps-uuidRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/MeetingRecapsUuidDeleteResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/MeetingRecapsUuidDeleteResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Delete-meeting-recaps-uuidRequestNotFoundError
+    Get-transcript-meeting-recapsRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/MeetingRecapsError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Get-transcript-meeting-recapsRequestForbiddenError
+    List-meeting-recapsRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/MeetingRecapsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/MeetingRecapsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-meeting-recapsRequestUnauthorizedError
+    ZoomConferenceDataSettings:
+      type: object
+      properties:
+        global_dial_in_numbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZoomConferenceDataSettingsGlobalDialInNumbersItems'
+      title: ZoomConferenceDataSettings
+    Get-transcript-meeting-recapsRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/MeetingRecapsUuidTranscriptGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/MeetingRecapsUuidTranscriptGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-transcript-meeting-recapsRequestBadRequestError
+    List-meeting-recapsRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/MeetingRecapsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/MeetingRecapsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-meeting-recapsRequestNotFoundError
+    MeetingRecapAttendeesItems:
+      type: object
+      properties:
+        host:
+          type: boolean
+          description: Whether this attendee is the meeting host.
+        user_email:
+          type: string
+          format: email
+          description: Attendee email address.
+        user_name:
+          type: string
+          description: Attendee display name.
+      required:
+      - host
+      - user_email
+      - user_name
+      title: MeetingRecapAttendeesItems
+    InviteeSpecifiedLocation:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/InviteeSpecifiedLocationType'
+          description: The event location selected by the invitee
+        location:
+          type: string
+          description: The event location description provided by the invitee
+      required:
+      - type
+      - location
+      description: Information about an event location that’s specified by the invitee.
+      title: InviteeSpecifiedLocation
+    MeetingRecapListItemAttendeesItems:
+      type: object
+      properties:
+        host:
+          type: boolean
+          description: Whether this attendee is the meeting host.
+        user_email:
+          type: string
+          format: email
+          description: Attendee email address.
+        user_name:
+          type: string
+          description: Attendee display name.
+      required:
+      - host
+      - user_email
+      - user_name
+      title: MeetingRecapListItemAttendeesItems
+    MeetingRecapsGetParametersStatus:
+      type: string
+      enum:
+      - available
+      - processing
+      - unavailable
+      title: MeetingRecapsGetParametersStatus
+    Notetaker_update-meeting-recaps-uuid_Response_200:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/MeetingRecap'
+      required:
+      - resource
+      title: Notetaker_update-meeting-recaps-uuid_Response_200
+    Update-meeting-recaps-uuidRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/MeetingRecapsUuidPatchResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/MeetingRecapsUuidPatchResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Update-meeting-recaps-uuidRequestBadRequestError
+    OutboundCallType:
+      type: string
+      enum:
+      - outbound_call
+      description: Indicates that the event host (publisher) will call the invitee
+      title: OutboundCallType
+    InPersonMeeting:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/InPersonMeetingType'
+          description: Indicates that the event will be an in-person meeting.
+        location:
+          type: string
+          description: The physical location specified by the event host (publisher)
+        additional_info:
+          type: string
+      required:
+      - type
+      - location
+      description: Information about the physical (in-person) event location
+      title: InPersonMeeting
+    Get-transcript-meeting-recapsRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/MeetingRecapsUuidTranscriptGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/MeetingRecapsUuidTranscriptGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-transcript-meeting-recapsRequestNotFoundError
+    MeetingRecapsError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/MeetingRecapsErrorTitle'
+        message:
+          $ref: '#/components/schemas/MeetingRecapsErrorMessage'
+      required:
+      - title
+      - message
+      description: Permission Denied
+      title: MeetingRecapsError
+    MeetingRecap:
+      type: object
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: Canonical reference (unique identifier) for the recap
+        app_url:
+          type: string
+          format: uri
+          description: URL for an authorized Calendly user to open this meeting recap in the Calendly web app. Requires authentication and access to the recap.
+        event:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: Canonical reference (unique identifier) for the event
+        status:
+          type: string
+          description: Either 'Available', 'Processing', or 'Unavailable'
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the meeting.
+        location:
+          $ref: '#/components/schemas/Location'
+        start_time:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Scheduled start time of the meeting (UTC, ISO 8601).
+        end_time:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Scheduled end time of the meeting (UTC, ISO 8601).
+        created_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the meeting recap was created (UTC, ISO 8601).
+        updated_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the meeting recap was last updated (UTC, ISO 8601).
+        attendees:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/MeetingRecapAttendeesItems'
+          description: Meeting attendees derived from tracked-meeting participants. Same shape as meeting_recap webhook attendees.
+        summary_md:
+          type:
+          - string
+          - 'null'
+          description: Summary Markdown
+        action_items_md:
+          type:
+          - string
+          - 'null'
+          description: Action Items Markdown
+        discussion_md:
+          type:
+          - string
+          - 'null'
+          description: Discussion Markdown
+        transcript:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: Canonical reference (unique identifier) for the transcript
+        share_link:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URL for sharing this meeting recap with others. Access is determined by the recap’s sharing settings.
+      required:
+      - uri
+      - app_url
+      - status
+      description: A meeting recap generated for a Calendly scheduled event or an external event.
+      title: MeetingRecap
+    GotoMeetingConferenceType:
+      type: string
+      enum:
+      - gotomeeting
+      description: The event location is a GoToMeeting conference
+      title: GotoMeetingConferenceType
+    ErrorResponseDetailsItem:
+      type: object
+      properties:
+        parameter:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+      title: ErrorResponseDetailsItem
+    InsufficientScopeErrorTitle:
+      type: string
+      enum:
+      - Insufficient scope
+      title: InsufficientScopeErrorTitle
+    WebExConferenceDataTelephony:
+      type: object
+      properties:
+        callInNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebExConferenceDataTelephonyCallInNumbersItems'
+      required:
+      - callInNumbers
+      title: WebExConferenceDataTelephony
+    MeetingRecapsUuidGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: MeetingRecapsUuidGetResponsesContentApplicationJsonSchemaMessage
+    MicrosoftTeamsConferenceType:
+      type: string
+      enum:
+      - microsoft_teams_conference
+      description: The event location is a Microsoft Teams conference
+      title: MicrosoftTeamsConferenceType
+    ZoomConferenceData:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/ZoomConferenceDataId'
+          description: The conference ID provided by Zoom
+        settings:
+          $ref: '#/components/schemas/ZoomConferenceDataSettings'
+        extra:
+          $ref: '#/components/schemas/ZoomConferenceDataExtra'
+        password:
+          type: string
+          format: password
+          description: Zoom meeting password
+      description: The conference metadata supplied by Zoom
+      title: ZoomConferenceData
+    WebExConferenceDataTelephonyCallInNumbersItems:
+      type: object
+      properties:
+        label:
+          type: string
+        callInNumber:
+          type: string
+        tollType:
+          type: string
+      required:
+      - label
+      - callInNumber
+      - tollType
+      title: WebExConferenceDataTelephonyCallInNumbersItems
+    Update-meeting-recaps-uuidRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/MeetingRecapsError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Update-meeting-recaps-uuidRequestForbiddenError
+    Location:
+      oneOf:
+      - $ref: '#/components/schemas/InPersonMeeting'
+      - $ref: '#/components/schemas/OutboundCall'
+      - $ref: '#/components/schemas/InboundCall'
+      - $ref: '#/components/schemas/GoogleConference'
+      - $ref: '#/components/schemas/ZoomConference'
+      - $ref: '#/components/schemas/GotoMeetingConference'
+      - $ref: '#/components/schemas/MicrosoftTeamsConference'
+      - $ref: '#/components/schemas/CustomLocation'
+      - $ref: '#/components/schemas/InviteeSpecifiedLocation'
+      - $ref: '#/components/schemas/WebExConference'
+      description: The polymorphic base type for an event location that Calendly supports
+      title: Location
+    MicrosoftTeamsConference:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/MicrosoftTeamsConferenceType'
+          description: The event location is a Microsoft Teams conference
+        status:
+          oneOf:
+          - $ref: '#/components/schemas/MicrosoftTeamsConferenceStatus'
+          - type: 'null'
+          description: Indicates the current status of the Microsoft Teams conference<br/>&nbsp; * Expect only `pushed` status to have non-`null` values for `join_url` & `data` fields.<br/>&nbsp; - `processing` Location details generation pending<br/>&nbsp; - `initiated` Requesting location details from MS Teams<br/>&nbsp; - `pushed` Location details are available<br/>&nbsp; - `failed` Error occurred or event has been canceled<br/>&nbsp; - `null` Location details are no longer available
+        join_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: Microsoft Teams meeting url
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/MicrosoftTeamsConferenceData'
+          - type: 'null'
+          description: The conference metadata supplied by Microsoft Teams
+      required:
+      - type
+      - status
+      - join_url
+      - data
+      description: Meeting will take place in a Microsoft Teams conference. Location details will not be available 6 months after event has occurred.
+      title: MicrosoftTeamsConference
+    Get-meeting-recaps-uuid-recapRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/MeetingRecapsError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Get-meeting-recaps-uuid-recapRequestForbiddenError
+    WebExConferenceData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Canonical reference (unique identifier) for the WebEx conference
+        telephony:
+          $ref: '#/components/schemas/WebExConferenceDataTelephony'
+        password:
+          type: string
+      required:
+      - id
+      - telephony
+      - password
+      description: The conference metadata supplied by GoToMeeting
+      title: WebExConferenceData
+    MeetingRecapsUuidDeleteResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: MeetingRecapsUuidDeleteResponsesContentApplicationJsonSchemaMessage
+    InsufficientScopeErrorMessage:
+      type: string
+      enum:
+      - This operation requires the scopes listed in the 'required_scopes' array.
+      title: InsufficientScopeErrorMessage
+    Get-meeting-recaps-uuid-recapRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/MeetingRecapsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/MeetingRecapsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-meeting-recaps-uuid-recapRequestBadRequestError
+    GotoMeetingConferenceStatus:
+      type: string
+      enum:
+      - initiated
+      - processing
+      - pushed
+      - failed
+      description: Indicates the current status of the GoToMeeting conference<br/>&nbsp; * Expect only `pushed` status to have non-`null` values for `join_url` & `data` fields.<br/>&nbsp; - `processing` Location details generation pending<br/>&nbsp; - `initiated` Requesting location details from GoToMeeting<br/>&nbsp; - `pushed` Location details are available<br/>&nbsp; - `failed` Error occurred or event has been canceled<br/>&nbsp; - `null` Location details are no longer available
+      title: GotoMeetingConferenceStatus
+    ZoomConferenceType:
+      type: string
+      enum:
+      - zoom
+      description: The event location is a Zoom conference
+      title: ZoomConferenceType
+    WebExConferenceType:
+      type: string
+      enum:
+      - webex_conference
+      description: The event location is a WebEx conference
+      title: WebExConferenceType
+    MeetingRecapListItem:
+      type: object
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: Canonical reference (unique identifier) for the recap.
+        app_url:
+          type: string
+          format: uri
+          description: URL for an authorized Calendly user to open this meeting recap in the Calendly web app. Requires authentication and access to the recap.
+        event:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URI of the event scheduled via Calendly which this recap belongs to, or null if the recap is for an external event.
+        status:
+          type: string
+          description: Processing state of the recap.
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the meeting.
+        location:
+          $ref: '#/components/schemas/Location'
+        start_time:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Scheduled start time of the meeting (UTC, ISO 8601).
+        end_time:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Scheduled end time of the meeting (UTC, ISO 8601).
+        created_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the tracked meeting record was created (UTC, ISO 8601).
+        updated_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the tracked meeting record was last updated (UTC, ISO 8601).
+        attendees:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/MeetingRecapListItemAttendeesItems'
+          description: Meeting attendees derived from tracked-meeting participants. Same shape as meeting_recap webhook attendees.
+        transcript:
+          type: string
+          format: uri
+          description: 'Canonical reference (unique identifier) for the transcript. Always present on
+
+            list items; the transcript resource itself may still be unavailable until the
+
+            recap is Available.'
+      required:
+      - uri
+      - app_url
+      - status
+      - transcript
+      description: A meeting recap list item generated for a Calendly scheduled event or an external event.
+      title: MeetingRecapListItem
+    List-meeting-recapsRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/MeetingRecapsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/MeetingRecapsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-meeting-recapsRequestInternalServerError
+    Update-meeting-recaps-uuidRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/MeetingRecapsUuidPatchResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/MeetingRecapsUuidPatchResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Update-meeting-recaps-uuidRequestUnauthorizedError
+    CustomLocationType:
+      type: string
+      enum:
+      - custom
+      description: The event location doesn't fall into a standard category defined by the event host (publisher)
+      title: CustomLocationType
+    MeetingRecapsGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: MeetingRecapsGetResponsesContentApplicationJsonSchemaMessage
+    Pagination:
+      type: object
+      properties:
+        count:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: The number of rows to return
+        next_page:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URI to return the next page of an ordered list ("null" indicates no additional results are available)
+        previous_page:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URI to return the previous page of an ordered list ("null" indicates no additional results are available)
+        next_page_token:
+          type:
+          - string
+          - 'null'
+          description: Token to return the next page of an ordered list ("null" indicates no additional results are available)
+        previous_page_token:
+          type:
+          - string
+          - 'null'
+          description: Token to return the previous page of an ordered list ("null" indicates no additional results are available)
+      required:
+      - count
+      - next_page
+      - previous_page
+      - next_page_token
+      - previous_page_token
+      title: Pagination
+  securitySchemes:
+    oauth2:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0
+    personal_access_token:
+      type: http
+      scheme: bearer
+      description: Personal Access Token

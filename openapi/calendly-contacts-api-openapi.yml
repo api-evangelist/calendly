@@ -1,0 +1,1614 @@
+openapi: 3.2.0
+info:
+  title: Calendly Contacts API
+  version: 1.0.0
+servers:
+- url: https://api.calendly.com
+  description: https://api.calendly.com
+tags:
+- name: Contacts
+paths:
+  /contacts:
+    post:
+      operationId: contacts_create-contact
+      summary: Create Contact
+      description: 'Create a new Contact
+
+
+        > `contacts:write`'
+      tags:
+      - Contacts
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contacts_create-contact_Response_201'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-contactRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-contactRequestUnauthorizedError'
+        '403':
+          description: Permission Denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-contactRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-contactRequestNotFoundError'
+        '409':
+          description: Attempt to create a resource that already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-contactRequestConflictError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-contactRequestInternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                emails:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Email'
+                  description: The user's email addresses. Max 10.
+                phone_numbers:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/PhoneNumber'
+                  description: The user's phone numbers. Max 10.
+                timezone:
+                  type: string
+                job_title:
+                  type: string
+                company:
+                  type: string
+                country:
+                  type: string
+                state:
+                  type: string
+                city:
+                  type: string
+                linkedin:
+                  type: string
+                  format: uri
+                custom_fields:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ContactsPostRequestBodyContentApplicationJsonSchemaCustomFieldsItems'
+                  description: Custom field values to set on the contact. Each item requires a `uuid` (the custom field definition identifier) and a `value`; any other keys (such as `label`) are ignored. The entire request is rejected if any `uuid` is unknown, any `value` is the wrong type for its field (including an array for a scalar field or a scalar for an array field), or any `single_select` `value` is not one of the field definition's option `uuid`s.
+              required:
+              - name
+              - emails
+      security:
+      - oauth2: []
+    get:
+      operationId: contacts_list-contacts
+      summary: List Contacts
+      description: 'Returns a collection of Contacts
+
+
+        > `contacts:read`'
+      tags:
+      - Contacts
+      parameters:
+      - name: sort
+        in: query
+        description: 'Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values. Supported fields are: created_at, updated_at. Sort direction is specified as: asc, desc.'
+        required: false
+        schema:
+          type: string
+      - name: email
+        in: query
+        description: Filter results by exact match on email address. Accepts a comma-separated list.
+        required: false
+        schema:
+          type: string
+      - name: phone_number
+        in: query
+        description: Filter results by exact match on phone number. Accepts a comma-separated list.
+        required: false
+        schema:
+          type: string
+      - name: timezone
+        in: query
+        description: Filter results by exact match on the IANA time zone name(s). Accepts a comma-separated list of time zones.
+        required: false
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: Filter results by partial match on name(s). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).
+        required: false
+        schema:
+          type: string
+      - name: job_title
+        in: query
+        description: Filter results by partial match on job title(s). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).
+        required: false
+        schema:
+          type: string
+      - name: company
+        in: query
+        description: Filter results by partial match on company name(s). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).
+        required: false
+        schema:
+          type: string
+      - name: country
+        in: query
+        description: Filter results by exact match on two-letter country code (ISO 3166-1 alpha-2). Accepts a comma-separated list.
+        required: false
+        schema:
+          type: string
+      - name: state
+        in: query
+        description: Filter results by exact match on state(s), province(s), or region(s). Accepts a comma-separated list of values.
+        required: false
+        schema:
+          type: string
+      - name: city
+        in: query
+        description: Filter results by partial match on city(ies). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).
+        required: false
+        schema:
+          type: string
+      - name: count
+        in: query
+        description: The number of rows to return
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+      - name: page_token
+        in: query
+        description: The token to pass to get the next or previous portion of the collection
+        required: false
+        schema:
+          type: string
+      - name: exclude
+        in: query
+        description: Omit the listed fields from the response. Currently only `custom_fields` is supported. When omitted, all fields are returned.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contacts_list-contacts_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-contactsRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-contactsRequestUnauthorizedError'
+        '403':
+          description: Permission Denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-contactsRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-contactsRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-contactsRequestInternalServerError'
+      security:
+      - oauth2: []
+  /contacts/{uuid}:
+    delete:
+      operationId: contacts_delete-contacts-uuid
+      summary: Delete Contact
+      description: 'Delete an existing Contact
+
+
+        > `contacts:write`'
+      tags:
+      - Contacts
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-contacts-uuidRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-contacts-uuidRequestUnauthorizedError'
+        '403':
+          description: Permission Denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-contacts-uuidRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-contacts-uuidRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-contacts-uuidRequestInternalServerError'
+      security:
+      - oauth2: []
+    get:
+      operationId: contacts_get-contact
+      summary: Get Contact
+      description: 'Returns the details of a specified Contact.
+
+
+        > `contacts:read`'
+      tags:
+      - Contacts
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: exclude
+        in: query
+        description: Omit the listed fields from the response. Currently only `custom_fields` is supported. When omitted, all fields are returned.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contacts_get-contact_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-contactRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-contactRequestUnauthorizedError'
+        '403':
+          description: Permission Denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-contactRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-contactRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-contactRequestInternalServerError'
+      security:
+      - oauth2: []
+    patch:
+      operationId: contacts_patch-contacts-uuid
+      summary: Update Contact
+      description: 'Update an existing Contact. The body must include at least one supported field; unknown top-level properties are rejected.
+
+
+        > `contacts:write`'
+      tags:
+      - Contacts
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contacts_patch-contacts-uuid_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patch-contacts-uuidRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patch-contacts-uuidRequestUnauthorizedError'
+        '403':
+          description: Permission Denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patch-contacts-uuidRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patch-contacts-uuidRequestNotFoundError'
+        '409':
+          description: Attempt to create a resource that already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patch-contacts-uuidRequestConflictError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patch-contacts-uuidRequestInternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                emails:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Email'
+                  description: 'The user''s email addresses. Max 10. <br>  <span style="color:red">Warning: </span>Updating emails will overwrite all existing emails for the contact. Use the GET endpoint to first retrieve the existing emails and then pass the modified emails to the emails array.'
+                phone_numbers:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/PhoneNumber'
+                  description: 'The user''s phone numbers. Max 10. <br>  <span style="color:red">Warning: </span>Updating phone_numbers will overwrite all existing phone numbers for the contact. Use the GET endpoint to first retrieve the existing phone numbers and then pass the modified phone_numbers to the phone_numbers array.'
+                timezone:
+                  type: string
+                job_title:
+                  type: string
+                company:
+                  type: string
+                country:
+                  type: string
+                state:
+                  type: string
+                city:
+                  type: string
+                linkedin:
+                  type: string
+                  format: uri
+                custom_fields:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ContactsUuidPatchRequestBodyContentApplicationJsonSchemaCustomFieldsItems'
+                  description: Custom field values to set on the contact. Each item requires a `uuid` (the custom field definition identifier) and a `value`; any other keys (such as `label`) are ignored. The entire request is rejected if any `uuid` is unknown, any `value` is the wrong type for its field (including an array for a scalar field or a scalar for an array field), or any `single_select` `value` is not one of the field definition's option `uuid`s.
+      security:
+      - oauth2: []
+  /contacts/custom_field_definitions/{uuid}:
+    get:
+      operationId: contacts_get-contact-custom-field-definition
+      summary: Get Contact Custom Field Definition
+      description: 'Returns a single custom field definition by uuid.
+
+
+        > `contacts:read`'
+      tags:
+      - Contacts
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contacts_get-contact-custom-field-definition_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-contact-custom-field-definitionRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-contact-custom-field-definitionRequestUnauthorizedError'
+        '403':
+          description: Permission Denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-contact-custom-field-definitionRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-contact-custom-field-definitionRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-contact-custom-field-definitionRequestInternalServerError'
+      security:
+      - oauth2: []
+  /contacts/custom_field_definitions:
+    get:
+      operationId: contacts_list-contact-custom-field-definitions
+      summary: List Contact Custom Field Definitions
+      description: 'Returns all custom field definitions available to the authenticated user or organization.
+
+
+        > `contacts:read`'
+      tags:
+      - Contacts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contacts_list-contact-custom-field-definitions_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-contact-custom-field-definitionsRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-contact-custom-field-definitionsRequestUnauthorizedError'
+        '403':
+          description: Permission Denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-contact-custom-field-definitionsRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-contact-custom-field-definitionsRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-contact-custom-field-definitionsRequestInternalServerError'
+      security:
+      - oauth2: []
+components:
+  schemas:
+    List-contact-custom-field-definitionsRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsCustomFieldDefinitionsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsCustomFieldDefinitionsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-contact-custom-field-definitionsRequestNotFoundError
+    ContactsUuidPatchResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: ContactsUuidPatchResponsesContentApplicationJsonSchemaTitle
+    InsufficientScopeError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InsufficientScopeErrorTitle'
+        message:
+          $ref: '#/components/schemas/InsufficientScopeErrorMessage'
+        required_scopes:
+          type: array
+          items:
+            type: string
+            pattern: ^[a-z_]+:(read|write)$
+      required:
+      - title
+      - message
+      - required_scopes
+      description: Caller does not have required oauth scopes
+      title: InsufficientScopeError
+    Delete-contacts-uuidRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/ContactsError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Delete-contacts-uuidRequestForbiddenError
+    Patch-contacts-uuidRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsUuidPatchResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsUuidPatchResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Patch-contacts-uuidRequestUnauthorizedError
+    ContactsUuidGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: ContactsUuidGetResponsesContentApplicationJsonSchemaTitle
+    List-contactsRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/ContactsError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: List-contactsRequestForbiddenError
+    ContactsPostResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: ContactsPostResponsesContentApplicationJsonSchemaTitle
+    Get-contactRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-contactRequestBadRequestError
+    ContactsUuidPatchRequestBodyContentApplicationJsonSchemaCustomFieldsItemsValue:
+      oneOf:
+      - type: string
+      - type: number
+        format: double
+      - type: boolean
+      - type: array
+        items:
+          type: string
+      description: The custom field value; the accepted type is set by the field definition's `field_type`. `text` and `single_select` take a string (`single_select` must equal one of the definition's option `uuid`s); `number` takes a number; `boolean` takes a boolean; `currency` takes an integer amount in the currency's minor units (the ISO currency code lives on the field definition, not on this entry); `date` takes a string in ISO 8601 date format (`YYYY-MM-DD`); `tags` takes an array of strings. Scalar fields reject array values, and `tags` rejects non-array values.
+      title: ContactsUuidPatchRequestBodyContentApplicationJsonSchemaCustomFieldsItemsValue
+    Get-contactRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/ContactsError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Get-contactRequestForbiddenError
+    ContactsPostRequestBodyContentApplicationJsonSchemaCustomFieldsItemsValue:
+      oneOf:
+      - type: string
+      - type: number
+        format: double
+      - type: boolean
+      - type: array
+        items:
+          type: string
+      description: The custom field value; the accepted type is set by the field definition's `field_type`. `text` and `single_select` take a string (`single_select` must equal one of the definition's option `uuid`s); `number` takes a number; `boolean` takes a boolean; `currency` takes an integer amount in the currency's minor units (the ISO currency code lives on the field definition, not on this entry); `date` takes a string in ISO 8601 date format (`YYYY-MM-DD`); `tags` takes an array of strings. Scalar fields reject array values, and `tags` rejects non-array values.
+      title: ContactsPostRequestBodyContentApplicationJsonSchemaCustomFieldsItemsValue
+    ContactCustomFieldDefinition:
+      type: object
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: Canonical URI of the custom field definition.
+        label:
+          type: string
+          description: User-facing display name.
+        field_type:
+          $ref: '#/components/schemas/ContactCustomFieldDefinitionFieldType'
+          description: Calendly custom field kind, which determines both input behavior and the expected value type.
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactCustomFieldOption'
+          description: Allowed options for `single_select` fields. Returned in configured display order.
+        currency:
+          type: string
+          description: ISO currency code for currency fields, if applicable.
+        source:
+          $ref: '#/components/schemas/ContactCustomFieldSource'
+          description: Source metadata for system-generated fields. Present when `field_type` is `invitee_question`.
+        created_at:
+          type: string
+          format: date-time
+          description: Creation timestamp.
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp.
+      required:
+      - uri
+      - label
+      - field_type
+      - created_at
+      - updated_at
+      description: A custom field definition describes the schema for a field that can be applied to Contacts.
+      title: ContactCustomFieldDefinition
+    Delete-contacts-uuidRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsUuidDeleteResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsUuidDeleteResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Delete-contacts-uuidRequestNotFoundError
+    ContactsGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: ContactsGetResponsesContentApplicationJsonSchemaTitle
+    Get-contact-custom-field-definitionRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsCustomFieldDefinitionsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsCustomFieldDefinitionsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-contact-custom-field-definitionRequestUnauthorizedError
+    Patch-contacts-uuidRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsUuidPatchResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsUuidPatchResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Patch-contacts-uuidRequestNotFoundError
+    Patch-contacts-uuidRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsUuidPatchResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsUuidPatchResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Patch-contacts-uuidRequestBadRequestError
+    PhoneNumber:
+      type: object
+      properties:
+        phone_number:
+          type: string
+          description: Phone number.
+      required:
+      - phone_number
+      description: A phone number associated with a contact.
+      title: PhoneNumber
+    Get-contact-custom-field-definitionRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsCustomFieldDefinitionsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsCustomFieldDefinitionsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-contact-custom-field-definitionRequestInternalServerError
+    ContactCustomFieldSource:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ContactCustomFieldSourceType'
+        event_type_uri:
+          type: string
+          format: uri
+        question:
+          type: string
+      required:
+      - type
+      description: Source metadata for system-generated fields, such as invitee questions.
+      title: ContactCustomFieldSource
+    List-contactsRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-contactsRequestBadRequestError
+    Get-contactRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-contactRequestUnauthorizedError
+    ContactsUuidGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: ContactsUuidGetResponsesContentApplicationJsonSchemaMessage
+    Create-contactRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-contactRequestUnauthorizedError
+    Get-contact-custom-field-definitionRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsCustomFieldDefinitionsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsCustomFieldDefinitionsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-contact-custom-field-definitionRequestNotFoundError
+    Create-contactRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-contactRequestBadRequestError
+    Contacts_create-contact_Response_201:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/Contact'
+      required:
+      - resource
+      title: Contacts_create-contact_Response_201
+    ContactsErrorTitle:
+      type: string
+      enum:
+      - Permission Denied
+      title: ContactsErrorTitle
+    ContactsUuidDeleteResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: ContactsUuidDeleteResponsesContentApplicationJsonSchemaTitle
+    ContactsCustomFieldDefinitionsGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: ContactsCustomFieldDefinitionsGetResponsesContentApplicationJsonSchemaMessage
+    Email:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: Email address.
+        is_primary:
+          type: boolean
+          description: Whether this is the primary email.
+      required:
+      - email
+      - is_primary
+      description: An email address for a contact. Exactly one entry in the emails array must have is_primary true.
+      title: Email
+    Contacts_list-contact-custom-field-definitions_Response_200:
+      type: object
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactCustomFieldDefinition'
+      required:
+      - collection
+      title: Contacts_list-contact-custom-field-definitions_Response_200
+    List-contactsRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-contactsRequestUnauthorizedError
+    Create-contactRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-contactRequestInternalServerError
+    Delete-contacts-uuidRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsUuidDeleteResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsUuidDeleteResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Delete-contacts-uuidRequestUnauthorizedError
+    List-contact-custom-field-definitionsRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsCustomFieldDefinitionsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsCustomFieldDefinitionsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-contact-custom-field-definitionsRequestUnauthorizedError
+    List-contact-custom-field-definitionsRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/ContactsError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: List-contact-custom-field-definitionsRequestForbiddenError
+    Delete-contacts-uuidRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsUuidDeleteResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsUuidDeleteResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Delete-contacts-uuidRequestInternalServerError
+    Contacts_patch-contacts-uuid_Response_200:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/Contact'
+      required:
+      - resource
+      title: Contacts_patch-contacts-uuid_Response_200
+    Contacts_get-contact_Response_200:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/Contact'
+      required:
+      - resource
+      title: Contacts_get-contact_Response_200
+    ContactsGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: ContactsGetResponsesContentApplicationJsonSchemaMessage
+    Create-contactRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/ContactsError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Create-contactRequestForbiddenError
+    Create-contactRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-contactRequestNotFoundError
+    ContactCustomFieldOption:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Unique identifier for the option. Used in Contact `custom_fields` entries when `field_type` is `single_select`.
+        label:
+          type: string
+          description: User-facing display label for the option.
+        color:
+          type: string
+          description: Display color for the option.
+        is_active:
+          type: boolean
+          description: Whether the option is active and selectable.
+      required:
+      - uuid
+      - label
+      - is_active
+      title: ContactCustomFieldOption
+    ContactCustomFieldSourceType:
+      type: string
+      enum:
+      - event_type_invitee_question
+      title: ContactCustomFieldSourceType
+    Delete-contacts-uuidRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsUuidDeleteResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsUuidDeleteResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Delete-contacts-uuidRequestBadRequestError
+    ContactsErrorMessage:
+      type: string
+      enum:
+      - Please upgrade your Calendly account to Enterprise.
+      - You do not have permission to access this resource.
+      - Please upgrade to a paid Calendly account.
+      - Contact creation is not available. Required features are not enabled for your account.
+      title: ContactsErrorMessage
+    Get-contactRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-contactRequestInternalServerError
+    List-contactsRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-contactsRequestInternalServerError
+    Contact:
+      type: object
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: Canonical reference (unique identifier) for the contact.
+        emails:
+          type: array
+          items:
+            $ref: '#/components/schemas/Email'
+          description: The user's email addresses. Max 10.
+        name:
+          type:
+          - string
+          - 'null'
+          description: The user's name (human-readable format).
+        phone_numbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/PhoneNumber'
+          description: The user's phone numbers. Max 10.
+        timezone:
+          type:
+          - string
+          - 'null'
+          description: The time zone to use when presenting time to the user.
+        job_title:
+          type:
+          - string
+          - 'null'
+          description: The user's job title.
+        company:
+          type:
+          - string
+          - 'null'
+          description: The user's company name.
+        country:
+          type:
+          - string
+          - 'null'
+          description: The user's two letter country code. *(ISO 3166-1 alpha-2)*
+        state:
+          type:
+          - string
+          - 'null'
+          description: The user's state, province, or region.
+        city:
+          type:
+          - string
+          - 'null'
+          description: The user's city.
+        linkedin:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: The URL of the user's LinkedIn profile.
+        custom_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactCustomField'
+          description: The contact's custom field values.
+        created_at:
+          type: string
+          format: date-time
+          description: The moment the user's record was created (e.g. "2026-01-15T18:01:09Z")
+        updated_at:
+          type: string
+          format: date-time
+          description: The moment the user's record was last updated (e.g. "2026-01-15T18:01:09Z")
+        first_email_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The timestamp of the earliest email exchanged with the contact. Always `null` immediately after a contact is created.
+        last_email_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The timestamp of the most recent email exchanged with the contact. Always `null` immediately after a contact is created.
+        next_meeting_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The timestamp of the next upcoming meeting scheduled with the contact. Always `null` immediately after a contact is created.
+        last_meeting_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The timestamp of the most recent meeting held with the contact. Always `null` immediately after a contact is created.
+        last_interaction_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The timestamp of the most recent interaction (email or meeting) with the contact. Always `null` immediately after a contact is created.
+      required:
+      - uri
+      - emails
+      - created_at
+      - updated_at
+      description: Information about a contact.
+      title: Contact
+    List-contact-custom-field-definitionsRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsCustomFieldDefinitionsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsCustomFieldDefinitionsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-contact-custom-field-definitionsRequestBadRequestError
+    Get-contactRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-contactRequestNotFoundError
+    ContactCustomFieldDefinitionFieldType:
+      type: string
+      enum:
+      - text
+      - number
+      - currency
+      - tags
+      - date
+      - single_select
+      - invitee_question
+      description: Calendly custom field kind, which determines both input behavior and the expected value type.
+      title: ContactCustomFieldDefinitionFieldType
+    ContactsError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsErrorTitle'
+        message:
+          $ref: '#/components/schemas/ContactsErrorMessage'
+      required:
+      - title
+      - message
+      description: Permission Denied
+      title: ContactsError
+    ContactsUuidDeleteResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: ContactsUuidDeleteResponsesContentApplicationJsonSchemaMessage
+    ContactsPostRequestBodyContentApplicationJsonSchemaCustomFieldsItems:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Unique identifier of the custom field definition.
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/ContactsPostRequestBodyContentApplicationJsonSchemaCustomFieldsItemsValue'
+          - type: 'null'
+          description: The custom field value; the accepted type is set by the field definition's `field_type`. `text` and `single_select` take a string (`single_select` must equal one of the definition's option `uuid`s); `number` takes a number; `boolean` takes a boolean; `currency` takes an integer amount in the currency's minor units (the ISO currency code lives on the field definition, not on this entry); `date` takes a string in ISO 8601 date format (`YYYY-MM-DD`); `tags` takes an array of strings. Scalar fields reject array values, and `tags` rejects non-array values.
+      required:
+      - uuid
+      - value
+      title: ContactsPostRequestBodyContentApplicationJsonSchemaCustomFieldsItems
+    ContactsUuidPatchResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: ContactsUuidPatchResponsesContentApplicationJsonSchemaMessage
+    ErrorResponseDetailsItem:
+      type: object
+      properties:
+        parameter:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+      title: ErrorResponseDetailsItem
+    InsufficientScopeErrorTitle:
+      type: string
+      enum:
+      - Insufficient scope
+      title: InsufficientScopeErrorTitle
+    ContactsCustomFieldDefinitionsUuidGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: ContactsCustomFieldDefinitionsUuidGetResponsesContentApplicationJsonSchemaTitle
+    Patch-contacts-uuidRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsUuidPatchResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsUuidPatchResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Patch-contacts-uuidRequestInternalServerError
+    Contacts_list-contacts_Response_200:
+      type: object
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - collection
+      - pagination
+      title: Contacts_list-contacts_Response_200
+    Patch-contacts-uuidRequestConflictError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsUuidPatchResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsUuidPatchResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Patch-contacts-uuidRequestConflictError
+    ContactsCustomFieldDefinitionsGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: ContactsCustomFieldDefinitionsGetResponsesContentApplicationJsonSchemaTitle
+    ContactsUuidPatchRequestBodyContentApplicationJsonSchemaCustomFieldsItems:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Unique identifier of the custom field definition.
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/ContactsUuidPatchRequestBodyContentApplicationJsonSchemaCustomFieldsItemsValue'
+          - type: 'null'
+          description: The custom field value; the accepted type is set by the field definition's `field_type`. `text` and `single_select` take a string (`single_select` must equal one of the definition's option `uuid`s); `number` takes a number; `boolean` takes a boolean; `currency` takes an integer amount in the currency's minor units (the ISO currency code lives on the field definition, not on this entry); `date` takes a string in ISO 8601 date format (`YYYY-MM-DD`); `tags` takes an array of strings. Scalar fields reject array values, and `tags` rejects non-array values.
+      required:
+      - uuid
+      - value
+      title: ContactsUuidPatchRequestBodyContentApplicationJsonSchemaCustomFieldsItems
+    InsufficientScopeErrorMessage:
+      type: string
+      enum:
+      - This operation requires the scopes listed in the 'required_scopes' array.
+      title: InsufficientScopeErrorMessage
+    Create-contactRequestConflictError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-contactRequestConflictError
+    ContactCustomField:
+      type: object
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: Canonical URI of the custom field definition this value belongs to.
+        label:
+          type: string
+          description: User-facing display name of the custom field (for readability).
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/ContactCustomFieldValue'
+          - type: 'null'
+          description: The custom field value; the accepted type is set by the field definition's `field_type`. `text` and `single_select` take a string (`single_select` must equal one of the definition's option `uuid`s); `number` takes a number; `boolean` takes a boolean; `currency` takes an integer amount in the currency's minor units (the ISO currency code lives on the field definition, not on this entry); `date` takes a string in ISO 8601 date format (`YYYY-MM-DD`); `tags` takes an array of strings. Scalar fields reject array values, and `tags` rejects non-array values.
+      required:
+      - uri
+      - value
+      description: A custom field value on a Contact. `uri` is the custom field definition URI. `label` is derived from the custom field definition's name.
+      title: ContactCustomField
+    Contacts_get-contact-custom-field-definition_Response_200:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ContactCustomFieldDefinition'
+      required:
+      - resource
+      title: Contacts_get-contact-custom-field-definition_Response_200
+    Get-contact-custom-field-definitionRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/ContactsError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Get-contact-custom-field-definitionRequestForbiddenError
+    ContactCustomFieldValue:
+      oneOf:
+      - type: string
+      - type: number
+        format: double
+      - type: boolean
+      - type: array
+        items:
+          type: string
+      description: The custom field value; the accepted type is set by the field definition's `field_type`. `text` and `single_select` take a string (`single_select` must equal one of the definition's option `uuid`s); `number` takes a number; `boolean` takes a boolean; `currency` takes an integer amount in the currency's minor units (the ISO currency code lives on the field definition, not on this entry); `date` takes a string in ISO 8601 date format (`YYYY-MM-DD`); `tags` takes an array of strings. Scalar fields reject array values, and `tags` rejects non-array values.
+      title: ContactCustomFieldValue
+    List-contact-custom-field-definitionsRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsCustomFieldDefinitionsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsCustomFieldDefinitionsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-contact-custom-field-definitionsRequestInternalServerError
+    ContactsPostResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: ContactsPostResponsesContentApplicationJsonSchemaMessage
+    Get-contact-custom-field-definitionRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsCustomFieldDefinitionsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsCustomFieldDefinitionsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-contact-custom-field-definitionRequestBadRequestError
+    List-contactsRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ContactsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ContactsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-contactsRequestNotFoundError
+    ContactsCustomFieldDefinitionsUuidGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: ContactsCustomFieldDefinitionsUuidGetResponsesContentApplicationJsonSchemaMessage
+    Patch-contacts-uuidRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/ContactsError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Patch-contacts-uuidRequestForbiddenError
+    Pagination:
+      type: object
+      properties:
+        count:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: The number of rows to return
+        next_page:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URI to return the next page of an ordered list ("null" indicates no additional results are available)
+        previous_page:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URI to return the previous page of an ordered list ("null" indicates no additional results are available)
+        next_page_token:
+          type:
+          - string
+          - 'null'
+          description: Token to return the next page of an ordered list ("null" indicates no additional results are available)
+        previous_page_token:
+          type:
+          - string
+          - 'null'
+          description: Token to return the previous page of an ordered list ("null" indicates no additional results are available)
+      required:
+      - count
+      - next_page
+      - previous_page
+      - next_page_token
+      - previous_page_token
+      title: Pagination
+  securitySchemes:
+    oauth2:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0
+    personal_access_token:
+      type: http
+      scheme: bearer
+      description: Personal Access Token

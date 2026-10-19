@@ -1,0 +1,280 @@
+openapi: 3.2.0
+info:
+  title: Calendly Scheduling Links API
+  version: 1.0.0
+servers:
+- url: https://api.calendly.com
+  description: https://api.calendly.com
+tags:
+- name: Scheduling Links
+paths:
+  /scheduling_links:
+    post:
+      operationId: schedulingLinks_create-scheduling-link
+      summary: Create Single-Use Scheduling Link
+      description: 'Creates a single-use scheduling link.
+
+
+        > `scheduling_links:write`'
+      tags:
+      - Scheduling Links
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/schedulingLinks_create-scheduling-link_Response_201'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-scheduling-linkRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-scheduling-linkRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-scheduling-linkRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-scheduling-linkRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-scheduling-linkRequestInternalServerError'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                max_event_count:
+                  $ref: '#/components/schemas/SchedulingLinksPostRequestBodyContentApplicationJsonSchemaMaxEventCount'
+                  description: The max number of events that can be scheduled using this scheduling link.
+                owner:
+                  type: string
+                  format: uri
+                  description: A link to the resource that owns this Scheduling Link (currently, this is always an Event Type)
+                owner_type:
+                  $ref: '#/components/schemas/SchedulingLinksPostRequestBodyContentApplicationJsonSchemaOwnerType'
+                  description: Resource type (currently, this is always EventType)
+              required:
+              - max_event_count
+              - owner
+              - owner_type
+      security:
+      - oauth2: []
+components:
+  schemas:
+    InsufficientScopeErrorTitle:
+      type: string
+      enum:
+      - Insufficient scope
+      title: InsufficientScopeErrorTitle
+    InsufficientScopeError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InsufficientScopeErrorTitle'
+        message:
+          $ref: '#/components/schemas/InsufficientScopeErrorMessage'
+        required_scopes:
+          type: array
+          items:
+            type: string
+            pattern: ^[a-z_]+:(read|write)$
+      required:
+      - title
+      - message
+      - required_scopes
+      description: Caller does not have required oauth scopes
+      title: InsufficientScopeError
+    SchedulingLinksPostResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: SchedulingLinksPostResponsesContentApplicationJsonSchemaMessage
+    Create-scheduling-linkRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/SchedulingLinksPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/SchedulingLinksPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-scheduling-linkRequestUnauthorizedError
+    Create-scheduling-linkRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/SchedulingLinksPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/SchedulingLinksPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-scheduling-linkRequestBadRequestError
+    SchedulingLinksPostResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: SchedulingLinksPostResponsesContentApplicationJsonSchemaOneOf0Message
+    Create-scheduling-linkRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/SchedulingLinksPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/SchedulingLinksPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-scheduling-linkRequestInternalServerError
+    InsufficientScopeErrorMessage:
+      type: string
+      enum:
+      - This operation requires the scopes listed in the 'required_scopes' array.
+      title: InsufficientScopeErrorMessage
+    CreateSchedulingLinkRequestForbiddenError0:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/SchedulingLinksPostResponsesContentApplicationJsonSchemaOneOf0Title'
+        message:
+          $ref: '#/components/schemas/SchedulingLinksPostResponsesContentApplicationJsonSchemaOneOf0Message'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: CreateSchedulingLinkRequestForbiddenError0
+    SchedulingLinksPostResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: SchedulingLinksPostResponsesContentApplicationJsonSchemaTitle
+    SchedulingLinksPostResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: SchedulingLinksPostResponsesContentApplicationJsonSchemaOneOf0Title
+    Create-scheduling-linkRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/CreateSchedulingLinkRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Create-scheduling-linkRequestForbiddenError
+    Create-scheduling-linkRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/SchedulingLinksPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/SchedulingLinksPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-scheduling-linkRequestNotFoundError
+    SchedulingLinksPostRequestBodyContentApplicationJsonSchemaMaxEventCount:
+      type: string
+      enum:
+      - '1'
+      description: The max number of events that can be scheduled using this scheduling link.
+      title: SchedulingLinksPostRequestBodyContentApplicationJsonSchemaMaxEventCount
+    schedulingLinks_create-scheduling-link_Response_201:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/SchedulingLinksPostResponsesContentApplicationJsonSchemaResource'
+      required:
+      - resource
+      title: schedulingLinks_create-scheduling-link_Response_201
+    SchedulingLinksPostResponsesContentApplicationJsonSchemaResourceOwnerType:
+      type: string
+      enum:
+      - EventType
+      description: Resource type (currently, this is always EventType)
+      title: SchedulingLinksPostResponsesContentApplicationJsonSchemaResourceOwnerType
+    SchedulingLinksPostRequestBodyContentApplicationJsonSchemaOwnerType:
+      type: string
+      enum:
+      - EventType
+      description: Resource type (currently, this is always EventType)
+      title: SchedulingLinksPostRequestBodyContentApplicationJsonSchemaOwnerType
+    ErrorResponseDetailsItem:
+      type: object
+      properties:
+        parameter:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+      title: ErrorResponseDetailsItem
+    SchedulingLinksPostResponsesContentApplicationJsonSchemaResource:
+      type: object
+      properties:
+        booking_url:
+          type: string
+          format: uri
+          description: Scheduling link url
+        owner:
+          type: string
+          format: uri
+          description: A link to the resource that owns this Scheduling Link (currently, this is always an Event Type)
+        owner_type:
+          $ref: '#/components/schemas/SchedulingLinksPostResponsesContentApplicationJsonSchemaResourceOwnerType'
+          description: Resource type (currently, this is always EventType)
+      required:
+      - booking_url
+      title: SchedulingLinksPostResponsesContentApplicationJsonSchemaResource
+  securitySchemes:
+    oauth2:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0
+    personal_access_token:
+      type: http
+      scheme: bearer
+      description: Personal Access Token

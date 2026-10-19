@@ -1,0 +1,409 @@
+openapi: 3.2.0
+info:
+  title: Calendly Outgoing Communications API
+  version: 1.0.0
+servers:
+- url: https://api.calendly.com
+  description: https://api.calendly.com
+tags:
+- name: outgoingCommunications
+paths:
+  /outgoing_communications:
+    get:
+      operationId: outgoingCommunications_list-outgoing-communications
+      summary: List outgoing communications
+      description: '> This endpoint requires an Enterprise subscription.
+
+
+        > `outgoing_communications:read`
+
+
+        Returns a list of outgoing SMS and email communications.'
+      tags:
+      - outgoingCommunications
+      parameters:
+      - name: organization
+        in: query
+        description: Return outgoing communications from the organization associated with this URI
+        required: true
+        schema:
+          type: string
+          format: uri
+      - name: count
+        in: query
+        description: The number of records to return
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+      - name: min_created_at
+        in: query
+        description: 'Include outgoing communications that were created after this time (sample time format: "2020-01-02T03:04:05.678Z"). This time should use the UTC timezone'
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: max_created_at
+        in: query
+        description: 'Include outgoing communications that were created prior to this time (sample time format: "2020-01-02T03:04:05.678Z"). This time should use the UTC timezone'
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: page_token
+        in: query
+        description: The token to pass to get the next portion of the collection
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/outgoingCommunications_list-outgoing-communications_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-outgoing-communicationsRequestBadRequestError'
+        '403':
+          description: Permission Denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-outgoing-communicationsRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-outgoing-communicationsRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-outgoing-communicationsRequestInternalServerError'
+      security:
+      - oauth2: []
+components:
+  schemas:
+    InsufficientScopeErrorTitle:
+      type: string
+      enum:
+      - Insufficient scope
+      title: InsufficientScopeErrorTitle
+    EnterpriseOwnerAdminError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EnterpriseOwnerAdminErrorTitle'
+        message:
+          $ref: '#/components/schemas/EnterpriseOwnerAdminErrorMessage'
+      description: Permission Denied
+      title: EnterpriseOwnerAdminError
+    InsufficientScopeError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InsufficientScopeErrorTitle'
+        message:
+          $ref: '#/components/schemas/InsufficientScopeErrorMessage'
+        required_scopes:
+          type: array
+          items:
+            type: string
+            pattern: ^[a-z_]+:(read|write)$
+      required:
+      - title
+      - message
+      - required_scopes
+      description: Caller does not have required oauth scopes
+      title: InsufficientScopeError
+    OutgoingCommunicationsGetResponsesContentApplicationJsonSchemaCollectionItems:
+      oneOf:
+      - $ref: '#/components/schemas/sms'
+      - $ref: '#/components/schemas/email'
+      title: OutgoingCommunicationsGetResponsesContentApplicationJsonSchemaCollectionItems
+    email:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/EmailType'
+        to:
+          type: string
+        from:
+          type: string
+        subject:
+          type: string
+        body:
+          type: string
+        sender_uri:
+          type:
+          - string
+          - 'null'
+          format: uri
+        sender_email:
+          type:
+          - string
+          - 'null'
+        event_type_uri:
+          type: string
+          format: uri
+        event_uri:
+          type: string
+          format: uri
+        sent_at:
+          type: string
+          format: date-time
+          description: 'The UTC date and time when the email message was sent (format: "2020-01-02T03:04:05.678123Z")'
+        created_at:
+          type: string
+          format: date-time
+          description: 'The UTC date and time when the email message was created (format: "2020-01-02T03:04:05.678123Z")'
+        scheduling_url:
+          type: string
+          format: uri
+      required:
+      - type
+      - to
+      - from
+      - subject
+      - body
+      - sender_uri
+      - sender_email
+      - event_type_uri
+      - event_uri
+      - sent_at
+      - created_at
+      - scheduling_url
+      description: Object for an Email communication
+      title: email
+    SmsType:
+      type: string
+      enum:
+      - sms
+      title: SmsType
+    Get-outgoing-communicationsRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OutgoingCommunicationsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OutgoingCommunicationsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-outgoing-communicationsRequestNotFoundError
+    InsufficientScopeErrorMessage:
+      type: string
+      enum:
+      - This operation requires the scopes listed in the 'required_scopes' array.
+      title: InsufficientScopeErrorMessage
+    Get-outgoing-communicationsRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OutgoingCommunicationsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OutgoingCommunicationsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-outgoing-communicationsRequestBadRequestError
+    Get-outgoing-communicationsRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OutgoingCommunicationsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OutgoingCommunicationsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-outgoing-communicationsRequestInternalServerError
+    outgoingCommunications_list-outgoing-communications_Response_200:
+      type: object
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/OutgoingCommunicationsGetResponsesContentApplicationJsonSchemaCollectionItems'
+          description: The communications matching the criteria
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        total_count:
+          type: integer
+          minimum: 0
+          description: Total number of records based on search criteria
+      required:
+      - collection
+      - pagination
+      - total_count
+      description: Outgoing communications response
+      title: outgoingCommunications_list-outgoing-communications_Response_200
+    EnterpriseOwnerAdminErrorMessage:
+      type: string
+      enum:
+      - Please upgrade your Calendly account to Enterprise.
+      - You do not have permission to access this resource.
+      title: EnterpriseOwnerAdminErrorMessage
+    EmailType:
+      type: string
+      enum:
+      - email
+      title: EmailType
+    sms:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/SmsType'
+        to:
+          type: string
+        from:
+          type: string
+        subject:
+          type:
+          - string
+          - 'null'
+        body:
+          type: string
+        sender_uri:
+          type:
+          - string
+          - 'null'
+          format: uri
+        sender_email:
+          type:
+          - string
+          - 'null'
+        event_type_uri:
+          type: string
+          format: uri
+        event_uri:
+          type: string
+          format: uri
+        sent_at:
+          type: string
+          format: date-time
+          description: 'The UTC date and time when the SMS message was sent (format: "2020-01-02T03:04:05.678123Z")'
+        created_at:
+          type: string
+          format: date-time
+          description: 'The UTC date and time when the SMS message was created (format: "2020-01-02T03:04:05.678123Z")'
+        scheduling_url:
+          type: string
+          format: uri
+      required:
+      - type
+      - to
+      - from
+      - subject
+      - body
+      - sender_uri
+      - sender_email
+      - event_type_uri
+      - event_uri
+      - sent_at
+      - created_at
+      - scheduling_url
+      description: Object for a SMS communication
+      title: sms
+    OutgoingCommunicationsGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: OutgoingCommunicationsGetResponsesContentApplicationJsonSchemaTitle
+    EnterpriseOwnerAdminErrorTitle:
+      type: string
+      enum:
+      - Permission Denied
+      title: EnterpriseOwnerAdminErrorTitle
+    OutgoingCommunicationsGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: OutgoingCommunicationsGetResponsesContentApplicationJsonSchemaMessage
+    ErrorResponseDetailsItem:
+      type: object
+      properties:
+        parameter:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+      title: ErrorResponseDetailsItem
+    Get-outgoing-communicationsRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/EnterpriseOwnerAdminError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Get-outgoing-communicationsRequestForbiddenError
+    Pagination:
+      type: object
+      properties:
+        count:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: The number of rows to return
+        next_page:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URI to return the next page of an ordered list ("null" indicates no additional results are available)
+        previous_page:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URI to return the previous page of an ordered list ("null" indicates no additional results are available)
+        next_page_token:
+          type:
+          - string
+          - 'null'
+          description: Token to return the next page of an ordered list ("null" indicates no additional results are available)
+        previous_page_token:
+          type:
+          - string
+          - 'null'
+          description: Token to return the previous page of an ordered list ("null" indicates no additional results are available)
+      required:
+      - count
+      - next_page
+      - previous_page
+      - next_page_token
+      - previous_page_token
+      title: Pagination
+  securitySchemes:
+    oauth2:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0
+    personal_access_token:
+      type: http
+      scheme: bearer
+      description: Personal Access Token

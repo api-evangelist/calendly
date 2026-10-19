@@ -1,445 +1,2133 @@
 openapi: 3.2.0
 info:
-  title: Calendly Scheduling Organizations API
-  description: The Calendly Scheduling API (v2) is a RESTful API that allows developers to programmatically manage scheduling workflows.
-  version: 2.0.0
-  contact:
-    name: Calendly Developer Support
-    url: https://developer.calendly.com/
-  termsOfService: https://calendly.com/pages/terms
+  title: Calendly Organizations API
+  version: 1.0.0
 servers:
 - url: https://api.calendly.com
-  description: Production Server
-security:
-- bearerAuth: []
+  description: https://api.calendly.com
 tags:
 - name: Organizations
-  description: Endpoints for managing organization memberships, invitations, and organization-level settings.
 paths:
-  /organization_memberships:
+  /organizations/{uuid}:
     get:
-      operationId: listOrganizationMemberships
-      summary: List organization memberships
-      description: Returns a paginated list of organization memberships. Each membership represents a users role and status within an organization.
+      operationId: organizations_get-organization
+      summary: Get Organization
+      description: 'Returns the details of a specified Organization.
+
+
+        > `organizations:read`'
       tags:
       - Organizations
       parameters:
+      - name: uuid
+        in: path
+        description: The organization's unique identifier
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/organizations_get-organization_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-organizationRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-organizationRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-organizationRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-organizationRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-organizationRequestInternalServerError'
+      security:
+      - oauth2: []
+  /organizations/{org_uuid}/invitations/{uuid}:
+    get:
+      operationId: organizations_get-organization-invitation
+      summary: Get Organization Invitation
+      description: 'Returns an Organization Invitation that was sent to the organization''s members.
+
+
+        > `organizations:read`'
+      tags:
+      - Organizations
+      parameters:
+      - name: org_uuid
+        in: path
+        description: The organization’s unique identifier
+        required: true
+        schema:
+          type: string
+      - name: uuid
+        in: path
+        description: The organization invitation's unique identifier
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/organizations_get-organization-invitation_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-organization-invitationRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-organization-invitationRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-organization-invitationRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-organization-invitationRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-organization-invitationRequestInternalServerError'
+      security:
+      - oauth2: []
+    delete:
+      operationId: organizations_revoke-organization-invitation
+      summary: Revoke User's Organization Invitation
+      description: 'Use this to revoke an Organization Invitation to an organization. Once revoked, the invitation link that was sent to the invitee is no longer valid.
+
+
+        > `organizations:write`'
+      tags:
+      - Organizations
+      parameters:
+      - name: org_uuid
+        in: path
+        description: The organization’s unique identifier
+        required: true
+        schema:
+          type: string
+      - name: uuid
+        in: path
+        description: The organization invitation's unique identifier
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Revoke-organization-invitationRequestUnauthorizedError'
+        '403':
+          description: Permission Denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Revoke-organization-invitationRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Revoke-organization-invitationRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Revoke-organization-invitationRequestInternalServerError'
+      security:
+      - oauth2: []
+  /organization_memberships/{uuid}:
+    get:
+      operationId: organizations_get-organization-membership
+      summary: Get Organization Membership
+      description: 'Returns information about a user''s Organization Membership
+
+
+        > `organizations:read`'
+      tags:
+      - Organizations
+      parameters:
+      - name: uuid
+        in: path
+        description: The organization membership's unique identifier
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/organizations_get-organization-membership_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-organization-membershipRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-organization-membershipRequestUnauthorizedError'
+        '403':
+          description: Caller not authorized to perform this action or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-organization-membershipRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-organization-membershipRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-organization-membershipRequestInternalServerError'
+      security:
+      - oauth2: []
+    delete:
+      operationId: organizations_delete-organization-membership
+      summary: Remove User from Organization
+      description: 'Removes a user from an organization.
+
+
+        Notes:
+
+
+        * To remove users, the caller must have admin rights for the organization
+
+
+        * An organization owner can''t be removed
+
+
+        > `organizations:write`'
+      tags:
+      - Organizations
+      parameters:
+      - name: uuid
+        in: path
+        description: The organization membership's unique identifier
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-organization-membershipRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-organization-membershipRequestUnauthorizedError'
+        '403':
+          description: Permission Denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-organization-membershipRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-organization-membershipRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-organization-membershipRequestInternalServerError'
+      security:
+      - oauth2: []
+  /teams/{team_uuid}:
+    get:
+      operationId: organizations_get-team
+      summary: Get Team
+      description: 'Returns a single Team.
+
+
+        > #### Required scopes: `organizations:read`'
+      tags:
+      - Organizations
+      parameters:
+      - name: team_uuid
+        in: path
+        description: Team UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organizations_get-team_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-teamRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-teamRequestUnauthorizedError'
+        '403':
+          description: Caller not authorized to perform this action
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-teamRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-teamRequestNotFoundError'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-teamRequestTooManyRequestsError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-teamRequestInternalServerError'
+      security:
+      - oauth2: []
+  /organizations/{uuid}/invitations:
+    post:
+      operationId: organizations_create-organization-invitation
+      summary: Invite User to Organization
+      description: 'Invites a user to an organization.
+
+
+        > `organizations:write`'
+      tags:
+      - Organizations
+      parameters:
+      - name: uuid
+        in: path
+        description: The organization's unique identifier
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/organizations_create-organization-invitation_Response_201'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-organization-invitationRequestUnauthorizedError'
+        '403':
+          description: Permission Denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-organization-invitationRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-organization-invitationRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-organization-invitationRequestInternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: The email of the user being invited
+              required:
+              - email
+      security:
+      - oauth2: []
+    get:
+      operationId: organizations_list-organization-invitations
+      summary: List Organization Invitations
+      description: 'Returns a list of Organization Invitations that were sent to the organization''s members.
+
+
+        > `organizations:read`'
+      tags:
+      - Organizations
+      parameters:
+      - name: uuid
+        in: path
+        description: The organization's unique identifier
+        required: true
+        schema:
+          type: string
+      - name: count
+        in: query
+        description: The number of rows to return
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+      - name: page_token
+        in: query
+        description: The token to pass to get the next or previous portion of the collection
+        required: false
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: Order results by the field name and direction specified (ascending or descending). Returns multiple sets of results in a comma-separated list.
+        required: false
+        schema:
+          type: string
+          default: created_at:asc
+      - name: email
+        in: query
+        description: Indicates if the results should be filtered by email address
+        required: false
+        schema:
+          type: string
+          format: email
+      - name: status
+        in: query
+        description: Indicates if the results should be filtered by status  ("pending", "accepted", or "declined")
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrganizationsUuidInvitationsGetParametersStatus'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/organizations_list-organization-invitations_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-organization-invitationsRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-organization-invitationsRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-organization-invitationsRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-organization-invitationsRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-organization-invitationsRequestInternalServerError'
+      security:
+      - oauth2: []
+  /organization_memberships:
+    get:
+      operationId: organizations_list-organization-memberships
+      summary: List Organization Memberships
+      description: 'Use this to list the Organization Memberships for all users belonging to an organization, use:
+
+
+        * `user` to look up a user''s membership in an organization
+
+
+        * `organization` to look up all users that belong to the organization
+
+
+        This endpoint can also be used to retrieve your organization URI.
+
+
+        > `organizations:read`'
+      tags:
+      - Organizations
+      parameters:
+      - name: page_token
+        in: query
+        description: The token to pass to get the next or previous portion of the collection
+        required: false
+        schema:
+          type: string
+      - name: count
+        in: query
+        description: The number of rows to return
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+      - name: email
+        in: query
+        description: Indicates if the results should be filtered by email address
+        required: false
+        schema:
+          type: string
+          format: email
       - name: organization
         in: query
-        required: true
-        description: The URI of the organization whose memberships to list.
+        description: Indicates if the results should be filtered by organization
+        required: false
         schema:
           type: string
           format: uri
       - name: user
         in: query
-        description: Filter by user URI.
+        description: Indicates if the results should be filtered by user
+        required: false
         schema:
           type: string
           format: uri
-      - name: email
+      - name: role
         in: query
-        description: Filter by user email address.
+        description: Indicates if the results should be filtered by role
+        required: false
         schema:
-          type: string
-          format: email
-      - $ref: '#/components/parameters/Count'
-      - $ref: '#/components/parameters/PageToken'
+          $ref: '#/components/schemas/OrganizationMembershipsGetParametersRole'
       responses:
         '200':
-          description: Successfully retrieved organization memberships
+          description: OK
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  collection:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/OrganizationMembership'
-                  pagination:
-                    $ref: '#/components/schemas/Pagination'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-  /organization_memberships/{uuid}:
-    get:
-      operationId: getOrganizationMembership
-      summary: Get organization membership
-      description: Returns detailed information about a specific organization membership, including the users role and status within the organization.
-      tags:
-      - Organizations
-      parameters:
-      - name: uuid
-        in: path
-        required: true
-        description: The UUID of the organization membership.
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Successfully retrieved the organization membership
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  resource:
-                    $ref: '#/components/schemas/OrganizationMembership'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-    delete:
-      operationId: deleteOrganizationMembership
-      summary: Remove organization membership
-      description: Removes a user from an organization by deleting their membership. This action cannot be undone.
-      tags:
-      - Organizations
-      parameters:
-      - name: uuid
-        in: path
-        required: true
-        description: The UUID of the organization membership to remove.
-        schema:
-          type: string
-      responses:
-        '204':
-          description: Successfully removed the organization membership
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-  /organizations/{uuid}/invitations:
-    get:
-      operationId: listOrganizationInvitations
-      summary: List organization invitations
-      description: Returns a paginated list of pending invitations for the specified organization.
-      tags:
-      - Organizations
-      parameters:
-      - name: uuid
-        in: path
-        required: true
-        description: The UUID of the organization.
-        schema:
-          type: string
-      - name: status
-        in: query
-        description: Filter invitations by status.
-        schema:
-          type: string
-          enum:
-          - pending
-          - accepted
-          - declined
-      - $ref: '#/components/parameters/Count'
-      - $ref: '#/components/parameters/PageToken'
-      responses:
-        '200':
-          description: Successfully retrieved organization invitations
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  collection:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/OrganizationInvitation'
-                  pagination:
-                    $ref: '#/components/schemas/Pagination'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-    post:
-      operationId: inviteToOrganization
-      summary: Invite user to organization
-      description: Sends an invitation to a user to join the organization. The invitee will receive an email with instructions to accept the invitation.
-      tags:
-      - Organizations
-      parameters:
-      - name: uuid
-        in: path
-        required: true
-        description: The UUID of the organization.
-        schema:
-          type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-              - email
-              properties:
-                email:
-                  type: string
-                  format: email
-                  description: The email address of the person to invite.
-      responses:
-        '201':
-          description: Successfully created the invitation
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  resource:
-                    $ref: '#/components/schemas/OrganizationInvitation'
+                $ref: '#/components/schemas/organizations_list-organization-memberships_Response_200'
         '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-  /organizations/{org_uuid}/invitations/{invitation_uuid}:
-    get:
-      operationId: getOrganizationInvitation
-      summary: Get organization invitation
-      description: Returns detailed information about a specific organization invitation.
-      tags:
-      - Organizations
-      parameters:
-      - name: org_uuid
-        in: path
-        required: true
-        description: The UUID of the organization.
-        schema:
-          type: string
-      - name: invitation_uuid
-        in: path
-        required: true
-        description: The UUID of the invitation.
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Successfully retrieved the invitation
+          description: Request is not valid
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  resource:
-                    $ref: '#/components/schemas/OrganizationInvitation'
+                $ref: '#/components/schemas/List-organization-membershipsRequestBadRequestError'
         '401':
-          $ref: '#/components/responses/Unauthorized'
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-organization-membershipsRequestUnauthorizedError'
+        '403':
+          description: Caller not authorized to perform this action or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-organization-membershipsRequestForbiddenError'
         '404':
-          $ref: '#/components/responses/NotFound'
-    delete:
-      operationId: revokeOrganizationInvitation
-      summary: Revoke organization invitation
-      description: Revokes a pending organization invitation. The invitee will no longer be able to accept the invitation.
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-organization-membershipsRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-organization-membershipsRequestInternalServerError'
+      security:
+      - oauth2: []
+  /teams:
+    get:
+      operationId: organizations_list-teams
+      summary: List Teams
+      description: 'Returns a paginated list of Teams matching the requested user.
+
+
+        > #### Required scopes: `organizations:read`'
       tags:
       - Organizations
       parameters:
-      - name: org_uuid
-        in: path
-        required: true
-        description: The UUID of the organization.
+      - name: user
+        in: query
+        description: Filter results to Teams associated with a specific user
+        required: false
         schema:
           type: string
-      - name: invitation_uuid
-        in: path
-        required: true
-        description: The UUID of the invitation to revoke.
+          format: uri
+      - name: page_token
+        in: query
+        description: The token to pass to get the next or previous portion of the collection
+        required: false
         schema:
           type: string
-      responses:
-        '204':
-          description: Successfully revoked the invitation
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-components:
-  responses:
-    BadRequest:
-      description: The request was invalid or malformed. Check the request body and parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. Verify that a valid access token is provided in the Authorization header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found. Verify the UUID or URI is correct.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    PageToken:
-      name: page_token
-      in: query
-      description: A token for fetching the next page of results from a previous paginated response.
-      schema:
-        type: string
-    Count:
-      name: count
-      in: query
-      description: The number of results to return per page.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 20
-  schemas:
-    Pagination:
-      type: object
-      description: Pagination information for paginated list responses.
-      properties:
-        count:
+      - name: count
+        in: query
+        description: The number of rows to return
+        required: false
+        schema:
           type: integer
-          description: The number of results in the current page.
-        next_page:
-          type: string
-          format: uri
-          description: The URL of the next page of results, if available.
-        previous_page:
-          type: string
-          format: uri
-          description: The URL of the previous page of results, if available.
-        next_page_token:
-          type: string
-          description: The token to fetch the next page of results.
-        previous_page_token:
-          type: string
-          description: The token to fetch the previous page of results.
-    OrganizationInvitation:
+          minimum: 1
+          maximum: 100
+          default: 20
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organizations_list-teams_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-teamsRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-teamsRequestUnauthorizedError'
+        '403':
+          description: Caller not authorized to perform this action
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-teamsRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-teamsRequestNotFoundError'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-teamsRequestTooManyRequestsError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-teamsRequestInternalServerError'
+      security:
+      - oauth2: []
+components:
+  schemas:
+    InsufficientScopeError:
       type: object
-      description: An invitation for a user to join a Calendly organization.
-      properties:
-        uri:
-          type: string
-          format: uri
-          description: The canonical URI of the invitation resource.
-        email:
-          type: string
-          format: email
-          description: The email address the invitation was sent to.
-        status:
-          type: string
-          enum:
-          - pending
-          - accepted
-          - declined
-          description: The current status of the invitation.
-        organization:
-          type: string
-          format: uri
-          description: The URI of the organization.
-        created_at:
-          type: string
-          format: date-time
-          description: The timestamp when the invitation was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: The timestamp when the invitation was last updated.
-        last_sent_at:
-          type: string
-          format: date-time
-          description: The timestamp when the invitation was last sent.
-    Error:
-      type: object
-      description: An error response from the Calendly API.
       properties:
         title:
-          type: string
-          description: A short summary of the error.
+          $ref: '#/components/schemas/InsufficientScopeErrorTitle'
         message:
-          type: string
-          description: A detailed description of the error.
+          $ref: '#/components/schemas/InsufficientScopeErrorMessage'
+        required_scopes:
+          type: array
+          items:
+            type: string
+            pattern: ^[a-z_]+:(read|write)$
+      required:
+      - title
+      - message
+      - required_scopes
+      description: Caller does not have required oauth scopes
+      title: InsufficientScopeError
+    ListOrganizationInvitationsRequestForbiddenError0:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationsUuidInvitationsGetResponsesContentApplicationJsonSchemaOneOf0Title'
+        message:
+          $ref: '#/components/schemas/OrganizationsUuidInvitationsGetResponsesContentApplicationJsonSchemaOneOf0Message'
         details:
           type: array
           items:
-            type: object
-            properties:
-              parameter:
-                type: string
-                description: The parameter that caused the error.
-              message:
-                type: string
-                description: A description of what was wrong with the parameter.
-          description: Specific details about validation errors.
-    User:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: ListOrganizationInvitationsRequestForbiddenError0
+    Revoke-organization-invitationRequestNotFoundError:
       type: object
-      description: A Calendly user account with scheduling and organization information.
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationsOrgUuidInvitationsUuidDeleteResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationsOrgUuidInvitationsUuidDeleteResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Revoke-organization-invitationRequestNotFoundError
+    Revoke-organization-invitationRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationsOrgUuidInvitationsUuidDeleteResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationsOrgUuidInvitationsUuidDeleteResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Revoke-organization-invitationRequestUnauthorizedError
+    UserNotInOrgGenericErrorTitle:
+      type: string
+      enum:
+      - Permission Denied
+      title: UserNotInOrgGenericErrorTitle
+    OrganizationMembershipRole:
+      type: string
+      enum:
+      - user
+      - admin
+      - owner
+      description: The user's role in the organization
+      title: OrganizationMembershipRole
+    organizations_list-organization-memberships_Response_200:
+      type: object
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrganizationMembership'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - collection
+      - pagination
+      description: Service response
+      title: organizations_list-organization-memberships_Response_200
+    GetOrganizationRequestForbiddenError0:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationsUuidGetResponsesContentApplicationJsonSchemaOneOf0Title'
+        message:
+          $ref: '#/components/schemas/OrganizationsUuidGetResponsesContentApplicationJsonSchemaOneOf0Message'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: GetOrganizationRequestForbiddenError0
+    List-organization-membershipsRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationMembershipsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationMembershipsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-organization-membershipsRequestNotFoundError
+    List-teamsRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/TeamsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/TeamsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-teamsRequestUnauthorizedError
+    List-teamsRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/TeamsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/TeamsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-teamsRequestInternalServerError
+    Get-teamRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/TeamsTeamUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/TeamsTeamUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-teamRequestBadRequestError
+    OrganizationInvitationDeleteError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationInvitationDeleteErrorTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationInvitationDeleteErrorMessage'
+      description: Permission Denied
+      title: OrganizationInvitationDeleteError
+    OrganizationMembershipUserLocale:
+      type: string
+      enum:
+      - en
+      - fr
+      - es
+      - de
+      - pt
+      - ps
+      description: The user's language preference
+      title: OrganizationMembershipUserLocale
+    OrgMembershipDeleteError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrgMembershipDeleteErrorTitle'
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Caller not authorized to perform this action
+      title: OrgMembershipDeleteError
+    OrganizationsUuidInvitationsGetParametersStatus:
+      type: string
+      enum:
+      - pending
+      - accepted
+      - declined
+      title: OrganizationsUuidInvitationsGetParametersStatus
+    List-teamsRequestForbiddenError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/TeamsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/TeamsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-teamsRequestForbiddenError
+    OrganizationsUuidInvitationsGetResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: OrganizationsUuidInvitationsGetResponsesContentApplicationJsonSchemaOneOf0Message
+    List-teamsRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/TeamsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/TeamsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-teamsRequestBadRequestError
+    Get-organization-membershipRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationMembershipsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationMembershipsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-organization-membershipRequestNotFoundError
+    organizations_list-organization-invitations_Response_200:
+      type: object
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrganizationInvitation'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - collection
+      - pagination
+      title: organizations_list-organization-invitations_Response_200
+    Get-teamRequestForbiddenError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/TeamsTeamUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/TeamsTeamUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-teamRequestForbiddenError
+    Team:
+      type: object
       properties:
         uri:
           type: string
           format: uri
-          description: The canonical URI of the user resource.
+          description: Canonical Team identifier
         name:
           type: string
-          description: The full name of the user.
-        slug:
-          type: string
-          description: The URL-friendly slug for the users scheduling page.
-        email:
-          type: string
-          format: email
-          description: The email address of the user.
-        scheduling_url:
-          type: string
-          format: uri
-          description: The URL of the users Calendly scheduling page.
-        timezone:
-          type: string
-          description: The IANA timezone of the user.
-        avatar_url:
-          type: string
-          format: uri
-          description: The URL of the users avatar image.
-        created_at:
-          type: string
-          format: date-time
-          description: The timestamp when the user was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: The timestamp when the user was last updated.
-        current_organization:
-          type: string
-          format: uri
-          description: The URI of the users current organization.
-    OrganizationMembership:
-      type: object
-      description: A membership record representing a users role and status within a Calendly organization.
-      properties:
-        uri:
-          type: string
-          format: uri
-          description: The canonical URI of the organization membership resource.
-        role:
-          type: string
-          enum:
-          - user
-          - admin
-          - owner
-          description: The users role within the organization.
-        user:
-          $ref: '#/components/schemas/User'
+          description: Team name
         organization:
           type: string
           format: uri
-          description: The URI of the organization.
+          description: URI of the Organization the Team belongs to
+        scheduling_url:
+          type: string
+          format: uri
+          description: Canonical public scheduling page for the Team
+      required:
+      - uri
+      - name
+      - organization
+      - scheduling_url
+      description: 'A Team is a group of users within a Calendly organization who collaborate on scheduling.
+
+        Teams can have shared Event Types and a team scheduling URL for booking with available members.'
+      title: Team
+    OrganizationInvitationStatus:
+      type: string
+      enum:
+      - pending
+      - accepted
+      - declined
+      description: The status of the invitation ("pending", "accepted", or "declined")
+      title: OrganizationInvitationStatus
+    Get-organizationRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-organizationRequestInternalServerError
+    Get-organization-invitationRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationsOrgUuidInvitationsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationsOrgUuidInvitationsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-organization-invitationRequestNotFoundError
+    OrganizationInvitationDeleteErrorTitle:
+      type: string
+      enum:
+      - Permission Denied
+      title: OrganizationInvitationDeleteErrorTitle
+    OrgMembershipDeleteErrorTitle:
+      type: string
+      enum:
+      - Permission Denied
+      title: OrgMembershipDeleteErrorTitle
+    OrganizationsUuidInvitationsPostResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: OrganizationsUuidInvitationsPostResponsesContentApplicationJsonSchemaMessage
+    Create-organization-invitationRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationsUuidInvitationsPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationsUuidInvitationsPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-organization-invitationRequestNotFoundError
+    OrganizationMembershipsUuidDeleteResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: OrganizationMembershipsUuidDeleteResponsesContentApplicationJsonSchemaTitle
+    OrganizationMembershipsUuidGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: OrganizationMembershipsUuidGetResponsesContentApplicationJsonSchemaMessage
+    ErrorResponse:
+      type: object
+      properties:
+        title:
+          type: string
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: ErrorResponse
+    OrganizationPlan:
+      type: string
+      enum:
+      - basic
+      - essentials
+      - standard
+      - professional
+      - teams
+      - enterprise
+      description: Active subscription plan or trial plan
+      title: OrganizationPlan
+    Delete-organization-membershipRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/OrgMembershipDeleteError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Delete-organization-membershipRequestForbiddenError
+    organizations_get-organization_Response_200:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/Organization'
+      required:
+      - resource
+      title: organizations_get-organization_Response_200
+    Pagination:
+      type: object
+      properties:
+        count:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: The number of rows to return
+        next_page:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URI to return the next page of an ordered list ("null" indicates no additional results are available)
+        previous_page:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URI to return the previous page of an ordered list ("null" indicates no additional results are available)
+        next_page_token:
+          type:
+          - string
+          - 'null'
+          description: Token to return the next page of an ordered list ("null" indicates no additional results are available)
+        previous_page_token:
+          type:
+          - string
+          - 'null'
+          description: Token to return the previous page of an ordered list ("null" indicates no additional results are available)
+      required:
+      - count
+      - next_page
+      - previous_page
+      - next_page_token
+      - previous_page_token
+      title: Pagination
+    OrganizationsOrgUuidInvitationsUuidDeleteResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: OrganizationsOrgUuidInvitationsUuidDeleteResponsesContentApplicationJsonSchemaMessage
+    Get-organization-membershipRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationMembershipsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationMembershipsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-organization-membershipRequestInternalServerError
+    GetOrganizationInvitationRequestForbiddenError0:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationsOrgUuidInvitationsUuidGetResponsesContentApplicationJsonSchemaOneOf0Title'
+        message:
+          $ref: '#/components/schemas/OrganizationsOrgUuidInvitationsUuidGetResponsesContentApplicationJsonSchemaOneOf0Message'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: GetOrganizationInvitationRequestForbiddenError0
+    OrganizationMembershipsUuidGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: OrganizationMembershipsUuidGetResponsesContentApplicationJsonSchemaTitle
+    UserNotInOrgGenericError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/UserNotInOrgGenericErrorTitle'
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Caller not authorized to perform this action
+      title: UserNotInOrgGenericError
+    List-teamsRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/TeamsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/TeamsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-teamsRequestNotFoundError
+    List-organization-invitationsRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationsUuidInvitationsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationsUuidInvitationsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-organization-invitationsRequestNotFoundError
+    Get-organization-invitationRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationsOrgUuidInvitationsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationsOrgUuidInvitationsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-organization-invitationRequestInternalServerError
+    TeamsGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: TeamsGetResponsesContentApplicationJsonSchemaMessage
+    OrganizationMembershipsGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: OrganizationMembershipsGetResponsesContentApplicationJsonSchemaMessage
+    Get-teamRequestTooManyRequestsError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/TeamsTeamUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/TeamsTeamUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-teamRequestTooManyRequestsError
+    OrganizationsUuidInvitationsGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: OrganizationsUuidInvitationsGetResponsesContentApplicationJsonSchemaMessage
+    Get-organization-membershipRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationMembershipsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationMembershipsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-organization-membershipRequestBadRequestError
+    List-organization-invitationsRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationsUuidInvitationsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationsUuidInvitationsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-organization-invitationsRequestBadRequestError
+    Create-organization-invitationRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/OrganizationInvitationCreateError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Create-organization-invitationRequestForbiddenError
+    TeamsTeamUuidGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: TeamsTeamUuidGetResponsesContentApplicationJsonSchemaTitle
+    List-organization-invitationsRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/ListOrganizationInvitationsRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: List-organization-invitationsRequestForbiddenError
+    Delete-organization-membershipRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationMembershipsUuidDeleteResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationMembershipsUuidDeleteResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Delete-organization-membershipRequestBadRequestError
+    OrganizationMembershipsGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: OrganizationMembershipsGetResponsesContentApplicationJsonSchemaTitle
+    TeamsTeamUuidGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: TeamsTeamUuidGetResponsesContentApplicationJsonSchemaMessage
+    OrganizationKind:
+      type: string
+      enum:
+      - single
+      - multiple
+      description: Indicates whether the organization is a single-user or multiple-user organization
+      title: OrganizationKind
+    OrganizationInvitationCreateError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationInvitationCreateErrorTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationInvitationCreateErrorMessage'
+      description: Permission Denied
+      title: OrganizationInvitationCreateError
+    OrganizationsUuidInvitationsGetResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: OrganizationsUuidInvitationsGetResponsesContentApplicationJsonSchemaOneOf0Title
+    Delete-organization-membershipRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationMembershipsUuidDeleteResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationMembershipsUuidDeleteResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Delete-organization-membershipRequestUnauthorizedError
+    Organizations_list-teams_Response_200:
+      type: object
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/Team'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - collection
+      - pagination
+      title: Organizations_list-teams_Response_200
+    Get-teamRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/TeamsTeamUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/TeamsTeamUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-teamRequestUnauthorizedError
+    OrganizationsUuidInvitationsPostResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: OrganizationsUuidInvitationsPostResponsesContentApplicationJsonSchemaTitle
+    OrganizationsOrgUuidInvitationsUuidDeleteResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: OrganizationsOrgUuidInvitationsUuidDeleteResponsesContentApplicationJsonSchemaTitle
+    Revoke-organization-invitationRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/OrganizationInvitationDeleteError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Revoke-organization-invitationRequestForbiddenError
+    OrganizationsOrgUuidInvitationsUuidGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: OrganizationsOrgUuidInvitationsUuidGetResponsesContentApplicationJsonSchemaTitle
+    OrganizationsUuidGetResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: OrganizationsUuidGetResponsesContentApplicationJsonSchemaOneOf0Title
+    Organization:
+      type: object
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: Canonical resource reference
+        kind:
+          $ref: '#/components/schemas/OrganizationKind'
+          description: Indicates whether the organization is a single-user or multiple-user organization
+        name:
+          type: string
+          description: The Organization name (in human-readable format)
+        plan:
+          $ref: '#/components/schemas/OrganizationPlan'
+          description: Active subscription plan or trial plan
+        stage:
+          $ref: '#/components/schemas/OrganizationStage'
+          description: Current stage of organization
         created_at:
           type: string
           format: date-time
-          description: The timestamp when the membership was created.
+          description: Timestamp of when the organization was created.
         updated_at:
           type: string
           format: date-time
-          description: The timestamp when the membership was last updated.
+          description: Timestamp of when the organization was created or updated.
+      required:
+      - uri
+      - kind
+      - plan
+      - stage
+      - created_at
+      - updated_at
+      description: Organization object
+      title: Organization
+    Get-organization-invitationRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationsOrgUuidInvitationsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationsOrgUuidInvitationsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-organization-invitationRequestUnauthorizedError
+    List-organization-invitationsRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationsUuidInvitationsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationsUuidInvitationsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-organization-invitationsRequestInternalServerError
+    OrganizationsUuidInvitationsGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: OrganizationsUuidInvitationsGetResponsesContentApplicationJsonSchemaTitle
+    Get-organization-invitationRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/GetOrganizationInvitationRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Get-organization-invitationRequestForbiddenError
+    TeamsGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: TeamsGetResponsesContentApplicationJsonSchemaTitle
+    OrganizationInvitationDeleteErrorMessage:
+      type: string
+      enum:
+      - You cannot perform this action for an organization with SCIM enabled.
+      - You do not have permission
+      - You do not have permission to access this resource.
+      title: OrganizationInvitationDeleteErrorMessage
+    OrganizationMembershipsGetParametersRole:
+      type: string
+      enum:
+      - owner
+      - admin
+      - user
+      title: OrganizationMembershipsGetParametersRole
+    Get-teamRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/TeamsTeamUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/TeamsTeamUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-teamRequestNotFoundError
+    Get-organizationRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-organizationRequestBadRequestError
+    Organizations_get-team_Response_200:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/Team'
+      required:
+      - resource
+      title: Organizations_get-team_Response_200
+    OrganizationsOrgUuidInvitationsUuidGetResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: OrganizationsOrgUuidInvitationsUuidGetResponsesContentApplicationJsonSchemaOneOf0Message
+    ErrorResponseDetailsItem:
+      type: object
+      properties:
+        parameter:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+      title: ErrorResponseDetailsItem
+    Revoke-organization-invitationRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationsOrgUuidInvitationsUuidDeleteResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationsOrgUuidInvitationsUuidDeleteResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Revoke-organization-invitationRequestInternalServerError
+    organizations_get-organization-invitation_Response_200:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/OrganizationInvitation'
+      required:
+      - resource
+      title: organizations_get-organization-invitation_Response_200
+    InsufficientScopeErrorTitle:
+      type: string
+      enum:
+      - Insufficient scope
+      title: InsufficientScopeErrorTitle
+    Create-organization-invitationRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationsUuidInvitationsPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationsUuidInvitationsPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-organization-invitationRequestUnauthorizedError
+    OrganizationInvitation:
+      type: object
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: Canonical reference (unique identifier) for the organization invitation
+        organization:
+          type: string
+          description: Canonical reference (unique identifier) for the organization
+        email:
+          type: string
+          format: email
+          description: The email address of the person who was invited to join the organization
+        status:
+          $ref: '#/components/schemas/OrganizationInvitationStatus'
+          description: The status of the invitation ("pending", "accepted", or "declined")
+        created_at:
+          type: string
+          format: date-time
+          description: The moment the invitation was created (e.g. “2020-01-02T03:04:05.678123Z")
+        updated_at:
+          type: string
+          format: date-time
+          description: The moment the invitation was last updated (e.g. "2020-01-02T03:04:05.678123Z")
+        last_sent_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The moment the invitation was last sent (e.g. "2020-01-02T03:04:05.678123Z")
+        user:
+          type: string
+          format: uri
+          description: When the invitation is accepted, a reference to the user who accepted the invitation
+      required:
+      - uri
+      - organization
+      - email
+      - status
+      - created_at
+      - updated_at
+      - last_sent_at
+      description: Organization Invitation object
+      title: OrganizationInvitation
+    List-teamsRequestTooManyRequestsError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/TeamsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/TeamsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-teamsRequestTooManyRequestsError
+    Get-teamRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/TeamsTeamUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/TeamsTeamUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-teamRequestInternalServerError
+    Get-organization-membershipRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/UserNotInOrgGenericError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Get-organization-membershipRequestForbiddenError
+    List-organization-invitationsRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationsUuidInvitationsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationsUuidInvitationsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-organization-invitationsRequestUnauthorizedError
+    OrganizationMembershipUser:
+      type: object
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: Canonical reference (unique identifier) for the user
+        name:
+          type: string
+          description: The user's name (human-readable format)
+        slug:
+          type: string
+          description: The portion of URL for the user's scheduling page (where invitees book sessions), rendered in a human-readable format
+        email:
+          type: string
+          format: email
+          description: The user's email address
+        scheduling_url:
+          type: string
+          format: uri
+          description: The URL of the user's Calendly landing page (that lists all the user's event types)
+        timezone:
+          type: string
+          description: The time zone to use when presenting time to the user
+        avatar_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: The URL of the user's avatar (image)
+        locale:
+          $ref: '#/components/schemas/OrganizationMembershipUserLocale'
+          description: The user's language preference
+        created_at:
+          type: string
+          format: date-time
+          description: The moment when the user's record was created (e.g. "2020-01-02T03:04:05.678123Z")
+        updated_at:
+          type: string
+          format: date-time
+          description: The moment when the user's record was last updated (e.g. "2020-01-02T03:04:05.678123Z")
+      required:
+      - uri
+      - name
+      - slug
+      - email
+      - scheduling_url
+      - timezone
+      - avatar_url
+      - locale
+      - created_at
+      - updated_at
+      description: Information about the user.
+      title: OrganizationMembershipUser
+    OrganizationMembershipsUuidDeleteResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: OrganizationMembershipsUuidDeleteResponsesContentApplicationJsonSchemaMessage
+    Delete-organization-membershipRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationMembershipsUuidDeleteResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationMembershipsUuidDeleteResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Delete-organization-membershipRequestInternalServerError
+    OrganizationStage:
+      type: string
+      enum:
+      - trial
+      - free
+      - paid
+      description: Current stage of organization
+      title: OrganizationStage
+    OrganizationInvitationCreateErrorTitle:
+      type: string
+      enum:
+      - Permission Denied
+      title: OrganizationInvitationCreateErrorTitle
+    InsufficientScopeErrorMessage:
+      type: string
+      enum:
+      - This operation requires the scopes listed in the 'required_scopes' array.
+      title: InsufficientScopeErrorMessage
+    OrganizationsUuidGetResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: OrganizationsUuidGetResponsesContentApplicationJsonSchemaOneOf0Message
+    Get-organizationRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-organizationRequestUnauthorizedError
+    OrganizationsUuidGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: OrganizationsUuidGetResponsesContentApplicationJsonSchemaMessage
+    OrganizationsOrgUuidInvitationsUuidGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: OrganizationsOrgUuidInvitationsUuidGetResponsesContentApplicationJsonSchemaMessage
+    List-organization-membershipsRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationMembershipsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationMembershipsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-organization-membershipsRequestBadRequestError
+    Delete-organization-membershipRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationMembershipsUuidDeleteResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationMembershipsUuidDeleteResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Delete-organization-membershipRequestNotFoundError
+    organizations_get-organization-membership_Response_200:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/OrganizationMembership'
+      required:
+      - resource
+      title: organizations_get-organization-membership_Response_200
+    OrganizationInvitationCreateErrorMessage:
+      type: string
+      enum:
+      - You already sent all the invitations you're allotted based upon the number of seats purchased with your account. Please purchase more seats to send more invitations.
+      - You already sent all the invitations allotted to you with a trial account.
+      - You do not have permission
+      - You cannot perform this action for an organization with SCIM enabled.
+      title: OrganizationInvitationCreateErrorMessage
+    Get-organizationRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/GetOrganizationRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Get-organizationRequestForbiddenError
+    List-organization-membershipsRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/UserNotInOrgGenericError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: List-organization-membershipsRequestForbiddenError
+    organizations_create-organization-invitation_Response_201:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/OrganizationInvitation'
+      required:
+      - resource
+      title: organizations_create-organization-invitation_Response_201
+    Get-organizationRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-organizationRequestNotFoundError
+    List-organization-membershipsRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationMembershipsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationMembershipsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-organization-membershipsRequestUnauthorizedError
+    OrganizationsOrgUuidInvitationsUuidGetResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: OrganizationsOrgUuidInvitationsUuidGetResponsesContentApplicationJsonSchemaOneOf0Title
+    List-organization-membershipsRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationMembershipsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationMembershipsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-organization-membershipsRequestInternalServerError
+    OrganizationsUuidGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: OrganizationsUuidGetResponsesContentApplicationJsonSchemaTitle
+    Create-organization-invitationRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationsUuidInvitationsPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationsUuidInvitationsPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-organization-invitationRequestInternalServerError
+    OrganizationMembership:
+      type: object
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: Canonical reference (unique identifier) for the membership
+        role:
+          $ref: '#/components/schemas/OrganizationMembershipRole'
+          description: The user's role in the organization
+        user:
+          $ref: '#/components/schemas/OrganizationMembershipUser'
+          description: Information about the user.
+        organization:
+          type: string
+          format: uri
+          description: A unique reference to the organization
+        updated_at:
+          type: string
+          format: date-time
+          description: The moment when the membership record was last updated (e.g. "2020-01-02T03:04:05.678123Z")
+        created_at:
+          type: string
+          format: date-time
+          description: The moment when the membership record was created (e.g. "2020-01-02T03:04:05.678123Z")
+      required:
+      - uri
+      - role
+      - user
+      - organization
+      - updated_at
+      - created_at
+      title: OrganizationMembership
+    Get-organization-invitationRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationsOrgUuidInvitationsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationsOrgUuidInvitationsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-organization-invitationRequestBadRequestError
+    Get-organization-membershipRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OrganizationMembershipsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OrganizationMembershipsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-organization-membershipRequestUnauthorizedError
   securitySchemes:
-    bearerAuth:
+    oauth2:
       type: http
       scheme: bearer
-      description: Personal access token or OAuth 2.1 access token. Include in the Authorization header as Bearer {token}.
-externalDocs:
-  description: Calendly API Documentation
-  url: https://developer.calendly.com/api-docs
+      description: OAuth 2.0
+    personal_access_token:
+      type: http
+      scheme: bearer
+      description: Personal Access Token

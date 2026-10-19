@@ -1,0 +1,1127 @@
+openapi: 3.2.0
+info:
+  title: Calendly Routing Forms API
+  version: 1.0.0
+servers:
+- url: https://api.calendly.com
+  description: https://api.calendly.com
+tags:
+- name: routingForms
+paths:
+  /routing_forms/{uuid}:
+    get:
+      operationId: routingForms_get-routing-form
+      summary: Get Routing Form
+      description: 'Get a specified Routing Form.
+
+
+        > `routing_forms:read`'
+      tags:
+      - routingForms
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/routingForms_get-routing-form_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-routing-formRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-routing-formRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-routing-formRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-routing-formRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-routing-formRequestInternalServerError'
+      security:
+      - oauth2: []
+  /routing_form_submissions/{uuid}:
+    get:
+      operationId: routingForms_get-routing-form-submission
+      summary: Get Routing Form Submission
+      description: 'Get a specified Routing Form Submission.
+
+
+        > `routing_forms:read`'
+      tags:
+      - routingForms
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/routingForms_get-routing-form-submission_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-routing-form-submissionRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-routing-form-submissionRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-routing-form-submissionRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-routing-form-submissionRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-routing-form-submissionRequestInternalServerError'
+      security:
+      - oauth2: []
+  /routing_form_submissions:
+    get:
+      operationId: routingForms_list-routing-form-submissions
+      summary: List Routing Form Submissions
+      description: 'Get a list of Routing Form Submissions for a specified Routing Form.
+
+
+        > `routing_forms:read`'
+      tags:
+      - routingForms
+      parameters:
+      - name: form
+        in: query
+        description: View routing form submissions associated with the routing form's URI.
+        required: true
+        schema:
+          type: string
+          format: uri
+      - name: count
+        in: query
+        description: The number of rows to return
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+      - name: page_token
+        in: query
+        description: The token to pass to get the next or previous portion of the collection
+        required: false
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: 'Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values. Supported fields are: created_at. Sort direction is specified as: asc, desc.'
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/routingForms_list-routing-form-submissions_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-routing-form-submissionsRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-routing-form-submissionsRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-routing-form-submissionsRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-routing-form-submissionsRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-routing-form-submissionsRequestInternalServerError'
+      security:
+      - oauth2: []
+  /routing_forms:
+    get:
+      operationId: routingForms_list-routing-forms
+      summary: List Routing Forms
+      description: 'Get a list of Routing Forms for a specified Organization.
+
+
+        > `routing_forms:read`'
+      tags:
+      - routingForms
+      parameters:
+      - name: organization
+        in: query
+        description: View organization routing forms associated with the organization's URI.
+        required: true
+        schema:
+          type: string
+          format: uri
+      - name: count
+        in: query
+        description: The number of rows to return
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+      - name: page_token
+        in: query
+        description: The token to pass to get the next or previous portion of the collection
+        required: false
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: 'Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values. Supported fields are: created_at. Sort direction is specified as: asc, desc.'
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/routingForms_list-routing-forms_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-routing-formsRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-routing-formsRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-routing-formsRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-routing-formsRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-routing-formsRequestInternalServerError'
+      security:
+      - oauth2: []
+components:
+  schemas:
+    RoutingFormSubmissionsUuidGetResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: RoutingFormSubmissionsUuidGetResponsesContentApplicationJsonSchemaOneOf0Message
+    RoutingFormsUuidGetResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: RoutingFormsUuidGetResponsesContentApplicationJsonSchemaOneOf0Message
+    InsufficientScopeErrorTitle:
+      type: string
+      enum:
+      - Insufficient scope
+      title: InsufficientScopeErrorTitle
+    RoutingFormSubmissionsGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: RoutingFormSubmissionsGetResponsesContentApplicationJsonSchemaMessage
+    InsufficientScopeError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InsufficientScopeErrorTitle'
+        message:
+          $ref: '#/components/schemas/InsufficientScopeErrorMessage'
+        required_scopes:
+          type: array
+          items:
+            type: string
+            pattern: ^[a-z_]+:(read|write)$
+      required:
+      - title
+      - message
+      - required_scopes
+      description: Caller does not have required oauth scopes
+      title: InsufficientScopeError
+    routingForms_get-routing-form_Response_200:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/RoutingForm'
+      required:
+      - resource
+      title: routingForms_get-routing-form_Response_200
+    SubmissionExternalUrlResultType:
+      type: string
+      enum:
+      - external_url
+      description: Indicates that the routing form submission resulted in a redirect to an external URL.
+      title: SubmissionExternalUrlResultType
+    RoutingFormSubmissionsUuidGetResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: RoutingFormSubmissionsUuidGetResponsesContentApplicationJsonSchemaOneOf0Title
+    RoutingFormsGetResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: RoutingFormsGetResponsesContentApplicationJsonSchemaOneOf0Message
+    SubmissionCustomMessageResultValue:
+      type: object
+      properties:
+        headline:
+          type: string
+          description: Headline displayed when answers don't match any routes.
+        body:
+          type: string
+          description: Body text displayed when answers don't match any routes.
+      required:
+      - headline
+      - body
+      description: Contains an object with custom message headline and body.
+      title: SubmissionCustomMessageResultValue
+    List-routing-form-submissionsRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/ListRoutingFormSubmissionsRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: List-routing-form-submissionsRequestForbiddenError
+    RoutingFormSubmissionsGetResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: RoutingFormSubmissionsGetResponsesContentApplicationJsonSchemaOneOf0Message
+    Get-routing-form-submissionRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/RoutingFormSubmissionsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/RoutingFormSubmissionsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-routing-form-submissionRequestBadRequestError
+    Get-routing-formRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/RoutingFormsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/RoutingFormsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-routing-formRequestBadRequestError
+    List-routing-formsRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/ListRoutingFormsRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: List-routing-formsRequestForbiddenError
+    RoutingFormsUuidGetResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: RoutingFormsUuidGetResponsesContentApplicationJsonSchemaOneOf0Title
+    List-routing-form-submissionsRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/RoutingFormSubmissionsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/RoutingFormSubmissionsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-routing-form-submissionsRequestBadRequestError
+    Pagination:
+      type: object
+      properties:
+        count:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: The number of rows to return
+        next_page:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URI to return the next page of an ordered list ("null" indicates no additional results are available)
+        previous_page:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URI to return the previous page of an ordered list ("null" indicates no additional results are available)
+        next_page_token:
+          type:
+          - string
+          - 'null'
+          description: Token to return the next page of an ordered list ("null" indicates no additional results are available)
+        previous_page_token:
+          type:
+          - string
+          - 'null'
+          description: Token to return the previous page of an ordered list ("null" indicates no additional results are available)
+      required:
+      - count
+      - next_page
+      - previous_page
+      - next_page_token
+      - previous_page_token
+      title: Pagination
+    RoutingFormSubmission:
+      type: object
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: Canonical reference (unique identifier) for the routing form submission.
+        routing_form:
+          type: string
+          format: uri
+          description: The URI of the routing form that's associated with the submission.
+        questions_and_answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubmissionQuestionAndAnswer'
+          description: All Routing Form Submission questions with answers.
+        tracking:
+          $ref: '#/components/schemas/SubmissionTracking'
+        result:
+          $ref: '#/components/schemas/SubmissionResult'
+        submitter:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: The reference to the Invitee resource when routing form submission results in a scheduled meeting.
+        submitter_type:
+          oneOf:
+          - $ref: '#/components/schemas/RoutingFormSubmissionSubmitterType'
+          - type: 'null'
+          description: Type of the respondent resource that submitted the form and scheduled a meeting.
+        created_at:
+          type: string
+          format: date-time
+          description: The moment the routing form was submitted.
+        updated_at:
+          type: string
+          format: date-time
+          description: The moment when the routing form submission was last updated.
+      required:
+      - uri
+      - routing_form
+      - questions_and_answers
+      - tracking
+      - submitter
+      - submitter_type
+      - created_at
+      - updated_at
+      description: Information about a Routing Form Submission.
+      title: RoutingFormSubmission
+    RoutingFormSubmissionSubmitterType:
+      type: string
+      enum:
+      - Invitee
+      description: Type of the respondent resource that submitted the form and scheduled a meeting.
+      title: RoutingFormSubmissionSubmitterType
+    ErrorResponseDetailsItem:
+      type: object
+      properties:
+        parameter:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+      title: ErrorResponseDetailsItem
+    GetRoutingFormSubmissionRequestForbiddenError0:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/RoutingFormSubmissionsUuidGetResponsesContentApplicationJsonSchemaOneOf0Title'
+        message:
+          $ref: '#/components/schemas/RoutingFormSubmissionsUuidGetResponsesContentApplicationJsonSchemaOneOf0Message'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: GetRoutingFormSubmissionRequestForbiddenError0
+    RoutingFormSubmissionsUuidGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: RoutingFormSubmissionsUuidGetResponsesContentApplicationJsonSchemaTitle
+    Question:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: Unique identifier for the routing form question.
+        name:
+          type: string
+          description: Question name (in human-readable format).
+        type:
+          $ref: '#/components/schemas/QuestionType'
+          description: 'Question type: name, text input, email, phone, textarea input, dropdown list or radio button list.'
+        required:
+          type: boolean
+          description: 'true if an answer to the question is required for respondents to submit the routing form; false if not required.
+
+            '
+        answer_choices:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: The respondent’s option(s) for "select" or "radios" types of questions.
+      required:
+      - uuid
+      - name
+      - type
+      - required
+      - answer_choices
+      description: Routing form questions.
+      title: Question
+    RoutingFormStatus:
+      type: string
+      enum:
+      - draft
+      - published
+      description: Indicates if the form is in "draft" or "published" status.
+      title: RoutingFormStatus
+    RoutingFormsUuidGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: RoutingFormsUuidGetResponsesContentApplicationJsonSchemaTitle
+    Get-routing-formRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/RoutingFormsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/RoutingFormsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-routing-formRequestInternalServerError
+    RoutingFormsUuidGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: RoutingFormsUuidGetResponsesContentApplicationJsonSchemaMessage
+    Get-routing-form-submissionRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/RoutingFormSubmissionsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/RoutingFormSubmissionsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-routing-form-submissionRequestNotFoundError
+    InsufficientScopeErrorMessage:
+      type: string
+      enum:
+      - This operation requires the scopes listed in the 'required_scopes' array.
+      title: InsufficientScopeErrorMessage
+    ListRoutingFormsRequestForbiddenError0:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/RoutingFormsGetResponsesContentApplicationJsonSchemaOneOf0Title'
+        message:
+          $ref: '#/components/schemas/RoutingFormsGetResponsesContentApplicationJsonSchemaOneOf0Message'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: ListRoutingFormsRequestForbiddenError0
+    SubmissionQuestionAndAnswer:
+      type: object
+      properties:
+        question_uuid:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Unique identifier for the routing form question.
+        question:
+          type: string
+          description: Question name (in human-readable format).
+        answer:
+          type:
+          - string
+          - 'null'
+          description: Answer provided by the respondent when the form was submitted.
+      required:
+      - question_uuid
+      - question
+      description: All Routing Form Submission questions with answers.
+      title: SubmissionQuestionAndAnswer
+    RoutingFormSubmissionsGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: RoutingFormSubmissionsGetResponsesContentApplicationJsonSchemaTitle
+    RoutingFormsGetResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: RoutingFormsGetResponsesContentApplicationJsonSchemaOneOf0Title
+    SubmissionCustomMessageResultType:
+      type: string
+      enum:
+      - custom_message
+      description: Indicates if the routing form submission resulted in a custom "thank you" message.
+      title: SubmissionCustomMessageResultType
+    RoutingFormsGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: RoutingFormsGetResponsesContentApplicationJsonSchemaTitle
+    List-routing-formsRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/RoutingFormsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/RoutingFormsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-routing-formsRequestUnauthorizedError
+    SubmissionEventTypeResultType:
+      type: string
+      enum:
+      - event_type
+      description: Indicates that the routing form submission resulted in a redirect to an event type booking page.
+      title: SubmissionEventTypeResultType
+    RoutingFormSubmissionsGetResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: RoutingFormSubmissionsGetResponsesContentApplicationJsonSchemaOneOf0Title
+    List-routing-formsRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/RoutingFormsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/RoutingFormsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-routing-formsRequestNotFoundError
+    List-routing-formsRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/RoutingFormsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/RoutingFormsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-routing-formsRequestBadRequestError
+    QuestionType:
+      type: string
+      enum:
+      - name
+      - text
+      - email
+      - phone
+      - textarea
+      - select
+      - radios
+      description: 'Question type: name, text input, email, phone, textarea input, dropdown list or radio button list.'
+      title: QuestionType
+    Get-routing-formRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/RoutingFormsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/RoutingFormsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-routing-formRequestNotFoundError
+    SubmissionCustomMessageResult:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/SubmissionCustomMessageResultType'
+          description: Indicates if the routing form submission resulted in a custom "thank you" message.
+        value:
+          $ref: '#/components/schemas/SubmissionCustomMessageResultValue'
+          description: Contains an object with custom message headline and body.
+      required:
+      - type
+      - value
+      description: Information about the custom message Routing Form Submission result.
+      title: SubmissionCustomMessageResult
+    routingForms_list-routing-forms_Response_200:
+      type: object
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoutingForm'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - collection
+      - pagination
+      title: routingForms_list-routing-forms_Response_200
+    SubmissionExternalUrlResult:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/SubmissionExternalUrlResultType'
+          description: Indicates that the routing form submission resulted in a redirect to an external URL.
+        value:
+          type: string
+          format: uri
+          description: The external URL the respondent were redirected to.
+      required:
+      - type
+      - value
+      description: Information about the external URL Routing Form Submission result.
+      title: SubmissionExternalUrlResult
+    SubmissionEventTypeResult:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/SubmissionEventTypeResultType'
+          description: Indicates that the routing form submission resulted in a redirect to an event type booking page.
+        value:
+          type: string
+          format: uri
+          description: A reference to the event type resource.
+      required:
+      - type
+      - value
+      description: Information about the event type Routing Form Submission result.
+      title: SubmissionEventTypeResult
+    SubmissionTracking:
+      type: object
+      properties:
+        utm_campaign:
+          type:
+          - string
+          - 'null'
+          description: The UTM parameter used to track a campaign.
+        utm_source:
+          type:
+          - string
+          - 'null'
+          description: The UTM parameter that identifies the source (platform where the traffic originates).
+        utm_medium:
+          type:
+          - string
+          - 'null'
+          description: The UTM parameter that identifies the type of input (e.g. Cost Per Click (CPC), social media, affiliate or QR code).
+        utm_content:
+          type:
+          - string
+          - 'null'
+          description: UTM content tracking parameter.
+        utm_term:
+          type:
+          - string
+          - 'null'
+          description: The UTM parameter used to track keywords.
+        salesforce_uuid:
+          type:
+          - string
+          - 'null'
+          description: The Salesforce record unique identifier.
+      required:
+      - utm_campaign
+      - utm_source
+      - utm_medium
+      - utm_content
+      - utm_term
+      - salesforce_uuid
+      description: The UTM and Salesforce tracking parameters associated with a Routing Form Submission.
+      title: SubmissionTracking
+    RoutingFormSubmissionsUuidGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: RoutingFormSubmissionsUuidGetResponsesContentApplicationJsonSchemaMessage
+    List-routing-formsRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/RoutingFormsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/RoutingFormsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-routing-formsRequestInternalServerError
+    SubmissionResult:
+      oneOf:
+      - $ref: '#/components/schemas/SubmissionEventTypeResult'
+      - $ref: '#/components/schemas/SubmissionExternalUrlResult'
+      - $ref: '#/components/schemas/SubmissionCustomMessageResult'
+      description: The polymorphic base type for a Routing Form Submission result.
+      title: SubmissionResult
+    List-routing-form-submissionsRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/RoutingFormSubmissionsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/RoutingFormSubmissionsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-routing-form-submissionsRequestInternalServerError
+    Get-routing-form-submissionRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/RoutingFormSubmissionsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/RoutingFormSubmissionsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-routing-form-submissionRequestInternalServerError
+    routingForms_get-routing-form-submission_Response_200:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/RoutingFormSubmission'
+      required:
+      - resource
+      title: routingForms_get-routing-form-submission_Response_200
+    GetRoutingFormRequestForbiddenError0:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/RoutingFormsUuidGetResponsesContentApplicationJsonSchemaOneOf0Title'
+        message:
+          $ref: '#/components/schemas/RoutingFormsUuidGetResponsesContentApplicationJsonSchemaOneOf0Message'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: GetRoutingFormRequestForbiddenError0
+    Get-routing-formRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/RoutingFormsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/RoutingFormsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-routing-formRequestUnauthorizedError
+    RoutingFormsGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: RoutingFormsGetResponsesContentApplicationJsonSchemaMessage
+    Get-routing-form-submissionRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/GetRoutingFormSubmissionRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Get-routing-form-submissionRequestForbiddenError
+    Get-routing-form-submissionRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/RoutingFormSubmissionsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/RoutingFormSubmissionsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-routing-form-submissionRequestUnauthorizedError
+    RoutingForm:
+      type: object
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: 'Canonical reference (unique identifier) for the routing form.
+
+            '
+        organization:
+          type: string
+          format: uri
+          description: The URI of the organization that's associated with the routing form.
+        name:
+          type: string
+          description: The routing form name (in human-readable format).
+        status:
+          $ref: '#/components/schemas/RoutingFormStatus'
+          description: Indicates if the form is in "draft" or "published" status.
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+          description: An ordered collection of Routing Form non-deleted questions.
+        created_at:
+          type: string
+          format: date-time
+          description: The moment the routing form was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: The moment when the routing form was last updated.
+      required:
+      - uri
+      - organization
+      - name
+      - status
+      - questions
+      - created_at
+      - updated_at
+      description: Information about a routing form.
+      title: RoutingForm
+    ListRoutingFormSubmissionsRequestForbiddenError0:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/RoutingFormSubmissionsGetResponsesContentApplicationJsonSchemaOneOf0Title'
+        message:
+          $ref: '#/components/schemas/RoutingFormSubmissionsGetResponsesContentApplicationJsonSchemaOneOf0Message'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: ListRoutingFormSubmissionsRequestForbiddenError0
+    Get-routing-formRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/GetRoutingFormRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Get-routing-formRequestForbiddenError
+    List-routing-form-submissionsRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/RoutingFormSubmissionsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/RoutingFormSubmissionsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-routing-form-submissionsRequestUnauthorizedError
+    routingForms_list-routing-form-submissions_Response_200:
+      type: object
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoutingFormSubmission'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - collection
+      - pagination
+      title: routingForms_list-routing-form-submissions_Response_200
+    List-routing-form-submissionsRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/RoutingFormSubmissionsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/RoutingFormSubmissionsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-routing-form-submissionsRequestNotFoundError
+  securitySchemes:
+    oauth2:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0
+    personal_access_token:
+      type: http
+      scheme: bearer
+      description: Personal Access Token

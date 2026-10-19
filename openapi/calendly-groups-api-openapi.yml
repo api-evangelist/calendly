@@ -1,217 +1,1043 @@
 openapi: 3.2.0
 info:
-  title: Calendly Scheduling Groups API
-  description: The Calendly Scheduling API (v2) is a RESTful API that allows developers to programmatically manage scheduling workflows.
-  version: 2.0.0
-  contact:
-    name: Calendly Developer Support
-    url: https://developer.calendly.com/
-  termsOfService: https://calendly.com/pages/terms
+  title: Calendly Groups API
+  version: 1.0.0
 servers:
 - url: https://api.calendly.com
-  description: Production Server
-security:
-- bearerAuth: []
+  description: https://api.calendly.com
 tags:
 - name: Groups
-  description: Endpoints for listing and retrieving organization groups.
 paths:
-  /groups:
+  /groups/{uuid}:
     get:
-      operationId: listGroups
-      summary: List groups
-      description: Returns a paginated list of groups within the specified organization. Groups allow organizing users into teams for scheduling purposes.
+      operationId: groups_get-group
+      summary: Get Group
+      description: 'Returns information about a specified Group.
+
+
+        > `groups:read`'
       tags:
       - Groups
       parameters:
-      - name: organization
-        in: query
+      - name: uuid
+        in: path
+        description: Group unique identifier
         required: true
-        description: The URI of the organization whose groups to list.
         schema:
           type: string
-          format: uri
-      - $ref: '#/components/parameters/Count'
-      - $ref: '#/components/parameters/PageToken'
       responses:
         '200':
-          description: Successfully retrieved groups
+          description: OK
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  collection:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Group'
-                  pagination:
-                    $ref: '#/components/schemas/Pagination'
+                $ref: '#/components/schemas/groups_get-group_Response_200'
         '401':
-          $ref: '#/components/responses/Unauthorized'
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-groupRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-groupRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-groupRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-groupRequestInternalServerError'
+      security:
+      - oauth2: []
+  /group_relationships/{uuid}:
+    get:
+      operationId: groups_get-group-relationship
+      summary: Get Group Relationship
+      description: 'Returns a group relationship by uuid
+
+
+        > `groups:read`'
+      tags:
+      - Groups
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/groups_get-group-relationship_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-group-relationshipRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-group-relationshipRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-group-relationshipRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-group-relationshipRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-group-relationshipRequestInternalServerError'
+      security:
+      - oauth2: []
   /group_relationships:
     get:
-      operationId: listGroupRelationships
-      summary: List group relationships
-      description: Returns a paginated list of group memberships, showing which users belong to which groups within an organization.
+      operationId: groups_list-group-relationships
+      summary: List Group Relationships
+      description: 'Returns a list of group relationships - a given owner can have one membership record, but multiple admin records
+
+
+        > `groups:read`'
       tags:
       - Groups
       parameters:
-      - name: group
+      - name: count
         in: query
-        description: The URI of the group to list relationships for.
+        description: The number of rows to return
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+      - name: page_token
+        in: query
+        description: The token to pass to get the next or previous portion of the collection
+        required: false
         schema:
           type: string
-          format: uri
       - name: organization
         in: query
-        required: true
-        description: The URI of the organization.
+        description: Indicates the results should be filtered by organization
+        required: false
         schema:
           type: string
           format: uri
-      - $ref: '#/components/parameters/Count'
-      - $ref: '#/components/parameters/PageToken'
+      - name: owner
+        in: query
+        description: "Indicates the results should be filtered by owner <br>\nOne Of:\n  - Organization Membership URI - `https://api.calendly.com/organization_memberships/AAAAAAAAAAAAAAAA`\n  - Organization Invitation URI - `https://api.calendly.com/organizations/AAAAAAAAAAAAAAAA/invitations/BBBBBBBBBBBBBBBB`\n"
+        required: false
+        schema:
+          type: string
+          format: uri
+      - name: group
+        in: query
+        description: Indicates the results should be filtered by group
+        required: false
+        schema:
+          type: string
+          format: uri
       responses:
         '200':
-          description: Successfully retrieved group relationships
+          description: OK
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  collection:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/GroupRelationship'
-                  pagination:
-                    $ref: '#/components/schemas/Pagination'
+                $ref: '#/components/schemas/groups_list-group-relationships_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-group-relationshipsRequestBadRequestError'
         '401':
-          $ref: '#/components/responses/Unauthorized'
-components:
-  parameters:
-    PageToken:
-      name: page_token
-      in: query
-      description: A token for fetching the next page of results from a previous paginated response.
-      schema:
-        type: string
-    Count:
-      name: count
-      in: query
-      description: The number of results to return per page.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 20
-  schemas:
-    Pagination:
-      type: object
-      description: Pagination information for paginated list responses.
-      properties:
-        count:
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-group-relationshipsRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-group-relationshipsRequestForbiddenError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-group-relationshipsRequestInternalServerError'
+      security:
+      - oauth2: []
+  /groups:
+    get:
+      operationId: groups_list-groups
+      summary: List Groups
+      description: 'Returns a list of groups.
+
+
+        > `groups:read`'
+      tags:
+      - Groups
+      parameters:
+      - name: organization
+        in: query
+        description: Return groups that are associated with the organization associated with this URI
+        required: true
+        schema:
+          type: string
+          format: uri
+      - name: page_token
+        in: query
+        description: The token to pass to get the next or previous portion of the collection
+        required: false
+        schema:
+          type: string
+      - name: count
+        in: query
+        description: The number of rows to return
+        required: false
+        schema:
           type: integer
-          description: The number of results in the current page.
-        next_page:
-          type: string
-          format: uri
-          description: The URL of the next page of results, if available.
-        previous_page:
-          type: string
-          format: uri
-          description: The URL of the previous page of results, if available.
-        next_page_token:
-          type: string
-          description: The token to fetch the next page of results.
-        previous_page_token:
-          type: string
-          description: The token to fetch the previous page of results.
-    GroupRelationship:
+          minimum: 1
+          maximum: 100
+          default: 20
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/groups_list-groups_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-groupsRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-groupsRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-groupsRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-groupsRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-groupsRequestInternalServerError'
+      security:
+      - oauth2: []
+components:
+  schemas:
+    GroupsGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: GroupsGetResponsesContentApplicationJsonSchemaMessage
+    InsufficientScopeErrorTitle:
+      type: string
+      enum:
+      - Insufficient scope
+      title: InsufficientScopeErrorTitle
+    groups_get-group-relationship_Response_200:
       type: object
-      description: A relationship between a user and a group within an organization.
       properties:
-        uri:
-          type: string
-          format: uri
-          description: The canonical URI of the group relationship.
-        owner:
-          type: string
-          format: uri
-          description: The URI of the user who is a member of the group.
-        group:
-          type: string
-          format: uri
-          description: The URI of the group.
-        organization:
-          type: string
-          format: uri
-          description: The URI of the organization.
-        created_at:
-          type: string
-          format: date-time
-          description: The timestamp when the relationship was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: The timestamp when the relationship was last updated.
-    Group:
+        resource:
+          $ref: '#/components/schemas/GroupRelationship'
+      required:
+      - resource
+      description: Service response
+      title: groups_get-group-relationship_Response_200
+    InsufficientScopeError:
       type: object
-      description: A group within an organization for organizing users into teams.
-      properties:
-        uri:
-          type: string
-          format: uri
-          description: The canonical URI of the group resource.
-        name:
-          type: string
-          description: The name of the group.
-        organization:
-          type: string
-          format: uri
-          description: The URI of the organization.
-        created_at:
-          type: string
-          format: date-time
-          description: The timestamp when the group was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: The timestamp when the group was last updated.
-    Error:
-      type: object
-      description: An error response from the Calendly API.
       properties:
         title:
-          type: string
-          description: A short summary of the error.
+          $ref: '#/components/schemas/InsufficientScopeErrorTitle'
         message:
+          $ref: '#/components/schemas/InsufficientScopeErrorMessage'
+        required_scopes:
+          type: array
+          items:
+            type: string
+            pattern: ^[a-z_]+:(read|write)$
+      required:
+      - title
+      - message
+      - required_scopes
+      description: Caller does not have required oauth scopes
+      title: InsufficientScopeError
+    Get-groupRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/GetGroupRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Get-groupRequestForbiddenError
+    GroupRelationshipsUuidGetResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: GroupRelationshipsUuidGetResponsesContentApplicationJsonSchemaOneOf0Message
+    OrganizationMembershipOwnerType:
+      type: string
+      enum:
+      - OrganizationMembership
+      title: OrganizationMembershipOwnerType
+    Group:
+      type: object
+      properties:
+        uri:
           type: string
-          description: A detailed description of the error.
+          format: uri
+          description: Canonical reference (unique identifier) for the Group resource
+        name:
+          type: string
+          description: The Group name (in human-readable format)
+        organization:
+          type: string
+          format: uri
+          description: A unique reference to the associated Organization object
+        created_at:
+          type: string
+          format: date-time
+          description: The moment when the Group record was created
+        updated_at:
+          type: string
+          format: date-time
+          description: The moment when the Group record was last updated
+        member_count:
+          type: number
+          format: double
+      required:
+      - uri
+      - name
+      - organization
+      - created_at
+      - updated_at
+      description: The Group resource that was requested. Represents groupings of Users within an Organization.
+      title: Group
+    List-group-relationshipsRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/GroupRelationshipsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/GroupRelationshipsGetResponsesContentApplicationJsonSchemaMessage'
         details:
           type: array
           items:
-            type: object
-            properties:
-              parameter:
-                type: string
-                description: The parameter that caused the error.
-              message:
-                type: string
-                description: A description of what was wrong with the parameter.
-          description: Specific details about validation errors.
-  responses:
-    Unauthorized:
-      description: Authentication failed. Verify that a valid access token is provided in the Authorization header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-group-relationshipsRequestUnauthorizedError
+    Get-group-relationshipRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/GroupRelationshipsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/GroupRelationshipsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-group-relationshipRequestUnauthorizedError
+    GroupRelationshipsUuidGetResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: GroupRelationshipsUuidGetResponsesContentApplicationJsonSchemaOneOf0Title
+    Get-groupsRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/GroupsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/GroupsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-groupsRequestInternalServerError
+    OrganizationInvitationOwnerType:
+      type: string
+      enum:
+      - OrganizationInvitation
+      title: OrganizationInvitationOwnerType
+    OrganizationMembershipUser:
+      type: object
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: Canonical reference (unique identifier) for the user
+        name:
+          type: string
+          description: The user's name (human-readable format)
+        slug:
+          type: string
+          description: The portion of URL for the user's scheduling page (where invitees book sessions), rendered in a human-readable format
+        email:
+          type: string
+          format: email
+          description: The user's email address
+        scheduling_url:
+          type: string
+          format: uri
+          description: The URL of the user's Calendly landing page (that lists all the user's event types)
+        timezone:
+          type: string
+          description: The time zone to use when presenting time to the user
+        avatar_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: The URL of the user's avatar (image)
+        locale:
+          $ref: '#/components/schemas/OrganizationMembershipUserLocale'
+          description: The user's language preference
+        created_at:
+          type: string
+          format: date-time
+          description: The moment when the user's record was created (e.g. "2020-01-02T03:04:05.678123Z")
+        updated_at:
+          type: string
+          format: date-time
+          description: The moment when the user's record was last updated (e.g. "2020-01-02T03:04:05.678123Z")
+      required:
+      - uri
+      - name
+      - slug
+      - email
+      - scheduling_url
+      - timezone
+      - avatar_url
+      - locale
+      - created_at
+      - updated_at
+      description: Information about the user.
+      title: OrganizationMembershipUser
+    OrganizationMembershipRole:
+      type: string
+      enum:
+      - user
+      - admin
+      - owner
+      description: The user's role in the organization
+      title: OrganizationMembershipRole
+    groups_get-group_Response_200:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/Group'
+      required:
+      - resource
+      description: Service response
+      title: groups_get-group_Response_200
+    GroupRelationshipsUuidGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: GroupRelationshipsUuidGetResponsesContentApplicationJsonSchemaTitle
+    Get-groupsRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/GroupsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/GroupsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-groupsRequestUnauthorizedError
+    GroupsUuidGetResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: GroupsUuidGetResponsesContentApplicationJsonSchemaOneOf0Title
+    GroupRelationshipsGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: GroupRelationshipsGetResponsesContentApplicationJsonSchemaMessage
+    InsufficientScopeErrorMessage:
+      type: string
+      enum:
+      - This operation requires the scopes listed in the 'required_scopes' array.
+      title: InsufficientScopeErrorMessage
+    OrganizationInvitationOwner:
+      type: object
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: Canonical reference (unique identifier) for the organization invitation
+        organization:
+          type: string
+          description: Canonical reference (unique identifier) for the organization
+        email:
+          type: string
+          format: email
+          description: The email address of the person who was invited to join the organization
+        status:
+          $ref: '#/components/schemas/OrganizationInvitationStatus'
+          description: The status of the invitation ("pending", "accepted", or "declined")
+        created_at:
+          type: string
+          format: date-time
+          description: The moment the invitation was created (e.g. “2020-01-02T03:04:05.678123Z")
+        updated_at:
+          type: string
+          format: date-time
+          description: The moment the invitation was last updated (e.g. "2020-01-02T03:04:05.678123Z")
+        last_sent_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The moment the invitation was last sent (e.g. "2020-01-02T03:04:05.678123Z")
+        user:
+          type: string
+          format: uri
+          description: When the invitation is accepted, a reference to the user who accepted the invitation
+        type:
+          $ref: '#/components/schemas/OrganizationInvitationOwnerType'
+      required:
+      - uri
+      - organization
+      - email
+      - status
+      - created_at
+      - updated_at
+      - last_sent_at
+      - type
+      title: OrganizationInvitationOwner
+    Get-group-relationshipRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/GroupRelationshipsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/GroupRelationshipsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-group-relationshipRequestInternalServerError
+    GroupRelationshipsGetResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: GroupRelationshipsGetResponsesContentApplicationJsonSchemaOneOf0Title
+    OrganizationMembershipUserLocale:
+      type: string
+      enum:
+      - en
+      - fr
+      - es
+      - de
+      - pt
+      - ps
+      description: The user's language preference
+      title: OrganizationMembershipUserLocale
+    GroupRelationshipsUuidGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: GroupRelationshipsUuidGetResponsesContentApplicationJsonSchemaMessage
+    GroupsUuidGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: GroupsUuidGetResponsesContentApplicationJsonSchemaMessage
+    GroupRelationshipsGetResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: GroupRelationshipsGetResponsesContentApplicationJsonSchemaOneOf0Message
+    List-group-relationshipsRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/ListGroupRelationshipsRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: List-group-relationshipsRequestForbiddenError
+    List-group-relationshipsRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/GroupRelationshipsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/GroupRelationshipsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-group-relationshipsRequestInternalServerError
+    GetGroupRequestForbiddenError0:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/GroupsUuidGetResponsesContentApplicationJsonSchemaOneOf0Title'
+        message:
+          $ref: '#/components/schemas/GroupsUuidGetResponsesContentApplicationJsonSchemaOneOf0Message'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: GetGroupRequestForbiddenError0
+    GroupRelationship:
+      type: object
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: Canonical reference (unique identifier) for the group relationship
+        role:
+          type: string
+          description: The user's role in the group - this value can only be 'member' or 'admin'
+        owner:
+          $ref: '#/components/schemas/GroupRelationshipOwner'
+        organization:
+          type: string
+          format: uri
+          description: The unique reference to the organization that the group relationship is tied to.
+        group:
+          type: string
+          format: uri
+          description: The unique reference to the group that the group relationship is tied to.
+        created_at:
+          type: string
+          format: date-time
+          description: The moment when the group relationship record was created (e.g. "2020-01-02T03:04:05.678123Z")
+        updated_at:
+          type: string
+          format: date-time
+          description: The moment when the group relationship record was last updated (e.g. "2020-01-02T03:04:05.678123Z")
+      required:
+      - uri
+      - role
+      - owner
+      - organization
+      - group
+      - created_at
+      - updated_at
+      description: A group relationship record for an individual. A given individual may have more than one admin relationship to multiple groups, but only one member relationship to a single group.
+      title: GroupRelationship
+    GroupsGetResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: GroupsGetResponsesContentApplicationJsonSchemaOneOf0Title
+    OrganizationMembershipOwner:
+      type: object
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: Canonical reference (unique identifier) for the membership
+        role:
+          $ref: '#/components/schemas/OrganizationMembershipRole'
+          description: The user's role in the organization
+        user:
+          $ref: '#/components/schemas/OrganizationMembershipUser'
+          description: Information about the user.
+        organization:
+          type: string
+          format: uri
+          description: A unique reference to the organization
+        updated_at:
+          type: string
+          format: date-time
+          description: The moment when the membership record was last updated (e.g. "2020-01-02T03:04:05.678123Z")
+        created_at:
+          type: string
+          format: date-time
+          description: The moment when the membership record was created (e.g. "2020-01-02T03:04:05.678123Z")
+        type:
+          $ref: '#/components/schemas/OrganizationMembershipOwnerType'
+      required:
+      - uri
+      - role
+      - user
+      - organization
+      - updated_at
+      - created_at
+      - type
+      title: OrganizationMembershipOwner
+    GroupsUuidGetResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: GroupsUuidGetResponsesContentApplicationJsonSchemaOneOf0Message
+    Get-groupsRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/GroupsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/GroupsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-groupsRequestBadRequestError
+    GroupRelationshipOwner:
+      oneOf:
+      - $ref: '#/components/schemas/OrganizationMembershipOwner'
+      - $ref: '#/components/schemas/OrganizationInvitationOwner'
+      title: GroupRelationshipOwner
+    Get-groupsRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/GetGroupsRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Get-groupsRequestForbiddenError
+    Get-group-relationshipRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/GroupRelationshipsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/GroupRelationshipsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-group-relationshipRequestBadRequestError
+    groups_list-group-relationships_Response_200:
+      type: object
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupRelationship'
+          description: The set of group relationship records matching the criteria
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - collection
+      - pagination
+      description: Service response
+      title: groups_list-group-relationships_Response_200
+    Get-groupsRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/GroupsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/GroupsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-groupsRequestNotFoundError
+    Get-groupRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/GroupsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/GroupsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-groupRequestUnauthorizedError
+    GetGroupRelationshipRequestForbiddenError0:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/GroupRelationshipsUuidGetResponsesContentApplicationJsonSchemaOneOf0Title'
+        message:
+          $ref: '#/components/schemas/GroupRelationshipsUuidGetResponsesContentApplicationJsonSchemaOneOf0Message'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: GetGroupRelationshipRequestForbiddenError0
+    Get-groupRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/GroupsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/GroupsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-groupRequestInternalServerError
+    Get-groupRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/GroupsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/GroupsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-groupRequestNotFoundError
+    Get-group-relationshipRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/GetGroupRelationshipRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Get-group-relationshipRequestForbiddenError
+    GroupRelationshipsGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: GroupRelationshipsGetResponsesContentApplicationJsonSchemaTitle
+    GroupsGetResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: GroupsGetResponsesContentApplicationJsonSchemaOneOf0Message
+    groups_list-groups_Response_200:
+      type: object
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - collection
+      - pagination
+      title: groups_list-groups_Response_200
+    Get-group-relationshipRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/GroupRelationshipsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/GroupRelationshipsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-group-relationshipRequestNotFoundError
+    List-group-relationshipsRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/GroupRelationshipsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/GroupRelationshipsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-group-relationshipsRequestBadRequestError
+    ListGroupRelationshipsRequestForbiddenError0:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/GroupRelationshipsGetResponsesContentApplicationJsonSchemaOneOf0Title'
+        message:
+          $ref: '#/components/schemas/GroupRelationshipsGetResponsesContentApplicationJsonSchemaOneOf0Message'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: ListGroupRelationshipsRequestForbiddenError0
+    GroupsUuidGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: GroupsUuidGetResponsesContentApplicationJsonSchemaTitle
+    OrganizationInvitationStatus:
+      type: string
+      enum:
+      - pending
+      - accepted
+      - declined
+      description: The status of the invitation ("pending", "accepted", or "declined")
+      title: OrganizationInvitationStatus
+    GroupsGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: GroupsGetResponsesContentApplicationJsonSchemaTitle
+    ErrorResponseDetailsItem:
+      type: object
+      properties:
+        parameter:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+      title: ErrorResponseDetailsItem
+    Pagination:
+      type: object
+      properties:
+        count:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: The number of rows to return
+        next_page:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URI to return the next page of an ordered list ("null" indicates no additional results are available)
+        previous_page:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URI to return the previous page of an ordered list ("null" indicates no additional results are available)
+        next_page_token:
+          type:
+          - string
+          - 'null'
+          description: Token to return the next page of an ordered list ("null" indicates no additional results are available)
+        previous_page_token:
+          type:
+          - string
+          - 'null'
+          description: Token to return the previous page of an ordered list ("null" indicates no additional results are available)
+      required:
+      - count
+      - next_page
+      - previous_page
+      - next_page_token
+      - previous_page_token
+      title: Pagination
+    GetGroupsRequestForbiddenError0:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/GroupsGetResponsesContentApplicationJsonSchemaOneOf0Title'
+        message:
+          $ref: '#/components/schemas/GroupsGetResponsesContentApplicationJsonSchemaOneOf0Message'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: GetGroupsRequestForbiddenError0
   securitySchemes:
-    bearerAuth:
+    oauth2:
       type: http
       scheme: bearer
-      description: Personal access token or OAuth 2.1 access token. Include in the Authorization header as Bearer {token}.
-externalDocs:
-  description: Calendly API Documentation
-  url: https://developer.calendly.com/api-docs
+      description: OAuth 2.0
+    personal_access_token:
+      type: http
+      scheme: bearer
+      description: Personal Access Token

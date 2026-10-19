@@ -1,121 +1,547 @@
 openapi: 3.2.0
 info:
-  title: Calendly Scheduling Shares API
-  description: The Calendly Scheduling API (v2) is a RESTful API that allows developers to programmatically manage scheduling workflows.
-  version: 2.0.0
-  contact:
-    name: Calendly Developer Support
-    url: https://developer.calendly.com/
-  termsOfService: https://calendly.com/pages/terms
+  title: Calendly Shares API
+  version: 1.0.0
 servers:
 - url: https://api.calendly.com
-  description: Production Server
-security:
-- bearerAuth: []
+  description: https://api.calendly.com
 tags:
 - name: Shares
-  description: Endpoints for creating and managing shareable scheduling links.
 paths:
   /shares:
     post:
-      operationId: createShare
-      summary: Create share
-      description: Creates a shareable scheduling link that can be distributed to potential invitees. Shares can include multiple event types and custom availability settings.
+      operationId: shares_create-share
+      summary: Create Share
+      description: 'Endpoint for our Customize Once and Share feature. This allows you to customize events for a specific invitee without needing to make an entirely new event type.
+
+        ***This feature is only available for one-on-one event types.***
+
+        **Note: Any parameter which is not provided in the request body will be copied from the target event type.**
+
+
+        > `shares:write`'
       tags:
       - Shares
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/shares_create-share_Response_201'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-shareRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-shareRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-shareRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-shareRequestNotFoundError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Any type
       requestBody:
-        required: true
+        description: ''
         content:
           application/json:
             schema:
               type: object
-              required:
-              - event_type
               properties:
                 event_type:
                   type: string
                   format: uri
-                  description: The URI of the event type to create a share for.
-                max_spots:
+                name:
+                  type: string
+                  maxLength: 55
+                duration:
                   type: integer
-                  description: The maximum number of spots available for booking through this share.
                   minimum: 1
-      responses:
-        '201':
-          description: Successfully created the share
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  resource:
-                    $ref: '#/components/schemas/Share'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
+                  maximum: 720
+                  description: Must be one of the provided duration options. If duration options aren't provided then duration must be one of the duration options inherited from the event type.
+                duration_options:
+                  type: array
+                  items:
+                    type: integer
+                  description: A maximum of 4 unique options is allowed. Each option must be >= 1 and <= 720.
+                period_type:
+                  $ref: '#/components/schemas/SharesPostRequestBodyContentApplicationJsonSchemaPeriodType'
+                start_date:
+                  type: string
+                  format: date
+                  description: 'is required when `period_type` is ''fixed''
+
+                    Format: `YYYY-MM-DD`'
+                end_date:
+                  type: string
+                  format: date
+                  description: 'is required when `period_type` is ''fixed''
+
+                    Format: `YYYY-MM-DD`'
+                max_booking_time:
+                  type: integer
+                  description: is required when `period_type` is 'moving' or 'available_moving'
+                hide_location:
+                  type: boolean
+                  description: determines if a location is hidden until invitee books a spot, only respected when there is a single custom location configured
+                location_configurations:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SharesPostRequestBodyContentApplicationJsonSchemaLocationConfigurationsItems'
+                availability_rule:
+                  $ref: '#/components/schemas/SharesPostRequestBodyContentApplicationJsonSchemaAvailabilityRule'
+              required:
+              - event_type
+      security:
+      - oauth2: []
 components:
-  responses:
-    BadRequest:
-      description: The request was invalid or malformed. Check the request body and parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. Verify that a valid access token is provided in the Authorization header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
+    SharesPostResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Resource Not Found
+      title: SharesPostResponsesContentApplicationJsonSchemaTitle
+    InsufficientScopeErrorTitle:
+      type: string
+      enum:
+      - Insufficient scope
+      title: InsufficientScopeErrorTitle
+    SharesPostRequestBodyContentApplicationJsonSchemaAvailabilityRuleRulesItemsWday:
+      type: string
+      enum:
+      - sunday
+      - monday
+      - tuesday
+      - wednesday
+      - thursday
+      - friday
+      - saturday
+      description: is required when `type` is 'wday'
+      title: SharesPostRequestBodyContentApplicationJsonSchemaAvailabilityRuleRulesItemsWday
+    InsufficientScopeError:
       type: object
-      description: An error response from the Calendly API.
       properties:
         title:
-          type: string
-          description: A short summary of the error.
+          $ref: '#/components/schemas/InsufficientScopeErrorTitle'
         message:
-          type: string
-          description: A detailed description of the error.
-        details:
+          $ref: '#/components/schemas/InsufficientScopeErrorMessage'
+        required_scopes:
           type: array
           items:
-            type: object
-            properties:
-              parameter:
-                type: string
-                description: The parameter that caused the error.
-              message:
-                type: string
-                description: A description of what was wrong with the parameter.
-          description: Specific details about validation errors.
-    Share:
+            type: string
+            pattern: ^[a-z_]+:(read|write)$
+      required:
+      - title
+      - message
+      - required_scopes
+      description: Caller does not have required oauth scopes
+      title: InsufficientScopeError
+    ShareShareOverridePeriodType:
+      type: string
+      enum:
+      - available_moving
+      - moving
+      - fixed
+      - unlimited
+      title: ShareShareOverridePeriodType
+    SharesPostRequestBodyContentApplicationJsonSchemaAvailabilityRuleRulesItems:
       type: object
-      description: A shareable scheduling link that can be distributed to potential invitees.
       properties:
-        uri:
+        type:
+          $ref: '#/components/schemas/SharesPostRequestBodyContentApplicationJsonSchemaAvailabilityRuleRulesItemsType'
+        wday:
+          $ref: '#/components/schemas/SharesPostRequestBodyContentApplicationJsonSchemaAvailabilityRuleRulesItemsWday'
+          description: is required when `type` is 'wday'
+        date:
           type: string
-          format: uri
-          description: The canonical URI of the share resource.
-        scheduling_url:
+          format: date
+          description: 'is required when `type` is ''date''
+
+            Format: `YYYY-MM-DD`'
+        intervals:
+          type: array
+          items:
+            $ref: '#/components/schemas/SharesPostRequestBodyContentApplicationJsonSchemaAvailabilityRuleRulesItemsIntervalsItems'
+      title: SharesPostRequestBodyContentApplicationJsonSchemaAvailabilityRuleRulesItems
+    ShareShareOverrideAvailabilityRuleRulesItems:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ShareShareOverrideAvailabilityRuleRulesItemsType'
+        wday:
+          $ref: '#/components/schemas/ShareShareOverrideAvailabilityRuleRulesItemsWday'
+        date:
           type: string
-          format: uri
-          description: The shareable scheduling URL.
+          format: date
+          description: 'Format: `YYYY-MM-DD`'
+        intervals:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShareShareOverrideAvailabilityRuleRulesItemsIntervalsItems'
+      required:
+      - type
+      title: ShareShareOverrideAvailabilityRuleRulesItems
+    ShareShareOverrideAvailabilityRuleRulesItemsIntervalsItems:
+      type: object
+      properties:
+        from:
+          type: string
+          pattern: (\d\d):(\d\d)
+          description: 'Format: `"hh:mm"`'
+        to:
+          type: string
+          pattern: (\d\d):(\d\d)
+          description: 'Format: `"hh:mm"`'
+      title: ShareShareOverrideAvailabilityRuleRulesItemsIntervalsItems
+    ShareShareOverrideAvailabilityRuleRulesItemsWday:
+      type: string
+      enum:
+      - sunday
+      - monday
+      - tuesday
+      - wednesday
+      - thursday
+      - friday
+      - saturday
+      title: ShareShareOverrideAvailabilityRuleRulesItemsWday
+    ShareSchedulingLinksItems:
+      type: object
+      properties:
         booking_url:
           type: string
           format: uri
-          description: The direct booking URL.
-        event_type:
+          description: Scheduling link url
+        owner:
           type: string
           format: uri
-          description: The URI of the associated event type.
+          description: A link to the resource that owns this Scheduling Link (currently, this is always an Event Type)
+        owner_type:
+          $ref: '#/components/schemas/ShareSchedulingLinksItemsOwnerType'
+          description: Resource type (currently, this is always EventType)
+      required:
+      - booking_url
+      title: ShareSchedulingLinksItems
+    CreateShareRequestForbiddenError0:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/SharesPostResponsesContentApplicationJsonSchemaOneOf0Title'
+        message:
+          $ref: '#/components/schemas/SharesPostResponsesContentApplicationJsonSchemaOneOf0Message'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: CreateShareRequestForbiddenError0
+    Create-shareRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/SharesPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/SharesPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-shareRequestBadRequestError
+    ShareShareOverrideAvailabilityRuleRulesItemsType:
+      type: string
+      enum:
+      - wday
+      - date
+      title: ShareShareOverrideAvailabilityRuleRulesItemsType
+    SharesPostRequestBodyContentApplicationJsonSchemaLocationConfigurationsItems:
+      type: object
+      properties:
+        location:
+          type: string
+          maxLength: 255
+          description: is only supported when `kind` is 'physical', 'custom' or 'ask_invitee'
+        additional_info:
+          type: string
+          maxLength: 255
+          description: 'is only supported when `kind` is ''physical'' or ''inbound_call'' '
+        phone_number:
+          type: string
+          description: is required when `kind` is 'inbound_call'
+        position:
+          type: integer
+        kind:
+          $ref: '#/components/schemas/SharesPostRequestBodyContentApplicationJsonSchemaLocationConfigurationsItemsKind'
+      title: SharesPostRequestBodyContentApplicationJsonSchemaLocationConfigurationsItems
+    Create-shareRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/CreateShareRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Create-shareRequestForbiddenError
+    shares_create-share_Response_201:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/Share'
+      required:
+      - resource
+      title: shares_create-share_Response_201
+    ShareShareOverrideAvailabilityRule:
+      type: object
+      properties:
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShareShareOverrideAvailabilityRuleRulesItems'
+        timezone:
+          type: string
+      required:
+      - rules
+      - timezone
+      title: ShareShareOverrideAvailabilityRule
+    SharesPostRequestBodyContentApplicationJsonSchemaAvailabilityRule:
+      type: object
+      properties:
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/SharesPostRequestBodyContentApplicationJsonSchemaAvailabilityRuleRulesItems'
+          description: are required when an availability rule is provided
+        timezone:
+          type: string
+          description: is required when an availability rule is provided
+      title: SharesPostRequestBodyContentApplicationJsonSchemaAvailabilityRule
+    SharesPostResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server could not find the requested resource.
+      title: SharesPostResponsesContentApplicationJsonSchemaMessage
+    SharesPostRequestBodyContentApplicationJsonSchemaAvailabilityRuleRulesItemsType:
+      type: string
+      enum:
+      - wday
+      - date
+      title: SharesPostRequestBodyContentApplicationJsonSchemaAvailabilityRuleRulesItemsType
+    InsufficientScopeErrorMessage:
+      type: string
+      enum:
+      - This operation requires the scopes listed in the 'required_scopes' array.
+      title: InsufficientScopeErrorMessage
+    Create-shareRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/SharesPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/SharesPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-shareRequestNotFoundError
+    SharesPostRequestBodyContentApplicationJsonSchemaPeriodType:
+      type: string
+      enum:
+      - available_moving
+      - moving
+      - fixed
+      - unlimited
+      title: SharesPostRequestBodyContentApplicationJsonSchemaPeriodType
+    ShareShareOverrideLocationConfigurationsItems:
+      type: object
+      properties:
+        location:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        additional_info:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        phone_number:
+          type:
+          - string
+          - 'null'
+        position:
+          type: integer
+        kind:
+          $ref: '#/components/schemas/ShareShareOverrideLocationConfigurationsItemsKind'
+      title: ShareShareOverrideLocationConfigurationsItems
+    ShareShareOverride:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 55
+        duration:
+          type: integer
+        duration_options:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+        period_type:
+          $ref: '#/components/schemas/ShareShareOverridePeriodType'
+        start_date:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: 'Format: `YYYY-MM-DD`'
+        end_date:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: 'Format: `YYYY-MM-DD`'
+        max_booking_time:
+          type:
+          - integer
+          - 'null'
+        hide_location:
+          type:
+          - boolean
+          - 'null'
+        location_configurations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShareShareOverrideLocationConfigurationsItems'
+        availability_rule:
+          $ref: '#/components/schemas/ShareShareOverrideAvailabilityRule'
+      title: ShareShareOverride
+    SharesPostRequestBodyContentApplicationJsonSchemaAvailabilityRuleRulesItemsIntervalsItems:
+      type: object
+      properties:
+        from:
+          type: string
+          pattern: (\d\d):(\d\d)
+          description: 'Format: `"hh:mm"`'
+        to:
+          type: string
+          pattern: (\d\d):(\d\d)
+          description: 'Format: `"hh:mm"`'
+      title: SharesPostRequestBodyContentApplicationJsonSchemaAvailabilityRuleRulesItemsIntervalsItems
+    Share:
+      type: object
+      properties:
+        scheduling_links:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShareSchedulingLinksItems'
+        share_override:
+          $ref: '#/components/schemas/ShareShareOverride'
+      required:
+      - scheduling_links
+      - share_override
+      title: Share
+    ShareShareOverrideLocationConfigurationsItemsKind:
+      type: string
+      enum:
+      - physical
+      - ask_invitee
+      - custom
+      - outbound_call
+      - inbound_call
+      - google_conference
+      - gotomeeting_conference
+      - microsoft_teams_conference
+      - zoom_conference
+      title: ShareShareOverrideLocationConfigurationsItemsKind
+    SharesPostRequestBodyContentApplicationJsonSchemaLocationConfigurationsItemsKind:
+      type: string
+      enum:
+      - physical
+      - ask_invitee
+      - custom
+      - outbound_call
+      - inbound_call
+      - google_conference
+      - gotomeeting_conference
+      - microsoft_teams_conference
+      - webex_conference
+      - zoom_conference
+      title: SharesPostRequestBodyContentApplicationJsonSchemaLocationConfigurationsItemsKind
+    ShareSchedulingLinksItemsOwnerType:
+      type: string
+      enum:
+      - EventType
+      description: Resource type (currently, this is always EventType)
+      title: ShareSchedulingLinksItemsOwnerType
+    SharesPostResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: SharesPostResponsesContentApplicationJsonSchemaOneOf0Title
+    Create-shareRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/SharesPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/SharesPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-shareRequestUnauthorizedError
+    ErrorResponseDetailsItem:
+      type: object
+      properties:
+        parameter:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+      title: ErrorResponseDetailsItem
+    SharesPostResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: SharesPostResponsesContentApplicationJsonSchemaOneOf0Message
   securitySchemes:
-    bearerAuth:
+    oauth2:
       type: http
       scheme: bearer
-      description: Personal access token or OAuth 2.1 access token. Include in the Authorization header as Bearer {token}.
-externalDocs:
-  description: Calendly API Documentation
-  url: https://developer.calendly.com/api-docs
+      description: OAuth 2.0
+    personal_access_token:
+      type: http
+      scheme: bearer
+      description: Personal Access Token

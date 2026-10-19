@@ -1,0 +1,2204 @@
+openapi: 3.2.0
+info:
+  title: Calendly Event Types API
+  version: 1.0.0
+servers:
+- url: https://api.calendly.com
+  description: https://api.calendly.com
+tags:
+- name: eventTypes
+paths:
+  /event_types:
+    post:
+      operationId: eventTypes_create-event-type
+      summary: Create Event Type
+      description: 'Create a new Event Type
+
+
+        **NOTE:**
+
+        * Currently, this endpoint only supports one-on-one event types (kind: "solo").
+
+
+        > `event_types:write`'
+      tags:
+      - eventTypes
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventTypes_create-event-type_Response_201'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-event-typeRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-event-typeRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-event-typeRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-event-typeRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-event-typeRequestInternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                active:
+                  type: boolean
+                  default: false
+                  description: Indicates if the event type is active or not
+                owner:
+                  type: string
+                  format: uri
+                  description: The owner for this event type
+                name:
+                  type: string
+                  description: The event type name
+                description:
+                  type: string
+                  description: The event type description
+                duration:
+                  type: integer
+                  minimum: 1
+                  maximum: 720
+                  description: The length of sessions booked with this event type. Must be one of the duration options if they're provided.
+                duration_options:
+                  type: array
+                  items:
+                    type: integer
+                  description: A maximum of 4 unique options is allowed. Each option must be >= 1 and <= 720.
+                locations:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/LocationConfiguration'
+                  description: Configuration information for each possible location for this event type
+                color:
+                  type: string
+                  pattern: ^#[a-f\d]{6}$
+                  description: The hexadecimal color value of the event type's scheduling page
+                locale:
+                  $ref: '#/components/schemas/EventTypesPostRequestBodyContentApplicationJsonSchemaLocale'
+                  description: The locale on the event type, used to determine the language of the event type's scheduling page
+              required:
+              - owner
+              - name
+      security:
+      - oauth2: []
+    get:
+      operationId: eventTypes_list-event-types
+      summary: List User's Event Types
+      description: 'Returns all Event Types associated with a specified User. Use:
+
+
+        * `organization` to look up all Event Types that belong to the organization
+
+
+        * `user` to look up a user''s Event Types in an organization
+
+
+        Either `organization` or `user` are required query params when using this endpoint.
+
+
+        > `event_types:read`'
+      tags:
+      - eventTypes
+      parameters:
+      - name: active
+        in: query
+        description: Return only active event types if true, only inactive if false, or all event types if this parameter is omitted.
+        required: false
+        schema:
+          type: boolean
+      - name: organization
+        in: query
+        description: View available personal, team, and organization event types associated with the organization's URI.
+        required: false
+        schema:
+          type: string
+          format: uri
+      - name: user
+        in: query
+        description: View available personal, team, and organization event types associated with the user's URI.
+        required: false
+        schema:
+          type: string
+          format: uri
+      - name: user_availability_schedule
+        in: query
+        description: Used in conjunction with `user` parameter, returns a filtered list of Event Types that use the given primary availability schedule.
+        required: false
+        schema:
+          type: string
+          format: uri
+      - name: sort
+        in: query
+        description: 'Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values.Supported fields are: name, position, created_at, updated_at. Sort direction is specified as: asc, desc.'
+        required: false
+        schema:
+          type: string
+          default: name:asc
+      - name: admin_managed
+        in: query
+        description: Return only admin managed event types if true, exclude admin managed event types if false, or include all event types if this parameter is omitted.
+        required: false
+        schema:
+          type: boolean
+      - name: page_token
+        in: query
+        description: The token to pass to get the next or previous portion of the collection
+        required: false
+        schema:
+          type: string
+      - name: count
+        in: query
+        description: The number of rows to return
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventTypes_list-event-types_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-event-typesRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-event-typesRequestUnauthorizedError'
+        '403':
+          description: Permission Denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-event-typesRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-event-typesRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-event-typesRequestInternalServerError'
+      security:
+      - oauth2: []
+  /one_off_event_types:
+    post:
+      operationId: eventTypes_create-one-off-event-type
+      summary: Create One-Off Event Type
+      description: 'Creates One-Off Event Type
+
+
+        > `event_types:write`'
+      tags:
+      - eventTypes
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventTypes_create-one-off-event-type_Response_201'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-one-off-event-typeRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-one-off-event-typeRequestUnauthorizedError'
+        '403':
+          description: Permission Denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-one-off-event-typeRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-one-off-event-typeRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-one-off-event-typeRequestInternalServerError'
+      requestBody:
+        description: Parameters for creating One-Off Event Type
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  maxLength: 55
+                  description: Event type name
+                host:
+                  type: string
+                  format: uri
+                  description: Host user uri
+                co_hosts:
+                  type: array
+                  items:
+                    type: string
+                    format: uri
+                  description: Collection of meeting co-host(s) user URIs
+                duration:
+                  type: number
+                  format: double
+                  maximum: 720
+                  description: Duration of meeting in minutes
+                timezone:
+                  type: string
+                  description: Time zone used for meeting. Defaults to host's time zone.
+                date_setting:
+                  $ref: '#/components/schemas/OneOffEventTypesPostRequestBodyContentApplicationJsonSchemaDateSetting'
+                location:
+                  $ref: '#/components/schemas/OneOffEventTypesPostRequestBodyContentApplicationJsonSchemaLocation'
+              required:
+              - name
+              - host
+              - duration
+              - date_setting
+      security:
+      - oauth2: []
+  /event_types/{uuid}:
+    get:
+      operationId: eventTypes_get-event-type
+      summary: Get Event Type
+      description: 'Returns information about a specified Event Type.
+
+
+        > `event_types:read`'
+      tags:
+      - eventTypes
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventTypes_get-event-type_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-event-typeRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-event-typeRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-event-typeRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-event-typeRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-event-typeRequestInternalServerError'
+      security:
+      - oauth2: []
+    patch:
+      operationId: eventTypes_update-event-type
+      summary: Update Event Type
+      description: 'Update an existing Event Type
+
+
+        **NOTE:**
+
+        * Currently, this endpoint only supports one-on-one event types (kind: "solo").
+
+
+        > `event_types:write`'
+      tags:
+      - eventTypes
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventTypes_update-event-type_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Update-event-typeRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Update-event-typeRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Update-event-typeRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Update-event-typeRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Update-event-typeRequestInternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                active:
+                  type: boolean
+                  description: Indicates if the event type is active or not
+                name:
+                  type: string
+                  description: The event type name
+                color:
+                  type: string
+                  pattern: ^#[a-f\d]{6}$
+                  description: The hexadecimal color value of the event type's scheduling page
+                description:
+                  type: string
+                  description: The event type description
+                duration:
+                  type: integer
+                  minimum: 1
+                  maximum: 720
+                  description: The length of sessions booked with this event type. Must be one of the duration options if they're provided.
+                duration_options:
+                  type: array
+                  items:
+                    type: integer
+                  description: A maximum of 4 unique options is allowed. Each option must be >= 1 and <= 720.
+                locale:
+                  $ref: '#/components/schemas/EventTypesUuidPatchRequestBodyContentApplicationJsonSchemaLocale'
+                  description: The locale on the event type, used to determine the language of the event type's scheduling page
+                locations:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/LocationConfiguration'
+                  description: Configuration information for each possible location for this Event Type
+      security:
+      - oauth2: []
+  /event_type_available_times:
+    get:
+      operationId: eventTypes_list-event-type-available-times
+      summary: List Event Type Available Times
+      description: 'Returns a list of available times for an event type within a specified date range.
+
+
+        **NOTE:**
+
+        * Date range can be no greater than 31 days.
+
+        * This endpoint does not support traditional keyset pagination.
+
+
+        > `availability:read`'
+      tags:
+      - eventTypes
+      parameters:
+      - name: event_type
+        in: query
+        description: The uri associated with the event type
+        required: true
+        schema:
+          type: string
+          format: uri
+      - name: start_time
+        in: query
+        description: Start time of the requested availability range. Date cannot be in the past.
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: end_time
+        in: query
+        description: End time of the requested availability range. Date must be in the future and no greater than 31 days from start_time.
+        required: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventTypes_list-event-type-available-times_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-event-type-available-timesRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-event-type-available-timesRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-event-type-available-timesRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-event-type-available-timesRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-event-type-available-timesRequestInternalServerError'
+      security:
+      - oauth2: []
+  /event_type_memberships:
+    get:
+      operationId: eventTypes_list-event-type-memberships
+      summary: List Event Type Hosts
+      description: 'Fetch list of event type hosts
+
+
+        > `event_types:read`'
+      tags:
+      - eventTypes
+      parameters:
+      - name: event_type
+        in: query
+        description: The uri associated with the event type
+        required: true
+        schema:
+          type: string
+          format: uri
+      - name: count
+        in: query
+        description: The number of rows to return
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+      - name: page_token
+        in: query
+        description: The token to pass to get the next or previous portion of the collection
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventTypes_list-event-type-memberships_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-event-type-membershipsRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-event-type-membershipsRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-event-type-membershipsRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-event-type-membershipsRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-event-type-membershipsRequestInternalServerError'
+      security:
+      - personal_access_token: []
+components:
+  schemas:
+    List-event-type-membershipsRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypeMembershipsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypeMembershipsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-event-type-membershipsRequestNotFoundError
+    Spots:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/SpotsType'
+        spots:
+          type: array
+          items:
+            $ref: '#/components/schemas/SpotsSpotsItems'
+      required:
+      - type
+      - spots
+      description: Only allow scheduling with dedicated time spots
+      title: Spots
+    InsufficientScopeError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InsufficientScopeErrorTitle'
+        message:
+          $ref: '#/components/schemas/InsufficientScopeErrorMessage'
+        required_scopes:
+          type: array
+          items:
+            type: string
+            pattern: ^[a-z_]+:(read|write)$
+      required:
+      - title
+      - message
+      - required_scopes
+      description: Caller does not have required oauth scopes
+      title: InsufficientScopeError
+    AdhocMicrosoftTeamsConferenceKind:
+      type: string
+      enum:
+      - microsoft_teams_conference
+      title: AdhocMicrosoftTeamsConferenceKind
+    EventTypesError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypesErrorTitle'
+        message:
+          $ref: '#/components/schemas/EventTypesErrorMessage'
+      description: Permission Denied
+      title: EventTypesError
+    DaysInFutureType:
+      type: string
+      enum:
+      - days_in_future
+      title: DaysInFutureType
+    EventTypeAvailableTimesGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: EventTypeAvailableTimesGetResponsesContentApplicationJsonSchemaMessage
+    ListEventTypeAvailableTimesRequestForbiddenError0:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypeAvailableTimesGetResponsesContentApplicationJsonSchemaOneOf0Title'
+        message:
+          $ref: '#/components/schemas/EventTypeAvailableTimesGetResponsesContentApplicationJsonSchemaOneOf0Message'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: ListEventTypeAvailableTimesRequestForbiddenError0
+    EventTypeCustomQuestion:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The custom question that the host created for the event type.
+        type:
+          $ref: '#/components/schemas/EventTypeCustomQuestionType'
+          description: The type of response that the invitee provides to the custom question; can be one or multiple lines of text, a phone number, or single- or multiple-select.
+        position:
+          type: integer
+          description: The numerical position of the question on the event booking page after the name and email address fields.
+        enabled:
+          type: boolean
+          description: true if the question created by the host is turned ON and visible on the event booking page; false if turned OFF and invisible on the event booking page.
+        required:
+          type: boolean
+          description: true if a response to the question created by the host is required for invitees to book the event type; false if not required.
+        answer_choices:
+          type: array
+          items:
+            type: string
+          description: The invitee’s option(s) for single_select or multi_select type of responses.
+        include_other:
+          type: boolean
+          description: true if the custom question lets invitees record a written response in addition to single-select or multiple-select type of responses; false if it doesn’t.
+      required:
+      - name
+      - type
+      - position
+      - enabled
+      - required
+      - answer_choices
+      - include_other
+      title: EventTypeCustomQuestion
+    eventTypes_list-event-type-available-times_Response_200:
+      type: object
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventTypeAvailableTime'
+          description: The set of available times for the event type matching the criteria
+      required:
+      - collection
+      description: Service Response
+      title: eventTypes_list-event-type-available-times_Response_200
+    EventTypeMembershipsGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: EventTypeMembershipsGetResponsesContentApplicationJsonSchemaMessage
+    AdhocCustomLocationKind:
+      type: string
+      enum:
+      - custom
+      title: AdhocCustomLocationKind
+    EventTypesErrorMessage:
+      type: string
+      enum:
+      - This user is not in your organization
+      - You do not have permission
+      - You do not have permission to access this resource.
+      title: EventTypesErrorMessage
+    Create-event-typeRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypesPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypesPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-event-typeRequestUnauthorizedError
+    ListEventTypeMembershipsRequestForbiddenError0:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypeMembershipsGetResponsesContentApplicationJsonSchemaOneOf0Title'
+        message:
+          $ref: '#/components/schemas/EventTypeMembershipsGetResponsesContentApplicationJsonSchemaOneOf0Message'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: ListEventTypeMembershipsRequestForbiddenError0
+    OneOffEventTypesPostResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: OneOffEventTypesPostResponsesContentApplicationJsonSchemaTitle
+    EventTypesUuidPatchResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: EventTypesUuidPatchResponsesContentApplicationJsonSchemaOneOf0Message
+    OneOffEventTypesPostResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: OneOffEventTypesPostResponsesContentApplicationJsonSchemaMessage
+    OneOffEventsErrorMessage:
+      type: string
+      enum:
+      - This user is not in your organization
+      - You do not have permission
+      - You do not have permission to access this resource.
+      title: OneOffEventsErrorMessage
+    Get-event-typeRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypesUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypesUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-event-typeRequestUnauthorizedError
+    DaysInFuture:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/DaysInFutureType'
+        days:
+          type: integer
+          minimum: 0
+          maximum: 365
+        only_weekdays:
+          type: boolean
+          description: Excludes weekends and only counts Monday - Friday
+      required:
+      - type
+      - days
+      - only_weekdays
+      description: Only allow scheduling for N days into the future from now
+      title: DaysInFuture
+    EventTypeAvailableTimesGetResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: EventTypeAvailableTimesGetResponsesContentApplicationJsonSchemaOneOf0Message
+    List-event-type-available-timesRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypeAvailableTimesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypeAvailableTimesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-event-type-available-timesRequestUnauthorizedError
+    EventTypeMembershipsGetResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: EventTypeMembershipsGetResponsesContentApplicationJsonSchemaOneOf0Message
+    ProfileType:
+      type: string
+      enum:
+      - User
+      - Team
+      description: Indicates if the profile belongs to a "user" (individual) or "team"
+      title: ProfileType
+    EventTypesUuidPatchResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: EventTypesUuidPatchResponsesContentApplicationJsonSchemaOneOf0Title
+    List-event-type-available-timesRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypeAvailableTimesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypeAvailableTimesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-event-type-available-timesRequestNotFoundError
+    eventTypes_list-event-types_Response_200:
+      type: object
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventType'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - collection
+      - pagination
+      description: Service response
+      title: eventTypes_list-event-types_Response_200
+    AdhocInviteeSpecifiedLocation:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/AdhocInviteeSpecifiedLocationKind'
+        location:
+          type: string
+      required:
+      - kind
+      description: Information for an Invitee Specified Location
+      title: AdhocInviteeSpecifiedLocation
+    OneOffEventTypesPostRequestBodyContentApplicationJsonSchemaDateSetting:
+      oneOf:
+      - $ref: '#/components/schemas/DateRange'
+      - $ref: '#/components/schemas/DaysInFuture'
+      - $ref: '#/components/schemas/Spots'
+      title: OneOffEventTypesPostRequestBodyContentApplicationJsonSchemaDateSetting
+    List-event-type-membershipsRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypeMembershipsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypeMembershipsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-event-type-membershipsRequestUnauthorizedError
+    AdhocGoogleConference:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/AdhocGoogleConferenceKind'
+      required:
+      - kind
+      description: Information for a Google Conference
+      title: AdhocGoogleConference
+    EventTypesPostResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: EventTypesPostResponsesContentApplicationJsonSchemaTitle
+    Update-event-typeRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypesUuidPatchResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypesUuidPatchResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Update-event-typeRequestInternalServerError
+    List-event-typesRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-event-typesRequestNotFoundError
+    EventTypeLocale:
+      type: string
+      enum:
+      - en
+      - fr
+      - es
+      - de
+      - nl
+      - pt
+      - it
+      - uk
+      description: The locale on the event type, used to determine the language of the event type's scheduling page
+      title: EventTypeLocale
+    AdhocWebExConferenceKind:
+      type: string
+      enum:
+      - webex_conference
+      title: AdhocWebExConferenceKind
+    EventTypesGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: EventTypesGetResponsesContentApplicationJsonSchemaTitle
+    SpotsType:
+      type: string
+      enum:
+      - spots
+      title: SpotsType
+    DateRange:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/DateRangeType'
+        start_date:
+          type: string
+          format: date
+          description: 'Availability start - Must be before end_date. Format: YYYY-MM-DD'
+        end_date:
+          type: string
+          format: date
+          description: 'Availability end - Must be a date in the future and less than 365 days in the future from start_date. Format: YYYY-MM-DD'
+      required:
+      - type
+      - start_date
+      - end_date
+      description: Only allow scheduling within a specified date range
+      title: DateRange
+    Profile:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ProfileType'
+          description: Indicates if the profile belongs to a "user" (individual) or "team"
+        name:
+          type: string
+          description: Human-readable name for the profile of the user that's associated with the event type
+        owner:
+          type: string
+          format: uri
+          description: The unique reference to the user associated with the profile
+      required:
+      - type
+      - name
+      - owner
+      description: 'The publicly visible profile of a User or a Team that''s associated with the Event Type (note: some Event Types don''t have profiles)'
+      title: Profile
+    EventTypeCustomQuestionType:
+      type: string
+      enum:
+      - string
+      - text
+      - phone_number
+      - single_select
+      - multi_select
+      description: The type of response that the invitee provides to the custom question; can be one or multiple lines of text, a phone number, or single- or multiple-select.
+      title: EventTypeCustomQuestionType
+    EventTypeType:
+      type: string
+      enum:
+      - StandardEventType
+      - AdhocEventType
+      description: Indicates if the event type is "AdhocEventType" (ad hoc event) or "StandardEventType" (standard event type)
+      title: EventTypeType
+    GetEventTypeRequestForbiddenError0:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypesUuidGetResponsesContentApplicationJsonSchemaOneOf0Title'
+        message:
+          $ref: '#/components/schemas/EventTypesUuidGetResponsesContentApplicationJsonSchemaOneOf0Message'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: GetEventTypeRequestForbiddenError0
+    Create-one-off-event-typeRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OneOffEventTypesPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OneOffEventTypesPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-one-off-event-typeRequestUnauthorizedError
+    EventTypeBookingMethod:
+      type: string
+      enum:
+      - instant
+      - poll
+      description: Indicates if the event type is for a poll or an instant booking
+      title: EventTypeBookingMethod
+    AdhocMicrosoftTeamsConference:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/AdhocMicrosoftTeamsConferenceKind'
+      required:
+      - kind
+      description: Information for a Microsoft Teams Conference
+      title: AdhocMicrosoftTeamsConference
+    EventTypeMembershipsGetResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: EventTypeMembershipsGetResponsesContentApplicationJsonSchemaOneOf0Title
+    AdhocZoomConferenceKind:
+      type: string
+      enum:
+      - zoom_conference
+      title: AdhocZoomConferenceKind
+    AdhocInPersonMeetingKind:
+      type: string
+      enum:
+      - physical
+      title: AdhocInPersonMeetingKind
+    EventTypeMembershipsGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: EventTypeMembershipsGetResponsesContentApplicationJsonSchemaTitle
+    EventTypesUuidGetResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: EventTypesUuidGetResponsesContentApplicationJsonSchemaOneOf0Title
+    Create-event-typeRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/CreateEventTypeRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Create-event-typeRequestForbiddenError
+    DateRangeType:
+      type: string
+      enum:
+      - date_range
+      title: DateRangeType
+    LocationConfigurationKind:
+      type: string
+      enum:
+      - ask_invitee
+      - custom
+      - google_conference
+      - gotomeeting_conference
+      - inbound_call
+      - microsoft_teams_conference
+      - outbound_call
+      - physical
+      - webex_conference
+      - zoom_conference
+      title: LocationConfigurationKind
+    List-event-typesRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/EventTypesError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: List-event-typesRequestForbiddenError
+    UserLocale:
+      type: string
+      enum:
+      - en
+      - fr
+      - es
+      - de
+      - pt
+      - ps
+      description: The user's language preference
+      title: UserLocale
+    Create-event-typeRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypesPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypesPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-event-typeRequestInternalServerError
+    EventTypesUuidGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: EventTypesUuidGetResponsesContentApplicationJsonSchemaMessage
+    Get-event-typeRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypesUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypesUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-event-typeRequestInternalServerError
+    AdhocOutboundCall:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/AdhocOutboundCallKind'
+      required:
+      - kind
+      description: Information about an Outbound Call
+      title: AdhocOutboundCall
+    EventTypesUuidPatchRequestBodyContentApplicationJsonSchemaLocale:
+      type: string
+      enum:
+      - de
+      - en
+      - es
+      - fr
+      - it
+      - nl
+      - pt
+      - uk
+      description: The locale on the event type, used to determine the language of the event type's scheduling page
+      title: EventTypesUuidPatchRequestBodyContentApplicationJsonSchemaLocale
+    LocationConfiguration:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/LocationConfigurationKind'
+        location:
+          type: string
+        additional_info:
+          type: string
+        phone_number:
+          type: string
+      description: A configuration for an EventType's location
+      title: LocationConfiguration
+    eventTypes_create-one-off-event-type_Response_201:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/EventType'
+      required:
+      - resource
+      title: eventTypes_create-one-off-event-type_Response_201
+    List-event-typesRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-event-typesRequestInternalServerError
+    OneOffEventsError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OneOffEventsErrorTitle'
+        message:
+          $ref: '#/components/schemas/OneOffEventsErrorMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/OneOffEventsErrorDetailsItems'
+      description: Permission Denied
+      title: OneOffEventsError
+    AdhocWebExConference:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/AdhocWebExConferenceKind'
+      required:
+      - kind
+      description: Information about a WebEx Conference
+      title: AdhocWebExConference
+    EventTypeKind:
+      type: string
+      enum:
+      - solo
+      - group
+      description: Indicates if the event type is "solo" (belongs to an individual user) or "group"
+      title: EventTypeKind
+    List-event-type-available-timesRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypeAvailableTimesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypeAvailableTimesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-event-type-available-timesRequestBadRequestError
+    EventTypesUuidPatchResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: EventTypesUuidPatchResponsesContentApplicationJsonSchemaTitle
+    List-event-typesRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-event-typesRequestBadRequestError
+    EventTypesErrorTitle:
+      type: string
+      enum:
+      - Permission Denied
+      title: EventTypesErrorTitle
+    EventTypesPostResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: EventTypesPostResponsesContentApplicationJsonSchemaOneOf0Title
+    eventTypes_create-event-type_Response_201:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/EventType'
+      required:
+      - resource
+      title: eventTypes_create-event-type_Response_201
+    CreateEventTypeRequestForbiddenError0:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypesPostResponsesContentApplicationJsonSchemaOneOf0Title'
+        message:
+          $ref: '#/components/schemas/EventTypesPostResponsesContentApplicationJsonSchemaOneOf0Message'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: CreateEventTypeRequestForbiddenError0
+    AdhocGotoMeetingConference:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/AdhocGotoMeetingConferenceKind'
+      required:
+      - kind
+      description: Information for a GotoMeeting Conference
+      title: AdhocGotoMeetingConference
+    List-event-typesRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-event-typesRequestUnauthorizedError
+    AdhocCustomLocation:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/AdhocCustomLocationKind'
+        location:
+          type: string
+      required:
+      - kind
+      description: Information for a Custom Location
+      title: AdhocCustomLocation
+    EventTypeMembershipsGetResponsesContentApplicationJsonSchemaCollectionItems:
+      type: object
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: Canonical reference (unique identifier) for the event type membership
+        event_type:
+          $ref: '#/components/schemas/EventType'
+        member:
+          $ref: '#/components/schemas/User'
+          description: The event type host
+        updated_at:
+          type: string
+          format: date-time
+          description: Date and time of last update
+        created_at:
+          type: string
+          format: date-time
+          description: Date and time of creation
+      required:
+      - uri
+      - event_type
+      title: EventTypeMembershipsGetResponsesContentApplicationJsonSchemaCollectionItems
+    Create-one-off-event-typeRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OneOffEventTypesPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OneOffEventTypesPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-one-off-event-typeRequestNotFoundError
+    Create-event-typeRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypesPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypesPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-event-typeRequestNotFoundError
+    Get-event-typeRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/GetEventTypeRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Get-event-typeRequestForbiddenError
+    AdhocInPersonMeeting:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/AdhocInPersonMeetingKind'
+        location:
+          type: string
+        additional_info:
+          type: string
+      required:
+      - kind
+      description: Information for an In Person Meeting
+      title: AdhocInPersonMeeting
+    AdhocGotoMeetingConferenceKind:
+      type: string
+      enum:
+      - gotomeeting_conference
+      title: AdhocGotoMeetingConferenceKind
+    AdhocInboundCall:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/AdhocInboundCallKind'
+        phone_number:
+          type: string
+        additional_info:
+          type: string
+      required:
+      - kind
+      - phone_number
+      description: Information for an Inbound Call
+      title: AdhocInboundCall
+    OneOffEventsErrorTitle:
+      type: string
+      enum:
+      - Permission Denied
+      title: OneOffEventsErrorTitle
+    EventTypesPostResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: EventTypesPostResponsesContentApplicationJsonSchemaMessage
+    List-event-type-available-timesRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypeAvailableTimesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypeAvailableTimesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-event-type-available-timesRequestInternalServerError
+    Get-event-typeRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypesUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypesUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-event-typeRequestBadRequestError
+    List-event-type-membershipsRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypeMembershipsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypeMembershipsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-event-type-membershipsRequestBadRequestError
+    ErrorResponseDetailsItem:
+      type: object
+      properties:
+        parameter:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+      title: ErrorResponseDetailsItem
+    OneOffEventTypesPostRequestBodyContentApplicationJsonSchemaLocation:
+      oneOf:
+      - $ref: '#/components/schemas/AdhocCustomLocation'
+      - $ref: '#/components/schemas/AdhocGoogleConference'
+      - $ref: '#/components/schemas/AdhocGotoMeetingConference'
+      - $ref: '#/components/schemas/AdhocInPersonMeeting'
+      - $ref: '#/components/schemas/AdhocInboundCall'
+      - $ref: '#/components/schemas/AdhocInviteeSpecifiedLocation'
+      - $ref: '#/components/schemas/AdhocMicrosoftTeamsConference'
+      - $ref: '#/components/schemas/AdhocOutboundCall'
+      - $ref: '#/components/schemas/AdhocWebExConference'
+      - $ref: '#/components/schemas/AdhocZoomConference'
+      title: OneOffEventTypesPostRequestBodyContentApplicationJsonSchemaLocation
+    Update-event-typeRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypesUuidPatchResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypesUuidPatchResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Update-event-typeRequestUnauthorizedError
+    AdhocGoogleConferenceKind:
+      type: string
+      enum:
+      - google_conference
+      title: AdhocGoogleConferenceKind
+    InsufficientScopeErrorTitle:
+      type: string
+      enum:
+      - Insufficient scope
+      title: InsufficientScopeErrorTitle
+    EventType:
+      type: object
+      properties:
+        active:
+          type: boolean
+          description: Indicates if the event is active or not.
+        admin_managed:
+          type: boolean
+          description: Indicates if this event type is managed by an organization admin
+        booking_method:
+          $ref: '#/components/schemas/EventTypeBookingMethod'
+          description: Indicates if the event type is for a poll or an instant booking
+        color:
+          type: string
+          pattern: ^#[a-f\d]{6}$
+          description: The hexadecimal color value of the event type's scheduling page
+        created_at:
+          type: string
+          format: date-time
+          description: The moment the event type was created (e.g. "2020-01-02T03:04:05.678123Z")
+        custom_questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventTypeCustomQuestion'
+        deleted_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The moment the event type was deleted (e.g. "2020-01-02T03:04:05.678123Z"). Since event types can be deleted but their scheduled events remain it's useful to fetch a deleted event type when you still require event type data for a scheduled event.
+        description_html:
+          type:
+          - string
+          - 'null'
+          description: The event type's description (formatted with HTML)
+        description_plain:
+          type:
+          - string
+          - 'null'
+          description: The event type's description (in non formatted text)
+        duration:
+          type: number
+          format: double
+          description: The length of sessions booked with this event type
+        duration_options:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+          description: Array of duration options. Always null for adhoc event types.
+        internal_note:
+          type:
+          - string
+          - 'null'
+          description: Contents of a note that may be associated with the event type
+        is_paid:
+          type: boolean
+        kind:
+          $ref: '#/components/schemas/EventTypeKind'
+          description: Indicates if the event type is "solo" (belongs to an individual user) or "group"
+        locale:
+          $ref: '#/components/schemas/EventTypeLocale'
+          description: The locale on the event type, used to determine the language of the event type's scheduling page
+        locations:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/LocationConfiguration'
+          description: Configuration information for each possible location for this Event Type
+        name:
+          type:
+          - string
+          - 'null'
+          description: The event type name (in human-readable format)
+        pooling_type:
+          oneOf:
+          - $ref: '#/components/schemas/EventTypePoolingType'
+          - type: 'null'
+          description: Indicates if the event type is "round robin" (alternates between hosts) or "collective" (invitees pick a time when all participants are available) or “multi-pool” (considers availability delineated by pools of participants) or "null" (the event type doesn’t consider the availability of a group participants)
+        position:
+          type: integer
+          description: Position order of Event Type, starting with 0 (for display purposes)
+        profile:
+          $ref: '#/components/schemas/Profile'
+        scheduling_url:
+          type: string
+          format: uri
+          description: The URL of the user’s scheduling site where invitees book this event type
+        secret:
+          type: boolean
+          description: Indicates if the event type is hidden on the owner's main scheduling page
+        slug:
+          type:
+          - string
+          - 'null'
+          description: The portion of the event type's URL that identifies a specific web page (in a human-readable format)
+        type:
+          $ref: '#/components/schemas/EventTypeType'
+          description: Indicates if the event type is "AdhocEventType" (ad hoc event) or "StandardEventType" (standard event type)
+        updated_at:
+          type: string
+          format: date-time
+          description: The moment the event type was last updated (e.g. "2020-01-02T03:04:05.678123Z")
+        uri:
+          type: string
+          format: uri
+          description: Canonical reference (unique identifier) for the event type
+      required:
+      - active
+      - admin_managed
+      - booking_method
+      - color
+      - created_at
+      - custom_questions
+      - deleted_at
+      - description_html
+      - description_plain
+      - duration
+      - duration_options
+      - internal_note
+      - is_paid
+      - kind
+      - locale
+      - locations
+      - name
+      - pooling_type
+      - position
+      - profile
+      - scheduling_url
+      - secret
+      - slug
+      - type
+      - updated_at
+      - uri
+      description: A configuration for an Event Type
+      title: EventType
+    AdhocOutboundCallKind:
+      type: string
+      enum:
+      - outbound_call
+      title: AdhocOutboundCallKind
+    List-event-type-available-timesRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/ListEventTypeAvailableTimesRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: List-event-type-available-timesRequestForbiddenError
+    EventTypesGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: EventTypesGetResponsesContentApplicationJsonSchemaMessage
+    AdhocZoomConference:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/AdhocZoomConferenceKind'
+      required:
+      - kind
+      description: Information about a Zoom Conference
+      title: AdhocZoomConference
+    EventTypesPostRequestBodyContentApplicationJsonSchemaLocale:
+      type: string
+      enum:
+      - de
+      - en
+      - es
+      - fr
+      - it
+      - nl
+      - pt
+      - uk
+      description: The locale on the event type, used to determine the language of the event type's scheduling page
+      title: EventTypesPostRequestBodyContentApplicationJsonSchemaLocale
+    Update-event-typeRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/UpdateEventTypeRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Update-event-typeRequestForbiddenError
+    EventTypesPostResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: EventTypesPostResponsesContentApplicationJsonSchemaOneOf0Message
+    AdhocInviteeSpecifiedLocationKind:
+      type: string
+      enum:
+      - ask_invitee
+      title: AdhocInviteeSpecifiedLocationKind
+    EventTypesUuidGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: EventTypesUuidGetResponsesContentApplicationJsonSchemaTitle
+    UserTimeNotation:
+      type: string
+      enum:
+      - 12h
+      - 24h
+      default: 12h
+      description: Time notation used by the user. Accepts "12h" or "24h" as a value.
+      title: UserTimeNotation
+    UpdateEventTypeRequestForbiddenError0:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypesUuidPatchResponsesContentApplicationJsonSchemaOneOf0Title'
+        message:
+          $ref: '#/components/schemas/EventTypesUuidPatchResponsesContentApplicationJsonSchemaOneOf0Message'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: UpdateEventTypeRequestForbiddenError0
+    EventTypeAvailableTimesGetResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: EventTypeAvailableTimesGetResponsesContentApplicationJsonSchemaOneOf0Title
+    User:
+      type: object
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: Canonical reference (unique identifier) for the user
+        name:
+          type: string
+          description: The user's name (human-readable format)
+        slug:
+          type: string
+          description: The portion of URL for the user's scheduling page (where invitees book sessions), rendered in a human-readable format
+        email:
+          type: string
+          format: email
+          description: The user's email address
+        scheduling_url:
+          type: string
+          format: uri
+          description: The URL of the user's Calendly landing page (that lists all the user's event types)
+        timezone:
+          type: string
+          description: The time zone to use when presenting time to the user
+        time_notation:
+          $ref: '#/components/schemas/UserTimeNotation'
+          default: 12h
+          description: Time notation used by the user. Accepts "12h" or "24h" as a value.
+        avatar_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: The URL of the user's avatar (image)
+        created_at:
+          type: string
+          format: date-time
+          description: The moment when the user's record was created (e.g. "2020-01-02T03:04:05.678123Z")
+        updated_at:
+          type: string
+          format: date-time
+          description: The moment when the user's record was last updated (e.g. "2020-01-02T03:04:05.678123Z")
+        current_organization:
+          type: string
+          format: uri
+          description: A unique reference to the user's current organization
+        resource_type:
+          type: string
+          description: Resource type to support polymorphic associations.
+        locale:
+          $ref: '#/components/schemas/UserLocale'
+          description: The user's language preference
+      required:
+      - uri
+      - name
+      - slug
+      - email
+      - scheduling_url
+      - timezone
+      - avatar_url
+      - created_at
+      - updated_at
+      - current_organization
+      - resource_type
+      - locale
+      description: Information about the user.
+      title: User
+    Get-event-typeRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypesUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypesUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-event-typeRequestNotFoundError
+    InsufficientScopeErrorMessage:
+      type: string
+      enum:
+      - This operation requires the scopes listed in the 'required_scopes' array.
+      title: InsufficientScopeErrorMessage
+    eventTypes_update-event-type_Response_200:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/EventType'
+      required:
+      - resource
+      title: eventTypes_update-event-type_Response_200
+    Update-event-typeRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypesUuidPatchResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypesUuidPatchResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Update-event-typeRequestNotFoundError
+    eventTypes_list-event-type-memberships_Response_200:
+      type: object
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventTypeMembershipsGetResponsesContentApplicationJsonSchemaCollectionItems'
+          description: The set of hosts for a given event type
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - collection
+      - pagination
+      title: eventTypes_list-event-type-memberships_Response_200
+    EventTypePoolingType:
+      type: string
+      enum:
+      - round_robin
+      - collective
+      - multi_pool
+      description: Indicates if the event type is "round robin" (alternates between hosts) or "collective" (invitees pick a time when all participants are available) or “multi-pool” (considers availability delineated by pools of participants) or "null" (the event type doesn’t consider the availability of a group participants)
+      title: EventTypePoolingType
+    eventTypes_get-event-type_Response_200:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/EventType'
+      required:
+      - resource
+      title: eventTypes_get-event-type_Response_200
+    List-event-type-membershipsRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypeMembershipsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypeMembershipsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-event-type-membershipsRequestInternalServerError
+    Create-one-off-event-typeRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OneOffEventTypesPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OneOffEventTypesPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-one-off-event-typeRequestBadRequestError
+    EventTypeAvailableTime:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Indicates that the open time slot is "available"
+        invitees_remaining:
+          type: number
+          format: double
+          description: Total remaining invitees for this available time. For Group Event Type, more than one invitee can book in this available time. For all other Event Types, only one invitee can book in this available time.
+        start_time:
+          type: string
+          format: date-time
+          description: The moment the event was scheduled to start in UTC time
+        scheduling_url:
+          type: string
+          format: uri
+          description: The URL of the user’s scheduling site where invitees book this event type
+      required:
+      - status
+      - invitees_remaining
+      - start_time
+      - scheduling_url
+      description: An available meeting time slot for the given event type
+      title: EventTypeAvailableTime
+    Update-event-typeRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypesUuidPatchResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypesUuidPatchResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Update-event-typeRequestBadRequestError
+    OneOffEventsErrorDetailsItems:
+      type: object
+      properties:
+        parameter:
+          type: string
+        message:
+          type: string
+      title: OneOffEventsErrorDetailsItems
+    List-event-type-membershipsRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/ListEventTypeMembershipsRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: List-event-type-membershipsRequestForbiddenError
+    Create-one-off-event-typeRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/OneOffEventTypesPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/OneOffEventTypesPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-one-off-event-typeRequestInternalServerError
+    AdhocInboundCallKind:
+      type: string
+      enum:
+      - inbound_call
+      title: AdhocInboundCallKind
+    EventTypesUuidGetResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: EventTypesUuidGetResponsesContentApplicationJsonSchemaOneOf0Message
+    EventTypesUuidPatchResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: EventTypesUuidPatchResponsesContentApplicationJsonSchemaMessage
+    SpotsSpotsItems:
+      type: object
+      properties:
+        start_time:
+          type: string
+          format: date-time
+          description: The first time a spot can be scheduled
+        end_time:
+          type: string
+          format: date-time
+          description: The last time a spot can be scheduled
+      required:
+      - start_time
+      - end_time
+      title: SpotsSpotsItems
+    EventTypeAvailableTimesGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: EventTypeAvailableTimesGetResponsesContentApplicationJsonSchemaTitle
+    Create-one-off-event-typeRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/OneOffEventsError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Create-one-off-event-typeRequestForbiddenError
+    Create-event-typeRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypesPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypesPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-event-typeRequestBadRequestError
+    Pagination:
+      type: object
+      properties:
+        count:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: The number of rows to return
+        next_page:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URI to return the next page of an ordered list ("null" indicates no additional results are available)
+        previous_page:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URI to return the previous page of an ordered list ("null" indicates no additional results are available)
+        next_page_token:
+          type:
+          - string
+          - 'null'
+          description: Token to return the next page of an ordered list ("null" indicates no additional results are available)
+        previous_page_token:
+          type:
+          - string
+          - 'null'
+          description: Token to return the previous page of an ordered list ("null" indicates no additional results are available)
+      required:
+      - count
+      - next_page
+      - previous_page
+      - next_page_token
+      - previous_page_token
+      title: Pagination
+  securitySchemes:
+    oauth2:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0
+    personal_access_token:
+      type: http
+      scheme: bearer
+      description: Personal Access Token

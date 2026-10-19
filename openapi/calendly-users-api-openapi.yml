@@ -1,154 +1,438 @@
 openapi: 3.2.0
 info:
-  title: Calendly Scheduling Users API
-  description: The Calendly Scheduling API (v2) is a RESTful API that allows developers to programmatically manage scheduling workflows.
-  version: 2.0.0
-  contact:
-    name: Calendly Developer Support
-    url: https://developer.calendly.com/
-  termsOfService: https://calendly.com/pages/terms
+  title: Calendly Users API
+  version: 1.0.0
 servers:
 - url: https://api.calendly.com
-  description: Production Server
-security:
-- bearerAuth: []
+  description: https://api.calendly.com
 tags:
 - name: Users
-  description: Endpoints for retrieving user information and managing user accounts within Calendly.
 paths:
   /users/me:
     get:
-      operationId: getCurrentUser
+      operationId: users_get-current-user
       summary: Get current user
-      description: Returns information about the currently authenticated user, including their URI, name, email, scheduling URL, timezone, and organization membership.
+      description: 'Returns basic information about your user account.
+
+
+        > `users:read`'
       tags:
       - Users
       responses:
         '200':
-          description: Successfully retrieved the current user
+          description: OK
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  resource:
-                    $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/users_get-current-user_Response_200'
         '401':
-          $ref: '#/components/responses/Unauthorized'
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-current-userRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-current-userRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-current-userRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-current-userRequestInternalServerError'
+      security:
+      - oauth2: []
   /users/{uuid}:
     get:
-      operationId: getUser
+      operationId: users_get-user
       summary: Get user
-      description: Returns information about a specific user by their UUID, including name, email, scheduling URL, timezone, and organization.
+      description: 'Returns information about a specified User.
+
+
+        > `users:read`'
       tags:
       - Users
       parameters:
-      - $ref: '#/components/parameters/UserUuid'
+      - name: uuid
+        in: path
+        description: User unique identifier, or the constant "me" to reference the caller
+        required: true
+        schema:
+          type: string
       responses:
         '200':
-          description: Successfully retrieved the user
+          description: OK
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  resource:
-                    $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/users_get-user_Response_200'
         '401':
-          $ref: '#/components/responses/Unauthorized'
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-userRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-userRequestForbiddenError'
         '404':
-          $ref: '#/components/responses/NotFound'
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-userRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-userRequestInternalServerError'
+      security:
+      - oauth2: []
 components:
-  parameters:
-    UserUuid:
-      name: uuid
-      in: path
-      required: true
-      description: The UUID of the user.
-      schema:
-        type: string
-  responses:
-    Unauthorized:
-      description: Authentication failed. Verify that a valid access token is provided in the Authorization header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found. Verify the UUID or URI is correct.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    InsufficientScopeErrorTitle:
+      type: string
+      enum:
+      - Insufficient scope
+      title: InsufficientScopeErrorTitle
+    Get-userRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/UsersUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/UsersUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-userRequestInternalServerError
+    InsufficientScopeError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InsufficientScopeErrorTitle'
+        message:
+          $ref: '#/components/schemas/InsufficientScopeErrorMessage'
+        required_scopes:
+          type: array
+          items:
+            type: string
+            pattern: ^[a-z_]+:(read|write)$
+      required:
+      - title
+      - message
+      - required_scopes
+      description: Caller does not have required oauth scopes
+      title: InsufficientScopeError
+    users_get-user_Response_200:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/User'
+      required:
+      - resource
+      description: Service response
+      title: users_get-user_Response_200
+    Get-current-userRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/UsersMeGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/UsersMeGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-current-userRequestInternalServerError
+    UsersUuidGetResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: UsersUuidGetResponsesContentApplicationJsonSchemaOneOf0Message
+    UsersMeGetResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: UsersMeGetResponsesContentApplicationJsonSchemaOneOf0Message
+    UserTimeNotation:
+      type: string
+      enum:
+      - 12h
+      - 24h
+      default: 12h
+      description: Time notation used by the user. Accepts "12h" or "24h" as a value.
+      title: UserTimeNotation
+    UsersMeGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: UsersMeGetResponsesContentApplicationJsonSchemaMessage
     User:
       type: object
-      description: A Calendly user account with scheduling and organization information.
       properties:
         uri:
           type: string
           format: uri
-          description: The canonical URI of the user resource.
+          description: Canonical reference (unique identifier) for the user
         name:
           type: string
-          description: The full name of the user.
+          description: The user's name (human-readable format)
         slug:
           type: string
-          description: The URL-friendly slug for the users scheduling page.
+          description: The portion of URL for the user's scheduling page (where invitees book sessions), rendered in a human-readable format
         email:
           type: string
           format: email
-          description: The email address of the user.
+          description: The user's email address
         scheduling_url:
           type: string
           format: uri
-          description: The URL of the users Calendly scheduling page.
+          description: The URL of the user's Calendly landing page (that lists all the user's event types)
         timezone:
           type: string
-          description: The IANA timezone of the user.
+          description: The time zone to use when presenting time to the user
+        time_notation:
+          $ref: '#/components/schemas/UserTimeNotation'
+          default: 12h
+          description: Time notation used by the user. Accepts "12h" or "24h" as a value.
         avatar_url:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uri
-          description: The URL of the users avatar image.
+          description: The URL of the user's avatar (image)
         created_at:
           type: string
           format: date-time
-          description: The timestamp when the user was created.
+          description: The moment when the user's record was created (e.g. "2020-01-02T03:04:05.678123Z")
         updated_at:
           type: string
           format: date-time
-          description: The timestamp when the user was last updated.
+          description: The moment when the user's record was last updated (e.g. "2020-01-02T03:04:05.678123Z")
         current_organization:
           type: string
           format: uri
-          description: The URI of the users current organization.
-    Error:
+          description: A unique reference to the user's current organization
+        resource_type:
+          type: string
+          description: Resource type to support polymorphic associations.
+        locale:
+          $ref: '#/components/schemas/UserLocale'
+          description: The user's language preference
+      required:
+      - uri
+      - name
+      - slug
+      - email
+      - scheduling_url
+      - timezone
+      - avatar_url
+      - created_at
+      - updated_at
+      - current_organization
+      - resource_type
+      - locale
+      description: Information about the user.
+      title: User
+    UsersUuidGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: UsersUuidGetResponsesContentApplicationJsonSchemaTitle
+    InsufficientScopeErrorMessage:
+      type: string
+      enum:
+      - This operation requires the scopes listed in the 'required_scopes' array.
+      title: InsufficientScopeErrorMessage
+    UsersMeGetResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: UsersMeGetResponsesContentApplicationJsonSchemaOneOf0Title
+    GetCurrentUserRequestForbiddenError0:
       type: object
-      description: An error response from the Calendly API.
       properties:
         title:
-          type: string
-          description: A short summary of the error.
+          $ref: '#/components/schemas/UsersMeGetResponsesContentApplicationJsonSchemaOneOf0Title'
         message:
-          type: string
-          description: A detailed description of the error.
+          $ref: '#/components/schemas/UsersMeGetResponsesContentApplicationJsonSchemaOneOf0Message'
         details:
           type: array
           items:
-            type: object
-            properties:
-              parameter:
-                type: string
-                description: The parameter that caused the error.
-              message:
-                type: string
-                description: A description of what was wrong with the parameter.
-          description: Specific details about validation errors.
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: GetCurrentUserRequestForbiddenError0
+    UsersUuidGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: UsersUuidGetResponsesContentApplicationJsonSchemaMessage
+    GetUserRequestForbiddenError0:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/UsersUuidGetResponsesContentApplicationJsonSchemaOneOf0Title'
+        message:
+          $ref: '#/components/schemas/UsersUuidGetResponsesContentApplicationJsonSchemaOneOf0Message'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: GetUserRequestForbiddenError0
+    Get-userRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/GetUserRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Get-userRequestForbiddenError
+    Get-userRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/UsersUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/UsersUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-userRequestUnauthorizedError
+    Get-current-userRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/UsersMeGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/UsersMeGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-current-userRequestUnauthorizedError
+    Get-userRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/UsersUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/UsersUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-userRequestNotFoundError
+    Get-current-userRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/UsersMeGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/UsersMeGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-current-userRequestNotFoundError
+    Get-current-userRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/GetCurrentUserRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Get-current-userRequestForbiddenError
+    users_get-current-user_Response_200:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/User'
+      required:
+      - resource
+      description: Service response
+      title: users_get-current-user_Response_200
+    UsersUuidGetResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: UsersUuidGetResponsesContentApplicationJsonSchemaOneOf0Title
+    UserLocale:
+      type: string
+      enum:
+      - en
+      - fr
+      - es
+      - de
+      - pt
+      - ps
+      description: The user's language preference
+      title: UserLocale
+    UsersMeGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: UsersMeGetResponsesContentApplicationJsonSchemaTitle
+    ErrorResponseDetailsItem:
+      type: object
+      properties:
+        parameter:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+      title: ErrorResponseDetailsItem
   securitySchemes:
-    bearerAuth:
+    oauth2:
       type: http
       scheme: bearer
-      description: Personal access token or OAuth 2.1 access token. Include in the Authorization header as Bearer {token}.
-externalDocs:
-  description: Calendly API Documentation
-  url: https://developer.calendly.com/api-docs
+      description: OAuth 2.0
+    personal_access_token:
+      type: http
+      scheme: bearer
+      description: Personal Access Token

@@ -1,323 +1,1149 @@
 openapi: 3.2.0
 info:
-  title: Calendly Scheduling Availability API
-  description: The Calendly Scheduling API (v2) is a RESTful API that allows developers to programmatically manage scheduling workflows.
-  version: 2.0.0
-  contact:
-    name: Calendly Developer Support
-    url: https://developer.calendly.com/
-  termsOfService: https://calendly.com/pages/terms
+  title: Calendly Availability API
+  version: 1.0.0
 servers:
 - url: https://api.calendly.com
-  description: Production Server
-security:
-- bearerAuth: []
+  description: https://api.calendly.com
 tags:
 - name: Availability
-  description: Endpoints for viewing available times for event types and managing user availability schedules.
 paths:
-  /event_type_available_times:
-    get:
-      operationId: listEventTypeAvailableTimes
-      summary: List event type available times
-      description: Returns a list of available time slots for a specific event type within a given date range. This endpoint is used to display bookable times to potential invitees.
-      tags:
-      - Availability
-      parameters:
-      - name: event_type
-        in: query
-        required: true
-        description: The URI of the event type to check availability for.
-        schema:
-          type: string
-          format: uri
-      - name: start_time
-        in: query
-        required: true
-        description: The start of the time range to check, in UTC format.
-        schema:
-          type: string
-          format: date-time
-      - name: end_time
-        in: query
-        required: true
-        description: The end of the time range to check, in UTC format.
-        schema:
-          type: string
-          format: date-time
-      responses:
-        '200':
-          description: Successfully retrieved available times
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  collection:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/AvailableTime'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-  /user_busy_times:
-    get:
-      operationId: listUserBusyTimes
-      summary: List user busy times
-      description: Returns a list of time periods during which a user is busy, based on their connected calendars. Useful for checking a users availability before scheduling.
-      tags:
-      - Availability
-      parameters:
-      - name: user
-        in: query
-        required: true
-        description: The URI of the user whose busy times to retrieve.
-        schema:
-          type: string
-          format: uri
-      - name: start_time
-        in: query
-        required: true
-        description: The start of the time range to check, in UTC format.
-        schema:
-          type: string
-          format: date-time
-      - name: end_time
-        in: query
-        required: true
-        description: The end of the time range to check, in UTC format.
-        schema:
-          type: string
-          format: date-time
-      responses:
-        '200':
-          description: Successfully retrieved busy times
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  collection:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/BusyTime'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-  /user_availability_schedules:
-    get:
-      operationId: listUserAvailabilitySchedules
-      summary: List user availability schedules
-      description: Returns a list of availability schedules for a specific user. Availability schedules define the recurring time windows when a user is available for meetings.
-      tags:
-      - Availability
-      parameters:
-      - name: user
-        in: query
-        required: true
-        description: The URI of the user whose availability schedules to retrieve.
-        schema:
-          type: string
-          format: uri
-      responses:
-        '200':
-          description: Successfully retrieved availability schedules
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  collection:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/AvailabilitySchedule'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
   /user_availability_schedules/{uuid}:
     get:
-      operationId: getUserAvailabilitySchedule
-      summary: Get user availability schedule
-      description: Returns a specific availability schedule by its UUID, including the timezone and rules that define available time windows.
+      operationId: availability_get-user-availability-schedule
+      summary: Get User Availability Schedule
+      description: 'This will return the availability schedule of the given UUID.
+
+
+        > `availability:read`'
       tags:
       - Availability
       parameters:
       - name: uuid
         in: path
-        required: true
         description: The UUID of the availability schedule.
+        required: true
         schema:
           type: string
       responses:
         '200':
-          description: Successfully retrieved the availability schedule
+          description: OK
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  resource:
-                    $ref: '#/components/schemas/AvailabilitySchedule'
+                $ref: '#/components/schemas/availability_get-user-availability-schedule_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-user-availability-scheduleRequestBadRequestError'
         '401':
-          $ref: '#/components/responses/Unauthorized'
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-user-availability-scheduleRequestUnauthorizedError'
+        '403':
+          description: Caller not authorized to perform this action or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-user-availability-scheduleRequestForbiddenError'
         '404':
-          $ref: '#/components/responses/NotFound'
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-user-availability-scheduleRequestNotFoundError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Any type
+      security:
+      - oauth2: []
+  /event_type_availability_schedules:
+    get:
+      operationId: availability_get-event-type-availability
+      summary: List Event Type Availability Schedules
+      description: 'Return the availability for an event type
+
+
+        > `availability:read`'
+      tags:
+      - Availability
+      parameters:
+      - name: event_type
+        in: query
+        description: The URI associated with the event type
+        required: true
+        schema:
+          type: string
+          format: uri
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/availability_get-event-type-availability_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-event-type-availabilityRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-event-type-availabilityRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-event-type-availabilityRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-event-type-availabilityRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-event-type-availabilityRequestInternalServerError'
+      security:
+      - oauth2: []
+    patch:
+      operationId: availability_update-event-type-availability
+      summary: Update Event Type Availability Schedules
+      description: 'Update an event type availability schedule
+
+
+        > `availability:write`'
+      tags:
+      - Availability
+      parameters:
+      - name: event_type
+        in: query
+        description: Event Type uri in which to update the availability schedule
+        required: true
+        schema:
+          type: string
+          format: uri
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/availability_update-event-type-availability_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Update-event-type-availabilityRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Update-event-type-availabilityRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Update-event-type-availabilityRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Update-event-type-availabilityRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Update-event-type-availabilityRequestInternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                availability_rule:
+                  $ref: '#/components/schemas/EventTypeAvailabilitySchedulesPatchRequestBodyContentApplicationJsonSchemaAvailabilityRule'
+                availability_setting:
+                  $ref: '#/components/schemas/EventTypeAvailabilitySchedulesPatchRequestBodyContentApplicationJsonSchemaAvailabilitySetting'
+                  default: host
+                  description: By default every host on the Event Type shares an identical schedule.
+              required:
+              - availability_rule
+      security:
+      - oauth2: []
+  /user_availability_schedules:
+    get:
+      operationId: availability_list-user-availability-schedules
+      summary: List User Availability Schedules
+      description: 'Returns the availability schedules of the given user.
+
+
+        > `availability:read`'
+      tags:
+      - Availability
+      parameters:
+      - name: user
+        in: query
+        description: A URI reference to a user
+        required: true
+        schema:
+          type: string
+          format: uri
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/availability_list-user-availability-schedules_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-user-availability-schedulesRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-user-availability-schedulesRequestUnauthorizedError'
+        '403':
+          description: Caller not authorized to perform this action or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-user-availability-schedulesRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-user-availability-schedulesRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-user-availability-schedulesRequestInternalServerError'
+      security:
+      - oauth2: []
+  /user_busy_times:
+    get:
+      operationId: availability_list-user-busy-times
+      summary: List User Busy Times
+      description: 'Returns an ascending list of user internal and external scheduled events within a specified date range.
+
+
+        Date range can be no greater than 1 week (7 days).
+
+
+        **NOTE:**
+
+        * This endpoint does not support traditional keyset pagination.
+
+        * External events will only be returned for calendars that have "Check for conflicts" configured.
+
+
+        > `availability:read`'
+      tags:
+      - Availability
+      parameters:
+      - name: user
+        in: query
+        description: The uri associated with the user
+        required: true
+        schema:
+          type: string
+          format: uri
+      - name: start_time
+        in: query
+        description: Start time of the requested availability range. Date cannot be in the past.
+        required: true
+        schema:
+          type: string
+      - name: end_time
+        in: query
+        description: End time of the requested availability range. Date must be in the future of start_time.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/availability_list-user-busy-times_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-user-busy-timesRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-user-busy-timesRequestUnauthorizedError'
+        '403':
+          description: Caller not authorized to perform this action or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-user-busy-timesRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-user-busy-timesRequestNotFoundError'
+        '424':
+          description: Unable to access external calendar
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-user-busy-timesRequestInternalServerError'
+      security:
+      - oauth2: []
 components:
-  responses:
-    BadRequest:
-      description: The request was invalid or malformed. Check the request body and parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. Verify that a valid access token is provided in the Authorization header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found. Verify the UUID or URI is correct.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    InsufficientScopeErrorTitle:
+      type: string
+      enum:
+      - Insufficient scope
+      title: InsufficientScopeErrorTitle
+    InsufficientScopeError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InsufficientScopeErrorTitle'
+        message:
+          $ref: '#/components/schemas/InsufficientScopeErrorMessage'
+        required_scopes:
+          type: array
+          items:
+            type: string
+            pattern: ^[a-z_]+:(read|write)$
+      required:
+      - title
+      - message
+      - required_scopes
+      description: Caller does not have required oauth scopes
+      title: InsufficientScopeError
+    UserBusyTime:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/UserBusyTimeType'
+          description: Indicates whether the scheduled event is internal ('calendly' or 'reserved') or external
+        start_time:
+          type: string
+          format: date-time
+          description: The start time of the scheduled event in UTC time
+        end_time:
+          type: string
+          format: date-time
+          description: The end time of the scheduled event in UTC time
+        buffered_start_time:
+          type: string
+          format: date-time
+          description: The start time of the calendly event, as calculated by any "before" buffer set by the user
+        buffered_end_time:
+          type: string
+          format: date-time
+          description: The end time of the calendly event, as calculated by any "after" buffer set by the user
+        event:
+          $ref: '#/components/schemas/UserBusyTimeEvent'
+      required:
+      - type
+      - start_time
+      - end_time
+      description: An internal or external scheduled event for a given user
+      title: UserBusyTime
+    EventTypeAvailabilityScheduleAvailabilityRule:
+      type: object
+      properties:
+        timezone:
+          type: string
+          description: The timezone for which this Event Type Availability Schedule is originated in.
+        uri:
+          type: string
+          format: uri
+          description: Canonical reference (unique identifier) for the Availability Schedule that is referenced in the Event Type.
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the Availability Schedule that is referenced in the Event Type.
+        user:
+          type: string
+          format: uri
+          description: A URI reference to a user to be returned if availability_setting is not 'all'
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/AvailabilityRule'
+      title: EventTypeAvailabilityScheduleAvailabilityRule
+    EventTypeAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: EventTypeAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaOneOf0Title
+    ErrorResponse:
+      type: object
+      properties:
+        title:
+          type: string
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: ErrorResponse
+    EventTypeAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: EventTypeAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaMessage
+    List-user-busy-timesRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/UserBusyTimesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/UserBusyTimesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-user-busy-timesRequestBadRequestError
+    availability_get-event-type-availability_Response_200:
+      type: object
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventTypeAvailabilitySchedule'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - collection
+      - pagination
+      title: availability_get-event-type-availability_Response_200
+    List-user-busy-timesRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/UserBusyTimesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/UserBusyTimesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-user-busy-timesRequestNotFoundError
+    Update-event-type-availabilityRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypeAvailabilitySchedulesPatchResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypeAvailabilitySchedulesPatchResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Update-event-type-availabilityRequestNotFoundError
+    EventTypeAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: EventTypeAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaOneOf0Message
+    Get-event-type-availabilityRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/GetEventTypeAvailabilityRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Get-event-type-availabilityRequestForbiddenError
+    UserBusyTimeType:
+      type: string
+      enum:
+      - calendly
+      - reserved
+      - external
+      description: Indicates whether the scheduled event is internal ('calendly' or 'reserved') or external
+      title: UserBusyTimeType
+    Update-event-type-availabilityRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypeAvailabilitySchedulesPatchResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypeAvailabilitySchedulesPatchResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Update-event-type-availabilityRequestBadRequestError
+    UserAvailabilitySchedulesUuidGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server could not find the requested resource.
+      title: UserAvailabilitySchedulesUuidGetResponsesContentApplicationJsonSchemaMessage
+    UserAvailabilitySchedulesUuidGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Resource Not Found
+      title: UserAvailabilitySchedulesUuidGetResponsesContentApplicationJsonSchemaTitle
+    EventTypeAvailabilitySchedulesPatchResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: EventTypeAvailabilitySchedulesPatchResponsesContentApplicationJsonSchemaMessage
+    List-user-availability-schedulesRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/UserAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/UserAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-user-availability-schedulesRequestUnauthorizedError
+    EventTypeAvailabilitySchedulesPatchRequestBodyContentApplicationJsonSchemaAvailabilityRule:
+      type: object
+      properties:
+        timezone:
+          type: string
+          description: The timezone for which this Event Type Availability Schedule is originated in.
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/AvailabilityRule'
+          description: 'The rules for an availability schedule.<br>  <span style="color:red">Warning: </span>Updating rules will overwrite all existing rules for the event type. Use the GET endpoint to first retrieve the existing rules and then pass the modified rules to the rules object.'
+        user:
+          type: string
+          format: uri
+          description: Required when an admin or org owner is making the call to update a specific users availability schedule
+      required:
+      - timezone
+      title: EventTypeAvailabilitySchedulesPatchRequestBodyContentApplicationJsonSchemaAvailabilityRule
+    List-user-availability-schedulesRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/UserAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/UserAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-user-availability-schedulesRequestNotFoundError
+    EventTypeAvailabilitySchedulesPatchResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: EventTypeAvailabilitySchedulesPatchResponsesContentApplicationJsonSchemaOneOf0Title
+    Get-event-type-availabilityRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypeAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypeAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-event-type-availabilityRequestInternalServerError
+    EventTypeAvailabilitySchedulesPatchRequestBodyContentApplicationJsonSchemaAvailabilitySetting:
+      type: string
+      enum:
+      - host
+      default: host
+      description: By default every host on the Event Type shares an identical schedule.
+      title: EventTypeAvailabilitySchedulesPatchRequestBodyContentApplicationJsonSchemaAvailabilitySetting
+    availability_update-event-type-availability_Response_200:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/EventTypeAvailabilitySchedule'
+      required:
+      - resource
+      title: availability_update-event-type-availability_Response_200
+    AvailabilityRuleWday:
+      type: string
+      enum:
+      - sunday
+      - monday
+      - tuesday
+      - wednesday
+      - thursday
+      - friday
+      - saturday
+      description: The day of the week for which this Rule should be applied to.
+      title: AvailabilityRuleWday
+    UpdateEventTypeAvailabilityRequestForbiddenError0:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypeAvailabilitySchedulesPatchResponsesContentApplicationJsonSchemaOneOf0Title'
+        message:
+          $ref: '#/components/schemas/EventTypeAvailabilitySchedulesPatchResponsesContentApplicationJsonSchemaOneOf0Message'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: UpdateEventTypeAvailabilityRequestForbiddenError0
+    Get-event-type-availabilityRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypeAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypeAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-event-type-availabilityRequestBadRequestError
+    EventTypeAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: EventTypeAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaTitle
+    Get-user-availability-scheduleRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/UserAvailabilitySchedulesUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/UserAvailabilitySchedulesUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-user-availability-scheduleRequestBadRequestError
+    availability_list-user-busy-times_Response_200:
+      type: object
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserBusyTime'
+          description: The set of internal and external scheduled calendar events matching the criteria
+      required:
+      - collection
+      description: Service Response
+      title: availability_list-user-busy-times_Response_200
+    InsufficientScopeErrorMessage:
+      type: string
+      enum:
+      - This operation requires the scopes listed in the 'required_scopes' array.
+      title: InsufficientScopeErrorMessage
+    UserNotInOrganizationErrorMessage:
+      type: string
+      enum:
+      - This user is not in your organization
+      title: UserNotInOrganizationErrorMessage
+    List-user-busy-timesRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/UserNotInOrganizationError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: List-user-busy-timesRequestForbiddenError
+    List-user-busy-timesRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/UserBusyTimesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/UserBusyTimesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-user-busy-timesRequestInternalServerError
+    UserBusyTimesGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: UserBusyTimesGetResponsesContentApplicationJsonSchemaTitle
+    availability_get-user-availability-schedule_Response_200:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/AvailabilitySchedule'
+      required:
+      - resource
+      title: availability_get-user-availability-schedule_Response_200
+    Get-user-availability-scheduleRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/UserAvailabilitySchedulesUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/UserAvailabilitySchedulesUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-user-availability-scheduleRequestNotFoundError
+    Get-event-type-availabilityRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypeAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypeAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-event-type-availabilityRequestUnauthorizedError
+    GetEventTypeAvailabilityRequestForbiddenError0:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypeAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaOneOf0Title'
+        message:
+          $ref: '#/components/schemas/EventTypeAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaOneOf0Message'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: GetEventTypeAvailabilityRequestForbiddenError0
     AvailabilitySchedule:
       type: object
-      description: An availability schedule defining recurring time windows when a user is available for meetings.
       properties:
         uri:
           type: string
           format: uri
-          description: The canonical URI of the availability schedule resource.
-        name:
-          type: string
-          description: The name of the availability schedule.
+          description: A URI reference to this Availability Schedule.
         default:
           type: boolean
-          description: Whether this is the users default availability schedule.
+          description: This is the default Availability Schedule in use.
+        name:
+          type: string
+          description: The name of this Availability Schedule.
+        user:
+          type: string
+          format: uri
+          description: A URI reference to a User.
         timezone:
           type: string
-          description: The IANA timezone for the schedule.
+          description: The timezone for which this Availability Schedule is originated in.
         rules:
           type: array
           items:
-            type: object
-            properties:
-              type:
-                type: string
-                enum:
-                - wday
-                - date
-                description: The type of rule (recurring weekday or specific date).
-              wday:
-                type: string
-                enum:
-                - sunday
-                - monday
-                - tuesday
-                - wednesday
-                - thursday
-                - friday
-                - saturday
-                description: The day of the week for wday-type rules.
-              date:
-                type: string
-                format: date
-                description: The specific date for date-type rules.
-              intervals:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    from:
-                      type: string
-                      description: The start time of the interval (HH:MM format).
-                    to:
-                      type: string
-                      description: The end time of the interval (HH:MM format).
-                description: The time intervals during which the user is available.
-          description: The availability rules defining when the user is available.
-    Error:
+            $ref: '#/components/schemas/AvailabilityRule'
+          description: The rules of this Availability Schedule.
+      required:
+      - uri
+      - default
+      - name
+      - user
+      - timezone
+      - rules
+      description: The availability schedule set by the user.
+      title: AvailabilitySchedule
+    Update-event-type-availabilityRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/UpdateEventTypeAvailabilityRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Update-event-type-availabilityRequestForbiddenError
+    UserAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: UserAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaMessage
+    EventTypeAvailabilitySchedulesPatchResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: EventTypeAvailabilitySchedulesPatchResponsesContentApplicationJsonSchemaTitle
+    UserAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: UserAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaTitle
+    UserBusyTimeEvent:
       type: object
-      description: An error response from the Calendly API.
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: The uri associated with the calendly scheduled event
+      required:
+      - uri
+      title: UserBusyTimeEvent
+    UserBusyTimesGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: UserBusyTimesGetResponsesContentApplicationJsonSchemaMessage
+    List-user-availability-schedulesRequestBadRequestError:
+      type: object
       properties:
         title:
-          type: string
-          description: A short summary of the error.
+          $ref: '#/components/schemas/UserAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaTitle'
         message:
-          type: string
-          description: A detailed description of the error.
+          $ref: '#/components/schemas/UserAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaMessage'
         details:
           type: array
           items:
-            type: object
-            properties:
-              parameter:
-                type: string
-                description: The parameter that caused the error.
-              message:
-                type: string
-                description: A description of what was wrong with the parameter.
-          description: Specific details about validation errors.
-    BusyTime:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-user-availability-schedulesRequestBadRequestError
+    Get-event-type-availabilityRequestNotFoundError:
       type: object
-      description: A time period during which a user is busy based on their connected calendars.
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypeAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypeAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-event-type-availabilityRequestNotFoundError
+    AvailabilityRule:
+      type: object
       properties:
         type:
+          $ref: '#/components/schemas/AvailabilityRuleType'
+          description: The type of this Availability Rule; can be "wday" or a specific "date".
+        intervals:
+          type: array
+          items:
+            $ref: '#/components/schemas/AvailabilityRuleIntervalsItems'
+          description: The intervals to be applied to this Rule. Each interval represents when booking a meeting is allowed. If the interval array is empty, then there is no booking availability for that day. Time is in 24h format (i.e. "17:30") and local to the timezone in the Availability Schedule.
+        wday:
+          $ref: '#/components/schemas/AvailabilityRuleWday'
+          description: The day of the week for which this Rule should be applied to.
+        date:
           type: string
-          description: The type of busy time (e.g., calendly or external).
-        start_time:
-          type: string
-          format: date-time
-          description: The start of the busy period in UTC.
-        end_time:
-          type: string
-          format: date-time
-          description: The end of the busy period in UTC.
-        buffered_start_time:
-          type: string
-          format: date-time
-          description: The start time including buffer periods.
-        buffered_end_time:
-          type: string
-          format: date-time
-          description: The end time including buffer periods.
-        event:
-          type: object
-          description: Details about the event causing the busy time.
-          properties:
-            uri:
-              type: string
-              format: uri
-              description: The URI of the event.
-    AvailableTime:
+          pattern: ^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$
+          description: A specific date in the future that this should be applied to (i.e. "2030-12-31").
+      required:
+      - type
+      - intervals
+      description: The rules for an availability schedule.
+      title: AvailabilityRule
+    AvailabilityRuleIntervalsItems:
       type: object
-      description: An available time slot for an event type that can be booked by an invitee.
       properties:
-        status:
+        from:
           type: string
-          enum:
-          - available
-          description: The status of the time slot.
-        invitees_remaining:
-          type: integer
-          description: The number of remaining spots for group events.
-        start_time:
+          pattern: (\d\d):(\d\d)
+          description: 'Format: `"hh:mm"`'
+        to:
           type: string
-          format: date-time
-          description: The start time of the available slot in UTC.
-        scheduling_url:
+          pattern: (\d\d):(\d\d)
+          description: 'Format: `"hh:mm"`'
+      title: AvailabilityRuleIntervalsItems
+    UserNotInOrganizationErrorTitle:
+      type: string
+      enum:
+      - Permission Denied
+      title: UserNotInOrganizationErrorTitle
+    List-user-busy-timesRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/UserBusyTimesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/UserBusyTimesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-user-busy-timesRequestUnauthorizedError
+    EventTypeAvailabilityScheduleAvailabilitySetting:
+      type: string
+      enum:
+      - host
+      default: host
+      description: The setting for event type availability specifies if all hosts follow the same schedule or if each host has their own unique schedule on the event type.
+      title: EventTypeAvailabilityScheduleAvailabilitySetting
+    AvailabilityRuleType:
+      type: string
+      enum:
+      - wday
+      - date
+      description: The type of this Availability Rule; can be "wday" or a specific "date".
+      title: AvailabilityRuleType
+    List-user-availability-schedulesRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/UserAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/UserAvailabilitySchedulesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-user-availability-schedulesRequestInternalServerError
+    UserNotInOrganizationError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/UserNotInOrganizationErrorTitle'
+        message:
+          $ref: '#/components/schemas/UserNotInOrganizationErrorMessage'
+      description: Permission Denied or caller not authorized to perform this action
+      title: UserNotInOrganizationError
+    EventTypeAvailabilitySchedulesPatchResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: EventTypeAvailabilitySchedulesPatchResponsesContentApplicationJsonSchemaOneOf0Message
+    Update-event-type-availabilityRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypeAvailabilitySchedulesPatchResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypeAvailabilitySchedulesPatchResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Update-event-type-availabilityRequestUnauthorizedError
+    Get-user-availability-scheduleRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/UserAvailabilitySchedulesUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/UserAvailabilitySchedulesUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-user-availability-scheduleRequestUnauthorizedError
+    List-user-availability-schedulesRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/UserNotInOrganizationError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: List-user-availability-schedulesRequestForbiddenError
+    EventTypeAvailabilitySchedule:
+      type: object
+      properties:
+        event_type:
           type: string
           format: uri
-          description: The URL to schedule at this specific time.
+          description: The URI of the event type associated with the Event Type Availability Schedule
+        availability_setting:
+          $ref: '#/components/schemas/EventTypeAvailabilityScheduleAvailabilitySetting'
+          default: host
+          description: The setting for event type availability specifies if all hosts follow the same schedule or if each host has their own unique schedule on the event type.
+        availability_rule:
+          $ref: '#/components/schemas/EventTypeAvailabilityScheduleAvailabilityRule'
+      description: A configuration for an Event Type Availability Schedule
+      title: EventTypeAvailabilitySchedule
+    Get-user-availability-scheduleRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/UserNotInOrganizationError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Get-user-availability-scheduleRequestForbiddenError
+    Update-event-type-availabilityRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/EventTypeAvailabilitySchedulesPatchResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/EventTypeAvailabilitySchedulesPatchResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Update-event-type-availabilityRequestInternalServerError
+    ErrorResponseDetailsItem:
+      type: object
+      properties:
+        parameter:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+      title: ErrorResponseDetailsItem
+    Pagination:
+      type: object
+      properties:
+        count:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: The number of rows to return
+        next_page:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URI to return the next page of an ordered list ("null" indicates no additional results are available)
+        previous_page:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URI to return the previous page of an ordered list ("null" indicates no additional results are available)
+        next_page_token:
+          type:
+          - string
+          - 'null'
+          description: Token to return the next page of an ordered list ("null" indicates no additional results are available)
+        previous_page_token:
+          type:
+          - string
+          - 'null'
+          description: Token to return the previous page of an ordered list ("null" indicates no additional results are available)
+      required:
+      - count
+      - next_page
+      - previous_page
+      - next_page_token
+      - previous_page_token
+      title: Pagination
+    availability_list-user-availability-schedules_Response_200:
+      type: object
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/AvailabilitySchedule'
+      required:
+      - collection
+      title: availability_list-user-availability-schedules_Response_200
   securitySchemes:
-    bearerAuth:
+    oauth2:
       type: http
       scheme: bearer
-      description: Personal access token or OAuth 2.1 access token. Include in the Authorization header as Bearer {token}.
-externalDocs:
-  description: Calendly API Documentation
-  url: https://developer.calendly.com/api-docs
+      description: OAuth 2.0
+    personal_access_token:
+      type: http
+      scheme: bearer
+      description: Personal Access Token

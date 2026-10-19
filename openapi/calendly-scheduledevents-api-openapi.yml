@@ -1,0 +1,2903 @@
+openapi: 3.2.0
+info:
+  title: Calendly Scheduled Events API
+  version: 1.0.0
+servers:
+- url: https://api.calendly.com
+  description: https://api.calendly.com
+tags:
+- name: scheduledEvents
+paths:
+  /scheduled_events/{uuid}/cancellation:
+    post:
+      operationId: scheduledEvents_create-scheduled-event-cancellation
+      summary: Cancel Event
+      description: 'Cancels specified event.
+
+
+        > `scheduled_events:write`'
+      tags:
+      - scheduledEvents
+      parameters:
+      - name: uuid
+        in: path
+        description: The event's unique indentifier
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/scheduledEvents_create-scheduled-event-cancellation_Response_201'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-scheduled-event-cancellationRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-scheduled-event-cancellationRequestUnauthorizedError'
+        '403':
+          description: Permission Denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-scheduled-event-cancellationRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-scheduled-event-cancellationRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-scheduled-event-cancellationRequestInternalServerError'
+      requestBody:
+        description: Optional cancellation reason.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+                  maxLength: 10000
+                  description: Reason for cancellation
+      security:
+      - oauth2: []
+  /invitees:
+    post:
+      operationId: scheduledEvents_create-event-invitee
+      summary: Create Event Invitee (Scheduling API)
+      description: 'Creates a new booking for an event invitee. Use this endpoint to book an invitee directly from your app without redirects, iframes, or Calendly-hosted UI.
+
+
+        Standard notifications, calendar invites, reschedules, and workflows run as if booked via the Calendly UI.
+
+
+        **NOTE:**
+
+        * Access to this endpoint is limited to Calendly users on paid plans (Standard and above). Users on the Free plan will receive a 403 Forbidden response.
+
+
+        > `scheduled_events:write`'
+      tags:
+      - scheduledEvents
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/scheduledEvents_create-event-invitee_Response_201'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post-inviteeRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post-inviteeRequestUnauthorizedError'
+        '403':
+          description: Caller not authorized to perform this action or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post-inviteeRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post-inviteeRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post-inviteeRequestInternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                event_type:
+                  type: string
+                  format: uri
+                  description: 'Canonical reference (unique identifier) for the event type being scheduled '
+                start_time:
+                  type: string
+                  format: date-time
+                  description: The start time in UTC of the scheduled event
+                invitee:
+                  $ref: '#/components/schemas/InviteesPostRequestBodyContentApplicationJsonSchemaInvitee'
+                location:
+                  $ref: '#/components/schemas/InviteeLocation'
+                questions_and_answers:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/InviteeQuestionAndAnswer'
+                tracking:
+                  $ref: '#/components/schemas/InviteeTracking'
+                event_guests:
+                  type: array
+                  items:
+                    type: string
+                    format: email
+                  description: Emails of invitee guests. Max 10.
+              required:
+              - event_type
+              - start_time
+              - invitee
+      security:
+      - oauth2: []
+  /invitee_no_shows:
+    post:
+      operationId: scheduledEvents_create-invitee-no-show
+      summary: Create Invitee No Show
+      description: 'Marks an Invitee as a No Show.
+
+
+        > `scheduled_events:write`'
+      tags:
+      - scheduledEvents
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/scheduledEvents_create-invitee-no-show_Response_201'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-invitee-no-showRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-invitee-no-showRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-invitee-no-showRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-invitee-no-showRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-invitee-no-showRequestInternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                invitee:
+                  type: string
+                  format: uri
+      security:
+      - oauth2: []
+  /invitee_no_shows/{uuid}:
+    delete:
+      operationId: scheduledEvents_delete-invitee-no-show
+      summary: Delete Invitee No Show
+      description: 'Undoes marking an Invitee as a No Show.
+
+
+        > `scheduled_events:write`'
+      tags:
+      - scheduledEvents
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-invitee-no-showRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-invitee-no-showRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-invitee-no-showRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delete-invitee-no-showRequestInternalServerError'
+      security:
+      - oauth2: []
+    get:
+      operationId: scheduledEvents_get-invitee-no-show
+      summary: Get Invitee No Show
+      description: 'Returns information about a specified Invitee No Show.
+
+
+        > `scheduled_events:read`'
+      tags:
+      - scheduledEvents
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/scheduledEvents_get-invitee-no-show_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-invitee-no-showRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-invitee-no-showRequestUnauthorizedError'
+        '403':
+          description: Permission denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-invitee-no-showRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-invitee-no-showRequestNotFoundError'
+      security:
+      - oauth2: []
+  /scheduled_events/{uuid}:
+    get:
+      operationId: scheduledEvents_get-scheduled-event
+      summary: Get Event
+      description: 'Returns information about a specified Event.
+
+
+        > `scheduled_events:read`'
+      tags:
+      - scheduledEvents
+      parameters:
+      - name: uuid
+        in: path
+        description: The event's unique identifier
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/scheduledEvents_get-scheduled-event_Response_200'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-scheduled-eventRequestUnauthorizedError'
+        '403':
+          description: Permission Denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-scheduled-eventRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-scheduled-eventRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-scheduled-eventRequestInternalServerError'
+      security:
+      - oauth2: []
+  /scheduled_events/{event_uuid}/invitees/{invitee_uuid}:
+    get:
+      operationId: scheduledEvents_get-event-invitee
+      summary: Get Event Invitee
+      description: 'Returns information about a specified Invitee (person invited to an event).
+
+
+        > `scheduled_events:read`'
+      tags:
+      - scheduledEvents
+      parameters:
+      - name: event_uuid
+        in: path
+        description: The event's unique identifier
+        required: true
+        schema:
+          type: string
+      - name: invitee_uuid
+        in: path
+        description: The invitee's unique identifier
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/scheduledEvents_get-event-invitee_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-scheduled-event-inviteesRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-scheduled-event-inviteesRequestUnauthorizedError'
+        '403':
+          description: Caller not authorized to view event or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-scheduled-event-inviteesRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-scheduled-event-inviteesRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-scheduled-event-inviteesRequestInternalServerError'
+      security:
+      - oauth2: []
+  /scheduled_events/{uuid}/invitees:
+    get:
+      operationId: scheduledEvents_list-event-invitees
+      summary: List Event Invitees
+      description: 'Returns a list of Invitees for an event.
+
+
+        > `scheduled_events:read`'
+      tags:
+      - scheduledEvents
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: Indicates if the invitee "canceled" or still "active"
+        required: false
+        schema:
+          $ref: '#/components/schemas/ScheduledEventsUuidInviteesGetParametersStatus'
+      - name: sort
+        in: query
+        description: 'Order results by the **created_at** field and direction specified: ascending ("asc") or descending ("desc")'
+        required: false
+        schema:
+          type: string
+          default: created_at:asc
+      - name: email
+        in: query
+        description: Indicates if the results should be filtered by email address
+        required: false
+        schema:
+          type: string
+          format: email
+      - name: page_token
+        in: query
+        description: The token to pass to get the next or previous portion of the collection
+        required: false
+        schema:
+          type: string
+      - name: count
+        in: query
+        description: The number of rows to return
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/scheduledEvents_list-event-invitees_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-event-inviteesRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-event-inviteesRequestUnauthorizedError'
+        '403':
+          description: Permission Denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-event-inviteesRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-event-inviteesRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-event-inviteesRequestInternalServerError'
+      security:
+      - oauth2: []
+  /scheduled_events:
+    get:
+      operationId: scheduledEvents_list-scheduled-events
+      summary: List Events
+      description: 'Returns a list of Events.
+
+
+        * Pass `organization` parameter to return events for that organization (requires admin/owner privilege)
+
+        * Pass `user` parameter to return events for a specific User
+
+        * Pass `group` parameter to return events for a specific Group (requires organization admin/owner or group admin privilege)
+
+
+        **NOTES:**
+
+        * If you are the admin/owner of the organization, you can use both `organization` and `user` to get a list of events for a specific user within your organization.
+
+        * If you are the admin/owner of the organization, you can use both `organization` and `group` to get a list of events for a specific group within your organization.
+
+
+        * `user` can only be used alone when requesting your own personal events. This will return your events within any organization that you are currently in or were a part of in the past.
+
+
+        > `scheduled_events:read`'
+      tags:
+      - scheduledEvents
+      parameters:
+      - name: user
+        in: query
+        description: Return events that are scheduled with the user associated with this URI
+        required: false
+        schema:
+          type: string
+          format: uri
+      - name: organization
+        in: query
+        description: Return events that are scheduled with the organization associated with this URI
+        required: false
+        schema:
+          type: string
+          format: uri
+      - name: invitee_email
+        in: query
+        description: Return events that are scheduled with the invitee associated with this email address
+        required: false
+        schema:
+          type: string
+          format: email
+      - name: status
+        in: query
+        description: Whether the scheduled event is `active` or `canceled`
+        required: false
+        schema:
+          $ref: '#/components/schemas/ScheduledEventsGetParametersStatus'
+      - name: sort
+        in: query
+        description: 'Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values.
+
+          Supported fields are: start_time.
+
+          Sort direction is specified as: asc, desc.'
+        required: false
+        schema:
+          type: string
+      - name: min_start_time
+        in: query
+        description: 'Include events with start times after this time (sample time format: "2020-01-02T03:04:05.678123Z"). This time should use the UTC timezone.'
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: max_start_time
+        in: query
+        description: 'Include events with start times prior to this time (sample time format: "2020-01-02T03:04:05.678123Z"). This time should use the UTC timezone.'
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: page_token
+        in: query
+        description: The token to pass to get the next or previous portion of the collection
+        required: false
+        schema:
+          type: string
+      - name: count
+        in: query
+        description: The number of rows to return
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+      - name: group
+        in: query
+        description: Return events that are scheduled with the group associated with this URI
+        required: false
+        schema:
+          type: string
+          format: uri
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/scheduledEvents_list-scheduled-events_Response_200'
+        '400':
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-scheduled-eventsRequestBadRequestError'
+        '401':
+          description: Cannot authenticate caller
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-scheduled-eventsRequestUnauthorizedError'
+        '403':
+          description: Permission Denied or insufficient scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-scheduled-eventsRequestForbiddenError'
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-scheduled-eventsRequestNotFoundError'
+        '500':
+          description: An error has occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-scheduled-eventsRequestInternalServerError'
+      security:
+      - oauth2: []
+components:
+  schemas:
+    ZoomConferenceDataSettingsGlobalDialInNumbersItems:
+      type: object
+      properties:
+        number:
+          type: string
+          description: Phone number
+        country:
+          type: string
+          description: Country code
+        type:
+          type: string
+        city:
+          type: string
+        country_name:
+          type: string
+      title: ZoomConferenceDataSettingsGlobalDialInNumbersItems
+    InviteeLocation:
+      oneOf:
+      - $ref: '#/components/schemas/InviteeInPersonMeeting'
+      - $ref: '#/components/schemas/InviteeInboundCall'
+      - $ref: '#/components/schemas/InviteeOutboundCall'
+      - $ref: '#/components/schemas/InviteeZoomConference'
+      - $ref: '#/components/schemas/InviteeGoogleConference'
+      - $ref: '#/components/schemas/InviteeGotoMeetingConference'
+      - $ref: '#/components/schemas/InviteeMicrosoftTeamsConference'
+      - $ref: '#/components/schemas/InviteeWebExConference'
+      - $ref: '#/components/schemas/InviteeInviteeSpecifiedLocation'
+      - $ref: '#/components/schemas/InviteeCustomLocation'
+      description: "The polymorphic base type for an event location that Calendly supports.  \n\nNote: \n- Location.kind must be supplied if location is defined.\n- Location must match location specified on the EventType.\n- Do not pass the location object for an EventType with a round_robin pooling_type."
+      title: InviteeLocation
+    InsufficientScopeError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InsufficientScopeErrorTitle'
+        message:
+          $ref: '#/components/schemas/InsufficientScopeErrorMessage'
+        required_scopes:
+          type: array
+          items:
+            type: string
+            pattern: ^[a-z_]+:(read|write)$
+      required:
+      - title
+      - message
+      - required_scopes
+      description: Caller does not have required oauth scopes
+      title: InsufficientScopeError
+    InviteePaymentCurrency:
+      type: string
+      enum:
+      - AUD
+      - CAD
+      - EUR
+      - GBP
+      - USD
+      description: The currency format that the payment is in.
+      title: InviteePaymentCurrency
+    List-scheduled-eventsRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ScheduledEventsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ScheduledEventsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-scheduled-eventsRequestUnauthorizedError
+    InviteePayment:
+      type: object
+      properties:
+        external_id:
+          type: string
+          description: Unique identifier for the payment
+        provider:
+          $ref: '#/components/schemas/InviteePaymentProvider'
+          description: Payment provider
+        amount:
+          type: string
+          title: float
+          description: The amount of the payment
+        currency:
+          $ref: '#/components/schemas/InviteePaymentCurrency'
+          description: The currency format that the payment is in.
+        terms:
+          type:
+          - string
+          - 'null'
+          description: Terms of the payment
+        successful:
+          type: boolean
+          description: Indicates whether the payment was successfully processed
+      required:
+      - external_id
+      - provider
+      - amount
+      - currency
+      - terms
+      - successful
+      description: Invitee payment
+      title: InviteePayment
+    Guest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+      - email
+      - created_at
+      - updated_at
+      description: An individual whom an invitee has invited to be a guest attendee to an event
+      title: Guest
+    InviteeInboundCallKind:
+      type: string
+      enum:
+      - inbound_call
+      description: Indicates that the invitee will call the event host
+      title: InviteeInboundCallKind
+    ScheduledEventsGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: ScheduledEventsGetResponsesContentApplicationJsonSchemaMessage
+    Cancellation:
+      type: object
+      properties:
+        canceled_by:
+          type: string
+          description: Name of the person whom canceled
+        reason:
+          type:
+          - string
+          - 'null'
+          description: Reason that the cancellation occurred
+        canceler_type:
+          $ref: '#/components/schemas/CancellationCancelerType'
+        created_at:
+          type: string
+          format: date-time
+          description: The moment when the cancellation was created
+      required:
+      - canceled_by
+      - reason
+      - canceler_type
+      - created_at
+      description: Provides data pertaining to the cancellation of the Event or the Invitee
+      title: Cancellation
+    InviteeAssociatedNoShow:
+      type: object
+      properties:
+        uri:
+          type: string
+          description: Canonical reference (unique identifier) for the no show
+        created_at:
+          type: string
+          format: date-time
+          description: The moment when the no show was created
+      required:
+      - uri
+      - created_at
+      description: Provides data pertaining to the associated no show for the Invitee
+      title: InviteeAssociatedNoShow
+    CreateInviteeNoShowRequestForbiddenError0:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InviteeNoShowsPostResponsesContentApplicationJsonSchemaOneOf0Title'
+        message:
+          $ref: '#/components/schemas/InviteeNoShowsPostResponsesContentApplicationJsonSchemaOneOf0Message'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: CreateInviteeNoShowRequestForbiddenError0
+    InviteeSpecifiedLocationType:
+      type: string
+      enum:
+      - ask_invitee
+      description: The event location selected by the invitee
+      title: InviteeSpecifiedLocationType
+    List-scheduled-eventsRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ScheduledEventsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ScheduledEventsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-scheduled-eventsRequestInternalServerError
+    InviteeNoShow:
+      type: object
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: Canonical reference (unique identifier) for the no show
+        invitee:
+          type: string
+          format: uri
+          description: Canonical reference (unique identifier) for the associated Invitee
+        created_at:
+          type: string
+          format: date-time
+          description: The moment when the no show was created
+      required:
+      - uri
+      - invitee
+      - created_at
+      description: Information about an invitees no show.
+      title: InviteeNoShow
+    GetScheduledEventsError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/GetScheduledEventsErrorTitle'
+        message:
+          $ref: '#/components/schemas/GetScheduledEventsErrorMessage'
+      description: Permission Denied
+      title: GetScheduledEventsError
+    Get-scheduled-event-inviteesRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/GetScheduledEventInviteeError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Get-scheduled-event-inviteesRequestForbiddenError
+    InviteeInviteeSpecifiedLocation:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/InviteeInviteeSpecifiedLocationKind'
+          description: Indicates that the event location will be selected by the invitee
+        location:
+          type: string
+          description: The event location description provided by the invitee
+      required:
+      - kind
+      - location
+      description: Information for an Invitee Specified Location
+      title: InviteeInviteeSpecifiedLocation
+    InviteeInviteeSpecifiedLocationKind:
+      type: string
+      enum:
+      - ask_invitee
+      description: Indicates that the event location will be selected by the invitee
+      title: InviteeInviteeSpecifiedLocationKind
+    InviteeNoShowsPostResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: InviteeNoShowsPostResponsesContentApplicationJsonSchemaMessage
+    ZoomConferenceDataId:
+      oneOf:
+      - type: string
+      - type: integer
+      description: The conference ID provided by Zoom
+      title: ZoomConferenceDataId
+    GetScheduledEventsInviteesErrorTitle:
+      type: string
+      enum:
+      - Permission Denied
+      title: GetScheduledEventsInviteesErrorTitle
+    scheduledEvents_get-event-invitee_Response_200:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/Invitee'
+      required:
+      - resource
+      title: scheduledEvents_get-event-invitee_Response_200
+    scheduledEvents_get-invitee-no-show_Response_200:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/InviteeNoShow'
+      required:
+      - resource
+      title: scheduledEvents_get-invitee-no-show_Response_200
+    List-event-inviteesRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ScheduledEventsUuidInviteesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ScheduledEventsUuidInviteesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-event-inviteesRequestInternalServerError
+    Delete-invitee-no-showRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InviteeNoShowsUuidDeleteResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/InviteeNoShowsUuidDeleteResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Delete-invitee-no-showRequestUnauthorizedError
+    InviteeOutboundCall:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/InviteeOutboundCallKind'
+          description: Indicates that the event host (publisher) will call the invitee
+        location:
+          type: string
+          description: The phone number the event host (publisher) will use to call the invitee
+      required:
+      - kind
+      - location
+      description: Information about an Outbound Call
+      title: InviteeOutboundCall
+    MicrosoftTeamsConferenceData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The conference ID provided by Microsoft Teams
+        audioConferencing:
+          oneOf:
+          - $ref: '#/components/schemas/MicrosoftTeamsConferenceDataAudioConferencing'
+          - type: 'null'
+      description: The conference metadata supplied by Microsoft Teams
+      title: MicrosoftTeamsConferenceData
+    InviteeGotoMeetingConferenceKind:
+      type: string
+      enum:
+      - gotomeeting_conference
+      description: The event location is a GoToMeeting conference
+      title: InviteeGotoMeetingConferenceKind
+    ScheduledEventsUuidCancellationPostResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: ScheduledEventsUuidCancellationPostResponsesContentApplicationJsonSchemaTitle
+    Get-scheduled-event-inviteesRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ScheduledEventsEventUuidInviteesInviteeUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ScheduledEventsEventUuidInviteesInviteeUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-scheduled-event-inviteesRequestUnauthorizedError
+    InviteeReconfirmation:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          description: When the reconfirmation was created.
+        confirmed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the Invitee confirmed their attendance.
+      required:
+      - created_at
+      - confirmed_at
+      description: Assuming reconfirmation is enabled for the event type, when reconfirmation is requested this object is present with a `created_at` that reflects when the reconfirmation notification was sent. Once the invitee has reconfirmed the `confirmed_at` attribute will change from `null` to a timestamp that reflects when they took action.
+      title: InviteeReconfirmation
+    Event:
+      type: object
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: Canonical reference (unique identifier) for the resource
+        name:
+          type:
+          - string
+          - 'null'
+          description: The event name
+        meeting_notes_plain:
+          type:
+          - string
+          - 'null'
+          description: The internal meeting notes (in non formatted text)
+        meeting_notes_html:
+          type: string
+          description: The internal meeting notes (formatted with HTML)
+        status:
+          $ref: '#/components/schemas/EventStatus'
+          description: Indicates if the event is "active" or "canceled"
+        start_time:
+          type: string
+          format: date-time
+          description: The moment the event was scheduled to start in UTC time (e.g. "2020-01-02T03:04:05.678123Z").
+        end_time:
+          type: string
+          format: date-time
+          description: The moment the event was scheduled to end in UTC time (e.g. "2020-01-02T03:04:05.678123Z")
+        event_type:
+          type: string
+          format: uri
+          description: The event type associated with this event
+        location:
+          $ref: '#/components/schemas/Location'
+        invitees_counter:
+          $ref: '#/components/schemas/EventInviteesCounter'
+        created_at:
+          type: string
+          format: date-time
+          description: The moment when the event was created (e.g. "2020-01-02T03:04:05.678123Z")
+        updated_at:
+          type: string
+          format: date-time
+          description: The moment when the event was last updated (e.g. "2020-01-02T03:04:05.678123Z")
+        event_memberships:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventEventMembershipsItems'
+          description: Event membership list
+        event_guests:
+          type: array
+          items:
+            $ref: '#/components/schemas/Guest'
+          description: Additional people added to an event by an invitee
+        cancellation:
+          $ref: '#/components/schemas/Cancellation'
+        calendar_event:
+          $ref: '#/components/schemas/LegacyCalendarEvent'
+          deprecated: true
+      required:
+      - uri
+      - name
+      - status
+      - start_time
+      - end_time
+      - event_type
+      - location
+      - invitees_counter
+      - created_at
+      - updated_at
+      - event_memberships
+      - event_guests
+      - calendar_event
+      description: Information about a scheduled meeting
+      title: Event
+    GotoMeetingConference:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/GotoMeetingConferenceType'
+          description: The event location is a GoToMeeting conference
+        status:
+          oneOf:
+          - $ref: '#/components/schemas/GotoMeetingConferenceStatus'
+          - type: 'null'
+          description: Indicates the current status of the GoToMeeting conference<br/>&nbsp; * Expect only `pushed` status to have non-`null` values for `join_url` & `data` fields.<br/>&nbsp; - `processing` Location details generation pending<br/>&nbsp; - `initiated` Requesting location details from GoToMeeting<br/>&nbsp; - `pushed` Location details are available<br/>&nbsp; - `failed` Error occurred or event has been canceled<br/>&nbsp; - `null` Location details are no longer available
+        join_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: GoToMeeting conference meeting url
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/GotoMeetingConferenceData'
+          - type: 'null'
+          description: The conference metadata supplied by GoToMeeting
+      required:
+      - type
+      - status
+      - join_url
+      - data
+      description: Details about an Event that will take place using a GotoMeeting conference. Location details will not be available 6 months after event has occurred.
+      title: GotoMeetingConference
+    Get-scheduled-eventRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/GetScheduledEventsInviteesError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Get-scheduled-eventRequestForbiddenError
+    ScheduledEventsUuidInviteesGetParametersStatus:
+      type: string
+      enum:
+      - active
+      - canceled
+      title: ScheduledEventsUuidInviteesGetParametersStatus
+    GetScheduledEventInviteeError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/GetScheduledEventInviteeErrorTitle'
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Caller not authorized to view event
+      title: GetScheduledEventInviteeError
+    Get-invitee-no-showRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InviteeNoShowsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/InviteeNoShowsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-invitee-no-showRequestUnauthorizedError
+    InboundCall:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/InboundCallType'
+          description: "\t\nIndicates that the invitee will call the event host"
+        location:
+          type: string
+          description: The phone number the invitee will use to call the event host (publisher)
+        additional_info:
+          type: string
+      required:
+      - type
+      - location
+      description: Invitee will call meeting publisher at the specified phone number
+      title: InboundCall
+    InboundCallType:
+      type: string
+      enum:
+      - inbound_call
+      description: "\t\nIndicates that the invitee will call the event host"
+      title: InboundCallType
+    List-scheduled-eventsRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ScheduledEventsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ScheduledEventsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-scheduled-eventsRequestNotFoundError
+    InviteesError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InviteesErrorTitle'
+        message:
+          $ref: '#/components/schemas/InviteesErrorMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Caller not authorized to perform this action
+      title: InviteesError
+    GoogleConferenceStatus:
+      type: string
+      enum:
+      - processing
+      - initiated
+      - pushed
+      - failed
+      description: Indicates the current status of the Google conference<br/>&nbsp; * Expect only `pushed` status to have a non-`null` value for the `join_url` field.<br/>&nbsp; - `processing` Location details generation pending<br/>&nbsp; - `initiated` Requesting location details from Google<br/>&nbsp; - `pushed` Location details are available<br/>&nbsp; - `failed` Error occurred or event has been canceled<br/>&nbsp; - `null` Location details are no longer available
+      title: GoogleConferenceStatus
+    GoogleConferenceType:
+      type: string
+      enum:
+      - google_conference
+      description: The event location is a Google Meet or Hangouts conference
+      title: GoogleConferenceType
+    WebExConference:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/WebExConferenceType'
+          description: The event location is a WebEx conference
+        status:
+          oneOf:
+          - $ref: '#/components/schemas/WebExConferenceStatus'
+          - type: 'null'
+          description: Indicates the current status of the WebEx conference<br/>&nbsp; * Expect only `pushed` status to have non-`null` values for `join_url` & `data` fields.<br/>&nbsp; - `processing` Location details generation pending<br/>&nbsp; - `initiated` Requesting location details from WebEx<br/>&nbsp; - `pushed` Location details are available<br/>&nbsp; - `failed` Error occurred or event has been canceled<br/>&nbsp; - `null` Location details are no longer available
+        join_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: WebEx conference meeting url
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/WebExConferenceData'
+          - type: 'null'
+          description: The conference metadata supplied by GoToMeeting
+      required:
+      - type
+      - status
+      - join_url
+      - data
+      description: Details about an Event that will take place using a WebEx conference. Location details will not be available 6 months after event has occurred.
+      title: WebExConference
+    InviteeSchedulingMethod:
+      type: string
+      enum:
+      - instant_book
+      - api
+      description: The method used to schedule the event
+      title: InviteeSchedulingMethod
+    InPersonMeetingType:
+      type: string
+      enum:
+      - physical
+      description: Indicates that the event will be an in-person meeting.
+      title: InPersonMeetingType
+    Create-scheduled-event-cancellationRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ScheduledEventsUuidCancellationPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ScheduledEventsUuidCancellationPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-scheduled-event-cancellationRequestUnauthorizedError
+    CustomLocation:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/CustomLocationType'
+          description: The event location doesn't fall into a standard category defined by the event host (publisher)
+        location:
+          type:
+          - string
+          - 'null'
+          description: The location description provided by the event host (publisher)
+      required:
+      - type
+      - location
+      description: Use this to describe an existing Calendly-supported event location.
+      title: CustomLocation
+    InviteeCustomLocation:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/InviteeCustomLocationKind'
+          description: The event location doesn't fall into a standard category defined by the event host (publisher)
+        location:
+          type: string
+          description: The specific custom location
+      required:
+      - kind
+      - location
+      description: Information for a Custom Location
+      title: InviteeCustomLocation
+    GetScheduledEventsInviteesError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/GetScheduledEventsInviteesErrorTitle'
+        message:
+          $ref: '#/components/schemas/GetScheduledEventsInviteesErrorMessage'
+      description: Permission Denied
+      title: GetScheduledEventsInviteesError
+    Invitee:
+      type: object
+      properties:
+        uri:
+          type: string
+          format: uri
+          description: Canonical reference (unique identifier) for the invitee
+        email:
+          type: string
+          format: email
+          description: The invitee’s email address
+        first_name:
+          type:
+          - string
+          - 'null'
+          description: The first name of the invitee who booked the event when the event type is configured to use separate fields for first name and last name. Null when event type is configured to use a single field for name.
+        last_name:
+          type:
+          - string
+          - 'null'
+          description: The last name of the invitee who booked the event when the event type is configured to use separate fields for first name and last name. Null when event type is configured to use a single field for name.
+        name:
+          type: string
+          description: The invitee’s name (in human-readable format)
+        status:
+          $ref: '#/components/schemas/InviteeStatus'
+          description: Indicates if the invitee is "active" or "canceled"
+        questions_and_answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/InviteeQuestionAndAnswer'
+          description: A collection of the invitee's responses to questions on the event booking confirmation form
+        timezone:
+          type:
+          - string
+          - 'null'
+          description: Time zone to use when displaying time to the invitee
+        event:
+          type: string
+          format: uri
+          description: A reference to the event
+        created_at:
+          type: string
+          format: date-time
+          description: The moment when the event was created (e.g. "2020-01-02T03:04:05.678123Z")
+        updated_at:
+          type: string
+          format: date-time
+          description: The moment when the event was last updated (e.g. "2020-01-02T03:04:05.678123Z")
+        tracking:
+          $ref: '#/components/schemas/InviteeTracking'
+        text_reminder_number:
+          type:
+          - string
+          - 'null'
+          description: The phone number to use when sending text (SMS) reminders
+        rescheduled:
+          type: boolean
+          description: Indicates if this invitee has rescheduled. If `true`, a reference to the new Invitee instance is provided in the `new_invitee` field.
+        old_invitee:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: Reference to old Invitee instance that got rescheduled
+        new_invitee:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: Link to new invitee, after reschedule
+        cancel_url:
+          type: string
+          format: uri
+          description: Link to cancelling the event for the invitee
+        reschedule_url:
+          type: string
+          format: uri
+          description: Link to rescheduling the event for the invitee
+        routing_form_submission:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: Reference to a routing form submission that redirected the invitee to a booking page.
+        cancellation:
+          $ref: '#/components/schemas/Cancellation'
+        payment:
+          oneOf:
+          - $ref: '#/components/schemas/InviteePayment'
+          - type: 'null'
+          description: Invitee payment
+        no_show:
+          oneOf:
+          - $ref: '#/components/schemas/InviteeAssociatedNoShow'
+          - type: 'null'
+          description: Provides data pertaining to the associated no show for the Invitee
+        reconfirmation:
+          oneOf:
+          - $ref: '#/components/schemas/InviteeReconfirmation'
+          - type: 'null'
+          description: Assuming reconfirmation is enabled for the event type, when reconfirmation is requested this object is present with a `created_at` that reflects when the reconfirmation notification was sent. Once the invitee has reconfirmed the `confirmed_at` attribute will change from `null` to a timestamp that reflects when they took action.
+        scheduling_method:
+          oneOf:
+          - $ref: '#/components/schemas/InviteeSchedulingMethod'
+          - type: 'null'
+          description: The method used to schedule the event
+        invitee_scheduled_by:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: Reference to user URI who scheduled the event
+      required:
+      - uri
+      - email
+      - first_name
+      - last_name
+      - name
+      - status
+      - questions_and_answers
+      - timezone
+      - event
+      - created_at
+      - updated_at
+      - tracking
+      - text_reminder_number
+      - rescheduled
+      - old_invitee
+      - new_invitee
+      - cancel_url
+      - reschedule_url
+      - routing_form_submission
+      - payment
+      - no_show
+      - reconfirmation
+      - scheduling_method
+      - invitee_scheduled_by
+      description: An individual who has been invited to meet with a Calendly member
+      title: Invitee
+    scheduledEvents_get-scheduled-event_Response_200:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/Event'
+      required:
+      - resource
+      title: scheduledEvents_get-scheduled-event_Response_200
+    EventStatus:
+      type: string
+      enum:
+      - active
+      - canceled
+      description: Indicates if the event is "active" or "canceled"
+      title: EventStatus
+    InviteeGoogleConferenceKind:
+      type: string
+      enum:
+      - google_conference
+      description: The event location is a Google Meet or Hangouts conference
+      title: InviteeGoogleConferenceKind
+    GetScheduledEventsErrorMessage:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - Please also specify organization when requesting events for a user within your organization.
+      - Please also specify organization when requesting events for a group within your organization.
+      - This user is not in your organization
+      - You do not have permission
+      title: GetScheduledEventsErrorMessage
+    InviteesErrorTitle:
+      type: string
+      enum:
+      - Permission Denied
+      title: InviteesErrorTitle
+    Get-invitee-no-showRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InviteeNoShowsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/InviteeNoShowsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-invitee-no-showRequestNotFoundError
+    MicrosoftTeamsConferenceStatus:
+      type: string
+      enum:
+      - processing
+      - initiated
+      - pushed
+      - failed
+      description: Indicates the current status of the Microsoft Teams conference<br/>&nbsp; * Expect only `pushed` status to have non-`null` values for `join_url` & `data` fields.<br/>&nbsp; - `processing` Location details generation pending<br/>&nbsp; - `initiated` Requesting location details from MS Teams<br/>&nbsp; - `pushed` Location details are available<br/>&nbsp; - `failed` Error occurred or event has been canceled<br/>&nbsp; - `null` Location details are no longer available
+      title: MicrosoftTeamsConferenceStatus
+    ZoomConferenceStatus:
+      type: string
+      enum:
+      - processing
+      - initiated
+      - pushed
+      - failed
+      description: Indicates the current status of the Zoom conference<br/>&nbsp; * Expect only `pushed` status to have non-`null` values for `join_url` & `data` fields.<br/>&nbsp; - `processing` Location details generation pending<br/>&nbsp; - `initiated` Requesting location details from Zoom<br/>&nbsp; - `pushed` Location details are available<br/>&nbsp; - `failed` Error occurred or event has been canceled<br/>&nbsp; - `null` Location details are no longer available
+      title: ZoomConferenceStatus
+    scheduledEvents_create-event-invitee_Response_201:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/Invitee'
+      required:
+      - resource
+      title: scheduledEvents_create-event-invitee_Response_201
+    List-event-inviteesRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/GetScheduledEventsInviteesError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: List-event-inviteesRequestForbiddenError
+    Post-inviteeRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InviteesPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/InviteesPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Post-inviteeRequestInternalServerError
+    GetScheduledEventsInviteesErrorMessage:
+      type: string
+      enum:
+      - You are not allowed to view this event
+      title: GetScheduledEventsInviteesErrorMessage
+    Post-inviteeRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/InviteesError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Post-inviteeRequestForbiddenError
+    DeleteScheduledEventError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/DeleteScheduledEventErrorTitle'
+        message:
+          $ref: '#/components/schemas/DeleteScheduledEventErrorMessage'
+      description: Caller not authorized to perform this action
+      title: DeleteScheduledEventError
+    ZoomConference:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ZoomConferenceType'
+          description: The event location is a Zoom conference
+        status:
+          oneOf:
+          - $ref: '#/components/schemas/ZoomConferenceStatus'
+          - type: 'null'
+          description: Indicates the current status of the Zoom conference<br/>&nbsp; * Expect only `pushed` status to have non-`null` values for `join_url` & `data` fields.<br/>&nbsp; - `processing` Location details generation pending<br/>&nbsp; - `initiated` Requesting location details from Zoom<br/>&nbsp; - `pushed` Location details are available<br/>&nbsp; - `failed` Error occurred or event has been canceled<br/>&nbsp; - `null` Location details are no longer available
+        join_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: Zoom meeting url
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/ZoomConferenceData'
+          - type: 'null'
+          description: The conference metadata supplied by Zoom
+      required:
+      - type
+      - status
+      - join_url
+      - data
+      description: Meeting will take place in a Zoom conference. Location details will not be available 6 months after event has occurred.
+      title: ZoomConference
+    DeleteScheduledEventErrorMessage:
+      type: string
+      enum:
+      - You are not allowed to cancel this event
+      - Event in the past
+      - Event is already canceled
+      title: DeleteScheduledEventErrorMessage
+    GetInviteeNoShowRequestForbiddenError0:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InviteeNoShowsUuidGetResponsesContentApplicationJsonSchemaOneOf0Title'
+        message:
+          $ref: '#/components/schemas/InviteeNoShowsUuidGetResponsesContentApplicationJsonSchemaOneOf0Message'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: GetInviteeNoShowRequestForbiddenError0
+    InviteeZoomConferenceKind:
+      type: string
+      enum:
+      - zoom_conference
+      description: The event location is a Zoom conference
+      title: InviteeZoomConferenceKind
+    MicrosoftTeamsConferenceDataAudioConferencing:
+      type: object
+      properties:
+        conferenceId:
+          type: string
+        dialinUrl:
+          type: string
+          format: uri
+        tollNumber:
+          type: string
+      title: MicrosoftTeamsConferenceDataAudioConferencing
+    GotoMeetingConferenceData:
+      type: object
+      properties:
+        uniqueMeetingId:
+          type: number
+          format: double
+          description: Canonical reference (unique identifier) for the GoToMeeting conference
+        conferenceCallInfo:
+          type: string
+      description: The conference metadata supplied by GoToMeeting
+      title: GotoMeetingConferenceData
+    EventInviteesCounter:
+      type: object
+      properties:
+        total:
+          type: number
+          format: double
+          description: Total invitees for an event, including invitees that have canceled
+        active:
+          type: number
+          format: double
+          description: Total invitees for an event that have not canceled
+        limit:
+          type: number
+          format: double
+          description: Maximum number of active invitees that can book the event
+      required:
+      - total
+      - active
+      - limit
+      title: EventInviteesCounter
+    DeleteScheduledEventErrorTitle:
+      type: string
+      enum:
+      - Permission Denied
+      title: DeleteScheduledEventErrorTitle
+    Get-scheduled-event-inviteesRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ScheduledEventsEventUuidInviteesInviteeUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ScheduledEventsEventUuidInviteesInviteeUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-scheduled-event-inviteesRequestNotFoundError
+    Get-scheduled-event-inviteesRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ScheduledEventsEventUuidInviteesInviteeUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ScheduledEventsEventUuidInviteesInviteeUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-scheduled-event-inviteesRequestBadRequestError
+    InviteeNoShowsUuidGetResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: InviteeNoShowsUuidGetResponsesContentApplicationJsonSchemaOneOf0Message
+    Post-inviteeRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InviteesPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/InviteesPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Post-inviteeRequestUnauthorizedError
+    Create-scheduled-event-cancellationRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ScheduledEventsUuidCancellationPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ScheduledEventsUuidCancellationPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-scheduled-event-cancellationRequestNotFoundError
+    InviteeNoShowsPostResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: InviteeNoShowsPostResponsesContentApplicationJsonSchemaTitle
+    InviteeWebExConferenceKind:
+      type: string
+      enum:
+      - webex_conference
+      description: The event location is a WebEx conference
+      title: InviteeWebExConferenceKind
+    InviteeInboundCall:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/InviteeInboundCallKind'
+          description: Indicates that the invitee will call the event host
+      required:
+      - kind
+      description: Information for an Inbound Call
+      title: InviteeInboundCall
+    InviteesPostResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: InviteesPostResponsesContentApplicationJsonSchemaTitle
+    InviteeMicrosoftTeamsConferenceKind:
+      type: string
+      enum:
+      - microsoft_teams_conference
+      description: The event location is a Microsoft Teams conference
+      title: InviteeMicrosoftTeamsConferenceKind
+    Create-invitee-no-showRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InviteeNoShowsPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/InviteeNoShowsPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-invitee-no-showRequestNotFoundError
+    InviteeNoShowsUuidDeleteResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: InviteeNoShowsUuidDeleteResponsesContentApplicationJsonSchemaTitle
+    ScheduledEventsUuidGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: ScheduledEventsUuidGetResponsesContentApplicationJsonSchemaMessage
+    OutboundCall:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/OutboundCallType'
+          description: Indicates that the event host (publisher) will call the invitee
+        location:
+          type:
+          - string
+          - 'null'
+          description: The phone number the event host (publisher) will use to call the invitee
+      required:
+      - type
+      - location
+      description: Meeting publisher will call the Invitee
+      title: OutboundCall
+    ZoomConferenceDataExtra:
+      type: object
+      properties:
+        intl_numbers_url:
+          type: string
+          format: uri
+          description: Zoom International Dial-in Numbers URL
+      title: ZoomConferenceDataExtra
+    InviteeNoShowsUuidGetResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: InviteeNoShowsUuidGetResponsesContentApplicationJsonSchemaOneOf0Title
+    InviteeZoomConference:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/InviteeZoomConferenceKind'
+          description: The event location is a Zoom conference
+      required:
+      - kind
+      description: Information about a Zoom Conference
+      title: InviteeZoomConference
+    Create-invitee-no-showRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/CreateInviteeNoShowRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Create-invitee-no-showRequestForbiddenError
+    Get-invitee-no-showRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/GetInviteeNoShowRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Get-invitee-no-showRequestForbiddenError
+    InviteesErrorMessage:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      - The Scheduling API is only available on paid Calendly plans. Upgrade your plan to access this feature.
+      title: InviteesErrorMessage
+    InviteeNoShowsPostResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: InviteeNoShowsPostResponsesContentApplicationJsonSchemaOneOf0Message
+    GoogleConference:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/GoogleConferenceType'
+          description: The event location is a Google Meet or Hangouts conference
+        status:
+          oneOf:
+          - $ref: '#/components/schemas/GoogleConferenceStatus'
+          - type: 'null'
+          description: Indicates the current status of the Google conference<br/>&nbsp; * Expect only `pushed` status to have a non-`null` value for the `join_url` field.<br/>&nbsp; - `processing` Location details generation pending<br/>&nbsp; - `initiated` Requesting location details from Google<br/>&nbsp; - `pushed` Location details are available<br/>&nbsp; - `failed` Error occurred or event has been canceled<br/>&nbsp; - `null` Location details are no longer available
+        join_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: Google conference meeting url
+      required:
+      - type
+      - status
+      - join_url
+      description: Details about an Event that will take place using a Google Meet / Hangout conference. Location details will not be available 6 months after event has occurred.
+      title: GoogleConference
+    GetScheduledEventsErrorTitle:
+      type: string
+      enum:
+      - Permission Denied
+      title: GetScheduledEventsErrorTitle
+    WebExConferenceStatus:
+      type: string
+      enum:
+      - processing
+      - initiated
+      - pushed
+      - failed
+      description: Indicates the current status of the WebEx conference<br/>&nbsp; * Expect only `pushed` status to have non-`null` values for `join_url` & `data` fields.<br/>&nbsp; - `processing` Location details generation pending<br/>&nbsp; - `initiated` Requesting location details from WebEx<br/>&nbsp; - `pushed` Location details are available<br/>&nbsp; - `failed` Error occurred or event has been canceled<br/>&nbsp; - `null` Location details are no longer available
+      title: WebExConferenceStatus
+    Create-scheduled-event-cancellationRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/DeleteScheduledEventError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Create-scheduled-event-cancellationRequestForbiddenError
+    EventEventMembershipsItems:
+      type: object
+      properties:
+        user:
+          type: string
+          format: uri
+          description: Canonical reference (unique identifier) for the user
+        user_email:
+          type: string
+          format: email
+          description: The user's email
+        user_name:
+          type: string
+          description: The user's name
+        buffered_end_time:
+          type: string
+          format: date-time
+          description: The moment the membership's time buffer ends for the event in UTC time
+        buffered_start_time:
+          type: string
+          format: date-time
+          description: The moment the membership's time buffer starts for the event in UTC time
+      required:
+      - user
+      title: EventEventMembershipsItems
+    ZoomConferenceDataSettings:
+      type: object
+      properties:
+        global_dial_in_numbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZoomConferenceDataSettingsGlobalDialInNumbersItems'
+      title: ZoomConferenceDataSettings
+    scheduledEvents_create-invitee-no-show_Response_201:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/InviteeNoShow'
+      required:
+      - resource
+      title: scheduledEvents_create-invitee-no-show_Response_201
+    Post-inviteeRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InviteesPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/InviteesPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Post-inviteeRequestNotFoundError
+    InviteeSpecifiedLocation:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/InviteeSpecifiedLocationType'
+          description: The event location selected by the invitee
+        location:
+          type: string
+          description: The event location description provided by the invitee
+      required:
+      - type
+      - location
+      description: Information about an event location that’s specified by the invitee.
+      title: InviteeSpecifiedLocation
+    ScheduledEventsEventUuidInviteesInviteeUuidGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: ScheduledEventsEventUuidInviteesInviteeUuidGetResponsesContentApplicationJsonSchemaTitle
+    OutboundCallType:
+      type: string
+      enum:
+      - outbound_call
+      description: Indicates that the event host (publisher) will call the invitee
+      title: OutboundCallType
+    InPersonMeeting:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/InPersonMeetingType'
+          description: Indicates that the event will be an in-person meeting.
+        location:
+          type: string
+          description: The physical location specified by the event host (publisher)
+        additional_info:
+          type: string
+      required:
+      - type
+      - location
+      description: Information about the physical (in-person) event location
+      title: InPersonMeeting
+    InviteeQuestionAndAnswer:
+      type: object
+      properties:
+        question:
+          type: string
+          description: A question for the invitee. String is case sensitive and must exactly match the question.
+        answer:
+          type: string
+          description: The invitee's response to the question
+        position:
+          type: integer
+          description: The position of the question in relation to others
+      required:
+      - question
+      - answer
+      - position
+      description: A response to a question on a booking page form. Required questions must be included in the body and match on the question string exactly.
+      title: InviteeQuestionAndAnswer
+    InviteeNoShowsUuidDeleteResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: InviteeNoShowsUuidDeleteResponsesContentApplicationJsonSchemaMessage
+    InviteeNoShowsUuidDeleteResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: InviteeNoShowsUuidDeleteResponsesContentApplicationJsonSchemaOneOf0Title
+    Create-invitee-no-showRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InviteeNoShowsPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/InviteeNoShowsPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-invitee-no-showRequestBadRequestError
+    ScheduledEventsGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: ScheduledEventsGetResponsesContentApplicationJsonSchemaTitle
+    InviteeCustomLocationKind:
+      type: string
+      enum:
+      - custom
+      description: The event location doesn't fall into a standard category defined by the event host (publisher)
+      title: InviteeCustomLocationKind
+    List-event-inviteesRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ScheduledEventsUuidInviteesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ScheduledEventsUuidInviteesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-event-inviteesRequestUnauthorizedError
+    InviteesPostRequestBodyContentApplicationJsonSchemaInvitee:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The full name of the invitee. **Required if** `first_name` **is not provided**
+        first_name:
+          type: string
+          description: The first name of the invitee. **Required if** `name` **is not provided**
+        last_name:
+          type: string
+          description: The last name of the invitee
+        email:
+          type: string
+          description: The email of the invitee
+        timezone:
+          type: string
+          description: The timezone of the invitee
+        text_reminder_number:
+          type: string
+          description: Invitee's phone number for SMS reminders. Must be a valid phone number (e.g. +14155551234)
+      required:
+      - email
+      - timezone
+      title: InviteesPostRequestBodyContentApplicationJsonSchemaInvitee
+    InviteeInPersonMeetingKind:
+      type: string
+      enum:
+      - physical
+      description: Indicates that the event will be an in-person meeting.
+      title: InviteeInPersonMeetingKind
+    List-event-inviteesRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ScheduledEventsUuidInviteesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ScheduledEventsUuidInviteesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-event-inviteesRequestBadRequestError
+    InviteeTracking:
+      type: object
+      properties:
+        utm_campaign:
+          type:
+          - string
+          - 'null'
+          description: The UTM parameter used to track a campaign
+        utm_source:
+          type:
+          - string
+          - 'null'
+          description: The UTM parameter that identifies the source (platform where the traffic originates)
+        utm_medium:
+          type:
+          - string
+          - 'null'
+          description: The UTM parameter that identifies the type of input (e.g. Cost Per Click (CPC), social media, affiliate or QR code)
+        utm_content:
+          type:
+          - string
+          - 'null'
+          description: UTM content tracking parameter
+        utm_term:
+          type:
+          - string
+          - 'null'
+          description: The UTM parameter used to track keywords
+        salesforce_uuid:
+          type:
+          - string
+          - 'null'
+          description: The Salesforce record unique identifier
+      required:
+      - utm_campaign
+      - utm_source
+      - utm_medium
+      - utm_content
+      - utm_term
+      - salesforce_uuid
+      description: The UTM and Salesforce tracking parameters associated with an Invitee
+      title: InviteeTracking
+    InviteeNoShowsUuidDeleteResponsesContentApplicationJsonSchemaOneOf0Message:
+      type: string
+      enum:
+      - You do not have permission to access this resource.
+      - You do not have permission
+      title: InviteeNoShowsUuidDeleteResponsesContentApplicationJsonSchemaOneOf0Message
+    Create-scheduled-event-cancellationRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ScheduledEventsUuidCancellationPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ScheduledEventsUuidCancellationPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-scheduled-event-cancellationRequestInternalServerError
+    InviteeNoShowsUuidGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Resource Not Found
+      title: InviteeNoShowsUuidGetResponsesContentApplicationJsonSchemaTitle
+    Create-invitee-no-showRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InviteeNoShowsPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/InviteeNoShowsPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-invitee-no-showRequestUnauthorizedError
+    GotoMeetingConferenceType:
+      type: string
+      enum:
+      - gotomeeting
+      description: The event location is a GoToMeeting conference
+      title: GotoMeetingConferenceType
+    List-scheduled-eventsRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ScheduledEventsGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ScheduledEventsGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-scheduled-eventsRequestBadRequestError
+    InviteeGotoMeetingConference:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/InviteeGotoMeetingConferenceKind'
+          description: The event location is a GoToMeeting conference
+      required:
+      - kind
+      description: Information for a GotoMeeting Conference
+      title: InviteeGotoMeetingConference
+    Get-scheduled-eventRequestUnauthorizedError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ScheduledEventsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ScheduledEventsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-scheduled-eventRequestUnauthorizedError
+    ErrorResponseDetailsItem:
+      type: object
+      properties:
+        parameter:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+      required:
+      - message
+      title: ErrorResponseDetailsItem
+    Get-scheduled-eventRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ScheduledEventsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ScheduledEventsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-scheduled-eventRequestNotFoundError
+    InsufficientScopeErrorTitle:
+      type: string
+      enum:
+      - Insufficient scope
+      title: InsufficientScopeErrorTitle
+    WebExConferenceDataTelephony:
+      type: object
+      properties:
+        callInNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebExConferenceDataTelephonyCallInNumbersItems'
+      required:
+      - callInNumbers
+      title: WebExConferenceDataTelephony
+    List-event-inviteesRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ScheduledEventsUuidInviteesGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ScheduledEventsUuidInviteesGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: List-event-inviteesRequestNotFoundError
+    ScheduledEventsUuidInviteesGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: ScheduledEventsUuidInviteesGetResponsesContentApplicationJsonSchemaMessage
+    Delete-invitee-no-showRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/DeleteInviteeNoShowRequestForbiddenError0'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: Delete-invitee-no-showRequestForbiddenError
+    LegacyCalendarEvent:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/LegacyCalendarEventKind'
+          description: Indicates the calendar provider the event belongs to.
+          deprecated: true
+        external_id:
+          type: string
+          description: the id provided from the calendar provider for this calendar event.
+          deprecated: true
+      required:
+      - kind
+      - external_id
+      description: Information about the calendar event from the calendar provider.
+      title: LegacyCalendarEvent
+      deprecated: true
+    Get-invitee-no-showRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InviteeNoShowsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/InviteeNoShowsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-invitee-no-showRequestBadRequestError
+    MicrosoftTeamsConferenceType:
+      type: string
+      enum:
+      - microsoft_teams_conference
+      description: The event location is a Microsoft Teams conference
+      title: MicrosoftTeamsConferenceType
+    scheduledEvents_create-scheduled-event-cancellation_Response_201:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/Cancellation'
+      required:
+      - resource
+      title: scheduledEvents_create-scheduled-event-cancellation_Response_201
+    scheduledEvents_list-event-invitees_Response_200:
+      type: object
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/Invitee'
+          description: The set of event invitees matching the criteria
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - collection
+      - pagination
+      description: Service response
+      title: scheduledEvents_list-event-invitees_Response_200
+    ZoomConferenceData:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/ZoomConferenceDataId'
+          description: The conference ID provided by Zoom
+        settings:
+          $ref: '#/components/schemas/ZoomConferenceDataSettings'
+        extra:
+          $ref: '#/components/schemas/ZoomConferenceDataExtra'
+        password:
+          type: string
+          format: password
+          description: Zoom meeting password
+      description: The conference metadata supplied by Zoom
+      title: ZoomConferenceData
+    InviteeNoShowsPostResponsesContentApplicationJsonSchemaOneOf0Title:
+      type: string
+      enum:
+      - Permission Denied
+      title: InviteeNoShowsPostResponsesContentApplicationJsonSchemaOneOf0Title
+    WebExConferenceDataTelephonyCallInNumbersItems:
+      type: object
+      properties:
+        label:
+          type: string
+        callInNumber:
+          type: string
+        tollType:
+          type: string
+      required:
+      - label
+      - callInNumber
+      - tollType
+      title: WebExConferenceDataTelephonyCallInNumbersItems
+    Create-invitee-no-showRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InviteeNoShowsPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/InviteeNoShowsPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-invitee-no-showRequestInternalServerError
+    Location:
+      oneOf:
+      - $ref: '#/components/schemas/InPersonMeeting'
+      - $ref: '#/components/schemas/OutboundCall'
+      - $ref: '#/components/schemas/InboundCall'
+      - $ref: '#/components/schemas/GoogleConference'
+      - $ref: '#/components/schemas/ZoomConference'
+      - $ref: '#/components/schemas/GotoMeetingConference'
+      - $ref: '#/components/schemas/MicrosoftTeamsConference'
+      - $ref: '#/components/schemas/CustomLocation'
+      - $ref: '#/components/schemas/InviteeSpecifiedLocation'
+      - $ref: '#/components/schemas/WebExConference'
+      description: The polymorphic base type for an event location that Calendly supports
+      title: Location
+    MicrosoftTeamsConference:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/MicrosoftTeamsConferenceType'
+          description: The event location is a Microsoft Teams conference
+        status:
+          oneOf:
+          - $ref: '#/components/schemas/MicrosoftTeamsConferenceStatus'
+          - type: 'null'
+          description: Indicates the current status of the Microsoft Teams conference<br/>&nbsp; * Expect only `pushed` status to have non-`null` values for `join_url` & `data` fields.<br/>&nbsp; - `processing` Location details generation pending<br/>&nbsp; - `initiated` Requesting location details from MS Teams<br/>&nbsp; - `pushed` Location details are available<br/>&nbsp; - `failed` Error occurred or event has been canceled<br/>&nbsp; - `null` Location details are no longer available
+        join_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: Microsoft Teams meeting url
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/MicrosoftTeamsConferenceData'
+          - type: 'null'
+          description: The conference metadata supplied by Microsoft Teams
+      required:
+      - type
+      - status
+      - join_url
+      - data
+      description: Meeting will take place in a Microsoft Teams conference. Location details will not be available 6 months after event has occurred.
+      title: MicrosoftTeamsConference
+    Create-scheduled-event-cancellationRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ScheduledEventsUuidCancellationPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ScheduledEventsUuidCancellationPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Create-scheduled-event-cancellationRequestBadRequestError
+    WebExConferenceData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Canonical reference (unique identifier) for the WebEx conference
+        telephony:
+          $ref: '#/components/schemas/WebExConferenceDataTelephony'
+        password:
+          type: string
+      required:
+      - id
+      - telephony
+      - password
+      description: The conference metadata supplied by GoToMeeting
+      title: WebExConferenceData
+    ScheduledEventsUuidInviteesGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: ScheduledEventsUuidInviteesGetResponsesContentApplicationJsonSchemaTitle
+    Get-scheduled-eventRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ScheduledEventsUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ScheduledEventsUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-scheduled-eventRequestInternalServerError
+    Get-scheduled-event-inviteesRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/ScheduledEventsEventUuidInviteesInviteeUuidGetResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/ScheduledEventsEventUuidInviteesInviteeUuidGetResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Get-scheduled-event-inviteesRequestInternalServerError
+    InsufficientScopeErrorMessage:
+      type: string
+      enum:
+      - This operation requires the scopes listed in the 'required_scopes' array.
+      title: InsufficientScopeErrorMessage
+    InviteeGoogleConference:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/InviteeGoogleConferenceKind'
+          description: The event location is a Google Meet or Hangouts conference
+      required:
+      - kind
+      description: Information for a Google Conference
+      title: InviteeGoogleConference
+    InviteesPostResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: InviteesPostResponsesContentApplicationJsonSchemaMessage
+    InviteeStatus:
+      type: string
+      enum:
+      - active
+      - canceled
+      description: Indicates if the invitee is "active" or "canceled"
+      title: InviteeStatus
+    ScheduledEventsEventUuidInviteesInviteeUuidGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: ScheduledEventsEventUuidInviteesInviteeUuidGetResponsesContentApplicationJsonSchemaMessage
+    GetScheduledEventInviteeErrorTitle:
+      type: string
+      enum:
+      - Permission Denied
+      title: GetScheduledEventInviteeErrorTitle
+    ScheduledEventsUuidCancellationPostResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      title: ScheduledEventsUuidCancellationPostResponsesContentApplicationJsonSchemaMessage
+    GotoMeetingConferenceStatus:
+      type: string
+      enum:
+      - initiated
+      - processing
+      - pushed
+      - failed
+      description: Indicates the current status of the GoToMeeting conference<br/>&nbsp; * Expect only `pushed` status to have non-`null` values for `join_url` & `data` fields.<br/>&nbsp; - `processing` Location details generation pending<br/>&nbsp; - `initiated` Requesting location details from GoToMeeting<br/>&nbsp; - `pushed` Location details are available<br/>&nbsp; - `failed` Error occurred or event has been canceled<br/>&nbsp; - `null` Location details are no longer available
+      title: GotoMeetingConferenceStatus
+    DeleteInviteeNoShowRequestForbiddenError0:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InviteeNoShowsUuidDeleteResponsesContentApplicationJsonSchemaOneOf0Title'
+        message:
+          $ref: '#/components/schemas/InviteeNoShowsUuidDeleteResponsesContentApplicationJsonSchemaOneOf0Message'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: DeleteInviteeNoShowRequestForbiddenError0
+    LegacyCalendarEventKind:
+      type: string
+      enum:
+      - exchange
+      - google
+      - icloud
+      - outlook
+      - outlook_desktop
+      description: Indicates the calendar provider the event belongs to.
+      title: LegacyCalendarEventKind
+      deprecated: true
+    InviteeNoShowsUuidGetResponsesContentApplicationJsonSchemaMessage:
+      type: string
+      enum:
+      - The server could not find the requested resource.
+      title: InviteeNoShowsUuidGetResponsesContentApplicationJsonSchemaMessage
+    ScheduledEventsUuidGetResponsesContentApplicationJsonSchemaTitle:
+      type: string
+      enum:
+      - Internal Server Error
+      title: ScheduledEventsUuidGetResponsesContentApplicationJsonSchemaTitle
+    Delete-invitee-no-showRequestNotFoundError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InviteeNoShowsUuidDeleteResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/InviteeNoShowsUuidDeleteResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Delete-invitee-no-showRequestNotFoundError
+    Post-inviteeRequestBadRequestError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InviteesPostResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/InviteesPostResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Post-inviteeRequestBadRequestError
+    ZoomConferenceType:
+      type: string
+      enum:
+      - zoom
+      description: The event location is a Zoom conference
+      title: ZoomConferenceType
+    WebExConferenceType:
+      type: string
+      enum:
+      - webex_conference
+      description: The event location is a WebEx conference
+      title: WebExConferenceType
+    InviteeWebExConference:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/InviteeWebExConferenceKind'
+          description: The event location is a WebEx conference
+      required:
+      - kind
+      description: Information about a WebEx Conference
+      title: InviteeWebExConference
+    InviteeOutboundCallKind:
+      type: string
+      enum:
+      - outbound_call
+      description: Indicates that the event host (publisher) will call the invitee
+      title: InviteeOutboundCallKind
+    CancellationCancelerType:
+      type: string
+      enum:
+      - host
+      - invitee
+      title: CancellationCancelerType
+    List-scheduled-eventsRequestForbiddenError:
+      oneOf:
+      - $ref: '#/components/schemas/GetScheduledEventsError'
+      - $ref: '#/components/schemas/InsufficientScopeError'
+      title: List-scheduled-eventsRequestForbiddenError
+    ScheduledEventsGetParametersStatus:
+      type: string
+      enum:
+      - active
+      - canceled
+      title: ScheduledEventsGetParametersStatus
+    InviteePaymentProvider:
+      type: string
+      enum:
+      - stripe
+      - paypal
+      description: Payment provider
+      title: InviteePaymentProvider
+    scheduledEvents_list-scheduled-events_Response_200:
+      type: object
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+          description: The set of scheduled events matching the criteria
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - collection
+      - pagination
+      description: Service response
+      title: scheduledEvents_list-scheduled-events_Response_200
+    InviteeMicrosoftTeamsConference:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/InviteeMicrosoftTeamsConferenceKind'
+          description: The event location is a Microsoft Teams conference
+      required:
+      - kind
+      description: Information for a Microsoft Teams Conference
+      title: InviteeMicrosoftTeamsConference
+    CustomLocationType:
+      type: string
+      enum:
+      - custom
+      description: The event location doesn't fall into a standard category defined by the event host (publisher)
+      title: CustomLocationType
+    Delete-invitee-no-showRequestInternalServerError:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/InviteeNoShowsUuidDeleteResponsesContentApplicationJsonSchemaTitle'
+        message:
+          $ref: '#/components/schemas/InviteeNoShowsUuidDeleteResponsesContentApplicationJsonSchemaMessage'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponseDetailsItem'
+      required:
+      - title
+      - message
+      description: Error Object
+      title: Delete-invitee-no-showRequestInternalServerError
+    InviteeInPersonMeeting:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/InviteeInPersonMeetingKind'
+          description: Indicates that the event will be an in-person meeting.
+        location:
+          type: string
+          description: The specific physical location
+      required:
+      - kind
+      - location
+      description: Information for an In Person Meeting
+      title: InviteeInPersonMeeting
+    Pagination:
+      type: object
+      properties:
+        count:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: The number of rows to return
+        next_page:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URI to return the next page of an ordered list ("null" indicates no additional results are available)
+        previous_page:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URI to return the previous page of an ordered list ("null" indicates no additional results are available)
+        next_page_token:
+          type:
+          - string
+          - 'null'
+          description: Token to return the next page of an ordered list ("null" indicates no additional results are available)
+        previous_page_token:
+          type:
+          - string
+          - 'null'
+          description: Token to return the previous page of an ordered list ("null" indicates no additional results are available)
+      required:
+      - count
+      - next_page
+      - previous_page
+      - next_page_token
+      - previous_page_token
+      title: Pagination
+  securitySchemes:
+    oauth2:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0
+    personal_access_token:
+      type: http
+      scheme: bearer
+      description: Personal Access Token
