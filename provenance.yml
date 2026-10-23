@@ -12,30 +12,45 @@ artifacts:
   authentication/calendly-authentication.yml:
     method: derived
     evidence: declared in the artifact
+  capabilities/calendly-capability-edges.yml:
+    method: unknown
+    evidence: no authorship recorded
   collections/calendly-activity-log-api.opencollection.json:
-    method: derived
-    evidence: openapi/calendly-activity-log-api
+    method: unknown
+    evidence: no authorship recorded
   collections/calendly-activity-log-api.postman_collection.json:
+    method: unknown
+    evidence: no authorship recorded
+  collections/calendly-activitylog-api.postman_collection.json:
     method: derived
-    evidence: openapi/calendly-activity-log-api
+    evidence: openapi/calendly-activitylog-api
   collections/calendly-availability-api.opencollection.json:
     method: derived
     evidence: openapi/calendly-availability-api
   collections/calendly-availability-api.postman_collection.json:
     method: derived
     evidence: openapi/calendly-availability-api
+  collections/calendly-contacts-api.postman_collection.json:
+    method: derived
+    evidence: openapi/calendly-contacts-api
   collections/calendly-data-compliance-api.opencollection.json:
-    method: derived
-    evidence: openapi/calendly-data-compliance-api
+    method: unknown
+    evidence: no authorship recorded
   collections/calendly-data-compliance-api.postman_collection.json:
+    method: unknown
+    evidence: no authorship recorded
+  collections/calendly-datacompliance-api.postman_collection.json:
     method: derived
-    evidence: openapi/calendly-data-compliance-api
+    evidence: openapi/calendly-datacompliance-api
   collections/calendly-event-types-api.opencollection.json:
-    method: derived
-    evidence: openapi/calendly-event-types-api
+    method: unknown
+    evidence: no authorship recorded
   collections/calendly-event-types-api.postman_collection.json:
+    method: unknown
+    evidence: no authorship recorded
+  collections/calendly-eventtypes-api.postman_collection.json:
     method: derived
-    evidence: openapi/calendly-event-types-api
+    evidence: openapi/calendly-eventtypes-api
   collections/calendly-groups-api.opencollection.json:
     method: derived
     evidence: openapi/calendly-groups-api
@@ -43,35 +58,53 @@ artifacts:
     method: derived
     evidence: openapi/calendly-groups-api
   collections/calendly-invitees-api.opencollection.json:
-    method: derived
-    evidence: openapi/calendly-invitees-api
+    method: unknown
+    evidence: no authorship recorded
   collections/calendly-invitees-api.postman_collection.json:
+    method: unknown
+    evidence: no authorship recorded
+  collections/calendly-locations-api.postman_collection.json:
     method: derived
-    evidence: openapi/calendly-invitees-api
+    evidence: openapi/calendly-locations-api
+  collections/calendly-notetaker-api.postman_collection.json:
+    method: derived
+    evidence: openapi/calendly-notetaker-api
   collections/calendly-organizations-api.opencollection.json:
     method: derived
     evidence: openapi/calendly-organizations-api
   collections/calendly-organizations-api.postman_collection.json:
     method: derived
     evidence: openapi/calendly-organizations-api
+  collections/calendly-outgoingcommunications-api.postman_collection.json:
+    method: derived
+    evidence: openapi/calendly-outgoingcommunications-api
   collections/calendly-routing-forms-api.opencollection.json:
-    method: derived
-    evidence: openapi/calendly-routing-forms-api
+    method: unknown
+    evidence: no authorship recorded
   collections/calendly-routing-forms-api.postman_collection.json:
+    method: unknown
+    evidence: no authorship recorded
+  collections/calendly-routingforms-api.postman_collection.json:
     method: derived
-    evidence: openapi/calendly-routing-forms-api
+    evidence: openapi/calendly-routingforms-api
   collections/calendly-scheduled-events-api.opencollection.json:
-    method: derived
-    evidence: openapi/calendly-scheduled-events-api
+    method: unknown
+    evidence: no authorship recorded
   collections/calendly-scheduled-events-api.postman_collection.json:
+    method: unknown
+    evidence: no authorship recorded
+  collections/calendly-scheduledevents-api.postman_collection.json:
     method: derived
-    evidence: openapi/calendly-scheduled-events-api
+    evidence: openapi/calendly-scheduledevents-api
   collections/calendly-scheduling-api.opencollection.json:
     method: unknown
     evidence: no authorship recorded
   collections/calendly-scheduling-api.postman_collection.json:
     method: unknown
     evidence: no authorship recorded
+  collections/calendly-scheduling-links-api.postman_collection.json:
+    method: derived
+    evidence: openapi/calendly-scheduling-links-api
   collections/calendly-shares-api.opencollection.json:
     method: derived
     evidence: openapi/calendly-shares-api
@@ -85,17 +118,26 @@ artifacts:
     method: derived
     evidence: openapi/calendly-users-api
   collections/calendly-webhook-subscriptions-api.opencollection.json:
-    method: derived
-    evidence: openapi/calendly-webhook-subscriptions-api
+    method: unknown
+    evidence: no authorship recorded
   collections/calendly-webhook-subscriptions-api.postman_collection.json:
+    method: unknown
+    evidence: no authorship recorded
+  collections/calendly-webhooks-api.postman_collection.json:
     method: derived
-    evidence: openapi/calendly-webhook-subscriptions-api
+    evidence: openapi/calendly-webhooks-api
   finops/calendly-finops.yml:
     method: generated
     evidence: declared in the artifact
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
+  integrations/_index.yml:
+    method: generated
+    evidence: carries an API Evangelist house phrase
+  integrations/calendly-integration-edges.yml:
+    method: searched
+    evidence: declared in the artifact
   json-ld/calendly-context.jsonld:
     method: unknown
     evidence: no authorship recorded
@@ -108,127 +150,7 @@ artifacts:
   json-schema/calendly-scheduled-event-schema.json:
     method: unknown
     evidence: no authorship recorded
-  kin/checks-2026-09-24T161608.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T125852.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T133943.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T143147.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T154045.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-26T215308.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T094438.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T103455.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T123021.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T132314.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T140727.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-28T221322.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T213958.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T230545.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T203505.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T220315.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-31T223420.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T063623.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T210448.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T222808.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T224043.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T161828.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T174231.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T062714.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T212454.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T224856.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T055819.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T072335.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T144739.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T195450.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T211839.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T011047.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T224210.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T200636.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T213054.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T214843.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T232836.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T204815.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T222408.yml:
+  kin/checks-2026-10-11T110117.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-12T062655.yml:
@@ -312,41 +234,68 @@ artifacts:
   kin/score-2026-09-24T161608.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T210408.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T232841.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T000835.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T024842.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-11T110117.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   llms/calendly-llms-probe.yml:
     method: searched
     evidence: 'derive-llms-provenance.py: harvested'
   mcp/calendly-mcp.yml:
     method: unknown
     evidence: no authorship recorded
-  openapi/_original/calendly-scheduling-api-openapi.yml:
+  openapi/_original/calendly-openapi.yml:
     method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
-  openapi/calendly-activity-log-api-openapi.yml:
+    evidence: byte-identical to https://developer.calendly.com/openapi/calendly-api.yaml (sha256 1ce1e60884ce,
+      fetched 2026-10-19)
+  openapi/calendly-activitylog-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/calendly-availability-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/calendly-data-compliance-api-openapi.yml:
+  openapi/calendly-contacts-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/calendly-event-types-api-openapi.yml:
+  openapi/calendly-datacompliance-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/calendly-eventtypes-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/calendly-groups-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/calendly-invitees-api-openapi.yml:
+  openapi/calendly-locations-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/calendly-notetaker-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/calendly-organizations-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/calendly-routing-forms-api-openapi.yml:
+  openapi/calendly-outgoingcommunications-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/calendly-scheduled-events-api-openapi.yml:
+  openapi/calendly-routingforms-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/calendly-scheduledevents-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/calendly-scheduling-links-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/calendly-shares-api-openapi.yml:
@@ -355,7 +304,7 @@ artifacts:
   openapi/calendly-users-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/calendly-webhook-subscriptions-api-openapi.yml:
+  openapi/calendly-webhooks-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   plans/calendly-plans-pricing.yml:
