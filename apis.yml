@@ -307,6 +307,8 @@ apis:
   - type: Documentation
     url: https://developer.calendly.com/api-docs
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/calendly/overview
   - type: Plans
     url: plans/calendly-plans-pricing.yml
   - type: RateLimits
