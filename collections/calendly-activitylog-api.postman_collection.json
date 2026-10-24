@@ -1,0 +1,606 @@
+{
+  "info": {
+    "_postman_id": "6911d9e8-1117-4338-871f-aae3782beac9",
+    "name": "Calendly Activity Log API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:58:00.000Z",
+    "updatedAt": "2026-10-21T20:58:00.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6911d9e8-1117-4338-871f-aae3782beac9"
+  },
+  "item": [
+    {
+      "name": "activity_log_entries",
+      "item": [
+        {
+          "name": "List activity log entries",
+          "id": "860c079e-aa8d-4a0e-a2df-30610daf86f2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/activity_log_entries?organization=<uri>&search_term=<string>&actor=<uri>&actor=<uri>&sort=occurred_at:desc&min_occurred_at=<dateTime>&max_occurred_at=<dateTime>&page_token=<string>&count=20&namespace=<string>&namespace=<string>&action=<string>&action=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "activity_log_entries"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Return activity log entries from the organization associated with this URI",
+                  "key": "organization",
+                  "value": "<uri>"
+                },
+                {
+                  "description": "Filters entries based on the search term.\n\nSupported operators:\n  - `|` - to allow filtering by one term or another. Example: `this | that`\n  - `+` - to allow filtering by one term and another. Example: `this + that`\n  - `\"` - to allow filtering by an exact search term. Example: `\"email@website.com\"`\n  - `-` - to omit specific terms from results. Example: `Added -User`\n  - `()` - to allow specifying precedence during a search. Example: `(this + that) OR (person + place)`\n  - `*` - to allow prefix searching. Example `*@other-website.com`\n",
+                  "key": "search_term",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Return entries from the user(s) associated with the provided URIs",
+                  "key": "actor",
+                  "value": "<uri>"
+                },
+                {
+                  "description": "Return entries from the user(s) associated with the provided URIs",
+                  "key": "actor",
+                  "value": "<uri>"
+                },
+                {
+                  "description": "Order results by the specified field and direction. List of {field}:{direction} values.",
+                  "key": "sort",
+                  "value": "occurred_at:desc"
+                },
+                {
+                  "description": "Include entries that occurred after this time (sample time format: \"2020-01-02T03:04:05.678Z\"). This time should use the UTC timezone.",
+                  "key": "min_occurred_at",
+                  "value": "<dateTime>"
+                },
+                {
+                  "description": "Include entries that occurred prior to this time (sample time format: \"2020-01-02T03:04:05.678Z\"). This time should use the UTC timezone.",
+                  "key": "max_occurred_at",
+                  "value": "<dateTime>"
+                },
+                {
+                  "description": "The token to pass to get the next portion of the collection",
+                  "key": "page_token",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The number of rows to return",
+                  "key": "count",
+                  "value": "20"
+                },
+                {
+                  "description": "The categories of the entries",
+                  "key": "namespace",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The categories of the entries",
+                  "key": "namespace",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The action(s) associated with the entries",
+                  "key": "action",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The action(s) associated with the entries",
+                  "key": "action",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "> This endpoint requires an Enterprise subscription.\n\n> `activity_log:read`\n\nReturns a list of activity log entries"
+          },
+          "response": [
+            {
+              "id": "3f071cf2-1822-4d95-9ddd-9574f603dd74",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/activity_log_entries?organization=<uri>&search_term=<string>&actor=<uri>&sort=occurred_at:desc&min_occurred_at=<dateTime>&max_occurred_at=<dateTime>&page_token=<string>&count=20&namespace=<string>&action=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "activity_log_entries"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Return activity log entries from the organization associated with this URI",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Filters entries based on the search term.\n\nSupported operators:\n  - `|` - to allow filtering by one term or another. Example: `this | that`\n  - `+` - to allow filtering by one term and another. Example: `this + that`\n  - `\"` - to allow filtering by an exact search term. Example: `\"email@website.com\"`\n  - `-` - to omit specific terms from results. Example: `Added -User`\n  - `()` - to allow specifying precedence during a search. Example: `(this + that) OR (person + place)`\n  - `*` - to allow prefix searching. Example `*@other-website.com`\n",
+                      "key": "search_term",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Return entries from the user(s) associated with the provided URIs",
+                      "key": "actor",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Order results by the specified field and direction. List of {field}:{direction} values.",
+                      "key": "sort",
+                      "value": "occurred_at:desc"
+                    },
+                    {
+                      "description": "Include entries that occurred after this time (sample time format: \"2020-01-02T03:04:05.678Z\"). This time should use the UTC timezone.",
+                      "key": "min_occurred_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Include entries that occurred prior to this time (sample time format: \"2020-01-02T03:04:05.678Z\"). This time should use the UTC timezone.",
+                      "key": "max_occurred_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "The token to pass to get the next portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The categories of the entries",
+                      "key": "namespace",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The action(s) associated with the entries",
+                      "key": "action",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"collection\": [\n    {\n      \"occurred_at\": \"<dateTime>\",\n      \"details\": {},\n      \"fully_qualified_name\": \"EozpMb.7IB_P4W\",\n      \"uri\": \"<string>\",\n      \"namespace\": \"05426l\",\n      \"action\": \"d_0m-\",\n      \"organization\": \"<string>\",\n      \"actor\": {\n        \"type\": \"<string>\",\n        \"uri\": \"<string>\",\n        \"organization\": {\n          \"uri\": \"<string>\",\n          \"role\": \"<string>\"\n        },\n        \"group\": {\n          \"uri\": \"<string>\",\n          \"name\": \"<string>\",\n          \"role\": \"<string>\"\n        },\n        \"display_name\": \"<string>\",\n        \"alternative_identifier\": \"<string>\"\n      }\n    },\n    {\n      \"occurred_at\": \"<dateTime>\",\n      \"details\": {},\n      \"fully_qualified_name\": \"vNafYZ.f0nVbh\",\n      \"uri\": \"<string>\",\n      \"namespace\": \"Oci6ZgJMWAl\",\n      \"action\": \"JSr2W\",\n      \"organization\": \"<string>\",\n      \"actor\": {\n        \"type\": \"<string>\",\n        \"uri\": \"<string>\",\n        \"organization\": {\n          \"uri\": \"<string>\",\n          \"role\": \"<string>\"\n        },\n        \"group\": {\n          \"uri\": \"<string>\",\n          \"name\": \"<string>\",\n          \"role\": \"<string>\"\n        },\n        \"display_name\": \"<string>\",\n        \"alternative_identifier\": \"<string>\"\n      }\n    }\n  ],\n  \"pagination\": {\n    \"count\": \"<integer>\",\n    \"next_page\": \"<string,null-uri>\",\n    \"previous_page\": \"<string,null-uri>\",\n    \"next_page_token\": \"<string,null>\",\n    \"previous_page_token\": \"<string,null>\"\n  },\n  \"total_count\": \"<integer>\",\n  \"exceeds_max_total_count\": \"<boolean>\",\n  \"last_event_time\": \"<string,null-date-time>\"\n}",
+              "createdAt": "2026-10-21T20:58:01.000Z",
+              "updatedAt": "2026-10-21T20:58:01.000Z",
+              "uid": "35240-3f071cf2-1822-4d95-9ddd-9574f603dd74"
+            },
+            {
+              "id": "443d6bc6-ff71-4e9a-8639-fc3149b762c5",
+              "name": "Request is not valid",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/activity_log_entries?organization=<uri>&search_term=<string>&actor=<uri>&sort=occurred_at:desc&min_occurred_at=<dateTime>&max_occurred_at=<dateTime>&page_token=<string>&count=20&namespace=<string>&action=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "activity_log_entries"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Return activity log entries from the organization associated with this URI",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Filters entries based on the search term.\n\nSupported operators:\n  - `|` - to allow filtering by one term or another. Example: `this | that`\n  - `+` - to allow filtering by one term and another. Example: `this + that`\n  - `\"` - to allow filtering by an exact search term. Example: `\"email@website.com\"`\n  - `-` - to omit specific terms from results. Example: `Added -User`\n  - `()` - to allow specifying precedence during a search. Example: `(this + that) OR (person + place)`\n  - `*` - to allow prefix searching. Example `*@other-website.com`\n",
+                      "key": "search_term",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Return entries from the user(s) associated with the provided URIs",
+                      "key": "actor",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Order results by the specified field and direction. List of {field}:{direction} values.",
+                      "key": "sort",
+                      "value": "occurred_at:desc"
+                    },
+                    {
+                      "description": "Include entries that occurred after this time (sample time format: \"2020-01-02T03:04:05.678Z\"). This time should use the UTC timezone.",
+                      "key": "min_occurred_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Include entries that occurred prior to this time (sample time format: \"2020-01-02T03:04:05.678Z\"). This time should use the UTC timezone.",
+                      "key": "max_occurred_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "The token to pass to get the next portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The categories of the entries",
+                      "key": "namespace",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The action(s) associated with the entries",
+                      "key": "action",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:01.000Z",
+              "updatedAt": "2026-10-21T20:58:01.000Z",
+              "uid": "35240-443d6bc6-ff71-4e9a-8639-fc3149b762c5"
+            },
+            {
+              "id": "8dfa0f75-6bed-41b1-a98f-eb200e26f5f6",
+              "name": "Permission Denied or insufficient scope",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/activity_log_entries?organization=<uri>&search_term=<string>&actor=<uri>&sort=occurred_at:desc&min_occurred_at=<dateTime>&max_occurred_at=<dateTime>&page_token=<string>&count=20&namespace=<string>&action=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "activity_log_entries"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Return activity log entries from the organization associated with this URI",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Filters entries based on the search term.\n\nSupported operators:\n  - `|` - to allow filtering by one term or another. Example: `this | that`\n  - `+` - to allow filtering by one term and another. Example: `this + that`\n  - `\"` - to allow filtering by an exact search term. Example: `\"email@website.com\"`\n  - `-` - to omit specific terms from results. Example: `Added -User`\n  - `()` - to allow specifying precedence during a search. Example: `(this + that) OR (person + place)`\n  - `*` - to allow prefix searching. Example `*@other-website.com`\n",
+                      "key": "search_term",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Return entries from the user(s) associated with the provided URIs",
+                      "key": "actor",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Order results by the specified field and direction. List of {field}:{direction} values.",
+                      "key": "sort",
+                      "value": "occurred_at:desc"
+                    },
+                    {
+                      "description": "Include entries that occurred after this time (sample time format: \"2020-01-02T03:04:05.678Z\"). This time should use the UTC timezone.",
+                      "key": "min_occurred_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Include entries that occurred prior to this time (sample time format: \"2020-01-02T03:04:05.678Z\"). This time should use the UTC timezone.",
+                      "key": "max_occurred_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "The token to pass to get the next portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The categories of the entries",
+                      "key": "namespace",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The action(s) associated with the entries",
+                      "key": "action",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"You do not have permission to access this resource.\"\n}",
+              "createdAt": "2026-10-21T20:58:01.000Z",
+              "updatedAt": "2026-10-21T20:58:01.000Z",
+              "uid": "35240-8dfa0f75-6bed-41b1-a98f-eb200e26f5f6"
+            },
+            {
+              "id": "230aec42-55af-4237-8b85-097638eab5ee",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/activity_log_entries?organization=<uri>&search_term=<string>&actor=<uri>&sort=occurred_at:desc&min_occurred_at=<dateTime>&max_occurred_at=<dateTime>&page_token=<string>&count=20&namespace=<string>&action=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "activity_log_entries"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Return activity log entries from the organization associated with this URI",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Filters entries based on the search term.\n\nSupported operators:\n  - `|` - to allow filtering by one term or another. Example: `this | that`\n  - `+` - to allow filtering by one term and another. Example: `this + that`\n  - `\"` - to allow filtering by an exact search term. Example: `\"email@website.com\"`\n  - `-` - to omit specific terms from results. Example: `Added -User`\n  - `()` - to allow specifying precedence during a search. Example: `(this + that) OR (person + place)`\n  - `*` - to allow prefix searching. Example `*@other-website.com`\n",
+                      "key": "search_term",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Return entries from the user(s) associated with the provided URIs",
+                      "key": "actor",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Order results by the specified field and direction. List of {field}:{direction} values.",
+                      "key": "sort",
+                      "value": "occurred_at:desc"
+                    },
+                    {
+                      "description": "Include entries that occurred after this time (sample time format: \"2020-01-02T03:04:05.678Z\"). This time should use the UTC timezone.",
+                      "key": "min_occurred_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Include entries that occurred prior to this time (sample time format: \"2020-01-02T03:04:05.678Z\"). This time should use the UTC timezone.",
+                      "key": "max_occurred_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "The token to pass to get the next portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The categories of the entries",
+                      "key": "namespace",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The action(s) associated with the entries",
+                      "key": "action",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:01.000Z",
+              "updatedAt": "2026-10-21T20:58:01.000Z",
+              "uid": "35240-230aec42-55af-4237-8b85-097638eab5ee"
+            },
+            {
+              "id": "143fefcf-05fc-4062-8707-1f9ca5145b4f",
+              "name": "An error has occurred on the server",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/activity_log_entries?organization=<uri>&search_term=<string>&actor=<uri>&sort=occurred_at:desc&min_occurred_at=<dateTime>&max_occurred_at=<dateTime>&page_token=<string>&count=20&namespace=<string>&action=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "activity_log_entries"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Return activity log entries from the organization associated with this URI",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Filters entries based on the search term.\n\nSupported operators:\n  - `|` - to allow filtering by one term or another. Example: `this | that`\n  - `+` - to allow filtering by one term and another. Example: `this + that`\n  - `\"` - to allow filtering by an exact search term. Example: `\"email@website.com\"`\n  - `-` - to omit specific terms from results. Example: `Added -User`\n  - `()` - to allow specifying precedence during a search. Example: `(this + that) OR (person + place)`\n  - `*` - to allow prefix searching. Example `*@other-website.com`\n",
+                      "key": "search_term",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Return entries from the user(s) associated with the provided URIs",
+                      "key": "actor",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Order results by the specified field and direction. List of {field}:{direction} values.",
+                      "key": "sort",
+                      "value": "occurred_at:desc"
+                    },
+                    {
+                      "description": "Include entries that occurred after this time (sample time format: \"2020-01-02T03:04:05.678Z\"). This time should use the UTC timezone.",
+                      "key": "min_occurred_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Include entries that occurred prior to this time (sample time format: \"2020-01-02T03:04:05.678Z\"). This time should use the UTC timezone.",
+                      "key": "max_occurred_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "The token to pass to get the next portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The categories of the entries",
+                      "key": "namespace",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The action(s) associated with the entries",
+                      "key": "action",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:01.000Z",
+              "updatedAt": "2026-10-21T20:58:01.000Z",
+              "uid": "35240-143fefcf-05fc-4062-8707-1f9ca5145b4f"
+            }
+          ],
+          "createdAt": "2026-10-21T20:58:00.000Z",
+          "updatedAt": "2026-10-21T20:58:00.000Z",
+          "uid": "35240-860c079e-aa8d-4a0e-a2df-30610daf86f2"
+        }
+      ],
+      "id": "0b39ad4d-41b4-4147-949f-ee62349cd64d",
+      "createdAt": "2026-10-21T20:58:00.000Z",
+      "updatedAt": "2026-10-21T20:58:00.000Z",
+      "uid": "35240-0b39ad4d-41b4-4147-949f-ee62349cd64d"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.calendly.com"
+    }
+  ]
+}

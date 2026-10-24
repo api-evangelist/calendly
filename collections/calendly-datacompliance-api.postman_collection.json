@@ -1,0 +1,865 @@
+{
+  "info": {
+    "_postman_id": "8a1b2c0e-2908-497c-82b5-97657490482b",
+    "name": "Calendly Data Compliance API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:58:13.000Z",
+    "updatedAt": "2026-10-21T20:58:14.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8a1b2c0e-2908-497c-82b5-97657490482b"
+  },
+  "item": [
+    {
+      "name": "data_compliance",
+      "item": [
+        {
+          "name": "deletion",
+          "item": [
+            {
+              "name": "invitees",
+              "item": [
+                {
+                  "name": "Delete Invitee Data",
+                  "id": "2e1762da-7394-4eb2-a67c-63854508f561",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"emails\": [\n    \"<email>\",\n    \"<email>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/data_compliance/deletion/invitees",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "data_compliance",
+                        "deletion",
+                        "invitees"
+                      ]
+                    },
+                    "description": "To submit a request to remove invitee data from all previously booked events in your organization, use this endpoint. Requests for data deletion can take up to 7 days to complete.\n\n> This endpoint requires an Enterprise subscription.\n\n> `data_compliance:write`"
+                  },
+                  "response": [
+                    {
+                      "id": "87ff5c63-0daf-4a70-8a7d-ecd39f4adb4b",
+                      "name": "Accepted",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"emails\": [\n    \"<email>\",\n    \"<email>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/data_compliance/deletion/invitees",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data_compliance",
+                            "deletion",
+                            "invitees"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-21T20:58:14.000Z",
+                      "updatedAt": "2026-10-21T20:58:14.000Z",
+                      "uid": "35240-87ff5c63-0daf-4a70-8a7d-ecd39f4adb4b"
+                    },
+                    {
+                      "id": "d4a635d7-c602-402a-98a1-97c0ae6f316b",
+                      "name": "Request is not valid",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"emails\": [\n    \"<email>\",\n    \"<email>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/data_compliance/deletion/invitees",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data_compliance",
+                            "deletion",
+                            "invitees"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:58:14.000Z",
+                      "updatedAt": "2026-10-21T20:58:14.000Z",
+                      "uid": "35240-d4a635d7-c602-402a-98a1-97c0ae6f316b"
+                    },
+                    {
+                      "id": "ec1eaa22-2a78-4cc6-93f6-f5d9563e4d08",
+                      "name": "Cannot authenticate caller",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"emails\": [\n    \"<email>\",\n    \"<email>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/data_compliance/deletion/invitees",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data_compliance",
+                            "deletion",
+                            "invitees"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:58:14.000Z",
+                      "updatedAt": "2026-10-21T20:58:14.000Z",
+                      "uid": "35240-ec1eaa22-2a78-4cc6-93f6-f5d9563e4d08"
+                    },
+                    {
+                      "id": "365bdc78-f14c-459e-8986-79dbcf9ed92d",
+                      "name": "Forbidden or insufficient scope",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"emails\": [\n    \"<email>\",\n    \"<email>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/data_compliance/deletion/invitees",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data_compliance",
+                            "deletion",
+                            "invitees"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:58:14.000Z",
+                      "updatedAt": "2026-10-21T20:58:14.000Z",
+                      "uid": "35240-365bdc78-f14c-459e-8986-79dbcf9ed92d"
+                    },
+                    {
+                      "id": "ca420b7a-38a8-4b44-a166-f17121af6adf",
+                      "name": "Requested resource not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"emails\": [\n    \"<email>\",\n    \"<email>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/data_compliance/deletion/invitees",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data_compliance",
+                            "deletion",
+                            "invitees"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:58:14.000Z",
+                      "updatedAt": "2026-10-21T20:58:14.000Z",
+                      "uid": "35240-ca420b7a-38a8-4b44-a166-f17121af6adf"
+                    },
+                    {
+                      "id": "2b352834-c128-4d1f-bee7-d1b6557c0977",
+                      "name": "An error has occurred on the server",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"emails\": [\n    \"<email>\",\n    \"<email>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/data_compliance/deletion/invitees",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data_compliance",
+                            "deletion",
+                            "invitees"
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:58:14.000Z",
+                      "updatedAt": "2026-10-21T20:58:14.000Z",
+                      "uid": "35240-2b352834-c128-4d1f-bee7-d1b6557c0977"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:58:14.000Z",
+                  "updatedAt": "2026-10-21T20:58:14.000Z",
+                  "uid": "35240-2e1762da-7394-4eb2-a67c-63854508f561"
+                }
+              ],
+              "id": "53071370-b3ac-441a-b074-cf0ca4c3f786",
+              "createdAt": "2026-10-21T20:58:14.000Z",
+              "updatedAt": "2026-10-21T20:58:14.000Z",
+              "uid": "35240-53071370-b3ac-441a-b074-cf0ca4c3f786"
+            },
+            {
+              "name": "events",
+              "item": [
+                {
+                  "name": "Delete Scheduled Event Data",
+                  "id": "35664f3a-c559-47ab-bb70-f9a861bca4b0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/data_compliance/deletion/events",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "data_compliance",
+                        "deletion",
+                        "events"
+                      ]
+                    },
+                    "description": "> This endpoint requires an Enterprise subscription.\n\n> `data_compliance:write`\n\nTo submit a request to remove scheduled events data within a time range for your organization, use this endpoint. Requests for data deletion can take up to 7 days to complete.\n\nTime range can be no greater than 24 months and must occur in the past."
+                  },
+                  "response": [
+                    {
+                      "id": "09e9a67f-b31b-4ff4-93ee-f9fdd4e98d2c",
+                      "name": "Accepted",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/data_compliance/deletion/events",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data_compliance",
+                            "deletion",
+                            "events"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-21T20:58:14.000Z",
+                      "updatedAt": "2026-10-21T20:58:14.000Z",
+                      "uid": "35240-09e9a67f-b31b-4ff4-93ee-f9fdd4e98d2c"
+                    },
+                    {
+                      "id": "cc6a1676-e2b1-46aa-a708-6b706faf510f",
+                      "name": "Request is not valid",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/data_compliance/deletion/events",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data_compliance",
+                            "deletion",
+                            "events"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:58:14.000Z",
+                      "updatedAt": "2026-10-21T20:58:14.000Z",
+                      "uid": "35240-cc6a1676-e2b1-46aa-a708-6b706faf510f"
+                    },
+                    {
+                      "id": "6ca6778d-cd6d-456a-8674-3ee4ff409bef",
+                      "name": "Cannot authenticate caller",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/data_compliance/deletion/events",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data_compliance",
+                            "deletion",
+                            "events"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:58:14.000Z",
+                      "updatedAt": "2026-10-21T20:58:14.000Z",
+                      "uid": "35240-6ca6778d-cd6d-456a-8674-3ee4ff409bef"
+                    },
+                    {
+                      "id": "5664d1a4-f334-432b-b851-a0ef4482f6f5",
+                      "name": "Forbidden or insufficient scope",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/data_compliance/deletion/events",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data_compliance",
+                            "deletion",
+                            "events"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:58:14.000Z",
+                      "updatedAt": "2026-10-21T20:58:14.000Z",
+                      "uid": "35240-5664d1a4-f334-432b-b851-a0ef4482f6f5"
+                    },
+                    {
+                      "id": "1a3ed2d1-9f32-4020-bbee-c09b10c9a8e9",
+                      "name": "Requested resource not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/data_compliance/deletion/events",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data_compliance",
+                            "deletion",
+                            "events"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:58:14.000Z",
+                      "updatedAt": "2026-10-21T20:58:14.000Z",
+                      "uid": "35240-1a3ed2d1-9f32-4020-bbee-c09b10c9a8e9"
+                    },
+                    {
+                      "id": "57c274b7-bf92-47eb-beed-6e0f095b4ee8",
+                      "name": "An error has occurred on the server",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/data_compliance/deletion/events",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "data_compliance",
+                            "deletion",
+                            "events"
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:58:14.000Z",
+                      "updatedAt": "2026-10-21T20:58:14.000Z",
+                      "uid": "35240-57c274b7-bf92-47eb-beed-6e0f095b4ee8"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:58:14.000Z",
+                  "updatedAt": "2026-10-21T20:58:14.000Z",
+                  "uid": "35240-35664f3a-c559-47ab-bb70-f9a861bca4b0"
+                }
+              ],
+              "id": "c6dd2999-9e97-40d2-befa-606e26542418",
+              "createdAt": "2026-10-21T20:58:14.000Z",
+              "updatedAt": "2026-10-21T20:58:14.000Z",
+              "uid": "35240-c6dd2999-9e97-40d2-befa-606e26542418"
+            }
+          ],
+          "id": "cc8d4012-9236-4b3b-a552-37500d9b1457",
+          "createdAt": "2026-10-21T20:58:14.000Z",
+          "updatedAt": "2026-10-21T20:58:14.000Z",
+          "uid": "35240-cc8d4012-9236-4b3b-a552-37500d9b1457"
+        }
+      ],
+      "id": "96057433-7a9f-4049-8e11-e21ab362b7d8",
+      "createdAt": "2026-10-21T20:58:14.000Z",
+      "updatedAt": "2026-10-21T20:58:14.000Z",
+      "uid": "35240-96057433-7a9f-4049-8e11-e21ab362b7d8"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.calendly.com"
+    }
+  ]
+}

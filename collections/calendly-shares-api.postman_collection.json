@@ -1,32 +1,35 @@
 {
+  "info": {
+    "_postman_id": "b39134d7-0b1f-41c0-92ac-4796d49516b3",
+    "name": "Calendly Shares API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:57:47.000Z",
+    "updatedAt": "2026-10-21T20:57:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b39134d7-0b1f-41c0-92ac-4796d49516b3"
+  },
   "item": [
     {
-      "id": "5e2f07ec-d612-4c2f-984e-ed131b3945b3",
-      "name": "Shares",
-      "description": {
-        "content": "Endpoints for creating and managing shareable scheduling links.",
-        "type": "text/plain"
-      },
+      "name": "shares",
       "item": [
         {
-          "id": "fdc36882-f254-4690-a700-25caa60e7659",
-          "name": "Create share",
+          "name": "Create Share",
+          "id": "682844bd-1218-4e3e-93b3-0df66ad1d3b9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Create share",
-            "description": {
-              "content": "Creates a shareable scheduling link that can be distributed to potential invitees. Shares can include multiple event types and custom availability settings.",
-              "type": "text/plain"
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
             },
-            "url": {
-              "path": [
-                "shares"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -37,206 +40,380 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"event_type\": \"<uri>\",\n  \"max_spots\": \"<integer>\"\n}",
+              "raw": "{\n  \"event_type\": \"<uri>\",\n  \"name\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"duration_options\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"period_type\": \"unlimited\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"max_booking_time\": \"<integer>\",\n  \"hide_location\": \"<boolean>\",\n  \"location_configurations\": [\n    {\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"position\": \"<integer>\",\n      \"kind\": \"outbound_call\"\n    },\n    {\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"position\": \"<integer>\",\n      \"kind\": \"microsoft_teams_conference\"\n    }\n  ],\n  \"availability_rule\": {\n    \"rules\": [\n      {\n        \"type\": \"wday\",\n        \"wday\": \"sunday\",\n        \"date\": \"<date>\",\n        \"intervals\": [\n          {\n            \"from\": \"66:34\",\n            \"to\": \"31:76\"\n          },\n          {\n            \"from\": \"95:76\",\n            \"to\": \"15:58\"\n          }\n        ]\n      },\n      {\n        \"type\": \"wday\",\n        \"wday\": \"thursday\",\n        \"date\": \"<date>\",\n        \"intervals\": [\n          {\n            \"from\": \"19:19\",\n            \"to\": \"20:33\"\n          },\n          {\n            \"from\": \"13:62\",\n            \"to\": \"09:35\"\n          }\n        ]\n      }\n    ],\n    \"timezone\": \"<string>\"\n  }\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/shares",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "shares"
+              ]
+            },
+            "description": "Endpoint for our Customize Once and Share feature. This allows you to customize events for a specific invitee without needing to make an entirely new event type.\n***This feature is only available for one-on-one event types.***\n**Note: Any parameter which is not provided in the request body will be copied from the target event type.**\n\n> `shares:write`"
           },
           "response": [
             {
-              "id": "a6f616b7-15fd-4057-b3c4-a26c2f49a26c",
-              "name": "Successfully created the share",
+              "id": "ea12ab6b-475c-4f02-98dd-f154b575d317",
+              "name": "Created",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "shares"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"event_type\": \"<uri>\",\n  \"max_spots\": \"<integer>\"\n}",
+                  "raw": "{\n  \"event_type\": \"<uri>\",\n  \"name\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"duration_options\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"period_type\": \"unlimited\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"max_booking_time\": \"<integer>\",\n  \"hide_location\": \"<boolean>\",\n  \"location_configurations\": [\n    {\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"position\": \"<integer>\",\n      \"kind\": \"outbound_call\"\n    },\n    {\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"position\": \"<integer>\",\n      \"kind\": \"microsoft_teams_conference\"\n    }\n  ],\n  \"availability_rule\": {\n    \"rules\": [\n      {\n        \"type\": \"wday\",\n        \"wday\": \"sunday\",\n        \"date\": \"<date>\",\n        \"intervals\": [\n          {\n            \"from\": \"66:34\",\n            \"to\": \"31:76\"\n          },\n          {\n            \"from\": \"95:76\",\n            \"to\": \"15:58\"\n          }\n        ]\n      },\n      {\n        \"type\": \"wday\",\n        \"wday\": \"thursday\",\n        \"date\": \"<date>\",\n        \"intervals\": [\n          {\n            \"from\": \"19:19\",\n            \"to\": \"20:33\"\n          },\n          {\n            \"from\": \"13:62\",\n            \"to\": \"09:35\"\n          }\n        ]\n      }\n    ],\n    \"timezone\": \"<string>\"\n  }\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/shares",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "shares"
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"resource\": {\n    \"uri\": \"http://xbICSfyLoReMUYRdwtWUKiejPVxjVAS.blq7DT5NDL+fRQwsHvxTFcJZVDYNKlg,yWCaiGf+79WE.nJUG\",\n    \"scheduling_url\": \"http://UMLzuuPXnJfQOYfKWXLGVPf.cziLUdgq7DkPLNWpY.JEMe6uEsSDzsADUpLHHXjUQorO7s3ytv7Eu29s4x\",\n    \"booking_url\": \"https://WAlcgYpMXzNVlmLqgFmgJoQubGpqsa.xjcDW7Yk80uc,K9sgI,lEqmKxO6txEcwgJ-jvV2Qpx6WVgYuNlGNoLh+e6rfl.CLPP5\",\n    \"event_type\": \"https://ThdgbIDJLUBOcNzAYW.bycHnHxakQCMZfRz,mDpF3MwVLQ3RuKw\"\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"resource\": {\n    \"scheduling_links\": [\n      {\n        \"booking_url\": \"<uri>\",\n        \"owner\": \"<uri>\",\n        \"owner_type\": \"EventType\"\n      },\n      {\n        \"booking_url\": \"<uri>\",\n        \"owner\": \"<uri>\",\n        \"owner_type\": \"EventType\"\n      }\n    ],\n    \"share_override\": {\n      \"name\": \"<string>\",\n      \"duration\": \"<integer>\",\n      \"duration_options\": \"<array,null>\",\n      \"period_type\": \"moving\",\n      \"start_date\": \"<string,null-date>\",\n      \"end_date\": \"<string,null-date>\",\n      \"max_booking_time\": \"<integer,null>\",\n      \"hide_location\": \"<boolean,null>\",\n      \"location_configurations\": [\n        {\n          \"location\": \"<string,null>\",\n          \"additional_info\": \"<string,null>\",\n          \"phone_number\": \"<string,null>\",\n          \"position\": \"<integer>\",\n          \"kind\": \"custom\"\n        },\n        {\n          \"location\": \"<string,null>\",\n          \"additional_info\": \"<string,null>\",\n          \"phone_number\": \"<string,null>\",\n          \"position\": \"<integer>\",\n          \"kind\": \"gotomeeting_conference\"\n        }\n      ],\n      \"availability_rule\": {\n        \"rules\": [\n          {\n            \"type\": \"date\",\n            \"wday\": \"sunday\",\n            \"date\": \"<date>\",\n            \"intervals\": [\n              {\n                \"from\": \"78:27\",\n                \"to\": \"89:15\"\n              },\n              {\n                \"from\": \"39:42\",\n                \"to\": \"05:28\"\n              }\n            ]\n          },\n          {\n            \"type\": \"wday\",\n            \"wday\": \"monday\",\n            \"date\": \"<date>\",\n            \"intervals\": [\n              {\n                \"from\": \"63:51\",\n                \"to\": \"97:56\"\n              },\n              {\n                \"from\": \"57:28\",\n                \"to\": \"78:84\"\n              }\n            ]\n          }\n        ],\n        \"timezone\": \"<string>\"\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:57:48.000Z",
+              "updatedAt": "2026-10-21T20:57:48.000Z",
+              "uid": "35240-ea12ab6b-475c-4f02-98dd-f154b575d317"
             },
             {
-              "id": "74e3d7cd-c8ed-4616-876e-f8f80da838f9",
-              "name": "The request was invalid or malformed. Check the request body and parameters.",
+              "id": "98698b28-2adf-4af0-b155-9bd46dbb679c",
+              "name": "Request is not valid",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "shares"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"event_type\": \"<uri>\",\n  \"max_spots\": \"<integer>\"\n}",
+                  "raw": "{\n  \"event_type\": \"<uri>\",\n  \"name\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"duration_options\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"period_type\": \"unlimited\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"max_booking_time\": \"<integer>\",\n  \"hide_location\": \"<boolean>\",\n  \"location_configurations\": [\n    {\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"position\": \"<integer>\",\n      \"kind\": \"outbound_call\"\n    },\n    {\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"position\": \"<integer>\",\n      \"kind\": \"microsoft_teams_conference\"\n    }\n  ],\n  \"availability_rule\": {\n    \"rules\": [\n      {\n        \"type\": \"wday\",\n        \"wday\": \"sunday\",\n        \"date\": \"<date>\",\n        \"intervals\": [\n          {\n            \"from\": \"66:34\",\n            \"to\": \"31:76\"\n          },\n          {\n            \"from\": \"95:76\",\n            \"to\": \"15:58\"\n          }\n        ]\n      },\n      {\n        \"type\": \"wday\",\n        \"wday\": \"thursday\",\n        \"date\": \"<date>\",\n        \"intervals\": [\n          {\n            \"from\": \"19:19\",\n            \"to\": \"20:33\"\n          },\n          {\n            \"from\": \"13:62\",\n            \"to\": \"09:35\"\n          }\n        ]\n      }\n    ],\n    \"timezone\": \"<string>\"\n  }\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/shares",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "shares"
+                  ]
                 }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Resource Not Found\",\n  \"message\": \"The server could not find the requested resource.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:57:48.000Z",
+              "updatedAt": "2026-10-21T20:57:48.000Z",
+              "uid": "35240-98698b28-2adf-4af0-b155-9bd46dbb679c"
             },
             {
-              "id": "4a8421bf-fbbe-47a0-a233-8accd4910fe9",
-              "name": "Authentication failed. Verify that a valid access token is provided in the Authorization header.",
+              "id": "8b11dd7f-233f-4c6d-9b5b-4cdf309c6185",
+              "name": "Cannot authenticate caller",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "shares"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"event_type\": \"<uri>\",\n  \"max_spots\": \"<integer>\"\n}",
+                  "raw": "{\n  \"event_type\": \"<uri>\",\n  \"name\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"duration_options\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"period_type\": \"unlimited\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"max_booking_time\": \"<integer>\",\n  \"hide_location\": \"<boolean>\",\n  \"location_configurations\": [\n    {\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"position\": \"<integer>\",\n      \"kind\": \"outbound_call\"\n    },\n    {\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"position\": \"<integer>\",\n      \"kind\": \"microsoft_teams_conference\"\n    }\n  ],\n  \"availability_rule\": {\n    \"rules\": [\n      {\n        \"type\": \"wday\",\n        \"wday\": \"sunday\",\n        \"date\": \"<date>\",\n        \"intervals\": [\n          {\n            \"from\": \"66:34\",\n            \"to\": \"31:76\"\n          },\n          {\n            \"from\": \"95:76\",\n            \"to\": \"15:58\"\n          }\n        ]\n      },\n      {\n        \"type\": \"wday\",\n        \"wday\": \"thursday\",\n        \"date\": \"<date>\",\n        \"intervals\": [\n          {\n            \"from\": \"19:19\",\n            \"to\": \"20:33\"\n          },\n          {\n            \"from\": \"13:62\",\n            \"to\": \"09:35\"\n          }\n        ]\n      }\n    ],\n    \"timezone\": \"<string>\"\n  }\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/shares",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "shares"
+                  ]
                 }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Resource Not Found\",\n  \"message\": \"The server could not find the requested resource.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:57:48.000Z",
+              "updatedAt": "2026-10-21T20:57:48.000Z",
+              "uid": "35240-8b11dd7f-233f-4c6d-9b5b-4cdf309c6185"
+            },
+            {
+              "id": "2892a3e2-7e64-4dea-afe2-a0333de84350",
+              "name": "Permission denied or insufficient scope",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event_type\": \"<uri>\",\n  \"name\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"duration_options\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"period_type\": \"unlimited\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"max_booking_time\": \"<integer>\",\n  \"hide_location\": \"<boolean>\",\n  \"location_configurations\": [\n    {\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"position\": \"<integer>\",\n      \"kind\": \"outbound_call\"\n    },\n    {\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"position\": \"<integer>\",\n      \"kind\": \"microsoft_teams_conference\"\n    }\n  ],\n  \"availability_rule\": {\n    \"rules\": [\n      {\n        \"type\": \"wday\",\n        \"wday\": \"sunday\",\n        \"date\": \"<date>\",\n        \"intervals\": [\n          {\n            \"from\": \"66:34\",\n            \"to\": \"31:76\"\n          },\n          {\n            \"from\": \"95:76\",\n            \"to\": \"15:58\"\n          }\n        ]\n      },\n      {\n        \"type\": \"wday\",\n        \"wday\": \"thursday\",\n        \"date\": \"<date>\",\n        \"intervals\": [\n          {\n            \"from\": \"19:19\",\n            \"to\": \"20:33\"\n          },\n          {\n            \"from\": \"13:62\",\n            \"to\": \"09:35\"\n          }\n        ]\n      }\n    ],\n    \"timezone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/shares",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "shares"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"You do not have permission to access this resource.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:57:48.000Z",
+              "updatedAt": "2026-10-21T20:57:48.000Z",
+              "uid": "35240-2892a3e2-7e64-4dea-afe2-a0333de84350"
+            },
+            {
+              "id": "b0e2f3c6-495b-4189-8fc9-1896d4af4325",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event_type\": \"<uri>\",\n  \"name\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"duration_options\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"period_type\": \"unlimited\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"max_booking_time\": \"<integer>\",\n  \"hide_location\": \"<boolean>\",\n  \"location_configurations\": [\n    {\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"position\": \"<integer>\",\n      \"kind\": \"outbound_call\"\n    },\n    {\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"position\": \"<integer>\",\n      \"kind\": \"microsoft_teams_conference\"\n    }\n  ],\n  \"availability_rule\": {\n    \"rules\": [\n      {\n        \"type\": \"wday\",\n        \"wday\": \"sunday\",\n        \"date\": \"<date>\",\n        \"intervals\": [\n          {\n            \"from\": \"66:34\",\n            \"to\": \"31:76\"\n          },\n          {\n            \"from\": \"95:76\",\n            \"to\": \"15:58\"\n          }\n        ]\n      },\n      {\n        \"type\": \"wday\",\n        \"wday\": \"thursday\",\n        \"date\": \"<date>\",\n        \"intervals\": [\n          {\n            \"from\": \"19:19\",\n            \"to\": \"20:33\"\n          },\n          {\n            \"from\": \"13:62\",\n            \"to\": \"09:35\"\n          }\n        ]\n      }\n    ],\n    \"timezone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/shares",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "shares"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Resource Not Found\",\n  \"message\": \"The server could not find the requested resource.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:57:48.000Z",
+              "updatedAt": "2026-10-21T20:57:48.000Z",
+              "uid": "35240-b0e2f3c6-495b-4189-8fc9-1896d4af4325"
+            },
+            {
+              "id": "9862217b-0b80-4a75-959d-0641e8998ffc",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event_type\": \"<uri>\",\n  \"name\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"duration_options\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"period_type\": \"unlimited\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"max_booking_time\": \"<integer>\",\n  \"hide_location\": \"<boolean>\",\n  \"location_configurations\": [\n    {\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"position\": \"<integer>\",\n      \"kind\": \"outbound_call\"\n    },\n    {\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"position\": \"<integer>\",\n      \"kind\": \"microsoft_teams_conference\"\n    }\n  ],\n  \"availability_rule\": {\n    \"rules\": [\n      {\n        \"type\": \"wday\",\n        \"wday\": \"sunday\",\n        \"date\": \"<date>\",\n        \"intervals\": [\n          {\n            \"from\": \"66:34\",\n            \"to\": \"31:76\"\n          },\n          {\n            \"from\": \"95:76\",\n            \"to\": \"15:58\"\n          }\n        ]\n      },\n      {\n        \"type\": \"wday\",\n        \"wday\": \"thursday\",\n        \"date\": \"<date>\",\n        \"intervals\": [\n          {\n            \"from\": \"19:19\",\n            \"to\": \"20:33\"\n          },\n          {\n            \"from\": \"13:62\",\n            \"to\": \"09:35\"\n          }\n        ]\n      }\n    ],\n    \"timezone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/shares",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "shares"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"description\": \"Any type\"\n}",
+              "createdAt": "2026-10-21T20:57:48.000Z",
+              "updatedAt": "2026-10-21T20:57:48.000Z",
+              "uid": "35240-9862217b-0b80-4a75-959d-0641e8998ffc"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:57:48.000Z",
+          "updatedAt": "2026-10-21T20:57:48.000Z",
+          "uid": "35240-682844bd-1218-4e3e-93b3-0df66ad1d3b9"
         }
       ],
-      "event": []
+      "id": "aeaad47c-4ae1-4ffd-aa17-c37b2d98dd15",
+      "createdAt": "2026-10-21T20:57:48.000Z",
+      "updatedAt": "2026-10-21T20:57:48.000Z",
+      "uid": "35240-aeaad47c-4ae1-4ffd-aa17-c37b2d98dd15"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://api.calendly.com",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://api.calendly.com"
     }
-  ],
-  "auth": {
-    "type": "bearer",
-    "bearer": [
-      {
-        "key": "token",
-        "value": "{{bearerToken}}"
-      }
-    ]
-  },
-  "info": {
-    "_postman_id": "b352fbb4-38cd-412e-b7a3-fa006dc8b1a2",
-    "name": "Calendly Scheduling Activity Log Shares API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Calendly Scheduling API (v2) is a RESTful API that allows developers to programmatically manage scheduling workflows. It provides endpoints for managing users, organizations, event types, scheduled events, invitees, routing forms, availability schedules, and webhook subscriptions. The API uses JSON for request and response bodies, standard HTTP methods, and supports authentication via personal access tokens and OAuth 2.1. Developers can use it to create events on behalf of invitees, retrieve scheduling data, and integrate Calendly functionality directly into their applications.\n\nContact Support:\n Name: Calendly Developer Support",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

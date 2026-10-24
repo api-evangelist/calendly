@@ -1,0 +1,419 @@
+{
+  "info": {
+    "_postman_id": "74cc273e-7cec-40ec-a4b2-9d9b8a626f76",
+    "name": "Calendly Scheduling Links API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:59:07.000Z",
+    "updatedAt": "2026-10-21T20:59:07.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-74cc273e-7cec-40ec-a4b2-9d9b8a626f76"
+  },
+  "item": [
+    {
+      "name": "scheduling_links",
+      "item": [
+        {
+          "name": "Create Single-Use Scheduling Link",
+          "id": "d9bf1113-8ced-4739-852e-8d8ee5374d92",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"max_event_count\": \"1\",\n  \"owner\": \"<uri>\",\n  \"owner_type\": \"EventType\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/scheduling_links",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "scheduling_links"
+              ]
+            },
+            "description": "Creates a single-use scheduling link.\n\n> `scheduling_links:write`"
+          },
+          "response": [
+            {
+              "id": "5ec6df0e-fb8e-4213-85c0-4334fe83b573",
+              "name": "Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"max_event_count\": \"1\",\n  \"owner\": \"<uri>\",\n  \"owner_type\": \"EventType\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/scheduling_links",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "scheduling_links"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"resource\": {\n    \"booking_url\": \"<uri>\",\n    \"owner\": \"<uri>\",\n    \"owner_type\": \"EventType\"\n  }\n}",
+              "createdAt": "2026-10-21T20:59:07.000Z",
+              "updatedAt": "2026-10-21T20:59:07.000Z",
+              "uid": "35240-5ec6df0e-fb8e-4213-85c0-4334fe83b573"
+            },
+            {
+              "id": "add19116-311f-4e70-88cf-53c82719623b",
+              "name": "Request is not valid",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"max_event_count\": \"1\",\n  \"owner\": \"<uri>\",\n  \"owner_type\": \"EventType\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/scheduling_links",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "scheduling_links"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:59:07.000Z",
+              "updatedAt": "2026-10-21T20:59:07.000Z",
+              "uid": "35240-add19116-311f-4e70-88cf-53c82719623b"
+            },
+            {
+              "id": "793b3893-055e-40d1-937f-f446fa2b4050",
+              "name": "Cannot authenticate caller",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"max_event_count\": \"1\",\n  \"owner\": \"<uri>\",\n  \"owner_type\": \"EventType\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/scheduling_links",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "scheduling_links"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:59:07.000Z",
+              "updatedAt": "2026-10-21T20:59:07.000Z",
+              "uid": "35240-793b3893-055e-40d1-937f-f446fa2b4050"
+            },
+            {
+              "id": "50d3245d-7fb1-43fa-be28-609aec0ea49a",
+              "name": "Permission denied or insufficient scope",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"max_event_count\": \"1\",\n  \"owner\": \"<uri>\",\n  \"owner_type\": \"EventType\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/scheduling_links",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "scheduling_links"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"You do not have permission\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:59:07.000Z",
+              "updatedAt": "2026-10-21T20:59:07.000Z",
+              "uid": "35240-50d3245d-7fb1-43fa-be28-609aec0ea49a"
+            },
+            {
+              "id": "458cde4f-5aa2-4991-9011-2b5a5700a931",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"max_event_count\": \"1\",\n  \"owner\": \"<uri>\",\n  \"owner_type\": \"EventType\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/scheduling_links",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "scheduling_links"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:59:07.000Z",
+              "updatedAt": "2026-10-21T20:59:07.000Z",
+              "uid": "35240-458cde4f-5aa2-4991-9011-2b5a5700a931"
+            },
+            {
+              "id": "c6a0526a-5e81-4aae-a842-eced299e846d",
+              "name": "An error has occurred on the server",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"max_event_count\": \"1\",\n  \"owner\": \"<uri>\",\n  \"owner_type\": \"EventType\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/scheduling_links",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "scheduling_links"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:59:07.000Z",
+              "updatedAt": "2026-10-21T20:59:07.000Z",
+              "uid": "35240-c6a0526a-5e81-4aae-a842-eced299e846d"
+            }
+          ],
+          "createdAt": "2026-10-21T20:59:07.000Z",
+          "updatedAt": "2026-10-21T20:59:07.000Z",
+          "uid": "35240-d9bf1113-8ced-4739-852e-8d8ee5374d92"
+        }
+      ],
+      "id": "45e18fe1-67b6-4c10-8c02-f4a02423de8e",
+      "createdAt": "2026-10-21T20:59:07.000Z",
+      "updatedAt": "2026-10-21T20:59:07.000Z",
+      "uid": "35240-45e18fe1-67b6-4c10-8c02-f4a02423de8e"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.calendly.com"
+    }
+  ]
+}

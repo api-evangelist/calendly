@@ -1,0 +1,3031 @@
+{
+  "info": {
+    "_postman_id": "a9b4ad30-f58d-4e49-a73f-5fe3a0247f67",
+    "name": "Calendly Event Types API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:58:20.000Z",
+    "updatedAt": "2026-10-21T20:58:20.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a9b4ad30-f58d-4e49-a73f-5fe3a0247f67"
+  },
+  "item": [
+    {
+      "name": "event_types",
+      "item": [
+        {
+          "name": "{uuid}",
+          "item": [
+            {
+              "name": "Get Event Type",
+              "id": "516424e9-55dc-401f-a67c-6372276e3a46",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/event_types/:uuid",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_types",
+                    ":uuid"
+                  ],
+                  "variable": [
+                    {
+                      "id": "6a257cdf-39e5-45d9-ae36-0da9530b0ce6",
+                      "key": "uuid",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Returns information about a specified Event Type.\n\n> `event_types:read`"
+              },
+              "response": [
+                {
+                  "id": "238fff5f-9c11-4af8-a9e2-0a5183c92e35",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/event_types/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event_types",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"resource\": {\n    \"active\": \"<boolean>\",\n    \"admin_managed\": \"<boolean>\",\n    \"booking_method\": \"poll\",\n    \"color\": \"#ef1455\",\n    \"created_at\": \"<dateTime>\",\n    \"custom_questions\": [\n      {\n        \"name\": \"<string>\",\n        \"type\": \"string\",\n        \"position\": \"<integer>\",\n        \"enabled\": \"<boolean>\",\n        \"required\": \"<boolean>\",\n        \"answer_choices\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"include_other\": \"<boolean>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"type\": \"single_select\",\n        \"position\": \"<integer>\",\n        \"enabled\": \"<boolean>\",\n        \"required\": \"<boolean>\",\n        \"answer_choices\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"include_other\": \"<boolean>\"\n      }\n    ],\n    \"deleted_at\": \"<string,null-date-time>\",\n    \"description_html\": \"<string,null>\",\n    \"description_plain\": \"<string,null>\",\n    \"duration\": \"<double>\",\n    \"duration_options\": \"<array,null>\",\n    \"internal_note\": \"<string,null>\",\n    \"is_paid\": \"<boolean>\",\n    \"kind\": \"solo\",\n    \"locale\": \"pt\",\n    \"locations\": \"<array,null>\",\n    \"name\": \"<string,null>\",\n    \"pooling_type\": \"multi_pool\",\n    \"position\": \"<integer>\",\n    \"profile\": {\n      \"type\": \"User\",\n      \"name\": \"<string>\",\n      \"owner\": \"<uri>\"\n    },\n    \"scheduling_url\": \"<uri>\",\n    \"secret\": \"<boolean>\",\n    \"slug\": \"<string,null>\",\n    \"type\": \"AdhocEventType\",\n    \"updated_at\": \"<dateTime>\",\n    \"uri\": \"<uri>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:58:21.000Z",
+                  "updatedAt": "2026-10-21T20:58:21.000Z",
+                  "uid": "35240-238fff5f-9c11-4af8-a9e2-0a5183c92e35"
+                },
+                {
+                  "id": "f8626965-359f-4deb-98c6-383b449835d8",
+                  "name": "Request is not valid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/event_types/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event_types",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:21.000Z",
+                  "updatedAt": "2026-10-21T20:58:21.000Z",
+                  "uid": "35240-f8626965-359f-4deb-98c6-383b449835d8"
+                },
+                {
+                  "id": "582d7159-0639-49d2-9dc4-50e74f8ebdbb",
+                  "name": "Cannot authenticate caller",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/event_types/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event_types",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:21.000Z",
+                  "updatedAt": "2026-10-21T20:58:21.000Z",
+                  "uid": "35240-582d7159-0639-49d2-9dc4-50e74f8ebdbb"
+                },
+                {
+                  "id": "f81a2677-c2f8-46ad-b1bc-2ff4a5eabaa8",
+                  "name": "Permission denied or insufficient scope",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/event_types/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event_types",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"You do not have permission\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:21.000Z",
+                  "updatedAt": "2026-10-21T20:58:21.000Z",
+                  "uid": "35240-f81a2677-c2f8-46ad-b1bc-2ff4a5eabaa8"
+                },
+                {
+                  "id": "eb951234-52f0-4990-bf9a-a6d7492b261c",
+                  "name": "Requested resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/event_types/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event_types",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:21.000Z",
+                  "updatedAt": "2026-10-21T20:58:21.000Z",
+                  "uid": "35240-eb951234-52f0-4990-bf9a-a6d7492b261c"
+                },
+                {
+                  "id": "68fb04d6-4e7b-446b-8db7-4981e9ff2da4",
+                  "name": "An error has occurred on the server",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/event_types/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event_types",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:21.000Z",
+                  "updatedAt": "2026-10-21T20:58:21.000Z",
+                  "uid": "35240-68fb04d6-4e7b-446b-8db7-4981e9ff2da4"
+                }
+              ],
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-516424e9-55dc-401f-a67c-6372276e3a46"
+            },
+            {
+              "name": "Update Event Type",
+              "id": "b8920c1e-993b-4b81-982c-c24708aa327a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"active\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"color\": \"#4939c5\",\n  \"description\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"duration_options\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"locale\": \"pt\",\n  \"locations\": [\n    {\n      \"kind\": \"webex_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"kind\": \"google_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/event_types/:uuid",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_types",
+                    ":uuid"
+                  ],
+                  "variable": [
+                    {
+                      "id": "1f425bcc-5aee-472b-adc2-082f5e12de78",
+                      "key": "uuid",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Update an existing Event Type\n\n**NOTE:**\n* Currently, this endpoint only supports one-on-one event types (kind: \"solo\").\n\n> `event_types:write`"
+              },
+              "response": [
+                {
+                  "id": "a07cd728-ea36-4e9e-a289-4f6fbb4686bb",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"active\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"color\": \"#4939c5\",\n  \"description\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"duration_options\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"locale\": \"pt\",\n  \"locations\": [\n    {\n      \"kind\": \"webex_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"kind\": \"google_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/event_types/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event_types",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"resource\": {\n    \"active\": \"<boolean>\",\n    \"admin_managed\": \"<boolean>\",\n    \"booking_method\": \"instant\",\n    \"color\": \"#1f92b7\",\n    \"created_at\": \"<dateTime>\",\n    \"custom_questions\": [\n      {\n        \"name\": \"<string>\",\n        \"type\": \"text\",\n        \"position\": \"<integer>\",\n        \"enabled\": \"<boolean>\",\n        \"required\": \"<boolean>\",\n        \"answer_choices\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"include_other\": \"<boolean>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"type\": \"phone_number\",\n        \"position\": \"<integer>\",\n        \"enabled\": \"<boolean>\",\n        \"required\": \"<boolean>\",\n        \"answer_choices\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"include_other\": \"<boolean>\"\n      }\n    ],\n    \"deleted_at\": \"<string,null-date-time>\",\n    \"description_html\": \"<string,null>\",\n    \"description_plain\": \"<string,null>\",\n    \"duration\": \"<double>\",\n    \"duration_options\": \"<array,null>\",\n    \"internal_note\": \"<string,null>\",\n    \"is_paid\": \"<boolean>\",\n    \"kind\": \"solo\",\n    \"locale\": \"uk\",\n    \"locations\": \"<array,null>\",\n    \"name\": \"<string,null>\",\n    \"pooling_type\": \"collective\",\n    \"position\": \"<integer>\",\n    \"profile\": {\n      \"type\": \"Team\",\n      \"name\": \"<string>\",\n      \"owner\": \"<uri>\"\n    },\n    \"scheduling_url\": \"<uri>\",\n    \"secret\": \"<boolean>\",\n    \"slug\": \"<string,null>\",\n    \"type\": \"AdhocEventType\",\n    \"updated_at\": \"<dateTime>\",\n    \"uri\": \"<uri>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:58:21.000Z",
+                  "updatedAt": "2026-10-21T20:58:21.000Z",
+                  "uid": "35240-a07cd728-ea36-4e9e-a289-4f6fbb4686bb"
+                },
+                {
+                  "id": "494a5b0c-8ac5-4ab2-8b65-4f9830e9c41e",
+                  "name": "Request is not valid",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"active\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"color\": \"#4939c5\",\n  \"description\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"duration_options\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"locale\": \"pt\",\n  \"locations\": [\n    {\n      \"kind\": \"webex_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"kind\": \"google_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/event_types/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event_types",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:21.000Z",
+                  "updatedAt": "2026-10-21T20:58:21.000Z",
+                  "uid": "35240-494a5b0c-8ac5-4ab2-8b65-4f9830e9c41e"
+                },
+                {
+                  "id": "f02df237-556c-43c2-836b-df64c9d0bc61",
+                  "name": "Cannot authenticate caller",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"active\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"color\": \"#4939c5\",\n  \"description\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"duration_options\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"locale\": \"pt\",\n  \"locations\": [\n    {\n      \"kind\": \"webex_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"kind\": \"google_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/event_types/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event_types",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:21.000Z",
+                  "updatedAt": "2026-10-21T20:58:21.000Z",
+                  "uid": "35240-f02df237-556c-43c2-836b-df64c9d0bc61"
+                },
+                {
+                  "id": "f9713e6f-8bc3-4773-bfed-2cd3c4b762f4",
+                  "name": "Permission denied or insufficient scope",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"active\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"color\": \"#4939c5\",\n  \"description\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"duration_options\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"locale\": \"pt\",\n  \"locations\": [\n    {\n      \"kind\": \"webex_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"kind\": \"google_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/event_types/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event_types",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"You do not have permission\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:21.000Z",
+                  "updatedAt": "2026-10-21T20:58:21.000Z",
+                  "uid": "35240-f9713e6f-8bc3-4773-bfed-2cd3c4b762f4"
+                },
+                {
+                  "id": "80a739ef-8f9a-435c-8c95-932efc347fe0",
+                  "name": "Requested resource not found",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"active\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"color\": \"#4939c5\",\n  \"description\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"duration_options\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"locale\": \"pt\",\n  \"locations\": [\n    {\n      \"kind\": \"webex_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"kind\": \"google_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/event_types/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event_types",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:21.000Z",
+                  "updatedAt": "2026-10-21T20:58:21.000Z",
+                  "uid": "35240-80a739ef-8f9a-435c-8c95-932efc347fe0"
+                },
+                {
+                  "id": "e51fa146-dec5-420d-ba7e-767a40d7090b",
+                  "name": "An error has occurred on the server",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"active\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"color\": \"#4939c5\",\n  \"description\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"duration_options\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"locale\": \"pt\",\n  \"locations\": [\n    {\n      \"kind\": \"webex_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"kind\": \"google_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/event_types/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event_types",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:21.000Z",
+                  "updatedAt": "2026-10-21T20:58:21.000Z",
+                  "uid": "35240-e51fa146-dec5-420d-ba7e-767a40d7090b"
+                }
+              ],
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-b8920c1e-993b-4b81-982c-c24708aa327a"
+            }
+          ],
+          "id": "e3355df6-c280-40db-9dad-fc309d2edb4d",
+          "createdAt": "2026-10-21T20:58:20.000Z",
+          "updatedAt": "2026-10-21T20:58:20.000Z",
+          "uid": "35240-e3355df6-c280-40db-9dad-fc309d2edb4d"
+        },
+        {
+          "name": "Create Event Type",
+          "id": "0fff56a0-d755-4f1b-ace1-09b91f4aa166",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner\": \"<uri>\",\n  \"name\": \"<string>\",\n  \"active\": false,\n  \"description\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"duration_options\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"locations\": [\n    {\n      \"kind\": \"webex_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"kind\": \"zoom_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    }\n  ],\n  \"color\": \"#4af750\",\n  \"locale\": \"pt\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/event_types",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "event_types"
+              ]
+            },
+            "description": "Create a new Event Type\n\n**NOTE:**\n* Currently, this endpoint only supports one-on-one event types (kind: \"solo\").\n\n> `event_types:write`"
+          },
+          "response": [
+            {
+              "id": "1d289770-b837-4df4-b4a6-089905ddf2d4",
+              "name": "Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"owner\": \"<uri>\",\n  \"name\": \"<string>\",\n  \"active\": false,\n  \"description\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"duration_options\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"locations\": [\n    {\n      \"kind\": \"webex_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"kind\": \"zoom_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    }\n  ],\n  \"color\": \"#4af750\",\n  \"locale\": \"pt\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/event_types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_types"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"resource\": {\n    \"active\": \"<boolean>\",\n    \"admin_managed\": \"<boolean>\",\n    \"booking_method\": \"poll\",\n    \"color\": \"#e08fcb\",\n    \"created_at\": \"<dateTime>\",\n    \"custom_questions\": [\n      {\n        \"name\": \"<string>\",\n        \"type\": \"phone_number\",\n        \"position\": \"<integer>\",\n        \"enabled\": \"<boolean>\",\n        \"required\": \"<boolean>\",\n        \"answer_choices\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"include_other\": \"<boolean>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"type\": \"single_select\",\n        \"position\": \"<integer>\",\n        \"enabled\": \"<boolean>\",\n        \"required\": \"<boolean>\",\n        \"answer_choices\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"include_other\": \"<boolean>\"\n      }\n    ],\n    \"deleted_at\": \"<string,null-date-time>\",\n    \"description_html\": \"<string,null>\",\n    \"description_plain\": \"<string,null>\",\n    \"duration\": \"<double>\",\n    \"duration_options\": \"<array,null>\",\n    \"internal_note\": \"<string,null>\",\n    \"is_paid\": \"<boolean>\",\n    \"kind\": \"solo\",\n    \"locale\": \"en\",\n    \"locations\": \"<array,null>\",\n    \"name\": \"<string,null>\",\n    \"pooling_type\": \"multi_pool\",\n    \"position\": \"<integer>\",\n    \"profile\": {\n      \"type\": \"User\",\n      \"name\": \"<string>\",\n      \"owner\": \"<uri>\"\n    },\n    \"scheduling_url\": \"<uri>\",\n    \"secret\": \"<boolean>\",\n    \"slug\": \"<string,null>\",\n    \"type\": \"AdhocEventType\",\n    \"updated_at\": \"<dateTime>\",\n    \"uri\": \"<uri>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-1d289770-b837-4df4-b4a6-089905ddf2d4"
+            },
+            {
+              "id": "70b9f71c-7e18-4f5b-9103-f6bb9c80bcce",
+              "name": "Request is not valid",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"owner\": \"<uri>\",\n  \"name\": \"<string>\",\n  \"active\": false,\n  \"description\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"duration_options\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"locations\": [\n    {\n      \"kind\": \"webex_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"kind\": \"zoom_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    }\n  ],\n  \"color\": \"#4af750\",\n  \"locale\": \"pt\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/event_types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_types"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-70b9f71c-7e18-4f5b-9103-f6bb9c80bcce"
+            },
+            {
+              "id": "768c1208-e64b-491e-8ce8-232eeb4f8da0",
+              "name": "Cannot authenticate caller",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"owner\": \"<uri>\",\n  \"name\": \"<string>\",\n  \"active\": false,\n  \"description\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"duration_options\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"locations\": [\n    {\n      \"kind\": \"webex_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"kind\": \"zoom_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    }\n  ],\n  \"color\": \"#4af750\",\n  \"locale\": \"pt\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/event_types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_types"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-768c1208-e64b-491e-8ce8-232eeb4f8da0"
+            },
+            {
+              "id": "b9e44687-45e9-4e66-9a7d-c4d066e39e57",
+              "name": "Permission denied or insufficient scope",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"owner\": \"<uri>\",\n  \"name\": \"<string>\",\n  \"active\": false,\n  \"description\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"duration_options\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"locations\": [\n    {\n      \"kind\": \"webex_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"kind\": \"zoom_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    }\n  ],\n  \"color\": \"#4af750\",\n  \"locale\": \"pt\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/event_types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_types"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"You do not have permission\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-b9e44687-45e9-4e66-9a7d-c4d066e39e57"
+            },
+            {
+              "id": "46009353-989e-4506-9d70-e569538b7ce0",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"owner\": \"<uri>\",\n  \"name\": \"<string>\",\n  \"active\": false,\n  \"description\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"duration_options\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"locations\": [\n    {\n      \"kind\": \"webex_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"kind\": \"zoom_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    }\n  ],\n  \"color\": \"#4af750\",\n  \"locale\": \"pt\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/event_types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_types"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-46009353-989e-4506-9d70-e569538b7ce0"
+            },
+            {
+              "id": "f39d0dc7-6cc8-42eb-86a9-a6a86982d224",
+              "name": "An error has occurred on the server",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"owner\": \"<uri>\",\n  \"name\": \"<string>\",\n  \"active\": false,\n  \"description\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"duration_options\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"locations\": [\n    {\n      \"kind\": \"webex_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"kind\": \"zoom_conference\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    }\n  ],\n  \"color\": \"#4af750\",\n  \"locale\": \"pt\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/event_types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_types"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-f39d0dc7-6cc8-42eb-86a9-a6a86982d224"
+            }
+          ],
+          "createdAt": "2026-10-21T20:58:21.000Z",
+          "updatedAt": "2026-10-21T20:58:21.000Z",
+          "uid": "35240-0fff56a0-d755-4f1b-ace1-09b91f4aa166"
+        },
+        {
+          "name": "List User's Event Types",
+          "id": "6e6fa1a0-f786-43fa-9d2b-11a5924ca242",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/event_types?active=<boolean>&organization=<uri>&user=<uri>&user_availability_schedule=<uri>&sort=name:asc&admin_managed=<boolean>&page_token=<string>&count=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "event_types"
+              ],
+              "query": [
+                {
+                  "description": "Return only active event types if true, only inactive if false, or all event types if this parameter is omitted.",
+                  "key": "active",
+                  "value": "<boolean>"
+                },
+                {
+                  "description": "View available personal, team, and organization event types associated with the organization's URI.",
+                  "key": "organization",
+                  "value": "<uri>"
+                },
+                {
+                  "description": "View available personal, team, and organization event types associated with the user's URI.",
+                  "key": "user",
+                  "value": "<uri>"
+                },
+                {
+                  "description": "Used in conjunction with `user` parameter, returns a filtered list of Event Types that use the given primary availability schedule.",
+                  "key": "user_availability_schedule",
+                  "value": "<uri>"
+                },
+                {
+                  "description": "Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values.Supported fields are: name, position, created_at, updated_at. Sort direction is specified as: asc, desc.",
+                  "key": "sort",
+                  "value": "name:asc"
+                },
+                {
+                  "description": "Return only admin managed event types if true, exclude admin managed event types if false, or include all event types if this parameter is omitted.",
+                  "key": "admin_managed",
+                  "value": "<boolean>"
+                },
+                {
+                  "description": "The token to pass to get the next or previous portion of the collection",
+                  "key": "page_token",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The number of rows to return",
+                  "key": "count",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "Returns all Event Types associated with a specified User. Use:\n\n* `organization` to look up all Event Types that belong to the organization\n\n* `user` to look up a user's Event Types in an organization\n\nEither `organization` or `user` are required query params when using this endpoint.\n\n> `event_types:read`"
+          },
+          "response": [
+            {
+              "id": "dec7d303-0496-4a0f-8860-fd21eeb92cfc",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/event_types?active=<boolean>&organization=<uri>&user=<uri>&user_availability_schedule=<uri>&sort=name:asc&admin_managed=<boolean>&page_token=<string>&count=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_types"
+                  ],
+                  "query": [
+                    {
+                      "description": "Return only active event types if true, only inactive if false, or all event types if this parameter is omitted.",
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "View available personal, team, and organization event types associated with the organization's URI.",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "View available personal, team, and organization event types associated with the user's URI.",
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Used in conjunction with `user` parameter, returns a filtered list of Event Types that use the given primary availability schedule.",
+                      "key": "user_availability_schedule",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values.Supported fields are: name, position, created_at, updated_at. Sort direction is specified as: asc, desc.",
+                      "key": "sort",
+                      "value": "name:asc"
+                    },
+                    {
+                      "description": "Return only admin managed event types if true, exclude admin managed event types if false, or include all event types if this parameter is omitted.",
+                      "key": "admin_managed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"collection\": [\n    {\n      \"active\": \"<boolean>\",\n      \"admin_managed\": \"<boolean>\",\n      \"booking_method\": \"poll\",\n      \"color\": \"#13216f\",\n      \"created_at\": \"<dateTime>\",\n      \"custom_questions\": [\n        {\n          \"name\": \"<string>\",\n          \"type\": \"single_select\",\n          \"position\": \"<integer>\",\n          \"enabled\": \"<boolean>\",\n          \"required\": \"<boolean>\",\n          \"answer_choices\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"include_other\": \"<boolean>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"type\": \"multi_select\",\n          \"position\": \"<integer>\",\n          \"enabled\": \"<boolean>\",\n          \"required\": \"<boolean>\",\n          \"answer_choices\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"include_other\": \"<boolean>\"\n        }\n      ],\n      \"deleted_at\": \"<string,null-date-time>\",\n      \"description_html\": \"<string,null>\",\n      \"description_plain\": \"<string,null>\",\n      \"duration\": \"<double>\",\n      \"duration_options\": \"<array,null>\",\n      \"internal_note\": \"<string,null>\",\n      \"is_paid\": \"<boolean>\",\n      \"kind\": \"group\",\n      \"locale\": \"en\",\n      \"locations\": \"<array,null>\",\n      \"name\": \"<string,null>\",\n      \"pooling_type\": \"multi_pool\",\n      \"position\": \"<integer>\",\n      \"profile\": {\n        \"type\": \"User\",\n        \"name\": \"<string>\",\n        \"owner\": \"<uri>\"\n      },\n      \"scheduling_url\": \"<uri>\",\n      \"secret\": \"<boolean>\",\n      \"slug\": \"<string,null>\",\n      \"type\": \"AdhocEventType\",\n      \"updated_at\": \"<dateTime>\",\n      \"uri\": \"<uri>\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"admin_managed\": \"<boolean>\",\n      \"booking_method\": \"poll\",\n      \"color\": \"#af2d2d\",\n      \"created_at\": \"<dateTime>\",\n      \"custom_questions\": [\n        {\n          \"name\": \"<string>\",\n          \"type\": \"text\",\n          \"position\": \"<integer>\",\n          \"enabled\": \"<boolean>\",\n          \"required\": \"<boolean>\",\n          \"answer_choices\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"include_other\": \"<boolean>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"type\": \"text\",\n          \"position\": \"<integer>\",\n          \"enabled\": \"<boolean>\",\n          \"required\": \"<boolean>\",\n          \"answer_choices\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"include_other\": \"<boolean>\"\n        }\n      ],\n      \"deleted_at\": \"<string,null-date-time>\",\n      \"description_html\": \"<string,null>\",\n      \"description_plain\": \"<string,null>\",\n      \"duration\": \"<double>\",\n      \"duration_options\": \"<array,null>\",\n      \"internal_note\": \"<string,null>\",\n      \"is_paid\": \"<boolean>\",\n      \"kind\": \"group\",\n      \"locale\": \"fr\",\n      \"locations\": \"<array,null>\",\n      \"name\": \"<string,null>\",\n      \"pooling_type\": \"collective\",\n      \"position\": \"<integer>\",\n      \"profile\": {\n        \"type\": \"Team\",\n        \"name\": \"<string>\",\n        \"owner\": \"<uri>\"\n      },\n      \"scheduling_url\": \"<uri>\",\n      \"secret\": \"<boolean>\",\n      \"slug\": \"<string,null>\",\n      \"type\": \"AdhocEventType\",\n      \"updated_at\": \"<dateTime>\",\n      \"uri\": \"<uri>\"\n    }\n  ],\n  \"pagination\": {\n    \"count\": \"<integer>\",\n    \"next_page\": \"<string,null-uri>\",\n    \"previous_page\": \"<string,null-uri>\",\n    \"next_page_token\": \"<string,null>\",\n    \"previous_page_token\": \"<string,null>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-dec7d303-0496-4a0f-8860-fd21eeb92cfc"
+            },
+            {
+              "id": "e463a00d-20fc-4c9d-897b-1fd9ec6a2993",
+              "name": "Request is not valid",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/event_types?active=<boolean>&organization=<uri>&user=<uri>&user_availability_schedule=<uri>&sort=name:asc&admin_managed=<boolean>&page_token=<string>&count=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_types"
+                  ],
+                  "query": [
+                    {
+                      "description": "Return only active event types if true, only inactive if false, or all event types if this parameter is omitted.",
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "View available personal, team, and organization event types associated with the organization's URI.",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "View available personal, team, and organization event types associated with the user's URI.",
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Used in conjunction with `user` parameter, returns a filtered list of Event Types that use the given primary availability schedule.",
+                      "key": "user_availability_schedule",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values.Supported fields are: name, position, created_at, updated_at. Sort direction is specified as: asc, desc.",
+                      "key": "sort",
+                      "value": "name:asc"
+                    },
+                    {
+                      "description": "Return only admin managed event types if true, exclude admin managed event types if false, or include all event types if this parameter is omitted.",
+                      "key": "admin_managed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-e463a00d-20fc-4c9d-897b-1fd9ec6a2993"
+            },
+            {
+              "id": "08d703df-9195-4381-9115-492d3030bd51",
+              "name": "Cannot authenticate caller",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/event_types?active=<boolean>&organization=<uri>&user=<uri>&user_availability_schedule=<uri>&sort=name:asc&admin_managed=<boolean>&page_token=<string>&count=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_types"
+                  ],
+                  "query": [
+                    {
+                      "description": "Return only active event types if true, only inactive if false, or all event types if this parameter is omitted.",
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "View available personal, team, and organization event types associated with the organization's URI.",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "View available personal, team, and organization event types associated with the user's URI.",
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Used in conjunction with `user` parameter, returns a filtered list of Event Types that use the given primary availability schedule.",
+                      "key": "user_availability_schedule",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values.Supported fields are: name, position, created_at, updated_at. Sort direction is specified as: asc, desc.",
+                      "key": "sort",
+                      "value": "name:asc"
+                    },
+                    {
+                      "description": "Return only admin managed event types if true, exclude admin managed event types if false, or include all event types if this parameter is omitted.",
+                      "key": "admin_managed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-08d703df-9195-4381-9115-492d3030bd51"
+            },
+            {
+              "id": "b445987b-b659-4599-bc40-44cd0c8d849e",
+              "name": "Permission Denied or insufficient scope",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/event_types?active=<boolean>&organization=<uri>&user=<uri>&user_availability_schedule=<uri>&sort=name:asc&admin_managed=<boolean>&page_token=<string>&count=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_types"
+                  ],
+                  "query": [
+                    {
+                      "description": "Return only active event types if true, only inactive if false, or all event types if this parameter is omitted.",
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "View available personal, team, and organization event types associated with the organization's URI.",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "View available personal, team, and organization event types associated with the user's URI.",
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Used in conjunction with `user` parameter, returns a filtered list of Event Types that use the given primary availability schedule.",
+                      "key": "user_availability_schedule",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values.Supported fields are: name, position, created_at, updated_at. Sort direction is specified as: asc, desc.",
+                      "key": "sort",
+                      "value": "name:asc"
+                    },
+                    {
+                      "description": "Return only admin managed event types if true, exclude admin managed event types if false, or include all event types if this parameter is omitted.",
+                      "key": "admin_managed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"This user is not in your organization\"\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-b445987b-b659-4599-bc40-44cd0c8d849e"
+            },
+            {
+              "id": "afee2d1d-499c-4336-a225-15408944f608",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/event_types?active=<boolean>&organization=<uri>&user=<uri>&user_availability_schedule=<uri>&sort=name:asc&admin_managed=<boolean>&page_token=<string>&count=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_types"
+                  ],
+                  "query": [
+                    {
+                      "description": "Return only active event types if true, only inactive if false, or all event types if this parameter is omitted.",
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "View available personal, team, and organization event types associated with the organization's URI.",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "View available personal, team, and organization event types associated with the user's URI.",
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Used in conjunction with `user` parameter, returns a filtered list of Event Types that use the given primary availability schedule.",
+                      "key": "user_availability_schedule",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values.Supported fields are: name, position, created_at, updated_at. Sort direction is specified as: asc, desc.",
+                      "key": "sort",
+                      "value": "name:asc"
+                    },
+                    {
+                      "description": "Return only admin managed event types if true, exclude admin managed event types if false, or include all event types if this parameter is omitted.",
+                      "key": "admin_managed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-afee2d1d-499c-4336-a225-15408944f608"
+            },
+            {
+              "id": "580563da-3e33-47dc-8248-36c3c091de7e",
+              "name": "An error has occurred on the server",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/event_types?active=<boolean>&organization=<uri>&user=<uri>&user_availability_schedule=<uri>&sort=name:asc&admin_managed=<boolean>&page_token=<string>&count=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_types"
+                  ],
+                  "query": [
+                    {
+                      "description": "Return only active event types if true, only inactive if false, or all event types if this parameter is omitted.",
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "View available personal, team, and organization event types associated with the organization's URI.",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "View available personal, team, and organization event types associated with the user's URI.",
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Used in conjunction with `user` parameter, returns a filtered list of Event Types that use the given primary availability schedule.",
+                      "key": "user_availability_schedule",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values.Supported fields are: name, position, created_at, updated_at. Sort direction is specified as: asc, desc.",
+                      "key": "sort",
+                      "value": "name:asc"
+                    },
+                    {
+                      "description": "Return only admin managed event types if true, exclude admin managed event types if false, or include all event types if this parameter is omitted.",
+                      "key": "admin_managed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-580563da-3e33-47dc-8248-36c3c091de7e"
+            }
+          ],
+          "createdAt": "2026-10-21T20:58:21.000Z",
+          "updatedAt": "2026-10-21T20:58:21.000Z",
+          "uid": "35240-6e6fa1a0-f786-43fa-9d2b-11a5924ca242"
+        }
+      ],
+      "id": "c8cbf101-9888-4abb-8135-f53e8c6a505b",
+      "createdAt": "2026-10-21T20:58:20.000Z",
+      "updatedAt": "2026-10-21T20:58:20.000Z",
+      "uid": "35240-c8cbf101-9888-4abb-8135-f53e8c6a505b"
+    },
+    {
+      "name": "one_off_event_types",
+      "item": [
+        {
+          "name": "Create One-Off Event Type",
+          "id": "3008109a-873f-4282-9a18-497e337fca90",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"host\": \"<uri>\",\n  \"duration\": \"<double>\",\n  \"date_setting\": {\n    \"type\": \"date_range\",\n    \"start_date\": \"<date>\",\n    \"end_date\": \"<date>\"\n  },\n  \"co_hosts\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"timezone\": \"<string>\",\n  \"location\": {\n    \"kind\": \"custom\",\n    \"location\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/one_off_event_types",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "one_off_event_types"
+              ]
+            },
+            "description": "Creates One-Off Event Type\n\n> `event_types:write`"
+          },
+          "response": [
+            {
+              "id": "789a1f58-5658-4c7c-9f3b-acd45d4677c2",
+              "name": "Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"host\": \"<uri>\",\n  \"duration\": \"<double>\",\n  \"date_setting\": {\n    \"type\": \"date_range\",\n    \"start_date\": \"<date>\",\n    \"end_date\": \"<date>\"\n  },\n  \"co_hosts\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"timezone\": \"<string>\",\n  \"location\": {\n    \"kind\": \"custom\",\n    \"location\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/one_off_event_types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "one_off_event_types"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"resource\": {\n    \"active\": \"<boolean>\",\n    \"admin_managed\": \"<boolean>\",\n    \"booking_method\": \"instant\",\n    \"color\": \"#750820\",\n    \"created_at\": \"<dateTime>\",\n    \"custom_questions\": [\n      {\n        \"name\": \"<string>\",\n        \"type\": \"single_select\",\n        \"position\": \"<integer>\",\n        \"enabled\": \"<boolean>\",\n        \"required\": \"<boolean>\",\n        \"answer_choices\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"include_other\": \"<boolean>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"type\": \"single_select\",\n        \"position\": \"<integer>\",\n        \"enabled\": \"<boolean>\",\n        \"required\": \"<boolean>\",\n        \"answer_choices\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"include_other\": \"<boolean>\"\n      }\n    ],\n    \"deleted_at\": \"<string,null-date-time>\",\n    \"description_html\": \"<string,null>\",\n    \"description_plain\": \"<string,null>\",\n    \"duration\": \"<double>\",\n    \"duration_options\": \"<array,null>\",\n    \"internal_note\": \"<string,null>\",\n    \"is_paid\": \"<boolean>\",\n    \"kind\": \"solo\",\n    \"locale\": \"uk\",\n    \"locations\": \"<array,null>\",\n    \"name\": \"<string,null>\",\n    \"pooling_type\": \"round_robin\",\n    \"position\": \"<integer>\",\n    \"profile\": {\n      \"type\": \"User\",\n      \"name\": \"<string>\",\n      \"owner\": \"<uri>\"\n    },\n    \"scheduling_url\": \"<uri>\",\n    \"secret\": \"<boolean>\",\n    \"slug\": \"<string,null>\",\n    \"type\": \"AdhocEventType\",\n    \"updated_at\": \"<dateTime>\",\n    \"uri\": \"<uri>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-789a1f58-5658-4c7c-9f3b-acd45d4677c2"
+            },
+            {
+              "id": "f5f25563-899e-4209-9f1a-22f688583774",
+              "name": "Request is not valid",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"host\": \"<uri>\",\n  \"duration\": \"<double>\",\n  \"date_setting\": {\n    \"type\": \"date_range\",\n    \"start_date\": \"<date>\",\n    \"end_date\": \"<date>\"\n  },\n  \"co_hosts\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"timezone\": \"<string>\",\n  \"location\": {\n    \"kind\": \"custom\",\n    \"location\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/one_off_event_types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "one_off_event_types"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-f5f25563-899e-4209-9f1a-22f688583774"
+            },
+            {
+              "id": "6265c822-ff6b-4c3a-b0e7-7f76acfc3540",
+              "name": "Cannot authenticate caller",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"host\": \"<uri>\",\n  \"duration\": \"<double>\",\n  \"date_setting\": {\n    \"type\": \"date_range\",\n    \"start_date\": \"<date>\",\n    \"end_date\": \"<date>\"\n  },\n  \"co_hosts\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"timezone\": \"<string>\",\n  \"location\": {\n    \"kind\": \"custom\",\n    \"location\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/one_off_event_types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "one_off_event_types"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-6265c822-ff6b-4c3a-b0e7-7f76acfc3540"
+            },
+            {
+              "id": "3a50ce7a-088e-45e2-acd9-15e4869f6d44",
+              "name": "Permission Denied or insufficient scope",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"host\": \"<uri>\",\n  \"duration\": \"<double>\",\n  \"date_setting\": {\n    \"type\": \"date_range\",\n    \"start_date\": \"<date>\",\n    \"end_date\": \"<date>\"\n  },\n  \"co_hosts\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"timezone\": \"<string>\",\n  \"location\": {\n    \"kind\": \"custom\",\n    \"location\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/one_off_event_types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "one_off_event_types"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"This user is not in your organization\",\n  \"details\": [\n    {\n      \"parameter\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"parameter\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-3a50ce7a-088e-45e2-acd9-15e4869f6d44"
+            },
+            {
+              "id": "89d221ee-85aa-47e9-8694-6031c141250a",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"host\": \"<uri>\",\n  \"duration\": \"<double>\",\n  \"date_setting\": {\n    \"type\": \"date_range\",\n    \"start_date\": \"<date>\",\n    \"end_date\": \"<date>\"\n  },\n  \"co_hosts\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"timezone\": \"<string>\",\n  \"location\": {\n    \"kind\": \"custom\",\n    \"location\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/one_off_event_types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "one_off_event_types"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-89d221ee-85aa-47e9-8694-6031c141250a"
+            },
+            {
+              "id": "b25b54f6-7d3b-4982-8029-f6c34e4b64c5",
+              "name": "An error has occurred on the server",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"host\": \"<uri>\",\n  \"duration\": \"<double>\",\n  \"date_setting\": {\n    \"type\": \"date_range\",\n    \"start_date\": \"<date>\",\n    \"end_date\": \"<date>\"\n  },\n  \"co_hosts\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"timezone\": \"<string>\",\n  \"location\": {\n    \"kind\": \"custom\",\n    \"location\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/one_off_event_types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "one_off_event_types"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-b25b54f6-7d3b-4982-8029-f6c34e4b64c5"
+            }
+          ],
+          "createdAt": "2026-10-21T20:58:21.000Z",
+          "updatedAt": "2026-10-21T20:58:21.000Z",
+          "uid": "35240-3008109a-873f-4282-9a18-497e337fca90"
+        }
+      ],
+      "id": "91327339-4fb5-4510-a554-61cfbd4d02e6",
+      "createdAt": "2026-10-21T20:58:20.000Z",
+      "updatedAt": "2026-10-21T20:58:20.000Z",
+      "uid": "35240-91327339-4fb5-4510-a554-61cfbd4d02e6"
+    },
+    {
+      "name": "event_type_available_times",
+      "item": [
+        {
+          "name": "List Event Type Available Times",
+          "id": "12a3021b-b380-4e67-9dad-99321f6bb316",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/event_type_available_times?event_type=<uri>&start_time=<dateTime>&end_time=<dateTime>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "event_type_available_times"
+              ],
+              "query": [
+                {
+                  "description": "(Required) The uri associated with the event type",
+                  "key": "event_type",
+                  "value": "<uri>"
+                },
+                {
+                  "description": "(Required) Start time of the requested availability range. Date cannot be in the past.",
+                  "key": "start_time",
+                  "value": "<dateTime>"
+                },
+                {
+                  "description": "(Required) End time of the requested availability range. Date must be in the future and no greater than 31 days from start_time.",
+                  "key": "end_time",
+                  "value": "<dateTime>"
+                }
+              ]
+            },
+            "description": "Returns a list of available times for an event type within a specified date range.\n\n**NOTE:**\n* Date range can be no greater than 31 days.\n* This endpoint does not support traditional keyset pagination.\n\n> `availability:read`"
+          },
+          "response": [
+            {
+              "id": "89e450a0-9468-481f-ad51-3e9d544b2aa4",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/event_type_available_times?event_type=<uri>&start_time=<dateTime>&end_time=<dateTime>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_type_available_times"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The uri associated with the event type",
+                      "key": "event_type",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "(Required) Start time of the requested availability range. Date cannot be in the past.",
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "(Required) End time of the requested availability range. Date must be in the future and no greater than 31 days from start_time.",
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"collection\": [\n    {\n      \"status\": \"<string>\",\n      \"invitees_remaining\": \"<double>\",\n      \"start_time\": \"<dateTime>\",\n      \"scheduling_url\": \"<uri>\"\n    },\n    {\n      \"status\": \"<string>\",\n      \"invitees_remaining\": \"<double>\",\n      \"start_time\": \"<dateTime>\",\n      \"scheduling_url\": \"<uri>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-89e450a0-9468-481f-ad51-3e9d544b2aa4"
+            },
+            {
+              "id": "59913218-c96d-4830-a05d-99570cd51112",
+              "name": "Request is not valid",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/event_type_available_times?event_type=<uri>&start_time=<dateTime>&end_time=<dateTime>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_type_available_times"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The uri associated with the event type",
+                      "key": "event_type",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "(Required) Start time of the requested availability range. Date cannot be in the past.",
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "(Required) End time of the requested availability range. Date must be in the future and no greater than 31 days from start_time.",
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-59913218-c96d-4830-a05d-99570cd51112"
+            },
+            {
+              "id": "ced830c1-0bbe-4b3c-8d36-e35f8099df29",
+              "name": "Cannot authenticate caller",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/event_type_available_times?event_type=<uri>&start_time=<dateTime>&end_time=<dateTime>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_type_available_times"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The uri associated with the event type",
+                      "key": "event_type",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "(Required) Start time of the requested availability range. Date cannot be in the past.",
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "(Required) End time of the requested availability range. Date must be in the future and no greater than 31 days from start_time.",
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-ced830c1-0bbe-4b3c-8d36-e35f8099df29"
+            },
+            {
+              "id": "cdaa33f6-a332-4fad-b684-1de456b1943b",
+              "name": "Permission denied or insufficient scope",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/event_type_available_times?event_type=<uri>&start_time=<dateTime>&end_time=<dateTime>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_type_available_times"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The uri associated with the event type",
+                      "key": "event_type",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "(Required) Start time of the requested availability range. Date cannot be in the past.",
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "(Required) End time of the requested availability range. Date must be in the future and no greater than 31 days from start_time.",
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"You do not have permission\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-cdaa33f6-a332-4fad-b684-1de456b1943b"
+            },
+            {
+              "id": "da8d43d1-ff9e-4214-b918-13ebb89e362e",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/event_type_available_times?event_type=<uri>&start_time=<dateTime>&end_time=<dateTime>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_type_available_times"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The uri associated with the event type",
+                      "key": "event_type",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "(Required) Start time of the requested availability range. Date cannot be in the past.",
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "(Required) End time of the requested availability range. Date must be in the future and no greater than 31 days from start_time.",
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-da8d43d1-ff9e-4214-b918-13ebb89e362e"
+            },
+            {
+              "id": "81398710-0c26-40fd-9f47-42b645b1b542",
+              "name": "An error has occurred on the server",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/event_type_available_times?event_type=<uri>&start_time=<dateTime>&end_time=<dateTime>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_type_available_times"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The uri associated with the event type",
+                      "key": "event_type",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "(Required) Start time of the requested availability range. Date cannot be in the past.",
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "(Required) End time of the requested availability range. Date must be in the future and no greater than 31 days from start_time.",
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-81398710-0c26-40fd-9f47-42b645b1b542"
+            }
+          ],
+          "createdAt": "2026-10-21T20:58:21.000Z",
+          "updatedAt": "2026-10-21T20:58:21.000Z",
+          "uid": "35240-12a3021b-b380-4e67-9dad-99321f6bb316"
+        }
+      ],
+      "id": "911ab759-60a5-4a77-bbc1-31c25de9508f",
+      "createdAt": "2026-10-21T20:58:20.000Z",
+      "updatedAt": "2026-10-21T20:58:20.000Z",
+      "uid": "35240-911ab759-60a5-4a77-bbc1-31c25de9508f"
+    },
+    {
+      "name": "event_type_memberships",
+      "item": [
+        {
+          "name": "List Event Type Hosts",
+          "id": "e45c0b1f-a521-4a35-898c-16eca2b38e36",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/event_type_memberships?event_type=<uri>&count=20&page_token=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "event_type_memberships"
+              ],
+              "query": [
+                {
+                  "description": "(Required) The uri associated with the event type",
+                  "key": "event_type",
+                  "value": "<uri>"
+                },
+                {
+                  "description": "The number of rows to return",
+                  "key": "count",
+                  "value": "20"
+                },
+                {
+                  "description": "The token to pass to get the next or previous portion of the collection",
+                  "key": "page_token",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Fetch list of event type hosts\n\n> `event_types:read`"
+          },
+          "response": [
+            {
+              "id": "b171b711-db94-46b3-8b45-ad0a26597e5e",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/event_type_memberships?event_type=<uri>&count=20&page_token=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_type_memberships"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The uri associated with the event type",
+                      "key": "event_type",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"collection\": [\n    {\n      \"uri\": \"<uri>\",\n      \"event_type\": {\n        \"active\": \"<boolean>\",\n        \"admin_managed\": \"<boolean>\",\n        \"booking_method\": \"poll\",\n        \"color\": \"#b814e7\",\n        \"created_at\": \"<dateTime>\",\n        \"custom_questions\": [\n          {\n            \"name\": \"<string>\",\n            \"type\": \"text\",\n            \"position\": \"<integer>\",\n            \"enabled\": \"<boolean>\",\n            \"required\": \"<boolean>\",\n            \"answer_choices\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"include_other\": \"<boolean>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"type\": \"multi_select\",\n            \"position\": \"<integer>\",\n            \"enabled\": \"<boolean>\",\n            \"required\": \"<boolean>\",\n            \"answer_choices\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"include_other\": \"<boolean>\"\n          }\n        ],\n        \"deleted_at\": \"<string,null-date-time>\",\n        \"description_html\": \"<string,null>\",\n        \"description_plain\": \"<string,null>\",\n        \"duration\": \"<double>\",\n        \"duration_options\": \"<array,null>\",\n        \"internal_note\": \"<string,null>\",\n        \"is_paid\": \"<boolean>\",\n        \"kind\": \"group\",\n        \"locale\": \"uk\",\n        \"locations\": \"<array,null>\",\n        \"name\": \"<string,null>\",\n        \"pooling_type\": \"multi_pool\",\n        \"position\": \"<integer>\",\n        \"profile\": {\n          \"type\": \"Team\",\n          \"name\": \"<string>\",\n          \"owner\": \"<uri>\"\n        },\n        \"scheduling_url\": \"<uri>\",\n        \"secret\": \"<boolean>\",\n        \"slug\": \"<string,null>\",\n        \"type\": \"AdhocEventType\",\n        \"updated_at\": \"<dateTime>\",\n        \"uri\": \"<uri>\"\n      },\n      \"member\": {\n        \"uri\": \"<uri>\",\n        \"name\": \"<string>\",\n        \"slug\": \"<string>\",\n        \"email\": \"<email>\",\n        \"scheduling_url\": \"<uri>\",\n        \"timezone\": \"<string>\",\n        \"avatar_url\": \"<string,null-uri>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"current_organization\": \"<uri>\",\n        \"resource_type\": \"<string>\",\n        \"locale\": \"fr\",\n        \"time_notation\": \"12h\"\n      },\n      \"updated_at\": \"<dateTime>\",\n      \"created_at\": \"<dateTime>\"\n    },\n    {\n      \"uri\": \"<uri>\",\n      \"event_type\": {\n        \"active\": \"<boolean>\",\n        \"admin_managed\": \"<boolean>\",\n        \"booking_method\": \"instant\",\n        \"color\": \"#5c0f06\",\n        \"created_at\": \"<dateTime>\",\n        \"custom_questions\": [\n          {\n            \"name\": \"<string>\",\n            \"type\": \"phone_number\",\n            \"position\": \"<integer>\",\n            \"enabled\": \"<boolean>\",\n            \"required\": \"<boolean>\",\n            \"answer_choices\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"include_other\": \"<boolean>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"type\": \"phone_number\",\n            \"position\": \"<integer>\",\n            \"enabled\": \"<boolean>\",\n            \"required\": \"<boolean>\",\n            \"answer_choices\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"include_other\": \"<boolean>\"\n          }\n        ],\n        \"deleted_at\": \"<string,null-date-time>\",\n        \"description_html\": \"<string,null>\",\n        \"description_plain\": \"<string,null>\",\n        \"duration\": \"<double>\",\n        \"duration_options\": \"<array,null>\",\n        \"internal_note\": \"<string,null>\",\n        \"is_paid\": \"<boolean>\",\n        \"kind\": \"solo\",\n        \"locale\": \"pt\",\n        \"locations\": \"<array,null>\",\n        \"name\": \"<string,null>\",\n        \"pooling_type\": \"collective\",\n        \"position\": \"<integer>\",\n        \"profile\": {\n          \"type\": \"User\",\n          \"name\": \"<string>\",\n          \"owner\": \"<uri>\"\n        },\n        \"scheduling_url\": \"<uri>\",\n        \"secret\": \"<boolean>\",\n        \"slug\": \"<string,null>\",\n        \"type\": \"StandardEventType\",\n        \"updated_at\": \"<dateTime>\",\n        \"uri\": \"<uri>\"\n      },\n      \"member\": {\n        \"uri\": \"<uri>\",\n        \"name\": \"<string>\",\n        \"slug\": \"<string>\",\n        \"email\": \"<email>\",\n        \"scheduling_url\": \"<uri>\",\n        \"timezone\": \"<string>\",\n        \"avatar_url\": \"<string,null-uri>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"current_organization\": \"<uri>\",\n        \"resource_type\": \"<string>\",\n        \"locale\": \"fr\",\n        \"time_notation\": \"12h\"\n      },\n      \"updated_at\": \"<dateTime>\",\n      \"created_at\": \"<dateTime>\"\n    }\n  ],\n  \"pagination\": {\n    \"count\": \"<integer>\",\n    \"next_page\": \"<string,null-uri>\",\n    \"previous_page\": \"<string,null-uri>\",\n    \"next_page_token\": \"<string,null>\",\n    \"previous_page_token\": \"<string,null>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-b171b711-db94-46b3-8b45-ad0a26597e5e"
+            },
+            {
+              "id": "e9099676-55d1-441f-a339-9ef61fb2774e",
+              "name": "Request is not valid",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/event_type_memberships?event_type=<uri>&count=20&page_token=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_type_memberships"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The uri associated with the event type",
+                      "key": "event_type",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-e9099676-55d1-441f-a339-9ef61fb2774e"
+            },
+            {
+              "id": "ce8840fb-19c5-4bf1-b694-2894b661d250",
+              "name": "Cannot authenticate caller",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/event_type_memberships?event_type=<uri>&count=20&page_token=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_type_memberships"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The uri associated with the event type",
+                      "key": "event_type",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-ce8840fb-19c5-4bf1-b694-2894b661d250"
+            },
+            {
+              "id": "b184ac4b-66ef-4af4-ae02-88af8810b624",
+              "name": "Permission denied or insufficient scope",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/event_type_memberships?event_type=<uri>&count=20&page_token=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_type_memberships"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The uri associated with the event type",
+                      "key": "event_type",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"You do not have permission to access this resource.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-b184ac4b-66ef-4af4-ae02-88af8810b624"
+            },
+            {
+              "id": "5a53c9c7-2d74-4b90-8f57-0226b89b1a26",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/event_type_memberships?event_type=<uri>&count=20&page_token=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_type_memberships"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The uri associated with the event type",
+                      "key": "event_type",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-5a53c9c7-2d74-4b90-8f57-0226b89b1a26"
+            },
+            {
+              "id": "ccf49514-8a20-4e5c-991e-b199e111ae27",
+              "name": "An error has occurred on the server",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/event_type_memberships?event_type=<uri>&count=20&page_token=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event_type_memberships"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The uri associated with the event type",
+                      "key": "event_type",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:21.000Z",
+              "updatedAt": "2026-10-21T20:58:21.000Z",
+              "uid": "35240-ccf49514-8a20-4e5c-991e-b199e111ae27"
+            }
+          ],
+          "createdAt": "2026-10-21T20:58:21.000Z",
+          "updatedAt": "2026-10-21T20:58:21.000Z",
+          "uid": "35240-e45c0b1f-a521-4a35-898c-16eca2b38e36"
+        }
+      ],
+      "id": "78885c34-b306-4546-97ea-3fdd5983587f",
+      "createdAt": "2026-10-21T20:58:20.000Z",
+      "updatedAt": "2026-10-21T20:58:20.000Z",
+      "uid": "35240-78885c34-b306-4546-97ea-3fdd5983587f"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.calendly.com"
+    }
+  ]
+}

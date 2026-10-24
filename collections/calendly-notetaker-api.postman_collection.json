@@ -1,0 +1,2055 @@
+{
+  "info": {
+    "_postman_id": "9234688e-785d-4d9c-a98f-02bf8ea0ccdf",
+    "name": "Calendly Notetaker API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:58:34.000Z",
+    "updatedAt": "2026-10-21T20:58:34.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9234688e-785d-4d9c-a98f-02bf8ea0ccdf"
+  },
+  "item": [
+    {
+      "name": "meeting_recaps",
+      "item": [
+        {
+          "name": "{uuid}",
+          "item": [
+            {
+              "name": "transcript",
+              "item": [
+                {
+                  "name": "Get Transcript",
+                  "id": "65444fb9-89da-438a-b79e-767f58186942",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/meeting_recaps/:uuid/transcript",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meeting_recaps",
+                        ":uuid",
+                        "transcript"
+                      ],
+                      "variable": [
+                        {
+                          "id": "dcfd942d-60dd-4a01-a6bb-96a9b78a4005",
+                          "key": "uuid",
+                          "value": "<string>",
+                          "description": "(Required) The meeting recap uuid"
+                        }
+                      ]
+                    },
+                    "description": "Returns the transcript associated with a meeting recap if it is available.\n\n**Note:**\nRequires paid plan\n\n> `meeting_recaps:read`"
+                  },
+                  "response": [
+                    {
+                      "id": "e78b3461-6d9f-43ad-9001-928b23b963e7",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/meeting_recaps/:uuid/transcript",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "meeting_recaps",
+                            ":uuid",
+                            "transcript"
+                          ],
+                          "variable": [
+                            {
+                              "key": "uuid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"resource\": {\n    \"uri\": \"<uri>\",\n    \"text\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-21T20:58:34.000Z",
+                      "updatedAt": "2026-10-21T20:58:34.000Z",
+                      "uid": "35240-e78b3461-6d9f-43ad-9001-928b23b963e7"
+                    },
+                    {
+                      "id": "7d0faf71-a352-48d5-83e1-c4d9917b9d08",
+                      "name": "Request is not valid",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/meeting_recaps/:uuid/transcript",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "meeting_recaps",
+                            ":uuid",
+                            "transcript"
+                          ],
+                          "variable": [
+                            {
+                              "key": "uuid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:58:34.000Z",
+                      "updatedAt": "2026-10-21T20:58:34.000Z",
+                      "uid": "35240-7d0faf71-a352-48d5-83e1-c4d9917b9d08"
+                    },
+                    {
+                      "id": "4da17351-6f97-403b-8fe4-c305cd905f0d",
+                      "name": "Cannot authenticate caller",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/meeting_recaps/:uuid/transcript",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "meeting_recaps",
+                            ":uuid",
+                            "transcript"
+                          ],
+                          "variable": [
+                            {
+                              "key": "uuid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:58:34.000Z",
+                      "updatedAt": "2026-10-21T20:58:34.000Z",
+                      "uid": "35240-4da17351-6f97-403b-8fe4-c305cd905f0d"
+                    },
+                    {
+                      "id": "c35668cb-20d9-4134-b0cf-dc77b9957e77",
+                      "name": "Permission Denied or insufficient scope",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/meeting_recaps/:uuid/transcript",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "meeting_recaps",
+                            ":uuid",
+                            "transcript"
+                          ],
+                          "variable": [
+                            {
+                              "key": "uuid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"Meeting recap access is not available. Required features are not enabled for your account\"\n}",
+                      "createdAt": "2026-10-21T20:58:34.000Z",
+                      "updatedAt": "2026-10-21T20:58:34.000Z",
+                      "uid": "35240-c35668cb-20d9-4134-b0cf-dc77b9957e77"
+                    },
+                    {
+                      "id": "13feb965-f1bd-4af4-9b87-6f861667eb2a",
+                      "name": "Requested resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/meeting_recaps/:uuid/transcript",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "meeting_recaps",
+                            ":uuid",
+                            "transcript"
+                          ],
+                          "variable": [
+                            {
+                              "key": "uuid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:58:34.000Z",
+                      "updatedAt": "2026-10-21T20:58:34.000Z",
+                      "uid": "35240-13feb965-f1bd-4af4-9b87-6f861667eb2a"
+                    },
+                    {
+                      "id": "b4a9c78b-8c28-40e6-9695-2b0a2a979e7e",
+                      "name": "An error has occurred on the server",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/meeting_recaps/:uuid/transcript",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "meeting_recaps",
+                            ":uuid",
+                            "transcript"
+                          ],
+                          "variable": [
+                            {
+                              "key": "uuid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:58:34.000Z",
+                      "updatedAt": "2026-10-21T20:58:34.000Z",
+                      "uid": "35240-b4a9c78b-8c28-40e6-9695-2b0a2a979e7e"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:58:34.000Z",
+                  "updatedAt": "2026-10-21T20:58:34.000Z",
+                  "uid": "35240-65444fb9-89da-438a-b79e-767f58186942"
+                }
+              ],
+              "id": "d329bee6-5263-456f-b3f0-91b4b5450b35",
+              "createdAt": "2026-10-21T20:58:34.000Z",
+              "updatedAt": "2026-10-21T20:58:34.000Z",
+              "uid": "35240-d329bee6-5263-456f-b3f0-91b4b5450b35"
+            },
+            {
+              "name": "Delete Recap",
+              "id": "7db94d51-d453-4b5c-911b-6319f7397328",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/meeting_recaps/:uuid",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "meeting_recaps",
+                    ":uuid"
+                  ],
+                  "variable": [
+                    {
+                      "id": "0c2f20d3-3897-44cf-8278-df15c42d49f3",
+                      "key": "uuid",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Delete an existing Recap\n\n**Note:**\nRequires paid plan\n\n> `meeting_recaps:write`"
+              },
+              "response": [
+                {
+                  "id": "76a6658e-db7a-4e56-a168-01e68a208111",
+                  "name": "No Content",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/meeting_recaps/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meeting_recaps",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-21T20:58:34.000Z",
+                  "updatedAt": "2026-10-21T20:58:34.000Z",
+                  "uid": "35240-76a6658e-db7a-4e56-a168-01e68a208111"
+                },
+                {
+                  "id": "6ef67a98-a63d-4b50-84ae-a2b4573bfcad",
+                  "name": "Request is not valid",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/meeting_recaps/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meeting_recaps",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:34.000Z",
+                  "updatedAt": "2026-10-21T20:58:34.000Z",
+                  "uid": "35240-6ef67a98-a63d-4b50-84ae-a2b4573bfcad"
+                },
+                {
+                  "id": "cb4c8192-6c41-4573-b4b8-805a8290a1fe",
+                  "name": "Cannot authenticate caller",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/meeting_recaps/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meeting_recaps",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:34.000Z",
+                  "updatedAt": "2026-10-21T20:58:34.000Z",
+                  "uid": "35240-cb4c8192-6c41-4573-b4b8-805a8290a1fe"
+                },
+                {
+                  "id": "59b978d7-0b5c-4585-bf46-9b1702aa351e",
+                  "name": "Permission Denied or insufficient scope",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/meeting_recaps/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meeting_recaps",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"Meeting recap access is not available. Required features are not enabled for your account\"\n}",
+                  "createdAt": "2026-10-21T20:58:34.000Z",
+                  "updatedAt": "2026-10-21T20:58:34.000Z",
+                  "uid": "35240-59b978d7-0b5c-4585-bf46-9b1702aa351e"
+                },
+                {
+                  "id": "86d2bba9-d8b5-4880-91fc-0130f9db06b6",
+                  "name": "Requested resource not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/meeting_recaps/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meeting_recaps",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:34.000Z",
+                  "updatedAt": "2026-10-21T20:58:34.000Z",
+                  "uid": "35240-86d2bba9-d8b5-4880-91fc-0130f9db06b6"
+                },
+                {
+                  "id": "ef33a017-1b74-4c8e-862e-824114b4e166",
+                  "name": "An error has occurred on the server",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/meeting_recaps/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meeting_recaps",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:34.000Z",
+                  "updatedAt": "2026-10-21T20:58:34.000Z",
+                  "uid": "35240-ef33a017-1b74-4c8e-862e-824114b4e166"
+                }
+              ],
+              "createdAt": "2026-10-21T20:58:34.000Z",
+              "updatedAt": "2026-10-21T20:58:34.000Z",
+              "uid": "35240-7db94d51-d453-4b5c-911b-6319f7397328"
+            },
+            {
+              "name": "Get Recap",
+              "id": "154e2ac1-fee7-496d-8916-a6bf6d9820f2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/meeting_recaps/:uuid",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "meeting_recaps",
+                    ":uuid"
+                  ],
+                  "variable": [
+                    {
+                      "id": "0e9be85f-8544-4be6-a522-64073e227b3d",
+                      "key": "uuid",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Returns the recap associated with a meeting if it is available.\n\n**Note:**\nRequires paid plan\n\n> `meeting_recaps:read`"
+              },
+              "response": [
+                {
+                  "id": "bf59b01d-a8f5-4b29-b56c-d963a9335982",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/meeting_recaps/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meeting_recaps",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"resource\": {\n    \"uri\": \"<uri>\",\n    \"app_url\": \"<uri>\",\n    \"status\": \"<string>\",\n    \"event\": \"<string,null-uri>\",\n    \"name\": \"<string,null>\",\n    \"location\": {\n      \"type\": \"physical\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\"\n    },\n    \"start_time\": \"<string,null-date-time>\",\n    \"end_time\": \"<string,null-date-time>\",\n    \"created_at\": \"<string,null-date-time>\",\n    \"updated_at\": \"<string,null-date-time>\",\n    \"attendees\": \"<array,null>\",\n    \"summary_md\": \"<string,null>\",\n    \"action_items_md\": \"<string,null>\",\n    \"discussion_md\": \"<string,null>\",\n    \"transcript\": \"<string,null-uri>\",\n    \"share_link\": \"<string,null-uri>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:58:34.000Z",
+                  "updatedAt": "2026-10-21T20:58:34.000Z",
+                  "uid": "35240-bf59b01d-a8f5-4b29-b56c-d963a9335982"
+                },
+                {
+                  "id": "3179e5ea-ba73-4a75-b8ce-ffc8849e2bb7",
+                  "name": "Request is not valid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/meeting_recaps/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meeting_recaps",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:34.000Z",
+                  "updatedAt": "2026-10-21T20:58:34.000Z",
+                  "uid": "35240-3179e5ea-ba73-4a75-b8ce-ffc8849e2bb7"
+                },
+                {
+                  "id": "2d06e659-d8be-4776-aaef-5fd90a3b56a0",
+                  "name": "Cannot authenticate caller",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/meeting_recaps/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meeting_recaps",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:34.000Z",
+                  "updatedAt": "2026-10-21T20:58:34.000Z",
+                  "uid": "35240-2d06e659-d8be-4776-aaef-5fd90a3b56a0"
+                },
+                {
+                  "id": "7342c5ac-ce8a-426a-aed0-53b94a729467",
+                  "name": "Permission Denied or insufficient scope",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/meeting_recaps/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meeting_recaps",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"Meeting recap access is not available. Required features are not enabled for your account\"\n}",
+                  "createdAt": "2026-10-21T20:58:34.000Z",
+                  "updatedAt": "2026-10-21T20:58:34.000Z",
+                  "uid": "35240-7342c5ac-ce8a-426a-aed0-53b94a729467"
+                },
+                {
+                  "id": "992f21b3-9cb8-4507-92db-65cf628ea78e",
+                  "name": "Requested resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/meeting_recaps/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meeting_recaps",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:34.000Z",
+                  "updatedAt": "2026-10-21T20:58:34.000Z",
+                  "uid": "35240-992f21b3-9cb8-4507-92db-65cf628ea78e"
+                },
+                {
+                  "id": "ce9cfe88-4b03-4ee6-abe6-c002467c0e19",
+                  "name": "An error has occurred on the server",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/meeting_recaps/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meeting_recaps",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:34.000Z",
+                  "updatedAt": "2026-10-21T20:58:34.000Z",
+                  "uid": "35240-ce9cfe88-4b03-4ee6-abe6-c002467c0e19"
+                }
+              ],
+              "createdAt": "2026-10-21T20:58:34.000Z",
+              "updatedAt": "2026-10-21T20:58:34.000Z",
+              "uid": "35240-154e2ac1-fee7-496d-8916-a6bf6d9820f2"
+            },
+            {
+              "name": "Update Recap",
+              "id": "ad06c613-4ac4-40aa-90e9-afed8ce236a5",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"summary_md\": \"<string,null>\",\n  \"action_items_md\": \"<string,null>\",\n  \"discussion_md\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/meeting_recaps/:uuid",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "meeting_recaps",
+                    ":uuid"
+                  ],
+                  "variable": [
+                    {
+                      "id": "823c034f-8340-4e52-87ee-3882b95a1d1d",
+                      "key": "uuid",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Update an existing Recap. You may send any combination of the optional body fields; omitted fields are left unchanged. Unknown top-level properties are rejected.\n\n**Note:**\nRequires paid plan\n\n> `meeting_recaps:write`"
+              },
+              "response": [
+                {
+                  "id": "29149f85-d8c5-4fa6-bd30-f511d8f2bc3e",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"summary_md\": \"<string,null>\",\n  \"action_items_md\": \"<string,null>\",\n  \"discussion_md\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/meeting_recaps/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meeting_recaps",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"resource\": {\n    \"uri\": \"<uri>\",\n    \"app_url\": \"<uri>\",\n    \"status\": \"<string>\",\n    \"event\": \"<string,null-uri>\",\n    \"name\": \"<string,null>\",\n    \"location\": {\n      \"type\": \"physical\",\n      \"location\": \"<string>\",\n      \"additional_info\": \"<string>\"\n    },\n    \"start_time\": \"<string,null-date-time>\",\n    \"end_time\": \"<string,null-date-time>\",\n    \"created_at\": \"<string,null-date-time>\",\n    \"updated_at\": \"<string,null-date-time>\",\n    \"attendees\": \"<array,null>\",\n    \"summary_md\": \"<string,null>\",\n    \"action_items_md\": \"<string,null>\",\n    \"discussion_md\": \"<string,null>\",\n    \"transcript\": \"<string,null-uri>\",\n    \"share_link\": \"<string,null-uri>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:58:34.000Z",
+                  "updatedAt": "2026-10-21T20:58:34.000Z",
+                  "uid": "35240-29149f85-d8c5-4fa6-bd30-f511d8f2bc3e"
+                },
+                {
+                  "id": "b6410749-8f47-4c54-9c19-fb3adca1c4e4",
+                  "name": "Request is not valid",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"summary_md\": \"<string,null>\",\n  \"action_items_md\": \"<string,null>\",\n  \"discussion_md\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/meeting_recaps/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meeting_recaps",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:34.000Z",
+                  "updatedAt": "2026-10-21T20:58:34.000Z",
+                  "uid": "35240-b6410749-8f47-4c54-9c19-fb3adca1c4e4"
+                },
+                {
+                  "id": "9f6bcb56-e840-4155-9b97-51ea6a48c35d",
+                  "name": "Cannot authenticate caller",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"summary_md\": \"<string,null>\",\n  \"action_items_md\": \"<string,null>\",\n  \"discussion_md\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/meeting_recaps/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meeting_recaps",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:34.000Z",
+                  "updatedAt": "2026-10-21T20:58:34.000Z",
+                  "uid": "35240-9f6bcb56-e840-4155-9b97-51ea6a48c35d"
+                },
+                {
+                  "id": "9bf7ce9a-57cd-4973-bb95-c4b20b00c815",
+                  "name": "Permission Denied or insufficient scope",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"summary_md\": \"<string,null>\",\n  \"action_items_md\": \"<string,null>\",\n  \"discussion_md\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/meeting_recaps/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meeting_recaps",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"Meeting recap access is not available. Required features are not enabled for your account\"\n}",
+                  "createdAt": "2026-10-21T20:58:34.000Z",
+                  "updatedAt": "2026-10-21T20:58:34.000Z",
+                  "uid": "35240-9bf7ce9a-57cd-4973-bb95-c4b20b00c815"
+                },
+                {
+                  "id": "8b4c8f42-fdde-41cf-8d87-2c777ba7a7ea",
+                  "name": "Requested resource not found",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"summary_md\": \"<string,null>\",\n  \"action_items_md\": \"<string,null>\",\n  \"discussion_md\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/meeting_recaps/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meeting_recaps",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:34.000Z",
+                  "updatedAt": "2026-10-21T20:58:34.000Z",
+                  "uid": "35240-8b4c8f42-fdde-41cf-8d87-2c777ba7a7ea"
+                },
+                {
+                  "id": "23492f65-e93c-453b-ae51-9a6799205030",
+                  "name": "An error has occurred on the server",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"summary_md\": \"<string,null>\",\n  \"action_items_md\": \"<string,null>\",\n  \"discussion_md\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/meeting_recaps/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meeting_recaps",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:34.000Z",
+                  "updatedAt": "2026-10-21T20:58:34.000Z",
+                  "uid": "35240-23492f65-e93c-453b-ae51-9a6799205030"
+                }
+              ],
+              "createdAt": "2026-10-21T20:58:34.000Z",
+              "updatedAt": "2026-10-21T20:58:34.000Z",
+              "uid": "35240-ad06c613-4ac4-40aa-90e9-afed8ce236a5"
+            }
+          ],
+          "id": "af5d52b2-3dac-4cf6-b909-33f0b90890f3",
+          "createdAt": "2026-10-21T20:58:34.000Z",
+          "updatedAt": "2026-10-21T20:58:34.000Z",
+          "uid": "35240-af5d52b2-3dac-4cf6-b909-33f0b90890f3"
+        },
+        {
+          "name": "List Recaps",
+          "id": "10a6f4ae-5ca7-4f59-b457-691dec05f7b2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/meeting_recaps?event=<uri>&start_time=<dateTime>&end_time=<dateTime>&status=unavailable&attendee=<email>&count=20&page_token=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "meeting_recaps"
+              ],
+              "query": [
+                {
+                  "description": "Filter results to recaps associated with a specific event scheduled via Calendly. This field corresponds to the `/scheduled_events` endpoint.",
+                  "key": "event",
+                  "value": "<uri>"
+                },
+                {
+                  "description": "Return recaps for meetings that end after (or end at) this time (ISO 8601).",
+                  "key": "start_time",
+                  "value": "<dateTime>"
+                },
+                {
+                  "description": "Return recaps for meetings that start before (or start at) this time (ISO 8601).",
+                  "key": "end_time",
+                  "value": "<dateTime>"
+                },
+                {
+                  "description": "Filter by recap availability. When omitted, returns **Available** recaps only.\n\n- `available` \u2014 completed recaps with summary content\n- `processing` \u2014 recaps still being generated\n- `unavailable` \u2014 recaps that cannot be retrieved",
+                  "key": "status",
+                  "value": "unavailable"
+                },
+                {
+                  "description": "Filter results to recaps that include a specific attendee email address.",
+                  "key": "attendee",
+                  "value": "<email>"
+                },
+                {
+                  "description": "The number of rows to return",
+                  "key": "count",
+                  "value": "20"
+                },
+                {
+                  "description": "The token to pass to get the next or previous portion of the collection",
+                  "key": "page_token",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns a paginated list of meeting recaps accessible to the authenticated user. By default, returns **Available** recaps only. Use the `status` query parameter to retrieve `processing` or `unavailable` recaps. Supports additional filtering by scheduled event, attendee, or date range.\n\nReturns both Calendly-scheduled and external event recaps in a single collection. The `event` field is null for external events where no Calendly scheduled event exists.\n\n**Note:**\nRequires paid plan\n\n> `meeting_recaps:read`"
+          },
+          "response": [
+            {
+              "id": "88e7e885-d7e4-4c09-b5ff-fe970636a346",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/meeting_recaps?event=<uri>&start_time=<dateTime>&end_time=<dateTime>&status=unavailable&attendee=<email>&count=20&page_token=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "meeting_recaps"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter results to recaps associated with a specific event scheduled via Calendly. This field corresponds to the `/scheduled_events` endpoint.",
+                      "key": "event",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Return recaps for meetings that end after (or end at) this time (ISO 8601).",
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Return recaps for meetings that start before (or start at) this time (ISO 8601).",
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Filter by recap availability. When omitted, returns **Available** recaps only.\n\n- `available` \u2014 completed recaps with summary content\n- `processing` \u2014 recaps still being generated\n- `unavailable` \u2014 recaps that cannot be retrieved",
+                      "key": "status",
+                      "value": "unavailable"
+                    },
+                    {
+                      "description": "Filter results to recaps that include a specific attendee email address.",
+                      "key": "attendee",
+                      "value": "<email>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"collection\": [\n    {\n      \"uri\": \"<uri>\",\n      \"app_url\": \"<uri>\",\n      \"status\": \"<string>\",\n      \"transcript\": \"<uri>\",\n      \"event\": \"<string,null-uri>\",\n      \"name\": \"<string,null>\",\n      \"location\": {\n        \"type\": \"physical\",\n        \"location\": \"<string>\",\n        \"additional_info\": \"<string>\"\n      },\n      \"start_time\": \"<string,null-date-time>\",\n      \"end_time\": \"<string,null-date-time>\",\n      \"created_at\": \"<string,null-date-time>\",\n      \"updated_at\": \"<string,null-date-time>\",\n      \"attendees\": \"<array,null>\"\n    },\n    {\n      \"uri\": \"<uri>\",\n      \"app_url\": \"<uri>\",\n      \"status\": \"<string>\",\n      \"transcript\": \"<uri>\",\n      \"event\": \"<string,null-uri>\",\n      \"name\": \"<string,null>\",\n      \"location\": {\n        \"type\": \"physical\",\n        \"location\": \"<string>\",\n        \"additional_info\": \"<string>\"\n      },\n      \"start_time\": \"<string,null-date-time>\",\n      \"end_time\": \"<string,null-date-time>\",\n      \"created_at\": \"<string,null-date-time>\",\n      \"updated_at\": \"<string,null-date-time>\",\n      \"attendees\": \"<array,null>\"\n    }\n  ],\n  \"pagination\": {\n    \"count\": \"<integer>\",\n    \"next_page\": \"<string,null-uri>\",\n    \"previous_page\": \"<string,null-uri>\",\n    \"next_page_token\": \"<string,null>\",\n    \"previous_page_token\": \"<string,null>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:58:34.000Z",
+              "updatedAt": "2026-10-21T20:58:34.000Z",
+              "uid": "35240-88e7e885-d7e4-4c09-b5ff-fe970636a346"
+            },
+            {
+              "id": "7e836673-a06f-46c9-843e-c7942ddf514b",
+              "name": "Request is not valid",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/meeting_recaps?event=<uri>&start_time=<dateTime>&end_time=<dateTime>&status=unavailable&attendee=<email>&count=20&page_token=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "meeting_recaps"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter results to recaps associated with a specific event scheduled via Calendly. This field corresponds to the `/scheduled_events` endpoint.",
+                      "key": "event",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Return recaps for meetings that end after (or end at) this time (ISO 8601).",
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Return recaps for meetings that start before (or start at) this time (ISO 8601).",
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Filter by recap availability. When omitted, returns **Available** recaps only.\n\n- `available` \u2014 completed recaps with summary content\n- `processing` \u2014 recaps still being generated\n- `unavailable` \u2014 recaps that cannot be retrieved",
+                      "key": "status",
+                      "value": "unavailable"
+                    },
+                    {
+                      "description": "Filter results to recaps that include a specific attendee email address.",
+                      "key": "attendee",
+                      "value": "<email>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:34.000Z",
+              "updatedAt": "2026-10-21T20:58:34.000Z",
+              "uid": "35240-7e836673-a06f-46c9-843e-c7942ddf514b"
+            },
+            {
+              "id": "59d76fe1-79cf-47dc-8c55-63cb5d6876cb",
+              "name": "Cannot authenticate caller",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/meeting_recaps?event=<uri>&start_time=<dateTime>&end_time=<dateTime>&status=unavailable&attendee=<email>&count=20&page_token=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "meeting_recaps"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter results to recaps associated with a specific event scheduled via Calendly. This field corresponds to the `/scheduled_events` endpoint.",
+                      "key": "event",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Return recaps for meetings that end after (or end at) this time (ISO 8601).",
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Return recaps for meetings that start before (or start at) this time (ISO 8601).",
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Filter by recap availability. When omitted, returns **Available** recaps only.\n\n- `available` \u2014 completed recaps with summary content\n- `processing` \u2014 recaps still being generated\n- `unavailable` \u2014 recaps that cannot be retrieved",
+                      "key": "status",
+                      "value": "unavailable"
+                    },
+                    {
+                      "description": "Filter results to recaps that include a specific attendee email address.",
+                      "key": "attendee",
+                      "value": "<email>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:34.000Z",
+              "updatedAt": "2026-10-21T20:58:34.000Z",
+              "uid": "35240-59d76fe1-79cf-47dc-8c55-63cb5d6876cb"
+            },
+            {
+              "id": "1eaef907-7618-4bef-b4e6-299472d7fe86",
+              "name": "Permission Denied or insufficient scope",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/meeting_recaps?event=<uri>&start_time=<dateTime>&end_time=<dateTime>&status=unavailable&attendee=<email>&count=20&page_token=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "meeting_recaps"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter results to recaps associated with a specific event scheduled via Calendly. This field corresponds to the `/scheduled_events` endpoint.",
+                      "key": "event",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Return recaps for meetings that end after (or end at) this time (ISO 8601).",
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Return recaps for meetings that start before (or start at) this time (ISO 8601).",
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Filter by recap availability. When omitted, returns **Available** recaps only.\n\n- `available` \u2014 completed recaps with summary content\n- `processing` \u2014 recaps still being generated\n- `unavailable` \u2014 recaps that cannot be retrieved",
+                      "key": "status",
+                      "value": "unavailable"
+                    },
+                    {
+                      "description": "Filter results to recaps that include a specific attendee email address.",
+                      "key": "attendee",
+                      "value": "<email>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"Meeting recap access is not available. Required features are not enabled for your account\"\n}",
+              "createdAt": "2026-10-21T20:58:34.000Z",
+              "updatedAt": "2026-10-21T20:58:34.000Z",
+              "uid": "35240-1eaef907-7618-4bef-b4e6-299472d7fe86"
+            },
+            {
+              "id": "4ccd3139-dbfe-4837-a657-62726c3e5255",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/meeting_recaps?event=<uri>&start_time=<dateTime>&end_time=<dateTime>&status=unavailable&attendee=<email>&count=20&page_token=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "meeting_recaps"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter results to recaps associated with a specific event scheduled via Calendly. This field corresponds to the `/scheduled_events` endpoint.",
+                      "key": "event",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Return recaps for meetings that end after (or end at) this time (ISO 8601).",
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Return recaps for meetings that start before (or start at) this time (ISO 8601).",
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Filter by recap availability. When omitted, returns **Available** recaps only.\n\n- `available` \u2014 completed recaps with summary content\n- `processing` \u2014 recaps still being generated\n- `unavailable` \u2014 recaps that cannot be retrieved",
+                      "key": "status",
+                      "value": "unavailable"
+                    },
+                    {
+                      "description": "Filter results to recaps that include a specific attendee email address.",
+                      "key": "attendee",
+                      "value": "<email>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:34.000Z",
+              "updatedAt": "2026-10-21T20:58:34.000Z",
+              "uid": "35240-4ccd3139-dbfe-4837-a657-62726c3e5255"
+            },
+            {
+              "id": "d0bcbdd4-d9c6-4cee-99ea-481b4dafb0fd",
+              "name": "An error has occurred on the server",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/meeting_recaps?event=<uri>&start_time=<dateTime>&end_time=<dateTime>&status=unavailable&attendee=<email>&count=20&page_token=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "meeting_recaps"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter results to recaps associated with a specific event scheduled via Calendly. This field corresponds to the `/scheduled_events` endpoint.",
+                      "key": "event",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Return recaps for meetings that end after (or end at) this time (ISO 8601).",
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Return recaps for meetings that start before (or start at) this time (ISO 8601).",
+                      "key": "end_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Filter by recap availability. When omitted, returns **Available** recaps only.\n\n- `available` \u2014 completed recaps with summary content\n- `processing` \u2014 recaps still being generated\n- `unavailable` \u2014 recaps that cannot be retrieved",
+                      "key": "status",
+                      "value": "unavailable"
+                    },
+                    {
+                      "description": "Filter results to recaps that include a specific attendee email address.",
+                      "key": "attendee",
+                      "value": "<email>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:34.000Z",
+              "updatedAt": "2026-10-21T20:58:34.000Z",
+              "uid": "35240-d0bcbdd4-d9c6-4cee-99ea-481b4dafb0fd"
+            }
+          ],
+          "createdAt": "2026-10-21T20:58:34.000Z",
+          "updatedAt": "2026-10-21T20:58:34.000Z",
+          "uid": "35240-10a6f4ae-5ca7-4f59-b457-691dec05f7b2"
+        }
+      ],
+      "id": "70503ef4-40f7-4f22-857e-b8d45ef0a6fe",
+      "createdAt": "2026-10-21T20:58:34.000Z",
+      "updatedAt": "2026-10-21T20:58:34.000Z",
+      "uid": "35240-70503ef4-40f7-4f22-857e-b8d45ef0a6fe"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.calendly.com"
+    }
+  ]
+}

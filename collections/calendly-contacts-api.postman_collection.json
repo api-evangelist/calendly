@@ -1,0 +1,3132 @@
+{
+  "info": {
+    "_postman_id": "b1208347-c937-4ebe-ab43-1aa771eaba1d",
+    "name": "Calendly Contacts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:58:07.000Z",
+    "updatedAt": "2026-10-21T20:58:07.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b1208347-c937-4ebe-ab43-1aa771eaba1d"
+  },
+  "item": [
+    {
+      "name": "contacts",
+      "item": [
+        {
+          "name": "{uuid}",
+          "item": [
+            {
+              "name": "Delete Contact",
+              "id": "203196f3-c295-4209-ae3c-73323c0e7c72",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/contacts/:uuid",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts",
+                    ":uuid"
+                  ],
+                  "variable": [
+                    {
+                      "id": "9b9b74c5-f962-4051-86c8-1e29f00e1681",
+                      "key": "uuid",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Delete an existing Contact\n\n> `contacts:write`"
+              },
+              "response": [
+                {
+                  "id": "b7b68544-8fe0-4aab-96e8-87bc4e1921bc",
+                  "name": "No Content",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-b7b68544-8fe0-4aab-96e8-87bc4e1921bc"
+                },
+                {
+                  "id": "1b27d509-a393-4c00-a5e2-28f1940c2226",
+                  "name": "Request is not valid",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-1b27d509-a393-4c00-a5e2-28f1940c2226"
+                },
+                {
+                  "id": "3a8c4a06-466a-437c-b89f-f2d09a39548d",
+                  "name": "Cannot authenticate caller",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-3a8c4a06-466a-437c-b89f-f2d09a39548d"
+                },
+                {
+                  "id": "9051c29c-a86a-49e1-8287-2e1d7c7e1b6c",
+                  "name": "Permission Denied or insufficient scope",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"Please upgrade your Calendly account to Enterprise.\"\n}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-9051c29c-a86a-49e1-8287-2e1d7c7e1b6c"
+                },
+                {
+                  "id": "ed1598c7-56ef-4246-8df5-23b5bb454b29",
+                  "name": "Requested resource not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-ed1598c7-56ef-4246-8df5-23b5bb454b29"
+                },
+                {
+                  "id": "14416251-d2ef-415f-80f5-769680899840",
+                  "name": "An error has occurred on the server",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-14416251-d2ef-415f-80f5-769680899840"
+                }
+              ],
+              "createdAt": "2026-10-21T20:58:07.000Z",
+              "updatedAt": "2026-10-21T20:58:07.000Z",
+              "uid": "35240-203196f3-c295-4209-ae3c-73323c0e7c72"
+            },
+            {
+              "name": "Get Contact",
+              "id": "eb1d3ba4-020e-43a2-8016-53f11c64b241",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/contacts/:uuid?exclude=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts",
+                    ":uuid"
+                  ],
+                  "query": [
+                    {
+                      "description": "Omit the listed fields from the response. Currently only `custom_fields` is supported. When omitted, all fields are returned.",
+                      "key": "exclude",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "8162cffc-ab96-4bf8-85d5-a4ba8ae4f9ff",
+                      "key": "uuid",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Returns the details of a specified Contact.\n\n> `contacts:read`"
+              },
+              "response": [
+                {
+                  "id": "eb9fb1f0-9419-4ed5-b5ee-2aef0a59e176",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:uuid?exclude=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":uuid"
+                      ],
+                      "query": [
+                        {
+                          "description": "Omit the listed fields from the response. Currently only `custom_fields` is supported. When omitted, all fields are returned.",
+                          "key": "exclude",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"resource\": {\n    \"uri\": \"<uri>\",\n    \"emails\": [\n      {\n        \"email\": \"<email>\",\n        \"is_primary\": \"<boolean>\"\n      },\n      {\n        \"email\": \"<email>\",\n        \"is_primary\": \"<boolean>\"\n      }\n    ],\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"name\": \"<string,null>\",\n    \"phone_numbers\": [\n      {\n        \"phone_number\": \"<string>\"\n      },\n      {\n        \"phone_number\": \"<string>\"\n      }\n    ],\n    \"timezone\": \"<string,null>\",\n    \"job_title\": \"<string,null>\",\n    \"company\": \"<string,null>\",\n    \"country\": \"<string,null>\",\n    \"state\": \"<string,null>\",\n    \"city\": \"<string,null>\",\n    \"linkedin\": \"<string,null-uri>\",\n    \"custom_fields\": [\n      {\n        \"uri\": \"<uri>\",\n        \"value\": \"<string>\",\n        \"label\": \"<string>\"\n      },\n      {\n        \"uri\": \"<uri>\",\n        \"value\": \"<string>\",\n        \"label\": \"<string>\"\n      }\n    ],\n    \"first_email_date\": \"<string,null-date-time>\",\n    \"last_email_date\": \"<string,null-date-time>\",\n    \"next_meeting_date\": \"<string,null-date-time>\",\n    \"last_meeting_date\": \"<string,null-date-time>\",\n    \"last_interaction_date\": \"<string,null-date-time>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-eb9fb1f0-9419-4ed5-b5ee-2aef0a59e176"
+                },
+                {
+                  "id": "ee4d9af6-be04-4ffd-9ae0-f548da3044a2",
+                  "name": "Request is not valid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:uuid?exclude=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":uuid"
+                      ],
+                      "query": [
+                        {
+                          "description": "Omit the listed fields from the response. Currently only `custom_fields` is supported. When omitted, all fields are returned.",
+                          "key": "exclude",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-ee4d9af6-be04-4ffd-9ae0-f548da3044a2"
+                },
+                {
+                  "id": "3ba47a42-c820-4b50-973f-af0acb96186f",
+                  "name": "Cannot authenticate caller",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:uuid?exclude=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":uuid"
+                      ],
+                      "query": [
+                        {
+                          "description": "Omit the listed fields from the response. Currently only `custom_fields` is supported. When omitted, all fields are returned.",
+                          "key": "exclude",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-3ba47a42-c820-4b50-973f-af0acb96186f"
+                },
+                {
+                  "id": "ac37c7ad-8f44-4c8a-82e0-3c78061279c8",
+                  "name": "Permission Denied or insufficient scope",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:uuid?exclude=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":uuid"
+                      ],
+                      "query": [
+                        {
+                          "description": "Omit the listed fields from the response. Currently only `custom_fields` is supported. When omitted, all fields are returned.",
+                          "key": "exclude",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"Please upgrade your Calendly account to Enterprise.\"\n}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-ac37c7ad-8f44-4c8a-82e0-3c78061279c8"
+                },
+                {
+                  "id": "35265668-2bdf-450d-a33f-c3b4976a437b",
+                  "name": "Requested resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:uuid?exclude=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":uuid"
+                      ],
+                      "query": [
+                        {
+                          "description": "Omit the listed fields from the response. Currently only `custom_fields` is supported. When omitted, all fields are returned.",
+                          "key": "exclude",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-35265668-2bdf-450d-a33f-c3b4976a437b"
+                },
+                {
+                  "id": "496eb9fb-5982-4c7e-81c9-303ac5cd7327",
+                  "name": "An error has occurred on the server",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:uuid?exclude=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":uuid"
+                      ],
+                      "query": [
+                        {
+                          "description": "Omit the listed fields from the response. Currently only `custom_fields` is supported. When omitted, all fields are returned.",
+                          "key": "exclude",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-496eb9fb-5982-4c7e-81c9-303ac5cd7327"
+                }
+              ],
+              "createdAt": "2026-10-21T20:58:07.000Z",
+              "updatedAt": "2026-10-21T20:58:07.000Z",
+              "uid": "35240-eb1d3ba4-020e-43a2-8016-53f11c64b241"
+            },
+            {
+              "name": "Update Contact",
+              "id": "1739825b-2d91-4695-843a-217a10b70ddb",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"emails\": [\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"phone_number\": \"<string>\"\n    }\n  ],\n  \"timezone\": \"<string>\",\n  \"job_title\": \"<string>\",\n  \"company\": \"<string>\",\n  \"country\": \"<string>\",\n  \"state\": \"<string>\",\n  \"city\": \"<string>\",\n  \"linkedin\": \"<uri>\",\n  \"custom_fields\": [\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contacts/:uuid",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts",
+                    ":uuid"
+                  ],
+                  "variable": [
+                    {
+                      "id": "f9ca85fb-9867-4712-a520-5fe8c28f6bfc",
+                      "key": "uuid",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Update an existing Contact. The body must include at least one supported field; unknown top-level properties are rejected.\n\n> `contacts:write`"
+              },
+              "response": [
+                {
+                  "id": "86ba877c-f41b-4c00-ac9f-785e333cc41f",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"emails\": [\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"phone_number\": \"<string>\"\n    }\n  ],\n  \"timezone\": \"<string>\",\n  \"job_title\": \"<string>\",\n  \"company\": \"<string>\",\n  \"country\": \"<string>\",\n  \"state\": \"<string>\",\n  \"city\": \"<string>\",\n  \"linkedin\": \"<uri>\",\n  \"custom_fields\": [\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"resource\": {\n    \"uri\": \"<uri>\",\n    \"emails\": [\n      {\n        \"email\": \"<email>\",\n        \"is_primary\": \"<boolean>\"\n      },\n      {\n        \"email\": \"<email>\",\n        \"is_primary\": \"<boolean>\"\n      }\n    ],\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"name\": \"<string,null>\",\n    \"phone_numbers\": [\n      {\n        \"phone_number\": \"<string>\"\n      },\n      {\n        \"phone_number\": \"<string>\"\n      }\n    ],\n    \"timezone\": \"<string,null>\",\n    \"job_title\": \"<string,null>\",\n    \"company\": \"<string,null>\",\n    \"country\": \"<string,null>\",\n    \"state\": \"<string,null>\",\n    \"city\": \"<string,null>\",\n    \"linkedin\": \"<string,null-uri>\",\n    \"custom_fields\": [\n      {\n        \"uri\": \"<uri>\",\n        \"value\": \"<string>\",\n        \"label\": \"<string>\"\n      },\n      {\n        \"uri\": \"<uri>\",\n        \"value\": \"<string>\",\n        \"label\": \"<string>\"\n      }\n    ],\n    \"first_email_date\": \"<string,null-date-time>\",\n    \"last_email_date\": \"<string,null-date-time>\",\n    \"next_meeting_date\": \"<string,null-date-time>\",\n    \"last_meeting_date\": \"<string,null-date-time>\",\n    \"last_interaction_date\": \"<string,null-date-time>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-86ba877c-f41b-4c00-ac9f-785e333cc41f"
+                },
+                {
+                  "id": "7326ed7e-bfd5-4bf4-a93e-09e233ccd107",
+                  "name": "Request is not valid",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"emails\": [\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"phone_number\": \"<string>\"\n    }\n  ],\n  \"timezone\": \"<string>\",\n  \"job_title\": \"<string>\",\n  \"company\": \"<string>\",\n  \"country\": \"<string>\",\n  \"state\": \"<string>\",\n  \"city\": \"<string>\",\n  \"linkedin\": \"<uri>\",\n  \"custom_fields\": [\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-7326ed7e-bfd5-4bf4-a93e-09e233ccd107"
+                },
+                {
+                  "id": "77342f1f-ecfb-446c-b1a6-7e51e49d17f8",
+                  "name": "Cannot authenticate caller",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"emails\": [\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"phone_number\": \"<string>\"\n    }\n  ],\n  \"timezone\": \"<string>\",\n  \"job_title\": \"<string>\",\n  \"company\": \"<string>\",\n  \"country\": \"<string>\",\n  \"state\": \"<string>\",\n  \"city\": \"<string>\",\n  \"linkedin\": \"<uri>\",\n  \"custom_fields\": [\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-77342f1f-ecfb-446c-b1a6-7e51e49d17f8"
+                },
+                {
+                  "id": "b7bf3f7f-26dc-44f9-8426-fd7e23b01709",
+                  "name": "Permission Denied or insufficient scope",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"emails\": [\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"phone_number\": \"<string>\"\n    }\n  ],\n  \"timezone\": \"<string>\",\n  \"job_title\": \"<string>\",\n  \"company\": \"<string>\",\n  \"country\": \"<string>\",\n  \"state\": \"<string>\",\n  \"city\": \"<string>\",\n  \"linkedin\": \"<uri>\",\n  \"custom_fields\": [\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"Please upgrade your Calendly account to Enterprise.\"\n}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-b7bf3f7f-26dc-44f9-8426-fd7e23b01709"
+                },
+                {
+                  "id": "2c6128dd-14ae-4527-a4c4-fc44c0c0aa55",
+                  "name": "Requested resource not found",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"emails\": [\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"phone_number\": \"<string>\"\n    }\n  ],\n  \"timezone\": \"<string>\",\n  \"job_title\": \"<string>\",\n  \"company\": \"<string>\",\n  \"country\": \"<string>\",\n  \"state\": \"<string>\",\n  \"city\": \"<string>\",\n  \"linkedin\": \"<uri>\",\n  \"custom_fields\": [\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-2c6128dd-14ae-4527-a4c4-fc44c0c0aa55"
+                },
+                {
+                  "id": "654cd0c1-8484-415e-8cbd-b47848d6e77d",
+                  "name": "Attempt to create a resource that already exists",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"emails\": [\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"phone_number\": \"<string>\"\n    }\n  ],\n  \"timezone\": \"<string>\",\n  \"job_title\": \"<string>\",\n  \"company\": \"<string>\",\n  \"country\": \"<string>\",\n  \"state\": \"<string>\",\n  \"city\": \"<string>\",\n  \"linkedin\": \"<uri>\",\n  \"custom_fields\": [\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-654cd0c1-8484-415e-8cbd-b47848d6e77d"
+                },
+                {
+                  "id": "53f4ba78-7f28-47ad-88f0-7c77d9e08728",
+                  "name": "An error has occurred on the server",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"emails\": [\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"phone_number\": \"<string>\"\n    }\n  ],\n  \"timezone\": \"<string>\",\n  \"job_title\": \"<string>\",\n  \"company\": \"<string>\",\n  \"country\": \"<string>\",\n  \"state\": \"<string>\",\n  \"city\": \"<string>\",\n  \"linkedin\": \"<uri>\",\n  \"custom_fields\": [\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-53f4ba78-7f28-47ad-88f0-7c77d9e08728"
+                }
+              ],
+              "createdAt": "2026-10-21T20:58:07.000Z",
+              "updatedAt": "2026-10-21T20:58:07.000Z",
+              "uid": "35240-1739825b-2d91-4695-843a-217a10b70ddb"
+            }
+          ],
+          "id": "d46935c0-53e8-4d02-b833-01802fd17ec8",
+          "createdAt": "2026-10-21T20:58:07.000Z",
+          "updatedAt": "2026-10-21T20:58:07.000Z",
+          "uid": "35240-d46935c0-53e8-4d02-b833-01802fd17ec8"
+        },
+        {
+          "name": "custom_field_definitions",
+          "item": [
+            {
+              "name": "{uuid}",
+              "item": [
+                {
+                  "name": "Get Contact Custom Field Definition",
+                  "id": "983003a3-2cdc-40b7-96de-e0212e76fefa",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/custom_field_definitions/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        "custom_field_definitions",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e0eb3d44-50ff-4979-b231-42db287c2535",
+                          "key": "uuid",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Returns a single custom field definition by uuid.\n\n> `contacts:read`"
+                  },
+                  "response": [
+                    {
+                      "id": "38738bc2-babe-4712-af51-08bac7398dd7",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/contacts/custom_field_definitions/:uuid",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "contacts",
+                            "custom_field_definitions",
+                            ":uuid"
+                          ],
+                          "variable": [
+                            {
+                              "key": "uuid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"resource\": {\n    \"uri\": \"<uri>\",\n    \"label\": \"<string>\",\n    \"field_type\": \"single_select\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"options\": [\n      {\n        \"uuid\": \"<string>\",\n        \"label\": \"<string>\",\n        \"is_active\": \"<boolean>\",\n        \"color\": \"<string>\"\n      },\n      {\n        \"uuid\": \"<string>\",\n        \"label\": \"<string>\",\n        \"is_active\": \"<boolean>\",\n        \"color\": \"<string>\"\n      }\n    ],\n    \"currency\": \"<string>\",\n    \"source\": {\n      \"type\": \"event_type_invitee_question\",\n      \"event_type_uri\": \"<uri>\",\n      \"question\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-10-21T20:58:07.000Z",
+                      "updatedAt": "2026-10-21T20:58:07.000Z",
+                      "uid": "35240-38738bc2-babe-4712-af51-08bac7398dd7"
+                    },
+                    {
+                      "id": "4bd0be41-0068-44d2-aa4d-fb929ed56d97",
+                      "name": "Request is not valid",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/contacts/custom_field_definitions/:uuid",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "contacts",
+                            "custom_field_definitions",
+                            ":uuid"
+                          ],
+                          "variable": [
+                            {
+                              "key": "uuid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:58:07.000Z",
+                      "updatedAt": "2026-10-21T20:58:07.000Z",
+                      "uid": "35240-4bd0be41-0068-44d2-aa4d-fb929ed56d97"
+                    },
+                    {
+                      "id": "2dcc8f27-e870-4635-945b-481c11ffdea0",
+                      "name": "Cannot authenticate caller",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/contacts/custom_field_definitions/:uuid",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "contacts",
+                            "custom_field_definitions",
+                            ":uuid"
+                          ],
+                          "variable": [
+                            {
+                              "key": "uuid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:58:07.000Z",
+                      "updatedAt": "2026-10-21T20:58:07.000Z",
+                      "uid": "35240-2dcc8f27-e870-4635-945b-481c11ffdea0"
+                    },
+                    {
+                      "id": "2c2ed6f0-480f-4c62-8c97-daaf55a17394",
+                      "name": "Permission Denied or insufficient scope",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/contacts/custom_field_definitions/:uuid",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "contacts",
+                            "custom_field_definitions",
+                            ":uuid"
+                          ],
+                          "variable": [
+                            {
+                              "key": "uuid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"Please upgrade your Calendly account to Enterprise.\"\n}",
+                      "createdAt": "2026-10-21T20:58:07.000Z",
+                      "updatedAt": "2026-10-21T20:58:07.000Z",
+                      "uid": "35240-2c2ed6f0-480f-4c62-8c97-daaf55a17394"
+                    },
+                    {
+                      "id": "506f7d8c-8913-47f5-9653-182ae95c6c91",
+                      "name": "Requested resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/contacts/custom_field_definitions/:uuid",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "contacts",
+                            "custom_field_definitions",
+                            ":uuid"
+                          ],
+                          "variable": [
+                            {
+                              "key": "uuid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:58:07.000Z",
+                      "updatedAt": "2026-10-21T20:58:07.000Z",
+                      "uid": "35240-506f7d8c-8913-47f5-9653-182ae95c6c91"
+                    },
+                    {
+                      "id": "4a07ada5-6460-4ad7-8240-c7b287d27da4",
+                      "name": "An error has occurred on the server",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/contacts/custom_field_definitions/:uuid",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "contacts",
+                            "custom_field_definitions",
+                            ":uuid"
+                          ],
+                          "variable": [
+                            {
+                              "key": "uuid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:58:07.000Z",
+                      "updatedAt": "2026-10-21T20:58:07.000Z",
+                      "uid": "35240-4a07ada5-6460-4ad7-8240-c7b287d27da4"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-983003a3-2cdc-40b7-96de-e0212e76fefa"
+                }
+              ],
+              "id": "dfde8106-626c-4791-a269-6d7514618059",
+              "createdAt": "2026-10-21T20:58:07.000Z",
+              "updatedAt": "2026-10-21T20:58:07.000Z",
+              "uid": "35240-dfde8106-626c-4791-a269-6d7514618059"
+            },
+            {
+              "name": "List Contact Custom Field Definitions",
+              "id": "cf230020-c7b7-4e60-a61a-450103820091",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/contacts/custom_field_definitions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts",
+                    "custom_field_definitions"
+                  ]
+                },
+                "description": "Returns all custom field definitions available to the authenticated user or organization.\n\n> `contacts:read`"
+              },
+              "response": [
+                {
+                  "id": "969a143d-19fb-4d19-97d0-fc204aa92a05",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/custom_field_definitions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        "custom_field_definitions"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"collection\": [\n    {\n      \"uri\": \"<uri>\",\n      \"label\": \"<string>\",\n      \"field_type\": \"text\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"options\": [\n        {\n          \"uuid\": \"<string>\",\n          \"label\": \"<string>\",\n          \"is_active\": \"<boolean>\",\n          \"color\": \"<string>\"\n        },\n        {\n          \"uuid\": \"<string>\",\n          \"label\": \"<string>\",\n          \"is_active\": \"<boolean>\",\n          \"color\": \"<string>\"\n        }\n      ],\n      \"currency\": \"<string>\",\n      \"source\": {\n        \"type\": \"event_type_invitee_question\",\n        \"event_type_uri\": \"<uri>\",\n        \"question\": \"<string>\"\n      }\n    },\n    {\n      \"uri\": \"<uri>\",\n      \"label\": \"<string>\",\n      \"field_type\": \"invitee_question\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"options\": [\n        {\n          \"uuid\": \"<string>\",\n          \"label\": \"<string>\",\n          \"is_active\": \"<boolean>\",\n          \"color\": \"<string>\"\n        },\n        {\n          \"uuid\": \"<string>\",\n          \"label\": \"<string>\",\n          \"is_active\": \"<boolean>\",\n          \"color\": \"<string>\"\n        }\n      ],\n      \"currency\": \"<string>\",\n      \"source\": {\n        \"type\": \"event_type_invitee_question\",\n        \"event_type_uri\": \"<uri>\",\n        \"question\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-969a143d-19fb-4d19-97d0-fc204aa92a05"
+                },
+                {
+                  "id": "299acb90-aa8d-4bcc-bce2-b13ef9c91812",
+                  "name": "Request is not valid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/custom_field_definitions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        "custom_field_definitions"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-299acb90-aa8d-4bcc-bce2-b13ef9c91812"
+                },
+                {
+                  "id": "b35c8672-52be-42ae-a9e5-012bd33f59a4",
+                  "name": "Cannot authenticate caller",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/custom_field_definitions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        "custom_field_definitions"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-b35c8672-52be-42ae-a9e5-012bd33f59a4"
+                },
+                {
+                  "id": "8ccfd916-632d-44f5-b262-b45c3a404258",
+                  "name": "Permission Denied or insufficient scope",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/custom_field_definitions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        "custom_field_definitions"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"Please upgrade your Calendly account to Enterprise.\"\n}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-8ccfd916-632d-44f5-b262-b45c3a404258"
+                },
+                {
+                  "id": "d77b7322-0c7a-4d35-9600-c75b8dc1191c",
+                  "name": "Requested resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/custom_field_definitions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        "custom_field_definitions"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-d77b7322-0c7a-4d35-9600-c75b8dc1191c"
+                },
+                {
+                  "id": "e6405373-320f-4cb3-8f22-b16350e1f94e",
+                  "name": "An error has occurred on the server",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/custom_field_definitions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        "custom_field_definitions"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:58:07.000Z",
+                  "updatedAt": "2026-10-21T20:58:07.000Z",
+                  "uid": "35240-e6405373-320f-4cb3-8f22-b16350e1f94e"
+                }
+              ],
+              "createdAt": "2026-10-21T20:58:07.000Z",
+              "updatedAt": "2026-10-21T20:58:07.000Z",
+              "uid": "35240-cf230020-c7b7-4e60-a61a-450103820091"
+            }
+          ],
+          "id": "cfc8994a-3681-4172-9494-295a87ad964f",
+          "createdAt": "2026-10-21T20:58:07.000Z",
+          "updatedAt": "2026-10-21T20:58:07.000Z",
+          "uid": "35240-cfc8994a-3681-4172-9494-295a87ad964f"
+        },
+        {
+          "name": "Create Contact",
+          "id": "b8a21deb-c6b4-4ff9-bc27-9b3652fc5b90",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"emails\": [\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"phone_number\": \"<string>\"\n    }\n  ],\n  \"timezone\": \"<string>\",\n  \"job_title\": \"<string>\",\n  \"company\": \"<string>\",\n  \"country\": \"<string>\",\n  \"state\": \"<string>\",\n  \"city\": \"<string>\",\n  \"linkedin\": \"<uri>\",\n  \"custom_fields\": [\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/contacts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "contacts"
+              ]
+            },
+            "description": "Create a new Contact\n\n> `contacts:write`"
+          },
+          "response": [
+            {
+              "id": "670d9c85-0284-42e1-b5ba-3d719413b92f",
+              "name": "Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"emails\": [\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"phone_number\": \"<string>\"\n    }\n  ],\n  \"timezone\": \"<string>\",\n  \"job_title\": \"<string>\",\n  \"company\": \"<string>\",\n  \"country\": \"<string>\",\n  \"state\": \"<string>\",\n  \"city\": \"<string>\",\n  \"linkedin\": \"<uri>\",\n  \"custom_fields\": [\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"resource\": {\n    \"uri\": \"<uri>\",\n    \"emails\": [\n      {\n        \"email\": \"<email>\",\n        \"is_primary\": \"<boolean>\"\n      },\n      {\n        \"email\": \"<email>\",\n        \"is_primary\": \"<boolean>\"\n      }\n    ],\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"name\": \"<string,null>\",\n    \"phone_numbers\": [\n      {\n        \"phone_number\": \"<string>\"\n      },\n      {\n        \"phone_number\": \"<string>\"\n      }\n    ],\n    \"timezone\": \"<string,null>\",\n    \"job_title\": \"<string,null>\",\n    \"company\": \"<string,null>\",\n    \"country\": \"<string,null>\",\n    \"state\": \"<string,null>\",\n    \"city\": \"<string,null>\",\n    \"linkedin\": \"<string,null-uri>\",\n    \"custom_fields\": [\n      {\n        \"uri\": \"<uri>\",\n        \"value\": \"<string>\",\n        \"label\": \"<string>\"\n      },\n      {\n        \"uri\": \"<uri>\",\n        \"value\": \"<string>\",\n        \"label\": \"<string>\"\n      }\n    ],\n    \"first_email_date\": \"<string,null-date-time>\",\n    \"last_email_date\": \"<string,null-date-time>\",\n    \"next_meeting_date\": \"<string,null-date-time>\",\n    \"last_meeting_date\": \"<string,null-date-time>\",\n    \"last_interaction_date\": \"<string,null-date-time>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:58:07.000Z",
+              "updatedAt": "2026-10-21T20:58:07.000Z",
+              "uid": "35240-670d9c85-0284-42e1-b5ba-3d719413b92f"
+            },
+            {
+              "id": "0c99b740-10de-48b8-bb45-5d86e01d5bf6",
+              "name": "Request is not valid",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"emails\": [\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"phone_number\": \"<string>\"\n    }\n  ],\n  \"timezone\": \"<string>\",\n  \"job_title\": \"<string>\",\n  \"company\": \"<string>\",\n  \"country\": \"<string>\",\n  \"state\": \"<string>\",\n  \"city\": \"<string>\",\n  \"linkedin\": \"<uri>\",\n  \"custom_fields\": [\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:07.000Z",
+              "updatedAt": "2026-10-21T20:58:07.000Z",
+              "uid": "35240-0c99b740-10de-48b8-bb45-5d86e01d5bf6"
+            },
+            {
+              "id": "8bb4f93c-7b66-4793-be38-dfcbe3e04959",
+              "name": "Cannot authenticate caller",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"emails\": [\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"phone_number\": \"<string>\"\n    }\n  ],\n  \"timezone\": \"<string>\",\n  \"job_title\": \"<string>\",\n  \"company\": \"<string>\",\n  \"country\": \"<string>\",\n  \"state\": \"<string>\",\n  \"city\": \"<string>\",\n  \"linkedin\": \"<uri>\",\n  \"custom_fields\": [\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:07.000Z",
+              "updatedAt": "2026-10-21T20:58:07.000Z",
+              "uid": "35240-8bb4f93c-7b66-4793-be38-dfcbe3e04959"
+            },
+            {
+              "id": "b8e24c6b-99b0-4caa-98f6-c2326f83a9c7",
+              "name": "Permission Denied or insufficient scope",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"emails\": [\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"phone_number\": \"<string>\"\n    }\n  ],\n  \"timezone\": \"<string>\",\n  \"job_title\": \"<string>\",\n  \"company\": \"<string>\",\n  \"country\": \"<string>\",\n  \"state\": \"<string>\",\n  \"city\": \"<string>\",\n  \"linkedin\": \"<uri>\",\n  \"custom_fields\": [\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"Please upgrade your Calendly account to Enterprise.\"\n}",
+              "createdAt": "2026-10-21T20:58:07.000Z",
+              "updatedAt": "2026-10-21T20:58:07.000Z",
+              "uid": "35240-b8e24c6b-99b0-4caa-98f6-c2326f83a9c7"
+            },
+            {
+              "id": "31cac5f4-c53b-40a9-be14-481888f65a99",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"emails\": [\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"phone_number\": \"<string>\"\n    }\n  ],\n  \"timezone\": \"<string>\",\n  \"job_title\": \"<string>\",\n  \"company\": \"<string>\",\n  \"country\": \"<string>\",\n  \"state\": \"<string>\",\n  \"city\": \"<string>\",\n  \"linkedin\": \"<uri>\",\n  \"custom_fields\": [\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:07.000Z",
+              "updatedAt": "2026-10-21T20:58:07.000Z",
+              "uid": "35240-31cac5f4-c53b-40a9-be14-481888f65a99"
+            },
+            {
+              "id": "e4228f90-1ed6-40c8-b565-0a399679e5fd",
+              "name": "Attempt to create a resource that already exists",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"emails\": [\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"phone_number\": \"<string>\"\n    }\n  ],\n  \"timezone\": \"<string>\",\n  \"job_title\": \"<string>\",\n  \"company\": \"<string>\",\n  \"country\": \"<string>\",\n  \"state\": \"<string>\",\n  \"city\": \"<string>\",\n  \"linkedin\": \"<uri>\",\n  \"custom_fields\": [\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts"
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:07.000Z",
+              "updatedAt": "2026-10-21T20:58:07.000Z",
+              "uid": "35240-e4228f90-1ed6-40c8-b565-0a399679e5fd"
+            },
+            {
+              "id": "2a7d96b2-faaf-4044-a8f7-262fefe7720c",
+              "name": "An error has occurred on the server",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"emails\": [\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"is_primary\": \"<boolean>\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"phone_number\": \"<string>\"\n    },\n    {\n      \"phone_number\": \"<string>\"\n    }\n  ],\n  \"timezone\": \"<string>\",\n  \"job_title\": \"<string>\",\n  \"company\": \"<string>\",\n  \"country\": \"<string>\",\n  \"state\": \"<string>\",\n  \"city\": \"<string>\",\n  \"linkedin\": \"<uri>\",\n  \"custom_fields\": [\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:07.000Z",
+              "updatedAt": "2026-10-21T20:58:07.000Z",
+              "uid": "35240-2a7d96b2-faaf-4044-a8f7-262fefe7720c"
+            }
+          ],
+          "createdAt": "2026-10-21T20:58:07.000Z",
+          "updatedAt": "2026-10-21T20:58:07.000Z",
+          "uid": "35240-b8a21deb-c6b4-4ff9-bc27-9b3652fc5b90"
+        },
+        {
+          "name": "List Contacts",
+          "id": "4c96d46a-7de3-4569-9e2c-ebb8821da41a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/contacts?sort=<string>&email=<string>&phone_number=<string>&timezone=<string>&name=<string>&job_title=<string>&company=<string>&country=<string>&state=<string>&city=<string>&count=20&page_token=<string>&exclude=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "contacts"
+              ],
+              "query": [
+                {
+                  "description": "Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values. Supported fields are: created_at, updated_at. Sort direction is specified as: asc, desc.",
+                  "key": "sort",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter results by exact match on email address. Accepts a comma-separated list.",
+                  "key": "email",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter results by exact match on phone number. Accepts a comma-separated list.",
+                  "key": "phone_number",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter results by exact match on the IANA time zone name(s). Accepts a comma-separated list of time zones.",
+                  "key": "timezone",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter results by partial match on name(s). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter results by partial match on job title(s). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                  "key": "job_title",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter results by partial match on company name(s). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                  "key": "company",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter results by exact match on two-letter country code (ISO 3166-1 alpha-2). Accepts a comma-separated list.",
+                  "key": "country",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter results by exact match on state(s), province(s), or region(s). Accepts a comma-separated list of values.",
+                  "key": "state",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter results by partial match on city(ies). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                  "key": "city",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The number of rows to return",
+                  "key": "count",
+                  "value": "20"
+                },
+                {
+                  "description": "The token to pass to get the next or previous portion of the collection",
+                  "key": "page_token",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Omit the listed fields from the response. Currently only `custom_fields` is supported. When omitted, all fields are returned.",
+                  "key": "exclude",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns a collection of Contacts\n\n> `contacts:read`"
+          },
+          "response": [
+            {
+              "id": "97c06b18-9b64-4a84-a848-9a3d3f3b3601",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/contacts?sort=<string>&email=<string>&phone_number=<string>&timezone=<string>&name=<string>&job_title=<string>&company=<string>&country=<string>&state=<string>&city=<string>&count=20&page_token=<string>&exclude=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts"
+                  ],
+                  "query": [
+                    {
+                      "description": "Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values. Supported fields are: created_at, updated_at. Sort direction is specified as: asc, desc.",
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on email address. Accepts a comma-separated list.",
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on phone number. Accepts a comma-separated list.",
+                      "key": "phone_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on the IANA time zone name(s). Accepts a comma-separated list of time zones.",
+                      "key": "timezone",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by partial match on name(s). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by partial match on job title(s). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                      "key": "job_title",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by partial match on company name(s). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                      "key": "company",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on two-letter country code (ISO 3166-1 alpha-2). Accepts a comma-separated list.",
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on state(s), province(s), or region(s). Accepts a comma-separated list of values.",
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by partial match on city(ies). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Omit the listed fields from the response. Currently only `custom_fields` is supported. When omitted, all fields are returned.",
+                      "key": "exclude",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"collection\": [\n    {\n      \"uri\": \"<uri>\",\n      \"emails\": [\n        {\n          \"email\": \"<email>\",\n          \"is_primary\": \"<boolean>\"\n        },\n        {\n          \"email\": \"<email>\",\n          \"is_primary\": \"<boolean>\"\n        }\n      ],\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"name\": \"<string,null>\",\n      \"phone_numbers\": [\n        {\n          \"phone_number\": \"<string>\"\n        },\n        {\n          \"phone_number\": \"<string>\"\n        }\n      ],\n      \"timezone\": \"<string,null>\",\n      \"job_title\": \"<string,null>\",\n      \"company\": \"<string,null>\",\n      \"country\": \"<string,null>\",\n      \"state\": \"<string,null>\",\n      \"city\": \"<string,null>\",\n      \"linkedin\": \"<string,null-uri>\",\n      \"custom_fields\": [\n        {\n          \"uri\": \"<uri>\",\n          \"value\": \"<string>\",\n          \"label\": \"<string>\"\n        },\n        {\n          \"uri\": \"<uri>\",\n          \"value\": \"<string>\",\n          \"label\": \"<string>\"\n        }\n      ],\n      \"first_email_date\": \"<string,null-date-time>\",\n      \"last_email_date\": \"<string,null-date-time>\",\n      \"next_meeting_date\": \"<string,null-date-time>\",\n      \"last_meeting_date\": \"<string,null-date-time>\",\n      \"last_interaction_date\": \"<string,null-date-time>\"\n    },\n    {\n      \"uri\": \"<uri>\",\n      \"emails\": [\n        {\n          \"email\": \"<email>\",\n          \"is_primary\": \"<boolean>\"\n        },\n        {\n          \"email\": \"<email>\",\n          \"is_primary\": \"<boolean>\"\n        }\n      ],\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"name\": \"<string,null>\",\n      \"phone_numbers\": [\n        {\n          \"phone_number\": \"<string>\"\n        },\n        {\n          \"phone_number\": \"<string>\"\n        }\n      ],\n      \"timezone\": \"<string,null>\",\n      \"job_title\": \"<string,null>\",\n      \"company\": \"<string,null>\",\n      \"country\": \"<string,null>\",\n      \"state\": \"<string,null>\",\n      \"city\": \"<string,null>\",\n      \"linkedin\": \"<string,null-uri>\",\n      \"custom_fields\": [\n        {\n          \"uri\": \"<uri>\",\n          \"value\": \"<string>\",\n          \"label\": \"<string>\"\n        },\n        {\n          \"uri\": \"<uri>\",\n          \"value\": \"<string>\",\n          \"label\": \"<string>\"\n        }\n      ],\n      \"first_email_date\": \"<string,null-date-time>\",\n      \"last_email_date\": \"<string,null-date-time>\",\n      \"next_meeting_date\": \"<string,null-date-time>\",\n      \"last_meeting_date\": \"<string,null-date-time>\",\n      \"last_interaction_date\": \"<string,null-date-time>\"\n    }\n  ],\n  \"pagination\": {\n    \"count\": \"<integer>\",\n    \"next_page\": \"<string,null-uri>\",\n    \"previous_page\": \"<string,null-uri>\",\n    \"next_page_token\": \"<string,null>\",\n    \"previous_page_token\": \"<string,null>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:58:07.000Z",
+              "updatedAt": "2026-10-21T20:58:07.000Z",
+              "uid": "35240-97c06b18-9b64-4a84-a848-9a3d3f3b3601"
+            },
+            {
+              "id": "520b498f-546d-41a6-8817-305231b36d70",
+              "name": "Request is not valid",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/contacts?sort=<string>&email=<string>&phone_number=<string>&timezone=<string>&name=<string>&job_title=<string>&company=<string>&country=<string>&state=<string>&city=<string>&count=20&page_token=<string>&exclude=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts"
+                  ],
+                  "query": [
+                    {
+                      "description": "Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values. Supported fields are: created_at, updated_at. Sort direction is specified as: asc, desc.",
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on email address. Accepts a comma-separated list.",
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on phone number. Accepts a comma-separated list.",
+                      "key": "phone_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on the IANA time zone name(s). Accepts a comma-separated list of time zones.",
+                      "key": "timezone",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by partial match on name(s). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by partial match on job title(s). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                      "key": "job_title",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by partial match on company name(s). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                      "key": "company",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on two-letter country code (ISO 3166-1 alpha-2). Accepts a comma-separated list.",
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on state(s), province(s), or region(s). Accepts a comma-separated list of values.",
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by partial match on city(ies). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Omit the listed fields from the response. Currently only `custom_fields` is supported. When omitted, all fields are returned.",
+                      "key": "exclude",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:07.000Z",
+              "updatedAt": "2026-10-21T20:58:07.000Z",
+              "uid": "35240-520b498f-546d-41a6-8817-305231b36d70"
+            },
+            {
+              "id": "74890ab0-198c-4dc8-af59-d8ca94548592",
+              "name": "Cannot authenticate caller",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/contacts?sort=<string>&email=<string>&phone_number=<string>&timezone=<string>&name=<string>&job_title=<string>&company=<string>&country=<string>&state=<string>&city=<string>&count=20&page_token=<string>&exclude=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts"
+                  ],
+                  "query": [
+                    {
+                      "description": "Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values. Supported fields are: created_at, updated_at. Sort direction is specified as: asc, desc.",
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on email address. Accepts a comma-separated list.",
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on phone number. Accepts a comma-separated list.",
+                      "key": "phone_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on the IANA time zone name(s). Accepts a comma-separated list of time zones.",
+                      "key": "timezone",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by partial match on name(s). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by partial match on job title(s). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                      "key": "job_title",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by partial match on company name(s). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                      "key": "company",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on two-letter country code (ISO 3166-1 alpha-2). Accepts a comma-separated list.",
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on state(s), province(s), or region(s). Accepts a comma-separated list of values.",
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by partial match on city(ies). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Omit the listed fields from the response. Currently only `custom_fields` is supported. When omitted, all fields are returned.",
+                      "key": "exclude",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:07.000Z",
+              "updatedAt": "2026-10-21T20:58:07.000Z",
+              "uid": "35240-74890ab0-198c-4dc8-af59-d8ca94548592"
+            },
+            {
+              "id": "0b9e224a-f786-4276-abbb-57c7697198bb",
+              "name": "Permission Denied or insufficient scope",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/contacts?sort=<string>&email=<string>&phone_number=<string>&timezone=<string>&name=<string>&job_title=<string>&company=<string>&country=<string>&state=<string>&city=<string>&count=20&page_token=<string>&exclude=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts"
+                  ],
+                  "query": [
+                    {
+                      "description": "Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values. Supported fields are: created_at, updated_at. Sort direction is specified as: asc, desc.",
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on email address. Accepts a comma-separated list.",
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on phone number. Accepts a comma-separated list.",
+                      "key": "phone_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on the IANA time zone name(s). Accepts a comma-separated list of time zones.",
+                      "key": "timezone",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by partial match on name(s). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by partial match on job title(s). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                      "key": "job_title",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by partial match on company name(s). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                      "key": "company",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on two-letter country code (ISO 3166-1 alpha-2). Accepts a comma-separated list.",
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on state(s), province(s), or region(s). Accepts a comma-separated list of values.",
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by partial match on city(ies). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Omit the listed fields from the response. Currently only `custom_fields` is supported. When omitted, all fields are returned.",
+                      "key": "exclude",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"Please upgrade your Calendly account to Enterprise.\"\n}",
+              "createdAt": "2026-10-21T20:58:07.000Z",
+              "updatedAt": "2026-10-21T20:58:07.000Z",
+              "uid": "35240-0b9e224a-f786-4276-abbb-57c7697198bb"
+            },
+            {
+              "id": "1966d7a4-062f-4557-958f-fe90cfcfbd9f",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/contacts?sort=<string>&email=<string>&phone_number=<string>&timezone=<string>&name=<string>&job_title=<string>&company=<string>&country=<string>&state=<string>&city=<string>&count=20&page_token=<string>&exclude=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts"
+                  ],
+                  "query": [
+                    {
+                      "description": "Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values. Supported fields are: created_at, updated_at. Sort direction is specified as: asc, desc.",
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on email address. Accepts a comma-separated list.",
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on phone number. Accepts a comma-separated list.",
+                      "key": "phone_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on the IANA time zone name(s). Accepts a comma-separated list of time zones.",
+                      "key": "timezone",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by partial match on name(s). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by partial match on job title(s). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                      "key": "job_title",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by partial match on company name(s). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                      "key": "company",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on two-letter country code (ISO 3166-1 alpha-2). Accepts a comma-separated list.",
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on state(s), province(s), or region(s). Accepts a comma-separated list of values.",
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by partial match on city(ies). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Omit the listed fields from the response. Currently only `custom_fields` is supported. When omitted, all fields are returned.",
+                      "key": "exclude",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:07.000Z",
+              "updatedAt": "2026-10-21T20:58:07.000Z",
+              "uid": "35240-1966d7a4-062f-4557-958f-fe90cfcfbd9f"
+            },
+            {
+              "id": "c1f9862e-82da-4b04-a45b-cb43f30c30d8",
+              "name": "An error has occurred on the server",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/contacts?sort=<string>&email=<string>&phone_number=<string>&timezone=<string>&name=<string>&job_title=<string>&company=<string>&country=<string>&state=<string>&city=<string>&count=20&page_token=<string>&exclude=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts"
+                  ],
+                  "query": [
+                    {
+                      "description": "Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values. Supported fields are: created_at, updated_at. Sort direction is specified as: asc, desc.",
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on email address. Accepts a comma-separated list.",
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on phone number. Accepts a comma-separated list.",
+                      "key": "phone_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on the IANA time zone name(s). Accepts a comma-separated list of time zones.",
+                      "key": "timezone",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by partial match on name(s). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by partial match on job title(s). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                      "key": "job_title",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by partial match on company name(s). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                      "key": "company",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on two-letter country code (ISO 3166-1 alpha-2). Accepts a comma-separated list.",
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by exact match on state(s), province(s), or region(s). Accepts a comma-separated list of values.",
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results by partial match on city(ies). Accepts a comma-separated list-- each segment is matched independently (commas in the query string separate values).",
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Omit the listed fields from the response. Currently only `custom_fields` is supported. When omitted, all fields are returned.",
+                      "key": "exclude",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:58:07.000Z",
+              "updatedAt": "2026-10-21T20:58:07.000Z",
+              "uid": "35240-c1f9862e-82da-4b04-a45b-cb43f30c30d8"
+            }
+          ],
+          "createdAt": "2026-10-21T20:58:07.000Z",
+          "updatedAt": "2026-10-21T20:58:07.000Z",
+          "uid": "35240-4c96d46a-7de3-4569-9e2c-ebb8821da41a"
+        }
+      ],
+      "id": "3a0cf47a-21c0-4ee3-b7fc-654ed28f8306",
+      "createdAt": "2026-10-21T20:58:07.000Z",
+      "updatedAt": "2026-10-21T20:58:07.000Z",
+      "uid": "35240-3a0cf47a-21c0-4ee3-b7fc-654ed28f8306"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.calendly.com"
+    }
+  ]
+}

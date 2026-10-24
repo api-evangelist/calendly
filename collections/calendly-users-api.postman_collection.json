@@ -1,365 +1,593 @@
 {
+  "info": {
+    "_postman_id": "273809e6-fa33-4d81-9d0b-300ba6a637c4",
+    "name": "Calendly Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:57:54.000Z",
+    "updatedAt": "2026-10-21T20:57:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-273809e6-fa33-4d81-9d0b-300ba6a637c4"
+  },
   "item": [
     {
-      "id": "2bf2c1ef-6452-41b4-a225-450b27dfe916",
-      "name": "Users",
-      "description": {
-        "content": "Endpoints for retrieving user information and managing user accounts within Calendly.",
-        "type": "text/plain"
-      },
+      "name": "users",
       "item": [
         {
-          "id": "5f7758ac-5ed3-41a2-8eaa-a3706aa26efe",
-          "name": "Get current user",
-          "request": {
-            "name": "Get current user",
-            "description": {
-              "content": "Returns information about the currently authenticated user, including their URI, name, email, scheduling URL, timezone, and organization membership.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "users",
-                "me"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "me",
+          "item": [
             {
-              "id": "20ce213a-ccda-4db0-b135-609a35ddb83a",
-              "name": "Successfully retrieved the current user",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    "me"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+              "name": "Get current user",
+              "id": "836ff6ed-d7f4-43ee-9768-51688ba98506",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
                 },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"resource\": {\n    \"uri\": \"https://yhiGAptnr.wdtqAxMh8egsSAf2T0.gCVeLB8k\",\n    \"name\": \"string\",\n    \"slug\": \"string\",\n    \"email\": \"chpu1j1rmOnVR@aUhLeIyNdUk.ljbn\",\n    \"scheduling_url\": \"http://vqASzpMbSCZjHFqzsgKJcd.nxeaDqHLFl.sBBB60f3uTn\",\n    \"timezone\": \"string\",\n    \"avatar_url\": \"https://OtCXIEpqDkucoZcPPMeCcQtkZPMen.tfzbpuVnARjnCUxNNXSpSv5voJQ-bUzqj8VncERj6Ot.dvP,j7VHvIPkvTZgzkdFXOeajlUoqpPBdR,VFkUKr\",\n    \"created_at\": \"2009-08-26T23:05:45.307Z\",\n    \"updated_at\": \"1977-10-22T13:31:11.964Z\",\n    \"current_organization\": \"https://dsEYYWZTuTGlvGEcz.fuSyfAZQSVfXE9dafKPFs+gzAwtSvb.EFg\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0998c1ee-a02d-4a79-8b54-61cd6072fcaf",
-              "name": "Authentication failed. Verify that a valid access token is provided in the Authorization header.",
-              "originalRequest": {
                 "url": {
-                  "path": [
-                    "users",
-                    "me"
-                  ],
+                  "raw": "{{baseUrl}}/users/me",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
+                  "path": [
+                    "users",
+                    "me"
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "Returns basic information about your user account.\n\n> `users:read`"
               },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "e3b1bc7a-faa8-43b7-9b3a-2a9b12b365de",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/me",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        "me"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"resource\": {\n    \"uri\": \"<uri>\",\n    \"name\": \"<string>\",\n    \"slug\": \"<string>\",\n    \"email\": \"<email>\",\n    \"scheduling_url\": \"<uri>\",\n    \"timezone\": \"<string>\",\n    \"avatar_url\": \"<string,null-uri>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"current_organization\": \"<uri>\",\n    \"resource_type\": \"<string>\",\n    \"locale\": \"es\",\n    \"time_notation\": \"12h\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:57:54.000Z",
+                  "updatedAt": "2026-10-21T20:57:54.000Z",
+                  "uid": "35240-e3b1bc7a-faa8-43b7-9b3a-2a9b12b365de"
+                },
+                {
+                  "id": "cfcded4c-0590-406e-a32b-d6863b064b99",
+                  "name": "Cannot authenticate caller",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/me",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        "me"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:57:54.000Z",
+                  "updatedAt": "2026-10-21T20:57:54.000Z",
+                  "uid": "35240-cfcded4c-0590-406e-a32b-d6863b064b99"
+                },
+                {
+                  "id": "618b7445-4db1-4807-b4b5-06295da11b39",
+                  "name": "Permission denied or insufficient scope",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/me",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        "me"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"You do not have permission\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:57:54.000Z",
+                  "updatedAt": "2026-10-21T20:57:54.000Z",
+                  "uid": "35240-618b7445-4db1-4807-b4b5-06295da11b39"
+                },
+                {
+                  "id": "39cef8ff-3dfc-413a-9a09-e427be2fd394",
+                  "name": "Requested resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/me",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        "me"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:57:54.000Z",
+                  "updatedAt": "2026-10-21T20:57:54.000Z",
+                  "uid": "35240-39cef8ff-3dfc-413a-9a09-e427be2fd394"
+                },
+                {
+                  "id": "ccd03461-a3fa-4b8c-acd4-17aaaec36e2f",
+                  "name": "An error has occurred on the server",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/me",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        "me"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:57:54.000Z",
+                  "updatedAt": "2026-10-21T20:57:54.000Z",
+                  "uid": "35240-ccd03461-a3fa-4b8c-acd4-17aaaec36e2f"
                 }
               ],
-              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T20:57:54.000Z",
+              "updatedAt": "2026-10-21T20:57:54.000Z",
+              "uid": "35240-836ff6ed-d7f4-43ee-9768-51688ba98506"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "304850a5-75df-40a9-8767-f36524c67ec6",
+          "createdAt": "2026-10-21T20:57:54.000Z",
+          "updatedAt": "2026-10-21T20:57:54.000Z",
+          "uid": "35240-304850a5-75df-40a9-8767-f36524c67ec6"
         },
         {
-          "id": "d5e7fdce-fc17-4661-acff-cf9279093801",
-          "name": "Get user",
-          "request": {
-            "name": "Get user",
-            "description": {
-              "content": "Returns information about a specific user by their UUID, including name, email, scheduling URL, timezone, and organization.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "users",
-                ":uuid"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "uuid",
-                  "description": "(Required) The UUID of the user."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{uuid}",
+          "item": [
             {
-              "id": "2a92da08-61dc-4910-999c-d9e1370a4e9c",
-              "name": "Successfully retrieved the user",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":uuid"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+              "name": "Get user",
+              "id": "156fde39-d54e-4d2e-8c79-61acd9e6c2ca",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "uuid",
-                      "description": "(Required) The UUID of the user."
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
                     }
                   ]
                 },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"resource\": {\n    \"uri\": \"https://yhiGAptnr.wdtqAxMh8egsSAf2T0.gCVeLB8k\",\n    \"name\": \"string\",\n    \"slug\": \"string\",\n    \"email\": \"chpu1j1rmOnVR@aUhLeIyNdUk.ljbn\",\n    \"scheduling_url\": \"http://vqASzpMbSCZjHFqzsgKJcd.nxeaDqHLFl.sBBB60f3uTn\",\n    \"timezone\": \"string\",\n    \"avatar_url\": \"https://OtCXIEpqDkucoZcPPMeCcQtkZPMen.tfzbpuVnARjnCUxNNXSpSv5voJQ-bUzqj8VncERj6Ot.dvP,j7VHvIPkvTZgzkdFXOeajlUoqpPBdR,VFkUKr\",\n    \"created_at\": \"2009-08-26T23:05:45.307Z\",\n    \"updated_at\": \"1977-10-22T13:31:11.964Z\",\n    \"current_organization\": \"https://dsEYYWZTuTGlvGEcz.fuSyfAZQSVfXE9dafKPFs+gzAwtSvb.EFg\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "58da098a-c901-4f75-a6aa-13756d96fcf6",
-              "name": "Authentication failed. Verify that a valid access token is provided in the Authorization header.",
-              "originalRequest": {
                 "url": {
+                  "raw": "{{baseUrl}}/users/:uuid",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "users",
                     ":uuid"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
                   "variable": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
+                      "id": "ddb2fe03-0ddd-4497-8a99-c984a8bf445e",
                       "key": "uuid",
-                      "description": "(Required) The UUID of the user."
+                      "value": "<string>",
+                      "description": "(Required) User unique identifier, or the constant \"me\" to reference the caller"
                     }
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "Returns information about a specified User.\n\n> `users:read`"
               },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e3f766f6-dc6c-418e-8536-81800de2a01b",
-              "name": "The requested resource was not found. Verify the UUID or URI is correct.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":uuid"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "uuid",
-                      "description": "(Required) The UUID of the user."
+                  "id": "0be4f77a-64a3-4794-ad70-d32fd763333c",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
                     }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"resource\": {\n    \"uri\": \"<uri>\",\n    \"name\": \"<string>\",\n    \"slug\": \"<string>\",\n    \"email\": \"<email>\",\n    \"scheduling_url\": \"<uri>\",\n    \"timezone\": \"<string>\",\n    \"avatar_url\": \"<string,null-uri>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"current_organization\": \"<uri>\",\n    \"resource_type\": \"<string>\",\n    \"locale\": \"fr\",\n    \"time_notation\": \"12h\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:57:54.000Z",
+                  "updatedAt": "2026-10-21T20:57:54.000Z",
+                  "uid": "35240-0be4f77a-64a3-4794-ad70-d32fd763333c"
+                },
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "46b6a52c-8b18-4957-b26e-f2242e8fca8e",
+                  "name": "Cannot authenticate caller",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:57:54.000Z",
+                  "updatedAt": "2026-10-21T20:57:54.000Z",
+                  "uid": "35240-46b6a52c-8b18-4957-b26e-f2242e8fca8e"
+                },
+                {
+                  "id": "9267a4bd-219f-49bb-9a09-8db27c0713c8",
+                  "name": "Permission denied or insufficient scope",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"You do not have permission to access this resource.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:57:54.000Z",
+                  "updatedAt": "2026-10-21T20:57:54.000Z",
+                  "uid": "35240-9267a4bd-219f-49bb-9a09-8db27c0713c8"
+                },
+                {
+                  "id": "0fb1c4f5-66bb-4e87-a26d-0a7c54cf6e4e",
+                  "name": "Requested resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:57:54.000Z",
+                  "updatedAt": "2026-10-21T20:57:54.000Z",
+                  "uid": "35240-0fb1c4f5-66bb-4e87-a26d-0a7c54cf6e4e"
+                },
+                {
+                  "id": "4c08638c-24c2-4b76-a246-beecc6cddef7",
+                  "name": "An error has occurred on the server",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:57:54.000Z",
+                  "updatedAt": "2026-10-21T20:57:54.000Z",
+                  "uid": "35240-4c08638c-24c2-4b76-a246-beecc6cddef7"
                 }
               ],
-              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T20:57:54.000Z",
+              "updatedAt": "2026-10-21T20:57:54.000Z",
+              "uid": "35240-156fde39-d54e-4d2e-8c79-61acd9e6c2ca"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "ed60e8ab-4004-4587-bb13-7bb1858c0d97",
+          "createdAt": "2026-10-21T20:57:54.000Z",
+          "updatedAt": "2026-10-21T20:57:54.000Z",
+          "uid": "35240-ed60e8ab-4004-4587-bb13-7bb1858c0d97"
         }
       ],
-      "event": []
+      "id": "e439db3c-c2bf-4592-81be-5e6854d05a2c",
+      "createdAt": "2026-10-21T20:57:54.000Z",
+      "updatedAt": "2026-10-21T20:57:54.000Z",
+      "uid": "35240-e439db3c-c2bf-4592-81be-5e6854d05a2c"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://api.calendly.com",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://api.calendly.com"
     }
-  ],
-  "auth": {
-    "type": "bearer",
-    "bearer": [
-      {
-        "key": "token",
-        "value": "{{bearerToken}}"
-      }
-    ]
-  },
-  "info": {
-    "_postman_id": "2a6b2bcd-a48b-4112-9690-168d38210580",
-    "name": "Calendly Scheduling Activity Log Users API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Calendly Scheduling API (v2) is a RESTful API that allows developers to programmatically manage scheduling workflows. It provides endpoints for managing users, organizations, event types, scheduled events, invitees, routing forms, availability schedules, and webhook subscriptions. The API uses JSON for request and response bodies, standard HTTP methods, and supports authentication via personal access tokens and OAuth 2.1. Developers can use it to create events on behalf of invitees, retrieve scheduling data, and integrate Calendly functionality directly into their applications.\n\nContact Support:\n Name: Calendly Developer Support",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

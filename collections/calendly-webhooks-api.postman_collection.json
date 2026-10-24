@@ -1,0 +1,1966 @@
+{
+  "info": {
+    "_postman_id": "74ff519b-a48a-4b5a-90b7-e2c533bc3ff0",
+    "name": "Calendly Webhooks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:59:01.000Z",
+    "updatedAt": "2026-10-21T20:59:02.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-74ff519b-a48a-4b5a-90b7-e2c533bc3ff0"
+  },
+  "item": [
+    {
+      "name": "webhook_subscriptions",
+      "item": [
+        {
+          "name": "{webhook_uuid}",
+          "item": [
+            {
+              "name": "Delete Webhook Subscription",
+              "id": "17594f4e-0567-4f0b-aa30-bd9e7142b70c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions/:webhook_uuid",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions",
+                    ":webhook_uuid"
+                  ],
+                  "variable": [
+                    {
+                      "id": "2adfd729-c6d3-470e-8c7e-da4d2c066c11",
+                      "key": "webhook_uuid",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Delete a Webhook Subscription.\n\n> `webhooks:write`"
+              },
+              "response": [
+                {
+                  "id": "a565605a-a824-4167-aead-8a82962e6555",
+                  "name": "No Content",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:webhook_uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":webhook_uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "webhook_uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-21T20:59:02.000Z",
+                  "updatedAt": "2026-10-21T20:59:02.000Z",
+                  "uid": "35240-a565605a-a824-4167-aead-8a82962e6555"
+                },
+                {
+                  "id": "7bf64b70-d9b7-4e1b-b662-0c5d66998dad",
+                  "name": "Cannot authenticate caller",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:webhook_uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":webhook_uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "webhook_uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:59:02.000Z",
+                  "updatedAt": "2026-10-21T20:59:02.000Z",
+                  "uid": "35240-7bf64b70-d9b7-4e1b-b662-0c5d66998dad"
+                },
+                {
+                  "id": "26ce163c-f438-4d3c-b1c7-534e2bc11582",
+                  "name": "Permission denied or insufficient scope",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:webhook_uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":webhook_uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "webhook_uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"You do not have permission to access this resource.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:59:02.000Z",
+                  "updatedAt": "2026-10-21T20:59:02.000Z",
+                  "uid": "35240-26ce163c-f438-4d3c-b1c7-534e2bc11582"
+                },
+                {
+                  "id": "05296b22-d966-49f5-9a29-cfc998340a76",
+                  "name": "Requested resource not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:webhook_uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":webhook_uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "webhook_uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:59:02.000Z",
+                  "updatedAt": "2026-10-21T20:59:02.000Z",
+                  "uid": "35240-05296b22-d966-49f5-9a29-cfc998340a76"
+                },
+                {
+                  "id": "d321f853-f66c-417c-8adc-5a8bfc0567b6",
+                  "name": "An error has occurred on the server",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:webhook_uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":webhook_uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "webhook_uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:59:02.000Z",
+                  "updatedAt": "2026-10-21T20:59:02.000Z",
+                  "uid": "35240-d321f853-f66c-417c-8adc-5a8bfc0567b6"
+                }
+              ],
+              "createdAt": "2026-10-21T20:59:02.000Z",
+              "updatedAt": "2026-10-21T20:59:02.000Z",
+              "uid": "35240-17594f4e-0567-4f0b-aa30-bd9e7142b70c"
+            },
+            {
+              "name": "Get Webhook Subscription",
+              "id": "15e5d86d-d7e4-4a24-9d68-dd51201f4caf",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions/:webhook_uuid",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions",
+                    ":webhook_uuid"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d9d1959e-2bc5-41df-aa89-a58128eff8d4",
+                      "key": "webhook_uuid",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Get a specified Webhook Subscription.\n\n> `webhooks:read`"
+              },
+              "response": [
+                {
+                  "id": "c2642cf4-df39-4bdf-9894-6aeaa6a61982",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:webhook_uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":webhook_uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "webhook_uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"resource\": {\n    \"uri\": \"<uri>\",\n    \"callback_url\": \"<uri>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"retry_started_at\": \"<string,null-date-time>\",\n    \"state\": \"disabled\",\n    \"events\": [\n      \"contact.deleted\",\n      \"invitee.created\"\n    ],\n    \"scope\": \"organization\",\n    \"organization\": \"<uri>\",\n    \"user\": \"<string,null-uri>\",\n    \"group\": \"<string,null-uri>\",\n    \"creator\": \"<string,null-uri>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:59:02.000Z",
+                  "updatedAt": "2026-10-21T20:59:02.000Z",
+                  "uid": "35240-c2642cf4-df39-4bdf-9894-6aeaa6a61982"
+                },
+                {
+                  "id": "2b31d531-7614-4711-ba3d-f0370d15481c",
+                  "name": "Cannot authenticate caller",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:webhook_uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":webhook_uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "webhook_uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Resource Not Found\",\n  \"message\": \"The server could not find the requested resource.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:59:02.000Z",
+                  "updatedAt": "2026-10-21T20:59:02.000Z",
+                  "uid": "35240-2b31d531-7614-4711-ba3d-f0370d15481c"
+                },
+                {
+                  "id": "992272d6-f774-4cd6-8989-bf37e0cab564",
+                  "name": "Permission denied or insufficient scope",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:webhook_uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":webhook_uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "webhook_uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"You do not have permission to access this resource.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:59:02.000Z",
+                  "updatedAt": "2026-10-21T20:59:02.000Z",
+                  "uid": "35240-992272d6-f774-4cd6-8989-bf37e0cab564"
+                },
+                {
+                  "id": "d75a9e1b-b123-41f5-86c9-19af9e55b2ac",
+                  "name": "Requested resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:webhook_uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":webhook_uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "webhook_uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Resource Not Found\",\n  \"message\": \"The server could not find the requested resource.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:59:02.000Z",
+                  "updatedAt": "2026-10-21T20:59:02.000Z",
+                  "uid": "35240-d75a9e1b-b123-41f5-86c9-19af9e55b2ac"
+                }
+              ],
+              "createdAt": "2026-10-21T20:59:02.000Z",
+              "updatedAt": "2026-10-21T20:59:02.000Z",
+              "uid": "35240-15e5d86d-d7e4-4a24-9d68-dd51201f4caf"
+            }
+          ],
+          "id": "5a75e781-3b7c-4503-86a7-35978679db5d",
+          "createdAt": "2026-10-21T20:59:02.000Z",
+          "updatedAt": "2026-10-21T20:59:02.000Z",
+          "uid": "35240-5a75e781-3b7c-4503-86a7-35978679db5d"
+        },
+        {
+          "name": "Create Webhook Subscription",
+          "id": "9e88088b-43c9-42ea-8930-e795d0f91aa9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"<uri>\",\n  \"events\": [\n    \"invitee.canceled\",\n    \"contact.deleted\"\n  ],\n  \"organization\": \"<uri>\",\n  \"scope\": \"organization\",\n  \"user\": \"<uri>\",\n  \"group\": \"<uri>\",\n  \"signing_key\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/webhook_subscriptions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "webhook_subscriptions"
+              ]
+            },
+            "description": "Create a Webhook Subscription for an Organization, User, or Group.\n\n* The `organization` subscription scope triggers the webhook for all subscribed events within the organization.\n* The `user` subscription scope only triggers the webhook for subscribed events that belong to the specific user.\n* The `group` subscription scope only triggers the webhook for subscribed events that belong to the specfic group.\n\n| Event | Allowed Subscription Scopes | Required Auth Scope |\n| ----- | ----- | ----- |\n| invitee.created | `organization` `user` `group` | `scheduled_events:read` |\n| invitee.canceled | `organization` `user` `group` | `scheduled_events:read` |\n| invitee_no_show.created | `organization` `user` `group` | `scheduled_events:read` |\n| invitee_no_show.deleted | `organization` `user` `group` | `scheduled_events:read` |\n| event_type.created | `organization` `user` `group` | `event_types:read` |\n| event_type.deleted | `organization` `user` `group` | `event_types:read` |\n| event_type.updated | `organization` `user` `group` | `event_types:read` |\n| meeting_recap.created | `user` | `meeting_recaps:read` |\n| meeting_recap.updated | `user` | `meeting_recaps:read` |\n| meeting_recap.deleted | `user` | `meeting_recaps:read` |\n| routing_form_submission.created | `organization`\nCreate separate Webhook Subscriptions for events with different subscription scopes. | `routing_forms:read` |\n| contact.created | `organization` `user` `group` | `contacts:read` |\n| contact.updated | `organization` `user` `group` | `contacts:read` |\n| contact.deleted | `organization` `user` `group` | `contacts:read` |\n\n> `webhooks:write`"
+          },
+          "response": [
+            {
+              "id": "fe01d340-70b7-4bdc-9358-0476a22a03ba",
+              "name": "Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<uri>\",\n  \"events\": [\n    \"invitee.canceled\",\n    \"contact.deleted\"\n  ],\n  \"organization\": \"<uri>\",\n  \"scope\": \"organization\",\n  \"user\": \"<uri>\",\n  \"group\": \"<uri>\",\n  \"signing_key\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"resource\": {\n    \"uri\": \"<uri>\",\n    \"callback_url\": \"<uri>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"retry_started_at\": \"<string,null-date-time>\",\n    \"state\": \"active\",\n    \"events\": [\n      \"meeting_recap.deleted\",\n      \"meeting_recap.updated\"\n    ],\n    \"scope\": \"organization\",\n    \"organization\": \"<uri>\",\n    \"user\": \"<string,null-uri>\",\n    \"group\": \"<string,null-uri>\",\n    \"creator\": \"<string,null-uri>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:59:02.000Z",
+              "updatedAt": "2026-10-21T20:59:02.000Z",
+              "uid": "35240-fe01d340-70b7-4bdc-9358-0476a22a03ba"
+            },
+            {
+              "id": "84696610-55c6-47e9-9b58-6d054cfb02f6",
+              "name": "Request is not valid",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<uri>\",\n  \"events\": [\n    \"invitee.canceled\",\n    \"contact.deleted\"\n  ],\n  \"organization\": \"<uri>\",\n  \"scope\": \"organization\",\n  \"user\": \"<uri>\",\n  \"group\": \"<uri>\",\n  \"signing_key\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:59:02.000Z",
+              "updatedAt": "2026-10-21T20:59:02.000Z",
+              "uid": "35240-84696610-55c6-47e9-9b58-6d054cfb02f6"
+            },
+            {
+              "id": "9f8160b9-d644-4841-8d5e-4d6a6c8f5cf6",
+              "name": "Cannot authenticate caller",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<uri>\",\n  \"events\": [\n    \"invitee.canceled\",\n    \"contact.deleted\"\n  ],\n  \"organization\": \"<uri>\",\n  \"scope\": \"organization\",\n  \"user\": \"<uri>\",\n  \"group\": \"<uri>\",\n  \"signing_key\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:59:02.000Z",
+              "updatedAt": "2026-10-21T20:59:02.000Z",
+              "uid": "35240-9f8160b9-d644-4841-8d5e-4d6a6c8f5cf6"
+            },
+            {
+              "id": "4a4cc2d7-70d1-4bfc-b37a-1932fd6e9d8d",
+              "name": "Permission Denied or insufficient scope",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<uri>\",\n  \"events\": [\n    \"invitee.canceled\",\n    \"contact.deleted\"\n  ],\n  \"organization\": \"<uri>\",\n  \"scope\": \"organization\",\n  \"user\": \"<uri>\",\n  \"group\": \"<uri>\",\n  \"signing_key\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"You do not have permission\"\n}",
+              "createdAt": "2026-10-21T20:59:02.000Z",
+              "updatedAt": "2026-10-21T20:59:02.000Z",
+              "uid": "35240-4a4cc2d7-70d1-4bfc-b37a-1932fd6e9d8d"
+            },
+            {
+              "id": "617ea4e1-6676-4c7d-a3f3-d2956f0f77d0",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<uri>\",\n  \"events\": [\n    \"invitee.canceled\",\n    \"contact.deleted\"\n  ],\n  \"organization\": \"<uri>\",\n  \"scope\": \"organization\",\n  \"user\": \"<uri>\",\n  \"group\": \"<uri>\",\n  \"signing_key\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:59:02.000Z",
+              "updatedAt": "2026-10-21T20:59:02.000Z",
+              "uid": "35240-617ea4e1-6676-4c7d-a3f3-d2956f0f77d0"
+            },
+            {
+              "id": "276dc492-bc6f-48e6-8245-3076198d965d",
+              "name": "Attempt to create a resource that already exists",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<uri>\",\n  \"events\": [\n    \"invitee.canceled\",\n    \"contact.deleted\"\n  ],\n  \"organization\": \"<uri>\",\n  \"scope\": \"organization\",\n  \"user\": \"<uri>\",\n  \"group\": \"<uri>\",\n  \"signing_key\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions"
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:59:02.000Z",
+              "updatedAt": "2026-10-21T20:59:02.000Z",
+              "uid": "35240-276dc492-bc6f-48e6-8245-3076198d965d"
+            },
+            {
+              "id": "dac2a124-361f-4502-a5b4-4e84856f4d9b",
+              "name": "An error has occurred on the server",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<uri>\",\n  \"events\": [\n    \"invitee.canceled\",\n    \"contact.deleted\"\n  ],\n  \"organization\": \"<uri>\",\n  \"scope\": \"organization\",\n  \"user\": \"<uri>\",\n  \"group\": \"<uri>\",\n  \"signing_key\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions"
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:59:02.000Z",
+              "updatedAt": "2026-10-21T20:59:02.000Z",
+              "uid": "35240-dac2a124-361f-4502-a5b4-4e84856f4d9b"
+            }
+          ],
+          "createdAt": "2026-10-21T20:59:02.000Z",
+          "updatedAt": "2026-10-21T20:59:02.000Z",
+          "uid": "35240-9e88088b-43c9-42ea-8930-e795d0f91aa9"
+        },
+        {
+          "name": "List Webhook Subscriptions",
+          "id": "9d7cec03-7edc-469d-9e11-88fee51a29e7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/webhook_subscriptions?organization=<uri>&user=<uri>&group=<uri>&page_token=<string>&count=20&sort=<string>&scope=group",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "webhook_subscriptions"
+              ],
+              "query": [
+                {
+                  "description": "(Required) The given organization that owns the subscriptions being returned. This field is always required.",
+                  "key": "organization",
+                  "value": "<uri>"
+                },
+                {
+                  "description": "Indicates if the results should be filtered by user. This parameter is only required if the `scope` parameter is set to `user`.",
+                  "key": "user",
+                  "value": "<uri>"
+                },
+                {
+                  "description": "Indicates if the results should be filtered by group. This parameter is only required if the `scope` parameter is set to `group`.",
+                  "key": "group",
+                  "value": "<uri>"
+                },
+                {
+                  "description": "The token to pass to get the next or previous portion of the collection",
+                  "key": "page_token",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The number of rows to return",
+                  "key": "count",
+                  "value": "20"
+                },
+                {
+                  "description": "Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values.\nSupported fields are: created_at.\nSort direction is specified as: asc, desc.",
+                  "key": "sort",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Filter the list by organization, user, or group",
+                  "key": "scope",
+                  "value": "group"
+                }
+              ]
+            },
+            "description": "Get a list of Webhook Subscriptions for a specified Organization, User, or Group.\n\n> `webhooks:read`"
+          },
+          "response": [
+            {
+              "id": "df33ab63-7b44-44ea-80d0-579bf81dcd47",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions?organization=<uri>&user=<uri>&group=<uri>&page_token=<string>&count=20&sort=<string>&scope=group",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The given organization that owns the subscriptions being returned. This field is always required.",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Indicates if the results should be filtered by user. This parameter is only required if the `scope` parameter is set to `user`.",
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Indicates if the results should be filtered by group. This parameter is only required if the `scope` parameter is set to `group`.",
+                      "key": "group",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values.\nSupported fields are: created_at.\nSort direction is specified as: asc, desc.",
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Filter the list by organization, user, or group",
+                      "key": "scope",
+                      "value": "group"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"collection\": [\n    {\n      \"uri\": \"<uri>\",\n      \"callback_url\": \"<uri>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"retry_started_at\": \"<string,null-date-time>\",\n      \"state\": \"active\",\n      \"events\": [\n        \"invitee_no_show.created\",\n        \"contact.created\"\n      ],\n      \"scope\": \"group\",\n      \"organization\": \"<uri>\",\n      \"user\": \"<string,null-uri>\",\n      \"group\": \"<string,null-uri>\",\n      \"creator\": \"<string,null-uri>\"\n    },\n    {\n      \"uri\": \"<uri>\",\n      \"callback_url\": \"<uri>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"retry_started_at\": \"<string,null-date-time>\",\n      \"state\": \"disabled\",\n      \"events\": [\n        \"meeting_recap.updated\",\n        \"contact.created\"\n      ],\n      \"scope\": \"organization\",\n      \"organization\": \"<uri>\",\n      \"user\": \"<string,null-uri>\",\n      \"group\": \"<string,null-uri>\",\n      \"creator\": \"<string,null-uri>\"\n    }\n  ],\n  \"pagination\": {\n    \"count\": \"<integer>\",\n    \"next_page\": \"<string,null-uri>\",\n    \"previous_page\": \"<string,null-uri>\",\n    \"next_page_token\": \"<string,null>\",\n    \"previous_page_token\": \"<string,null>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:59:02.000Z",
+              "updatedAt": "2026-10-21T20:59:02.000Z",
+              "uid": "35240-df33ab63-7b44-44ea-80d0-579bf81dcd47"
+            },
+            {
+              "id": "c1a60a67-3a51-48de-a833-4f336f2d243d",
+              "name": "Request is not valid",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions?organization=<uri>&user=<uri>&group=<uri>&page_token=<string>&count=20&sort=<string>&scope=group",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The given organization that owns the subscriptions being returned. This field is always required.",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Indicates if the results should be filtered by user. This parameter is only required if the `scope` parameter is set to `user`.",
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Indicates if the results should be filtered by group. This parameter is only required if the `scope` parameter is set to `group`.",
+                      "key": "group",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values.\nSupported fields are: created_at.\nSort direction is specified as: asc, desc.",
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Filter the list by organization, user, or group",
+                      "key": "scope",
+                      "value": "group"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Resource Not Found\",\n  \"message\": \"The server could not find the requested resource.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:59:02.000Z",
+              "updatedAt": "2026-10-21T20:59:02.000Z",
+              "uid": "35240-c1a60a67-3a51-48de-a833-4f336f2d243d"
+            },
+            {
+              "id": "78d31c84-7fff-47fe-88cd-17aee8fa503a",
+              "name": "Cannot authenticate caller",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions?organization=<uri>&user=<uri>&group=<uri>&page_token=<string>&count=20&sort=<string>&scope=group",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The given organization that owns the subscriptions being returned. This field is always required.",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Indicates if the results should be filtered by user. This parameter is only required if the `scope` parameter is set to `user`.",
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Indicates if the results should be filtered by group. This parameter is only required if the `scope` parameter is set to `group`.",
+                      "key": "group",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values.\nSupported fields are: created_at.\nSort direction is specified as: asc, desc.",
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Filter the list by organization, user, or group",
+                      "key": "scope",
+                      "value": "group"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Resource Not Found\",\n  \"message\": \"The server could not find the requested resource.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:59:02.000Z",
+              "updatedAt": "2026-10-21T20:59:02.000Z",
+              "uid": "35240-78d31c84-7fff-47fe-88cd-17aee8fa503a"
+            },
+            {
+              "id": "d33372a7-cf5b-499e-9f05-1f9735222453",
+              "name": "Permission Denied or insufficient scope",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions?organization=<uri>&user=<uri>&group=<uri>&page_token=<string>&count=20&sort=<string>&scope=group",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The given organization that owns the subscriptions being returned. This field is always required.",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Indicates if the results should be filtered by user. This parameter is only required if the `scope` parameter is set to `user`.",
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Indicates if the results should be filtered by group. This parameter is only required if the `scope` parameter is set to `group`.",
+                      "key": "group",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values.\nSupported fields are: created_at.\nSort direction is specified as: asc, desc.",
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Filter the list by organization, user, or group",
+                      "key": "scope",
+                      "value": "group"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"You do not have permission to access this resource.\"\n}",
+              "createdAt": "2026-10-21T20:59:02.000Z",
+              "updatedAt": "2026-10-21T20:59:02.000Z",
+              "uid": "35240-d33372a7-cf5b-499e-9f05-1f9735222453"
+            },
+            {
+              "id": "7ecfacd4-2f98-4318-a659-a52f11f7f20e",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions?organization=<uri>&user=<uri>&group=<uri>&page_token=<string>&count=20&sort=<string>&scope=group",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The given organization that owns the subscriptions being returned. This field is always required.",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Indicates if the results should be filtered by user. This parameter is only required if the `scope` parameter is set to `user`.",
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Indicates if the results should be filtered by group. This parameter is only required if the `scope` parameter is set to `group`.",
+                      "key": "group",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Order results by the specified field and direction. Accepts comma-separated list of {field}:{direction} values.\nSupported fields are: created_at.\nSort direction is specified as: asc, desc.",
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Filter the list by organization, user, or group",
+                      "key": "scope",
+                      "value": "group"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Resource Not Found\",\n  \"message\": \"The server could not find the requested resource.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:59:02.000Z",
+              "updatedAt": "2026-10-21T20:59:02.000Z",
+              "uid": "35240-7ecfacd4-2f98-4318-a659-a52f11f7f20e"
+            }
+          ],
+          "createdAt": "2026-10-21T20:59:02.000Z",
+          "updatedAt": "2026-10-21T20:59:02.000Z",
+          "uid": "35240-9d7cec03-7edc-469d-9e11-88fee51a29e7"
+        }
+      ],
+      "id": "74400fd7-ebca-4ed8-bfcd-1255151d0307",
+      "createdAt": "2026-10-21T20:59:02.000Z",
+      "updatedAt": "2026-10-21T20:59:02.000Z",
+      "uid": "35240-74400fd7-ebca-4ed8-bfcd-1255151d0307"
+    },
+    {
+      "name": "sample_webhook_data",
+      "item": [
+        {
+          "name": "Get sample webhook data",
+          "id": "97872c62-9e8e-4b91-9d03-aa1ec31ded5d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/sample_webhook_data?event=invitee.canceled&organization=<uri>&user=<uri>&scope=user&group=<uri>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sample_webhook_data"
+              ],
+              "query": [
+                {
+                  "description": "(Required) ",
+                  "key": "event",
+                  "value": "invitee.canceled"
+                },
+                {
+                  "description": "(Required) ",
+                  "key": "organization",
+                  "value": "<uri>"
+                },
+                {
+                  "key": "user",
+                  "value": "<uri>"
+                },
+                {
+                  "description": "(Required) ",
+                  "key": "scope",
+                  "value": "user"
+                },
+                {
+                  "key": "group",
+                  "value": "<uri>"
+                }
+              ]
+            },
+            "description": "Test your webhook subscription\n\n> `webhooks:read`"
+          },
+          "response": [
+            {
+              "id": "37b43482-ef27-4b6b-9ba9-777e158754dc",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/sample_webhook_data?event=invitee.canceled&organization=<uri>&user=<uri>&scope=user&group=<uri>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sample_webhook_data"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ",
+                      "key": "event",
+                      "value": "invitee.canceled"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "scope",
+                      "value": "user"
+                    },
+                    {
+                      "key": "group",
+                      "value": "<uri>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"event\": \"contact.updated\",\n  \"created_at\": \"<dateTime>\",\n  \"created_by\": \"<uri>\",\n  \"payload\": {\n    \"uri\": \"<uri>\",\n    \"email\": \"<email>\",\n    \"first_name\": \"<string,null>\",\n    \"last_name\": \"<string,null>\",\n    \"name\": \"<string>\",\n    \"status\": \"canceled\",\n    \"questions_and_answers\": [\n      {\n        \"question\": \"<string>\",\n        \"answer\": \"<string>\",\n        \"position\": \"<integer>\"\n      },\n      {\n        \"question\": \"<string>\",\n        \"answer\": \"<string>\",\n        \"position\": \"<integer>\"\n      }\n    ],\n    \"timezone\": \"<string,null>\",\n    \"event\": \"<uri>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"tracking\": {\n      \"utm_campaign\": \"<string,null>\",\n      \"utm_source\": \"<string,null>\",\n      \"utm_medium\": \"<string,null>\",\n      \"utm_content\": \"<string,null>\",\n      \"utm_term\": \"<string,null>\",\n      \"salesforce_uuid\": \"<string,null>\"\n    },\n    \"text_reminder_number\": \"<string,null>\",\n    \"rescheduled\": \"<boolean>\",\n    \"old_invitee\": \"<string,null-uri>\",\n    \"new_invitee\": \"<string,null-uri>\",\n    \"cancel_url\": \"<uri>\",\n    \"reschedule_url\": \"<uri>\",\n    \"routing_form_submission\": \"<string,null-uri>\",\n    \"payment\": {\n      \"external_id\": \"<string>\",\n      \"provider\": \"stripe\",\n      \"amount\": \"<string>\",\n      \"currency\": \"USD\",\n      \"terms\": \"<string,null>\",\n      \"successful\": \"<boolean>\"\n    },\n    \"no_show\": {\n      \"uri\": \"<string>\",\n      \"created_at\": \"<dateTime>\"\n    },\n    \"reconfirmation\": {\n      \"created_at\": \"<dateTime>\",\n      \"confirmed_at\": \"<string,null-date-time>\"\n    },\n    \"scheduling_method\": \"instant_book\",\n    \"invitee_scheduled_by\": \"<string,null-uri>\",\n    \"scheduled_event\": {\n      \"uri\": \"<uri>\",\n      \"name\": \"<string,null>\",\n      \"status\": \"canceled\",\n      \"start_time\": \"<dateTime>\",\n      \"end_time\": \"<dateTime>\",\n      \"event_type\": \"<uri>\",\n      \"location\": {\n        \"type\": \"physical\",\n        \"location\": \"<string>\",\n        \"additional_info\": \"<string>\"\n      },\n      \"invitees_counter\": {\n        \"total\": \"<double>\",\n        \"active\": \"<double>\",\n        \"limit\": \"<double>\"\n      },\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"event_memberships\": [\n        {\n          \"user\": \"<uri>\",\n          \"user_email\": \"<email>\",\n          \"user_name\": \"<string>\"\n        },\n        {\n          \"user\": \"<uri>\",\n          \"user_email\": \"<email>\",\n          \"user_name\": \"<string>\"\n        }\n      ],\n      \"event_guests\": [\n        {\n          \"email\": \"<email>\",\n          \"created_at\": \"<dateTime>\",\n          \"updated_at\": \"<dateTime>\"\n        },\n        {\n          \"email\": \"<email>\",\n          \"created_at\": \"<dateTime>\",\n          \"updated_at\": \"<dateTime>\"\n        }\n      ],\n      \"meeting_notes_plain\": \"<string,null>\",\n      \"meeting_notes_html\": \"<string>\",\n      \"cancellation\": {\n        \"canceled_by\": \"<string>\",\n        \"reason\": \"<string,null>\",\n        \"canceler_type\": \"invitee\",\n        \"created_at\": \"<dateTime>\"\n      }\n    },\n    \"cancellation\": {\n      \"canceled_by\": \"<string>\",\n      \"reason\": \"<string,null>\",\n      \"canceler_type\": \"host\",\n      \"created_at\": \"<dateTime>\"\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:59:02.000Z",
+              "updatedAt": "2026-10-21T20:59:02.000Z",
+              "uid": "35240-37b43482-ef27-4b6b-9ba9-777e158754dc"
+            },
+            {
+              "id": "983d4877-ec70-489e-94d8-738a84bbc265",
+              "name": "Request is not valid",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/sample_webhook_data?event=invitee.canceled&organization=<uri>&user=<uri>&scope=user&group=<uri>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sample_webhook_data"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ",
+                      "key": "event",
+                      "value": "invitee.canceled"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "scope",
+                      "value": "user"
+                    },
+                    {
+                      "key": "group",
+                      "value": "<uri>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:59:02.000Z",
+              "updatedAt": "2026-10-21T20:59:02.000Z",
+              "uid": "35240-983d4877-ec70-489e-94d8-738a84bbc265"
+            },
+            {
+              "id": "ab035095-83ea-4179-b3dc-110bd79f0dc8",
+              "name": "Cannot authenticate caller",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/sample_webhook_data?event=invitee.canceled&organization=<uri>&user=<uri>&scope=user&group=<uri>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sample_webhook_data"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ",
+                      "key": "event",
+                      "value": "invitee.canceled"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "scope",
+                      "value": "user"
+                    },
+                    {
+                      "key": "group",
+                      "value": "<uri>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:59:02.000Z",
+              "updatedAt": "2026-10-21T20:59:02.000Z",
+              "uid": "35240-ab035095-83ea-4179-b3dc-110bd79f0dc8"
+            },
+            {
+              "id": "3384c14c-afbe-46bf-9099-98c3985da9ff",
+              "name": "Permission denied or insufficient scope",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/sample_webhook_data?event=invitee.canceled&organization=<uri>&user=<uri>&scope=user&group=<uri>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sample_webhook_data"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ",
+                      "key": "event",
+                      "value": "invitee.canceled"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "scope",
+                      "value": "user"
+                    },
+                    {
+                      "key": "group",
+                      "value": "<uri>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"You do not have permission\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:59:02.000Z",
+              "updatedAt": "2026-10-21T20:59:02.000Z",
+              "uid": "35240-3384c14c-afbe-46bf-9099-98c3985da9ff"
+            },
+            {
+              "id": "8eedd7b7-2f4a-43e4-92db-7f4a6049b69f",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/sample_webhook_data?event=invitee.canceled&organization=<uri>&user=<uri>&scope=user&group=<uri>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sample_webhook_data"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ",
+                      "key": "event",
+                      "value": "invitee.canceled"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "scope",
+                      "value": "user"
+                    },
+                    {
+                      "key": "group",
+                      "value": "<uri>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:59:02.000Z",
+              "updatedAt": "2026-10-21T20:59:02.000Z",
+              "uid": "35240-8eedd7b7-2f4a-43e4-92db-7f4a6049b69f"
+            },
+            {
+              "id": "95dc9d36-2b94-483d-8acf-016494fa375b",
+              "name": "An error has occurred on the server",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/sample_webhook_data?event=invitee.canceled&organization=<uri>&user=<uri>&scope=user&group=<uri>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sample_webhook_data"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ",
+                      "key": "event",
+                      "value": "invitee.canceled"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "scope",
+                      "value": "user"
+                    },
+                    {
+                      "key": "group",
+                      "value": "<uri>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:59:02.000Z",
+              "updatedAt": "2026-10-21T20:59:02.000Z",
+              "uid": "35240-95dc9d36-2b94-483d-8acf-016494fa375b"
+            }
+          ],
+          "createdAt": "2026-10-21T20:59:02.000Z",
+          "updatedAt": "2026-10-21T20:59:02.000Z",
+          "uid": "35240-97872c62-9e8e-4b91-9d03-aa1ec31ded5d"
+        }
+      ],
+      "id": "a30cb714-29a8-4e7c-a65b-446ecdd3c7e4",
+      "createdAt": "2026-10-21T20:59:02.000Z",
+      "updatedAt": "2026-10-21T20:59:02.000Z",
+      "uid": "35240-a30cb714-29a8-4e7c-a65b-446ecdd3c7e4"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.calendly.com"
+    }
+  ]
+}

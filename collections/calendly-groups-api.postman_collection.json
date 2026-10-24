@@ -1,387 +1,1508 @@
 {
+  "info": {
+    "_postman_id": "2018f832-eddc-4fa7-9200-cd7a227301c5",
+    "name": "Calendly Groups API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:57:32.000Z",
+    "updatedAt": "2026-10-21T20:57:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2018f832-eddc-4fa7-9200-cd7a227301c5"
+  },
   "item": [
     {
-      "id": "b62b4523-9172-4357-a85a-a1cd4db6a8d2",
-      "name": "Groups",
-      "description": {
-        "content": "Endpoints for listing and retrieving organization groups.",
-        "type": "text/plain"
-      },
+      "name": "groups",
       "item": [
         {
-          "id": "8de980c8-af09-4447-a26a-37d436aa16d0",
-          "name": "List groups",
+          "name": "{uuid}",
+          "item": [
+            {
+              "name": "Get Group",
+              "id": "8588010e-b1cf-41b4-8efb-a2bc971f4494",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups/:uuid",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups",
+                    ":uuid"
+                  ],
+                  "variable": [
+                    {
+                      "id": "58667010-32e0-4ceb-93ce-7caf76fd284a",
+                      "key": "uuid",
+                      "value": "<string>",
+                      "description": "(Required) Group unique identifier"
+                    }
+                  ]
+                },
+                "description": "Returns information about a specified Group.\n\n> `groups:read`"
+              },
+              "response": [
+                {
+                  "id": "83e8724b-3366-4eb1-93ce-26a8b4273d20",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"resource\": {\n    \"uri\": \"<uri>\",\n    \"name\": \"<string>\",\n    \"organization\": \"<uri>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"member_count\": \"<double>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:57:33.000Z",
+                  "updatedAt": "2026-10-21T20:57:33.000Z",
+                  "uid": "35240-83e8724b-3366-4eb1-93ce-26a8b4273d20"
+                },
+                {
+                  "id": "752b155b-02ac-4fb1-acb1-69f3dd633588",
+                  "name": "Cannot authenticate caller",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:57:33.000Z",
+                  "updatedAt": "2026-10-21T20:57:33.000Z",
+                  "uid": "35240-752b155b-02ac-4fb1-acb1-69f3dd633588"
+                },
+                {
+                  "id": "7685d9a0-6bf7-4107-a10d-e7fd3af63eb7",
+                  "name": "Permission denied or insufficient scope",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"You do not have permission\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:57:33.000Z",
+                  "updatedAt": "2026-10-21T20:57:33.000Z",
+                  "uid": "35240-7685d9a0-6bf7-4107-a10d-e7fd3af63eb7"
+                },
+                {
+                  "id": "ff7d306a-129c-4218-8660-4ab0edb108c5",
+                  "name": "Requested resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:57:33.000Z",
+                  "updatedAt": "2026-10-21T20:57:33.000Z",
+                  "uid": "35240-ff7d306a-129c-4218-8660-4ab0edb108c5"
+                },
+                {
+                  "id": "ad4d59e8-7994-4106-9bf4-3edaf1906ef2",
+                  "name": "An error has occurred on the server",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:57:33.000Z",
+                  "updatedAt": "2026-10-21T20:57:33.000Z",
+                  "uid": "35240-ad4d59e8-7994-4106-9bf4-3edaf1906ef2"
+                }
+              ],
+              "createdAt": "2026-10-21T20:57:33.000Z",
+              "updatedAt": "2026-10-21T20:57:33.000Z",
+              "uid": "35240-8588010e-b1cf-41b4-8efb-a2bc971f4494"
+            }
+          ],
+          "id": "639ed8ae-cd20-4809-85fe-63c423bfe7a7",
+          "createdAt": "2026-10-21T20:57:33.000Z",
+          "updatedAt": "2026-10-21T20:57:33.000Z",
+          "uid": "35240-639ed8ae-cd20-4809-85fe-63c423bfe7a7"
+        },
+        {
+          "name": "List Groups",
+          "id": "79c827ff-0dd8-4fb9-90dc-2cc23f98359e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "List groups",
-            "description": {
-              "content": "Returns a paginated list of groups within the specified organization. Groups allow organizing users into teams for scheduling purposes.",
-              "type": "text/plain"
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
             },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/groups?organization=<uri>&page_token=<string>&count=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "groups"
               ],
-              "host": [
-                "{{baseUrl}}"
-              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "(Required) Return groups that are associated with the organization associated with this URI",
                   "key": "organization",
-                  "value": "<uri>",
-                  "description": "(Required) The URI of the organization whose groups to list."
+                  "value": "<uri>"
                 },
                 {
-                  "disabled": false,
-                  "key": "count",
-                  "value": "20",
-                  "description": "The number of results to return per page."
-                },
-                {
-                  "disabled": false,
+                  "description": "The token to pass to get the next or previous portion of the collection",
                   "key": "page_token",
-                  "value": "<string>",
-                  "description": "A token for fetching the next page of results from a previous paginated response."
+                  "value": "<string>"
+                },
+                {
+                  "description": "The number of rows to return",
+                  "key": "count",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "Returns a list of groups.\n\n> `groups:read`"
+          },
+          "response": [
+            {
+              "id": "2fb13be8-efab-4ba3-9e32-fafb53eabd3d",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups?organization=<uri>&page_token=<string>&count=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Return groups that are associated with the organization associated with this URI",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
                 }
               ],
-              "variable": []
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"collection\": [\n    {\n      \"uri\": \"<uri>\",\n      \"name\": \"<string>\",\n      \"organization\": \"<uri>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"member_count\": \"<double>\"\n    },\n    {\n      \"uri\": \"<uri>\",\n      \"name\": \"<string>\",\n      \"organization\": \"<uri>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"member_count\": \"<double>\"\n    }\n  ],\n  \"pagination\": {\n    \"count\": \"<integer>\",\n    \"next_page\": \"<string,null-uri>\",\n    \"previous_page\": \"<string,null-uri>\",\n    \"next_page_token\": \"<string,null>\",\n    \"previous_page_token\": \"<string,null>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:57:33.000Z",
+              "updatedAt": "2026-10-21T20:57:33.000Z",
+              "uid": "35240-2fb13be8-efab-4ba3-9e32-fafb53eabd3d"
             },
+            {
+              "id": "26fcfb8a-74a6-463b-bb33-e2ff5e07fb63",
+              "name": "Request is not valid",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups?organization=<uri>&page_token=<string>&count=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Return groups that are associated with the organization associated with this URI",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:57:33.000Z",
+              "updatedAt": "2026-10-21T20:57:33.000Z",
+              "uid": "35240-26fcfb8a-74a6-463b-bb33-e2ff5e07fb63"
+            },
+            {
+              "id": "58984a82-3523-45a5-82f4-3459c20d7dfb",
+              "name": "Cannot authenticate caller",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups?organization=<uri>&page_token=<string>&count=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Return groups that are associated with the organization associated with this URI",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:57:33.000Z",
+              "updatedAt": "2026-10-21T20:57:33.000Z",
+              "uid": "35240-58984a82-3523-45a5-82f4-3459c20d7dfb"
+            },
+            {
+              "id": "034ce290-33a4-432e-9231-e7643211c13f",
+              "name": "Permission denied or insufficient scope",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups?organization=<uri>&page_token=<string>&count=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Return groups that are associated with the organization associated with this URI",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"You do not have permission\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:57:33.000Z",
+              "updatedAt": "2026-10-21T20:57:33.000Z",
+              "uid": "35240-034ce290-33a4-432e-9231-e7643211c13f"
+            },
+            {
+              "id": "e66d3235-30b8-47bd-8c6f-0ca680c23d62",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups?organization=<uri>&page_token=<string>&count=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Return groups that are associated with the organization associated with this URI",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:57:33.000Z",
+              "updatedAt": "2026-10-21T20:57:33.000Z",
+              "uid": "35240-e66d3235-30b8-47bd-8c6f-0ca680c23d62"
+            },
+            {
+              "id": "07bb60a2-61ad-4e60-8c81-90a9d81f0127",
+              "name": "An error has occurred on the server",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups?organization=<uri>&page_token=<string>&count=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Return groups that are associated with the organization associated with this URI",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:57:33.000Z",
+              "updatedAt": "2026-10-21T20:57:33.000Z",
+              "uid": "35240-07bb60a2-61ad-4e60-8c81-90a9d81f0127"
+            }
+          ],
+          "createdAt": "2026-10-21T20:57:33.000Z",
+          "updatedAt": "2026-10-21T20:57:33.000Z",
+          "uid": "35240-79c827ff-0dd8-4fb9-90dc-2cc23f98359e"
+        }
+      ],
+      "id": "e3a56ed3-64f6-47fb-8398-efc96f91e9ea",
+      "createdAt": "2026-10-21T20:57:33.000Z",
+      "updatedAt": "2026-10-21T20:57:33.000Z",
+      "uid": "35240-e3a56ed3-64f6-47fb-8398-efc96f91e9ea"
+    },
+    {
+      "name": "group_relationships",
+      "item": [
+        {
+          "name": "{uuid}",
+          "item": [
+            {
+              "name": "Get Group Relationship",
+              "id": "9b4a5e9f-5683-4f50-82ab-fe8f6aed9ea9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/group_relationships/:uuid",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "group_relationships",
+                    ":uuid"
+                  ],
+                  "variable": [
+                    {
+                      "id": "5bd03a30-656d-4642-b7ac-4a1f7d12537b",
+                      "key": "uuid",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Returns a group relationship by uuid\n\n> `groups:read`"
+              },
+              "response": [
+                {
+                  "id": "efd3e6ee-d4fc-4cf1-81ac-876aabf7ce0e",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/group_relationships/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "group_relationships",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"resource\": {\n    \"uri\": \"<uri>\",\n    \"role\": \"<string>\",\n    \"owner\": {\n      \"uri\": \"<uri>\",\n      \"role\": \"admin\",\n      \"user\": {\n        \"uri\": \"<uri>\",\n        \"name\": \"<string>\",\n        \"slug\": \"<string>\",\n        \"email\": \"<email>\",\n        \"scheduling_url\": \"<uri>\",\n        \"timezone\": \"<string>\",\n        \"avatar_url\": \"<string,null-uri>\",\n        \"locale\": \"en\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\"\n      },\n      \"organization\": \"<uri>\",\n      \"updated_at\": \"<dateTime>\",\n      \"created_at\": \"<dateTime>\",\n      \"type\": \"OrganizationMembership\"\n    },\n    \"organization\": \"<uri>\",\n    \"group\": \"<uri>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:57:33.000Z",
+                  "updatedAt": "2026-10-21T20:57:33.000Z",
+                  "uid": "35240-efd3e6ee-d4fc-4cf1-81ac-876aabf7ce0e"
+                },
+                {
+                  "id": "599d7257-ce31-429b-98bb-57b0d4157fab",
+                  "name": "Request is not valid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/group_relationships/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "group_relationships",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:57:33.000Z",
+                  "updatedAt": "2026-10-21T20:57:33.000Z",
+                  "uid": "35240-599d7257-ce31-429b-98bb-57b0d4157fab"
+                },
+                {
+                  "id": "08aa8cdd-c3b5-4573-956a-a0dfba211649",
+                  "name": "Cannot authenticate caller",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/group_relationships/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "group_relationships",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:57:33.000Z",
+                  "updatedAt": "2026-10-21T20:57:33.000Z",
+                  "uid": "35240-08aa8cdd-c3b5-4573-956a-a0dfba211649"
+                },
+                {
+                  "id": "808e51ea-301b-47c0-a917-6630e2387c92",
+                  "name": "Permission denied or insufficient scope",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/group_relationships/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "group_relationships",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"You do not have permission\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:57:33.000Z",
+                  "updatedAt": "2026-10-21T20:57:33.000Z",
+                  "uid": "35240-808e51ea-301b-47c0-a917-6630e2387c92"
+                },
+                {
+                  "id": "43bbd2c3-ce50-4c05-9198-f5ffa337bba0",
+                  "name": "Requested resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/group_relationships/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "group_relationships",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:57:33.000Z",
+                  "updatedAt": "2026-10-21T20:57:33.000Z",
+                  "uid": "35240-43bbd2c3-ce50-4c05-9198-f5ffa337bba0"
+                },
+                {
+                  "id": "acd0fe1b-bd17-4cbf-ba6b-a1d368df5c42",
+                  "name": "An error has occurred on the server",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/group_relationships/:uuid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "group_relationships",
+                        ":uuid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uuid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:57:33.000Z",
+                  "updatedAt": "2026-10-21T20:57:33.000Z",
+                  "uid": "35240-acd0fe1b-bd17-4cbf-ba6b-a1d368df5c42"
+                }
+              ],
+              "createdAt": "2026-10-21T20:57:33.000Z",
+              "updatedAt": "2026-10-21T20:57:33.000Z",
+              "uid": "35240-9b4a5e9f-5683-4f50-82ab-fe8f6aed9ea9"
+            }
+          ],
+          "id": "efec57e5-1192-4870-a055-f5fa6630c7ee",
+          "createdAt": "2026-10-21T20:57:33.000Z",
+          "updatedAt": "2026-10-21T20:57:33.000Z",
+          "uid": "35240-efec57e5-1192-4870-a055-f5fa6630c7ee"
+        },
+        {
+          "name": "List Group Relationships",
+          "id": "b9ca68fd-25aa-42b3-b7f9-ad2aecd75840",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "33a98ad0-cbe9-410d-9f0f-6c0b6f05d4cd",
-              "name": "Successfully retrieved groups",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "groups"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "organization",
-                      "value": "<uri>"
-                    },
-                    {
-                      "key": "count",
-                      "value": "20"
-                    },
-                    {
-                      "key": "page_token",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"collection\": [\n    {\n      \"uri\": \"https://AiWlhUyAYpLBQ.btDAz\",\n      \"name\": \"string\",\n      \"organization\": \"http://gijMgjHplytKgkR.jdzfvPIlufawsSKLkNkhDoYXee3.FPBvFr6TMJZUXyVA\",\n      \"created_at\": \"2006-02-03T09:46:05.108Z\",\n      \"updated_at\": \"2022-11-13T20:13:28.582Z\"\n    },\n    {\n      \"uri\": \"http://MjZWCagyHnLVHWLTDEFjbAKoI.paxbjBnAPUah,qTYQY8vX-eXtj.XsrJcNuE7TVB59AsochNt94J.4wJ\",\n      \"name\": \"string\",\n      \"organization\": \"https://PZWtVnKQDKMHwOtYiQebURc.nobJP8uv0EwIi0T.0rcnKomYTcbWrfDUetmeTquMQDRQI,4FTW5StmSSA\",\n      \"created_at\": \"1957-05-24T13:09:53.912Z\",\n      \"updated_at\": \"2023-12-20T09:40:24.388Z\"\n    }\n  ],\n  \"pagination\": {\n    \"count\": 8917,\n    \"next_page\": \"https://BerjtVHkiLhNpwWdmVmsNcUDRfpiDuM.nrSKJNxTmjDrNNAw1\",\n    \"previous_page\": \"https://GIopCiludfotCmwNbe.igdW5FWwS50iQZSO.IzYYNsPyq7vtA\",\n    \"next_page_token\": \"string\",\n    \"previous_page_token\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "44c89223-3906-4f43-85b8-2cd2c4f6cfec",
-              "name": "Authentication failed. Verify that a valid access token is provided in the Authorization header.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "groups"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "organization",
-                      "value": "<uri>"
-                    },
-                    {
-                      "key": "count",
-                      "value": "20"
-                    },
-                    {
-                      "key": "page_token",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "751b83da-cd8d-4ac4-8695-ca8368e0c256",
-          "name": "List group relationships",
-          "request": {
-            "name": "List group relationships",
-            "description": {
-              "content": "Returns a paginated list of group memberships, showing which users belong to which groups within an organization.",
-              "type": "text/plain"
-            },
             "url": {
+              "raw": "{{baseUrl}}/group_relationships?count=20&page_token=<string>&organization=<uri>&owner=<uri>&group=<uri>",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "group_relationships"
               ],
-              "host": [
-                "{{baseUrl}}"
-              ],
               "query": [
                 {
-                  "disabled": false,
-                  "key": "group",
-                  "value": "<uri>",
-                  "description": "The URI of the group to list relationships for."
-                },
-                {
-                  "disabled": false,
-                  "key": "organization",
-                  "value": "<uri>",
-                  "description": "(Required) The URI of the organization."
-                },
-                {
-                  "disabled": false,
+                  "description": "The number of rows to return",
                   "key": "count",
-                  "value": "20",
-                  "description": "The number of results to return per page."
+                  "value": "20"
                 },
                 {
-                  "disabled": false,
+                  "description": "The token to pass to get the next or previous portion of the collection",
                   "key": "page_token",
-                  "value": "<string>",
-                  "description": "A token for fetching the next page of results from a previous paginated response."
+                  "value": "<string>"
+                },
+                {
+                  "description": "Indicates the results should be filtered by organization",
+                  "key": "organization",
+                  "value": "<uri>"
+                },
+                {
+                  "description": "Indicates the results should be filtered by owner <br>\nOne Of:\n  - Organization Membership URI - `https://api.calendly.com/organization_memberships/AAAAAAAAAAAAAAAA`\n  - Organization Invitation URI - `https://api.calendly.com/organizations/AAAAAAAAAAAAAAAA/invitations/BBBBBBBBBBBBBBBB`\n",
+                  "key": "owner",
+                  "value": "<uri>"
+                },
+                {
+                  "description": "Indicates the results should be filtered by group",
+                  "key": "group",
+                  "value": "<uri>"
                 }
-              ],
-              "variable": []
+              ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            "description": "Returns a list of group relationships - a given owner can have one membership record, but multiple admin records\n\n> `groups:read`"
           },
           "response": [
             {
-              "id": "6fe9d32e-9df2-4f90-a356-7d41479b3082",
-              "name": "Successfully retrieved group relationships",
+              "id": "f4d67804-d092-47b9-9c91-f59256c9e2c9",
+              "name": "OK",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "group_relationships"
-                  ],
+                  "raw": "{{baseUrl}}/group_relationships?count=20&page_token=<string>&organization=<uri>&owner=<uri>&group=<uri>",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "group_relationships"
+                  ],
                   "query": [
                     {
-                      "key": "group",
-                      "value": "<uri>"
-                    },
-                    {
-                      "key": "organization",
-                      "value": "<uri>"
-                    },
-                    {
+                      "description": "The number of rows to return",
                       "key": "count",
                       "value": "20"
                     },
                     {
+                      "description": "The token to pass to get the next or previous portion of the collection",
                       "key": "page_token",
                       "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
                     },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                    {
+                      "description": "Indicates the results should be filtered by organization",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Indicates the results should be filtered by owner <br>\nOne Of:\n  - Organization Membership URI - `https://api.calendly.com/organization_memberships/AAAAAAAAAAAAAAAA`\n  - Organization Invitation URI - `https://api.calendly.com/organizations/AAAAAAAAAAAAAAAA/invitations/BBBBBBBBBBBBBBBB`\n",
+                      "key": "owner",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Indicates the results should be filtered by group",
+                      "key": "group",
+                      "value": "<uri>"
+                    }
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"collection\": [\n    {\n      \"uri\": \"http://igfGApAAKvVdFCYQQ.hrcmKTilFaIJJgQsHkj9Eox3BUhaJORqB1i.tYVFgAQJ1sNzzD+zNYb1gRSgxZ\",\n      \"owner\": \"http://oqEtsFfJWXV.egcXHH7.xat3iLB3v8CG5kN77eAj-vEb01QFymprQLKx+o\",\n      \"group\": \"https://MrClkMIqoZHEWQIJeflymmcHch.tgQ.IwMPX382mrJQi2jvbgz9gHsZjIBhg0.U2F1\",\n      \"organization\": \"http://GGBl.guflGODAO2CNycodoNrWC1QN4qgLLMLprMd8UGO1e0dQH6CR4ZHgbmymoLxkJ+nB\",\n      \"created_at\": \"1972-07-12T17:24:00.230Z\",\n      \"updated_at\": \"1973-02-17T15:38:55.287Z\"\n    },\n    {\n      \"uri\": \"http://MWAkxinxKSm.wldrlmY6\",\n      \"owner\": \"https://TorRgyggjJZpsYK.yeW9SRYFIhr,qUM84D2QkW5ql1x.VcV1VFGgea4x4XxQINXsQ2wZTpX0Oz0IgAFENeORs\",\n      \"group\": \"http://TXCfcAicEpGchQaLJslPUWgAooQfP.gnnl1dK9RKnegFOe5XE\",\n      \"organization\": \"https://NrGJAIDdIFfnTu.llGjVKFx1syhFwiIatGmNVkcOMjJYvrjAcic-7leSnWylFdToQPcWyqCM+QCGM558nNbS,sKZ\",\n      \"created_at\": \"2005-07-28T13:00:26.992Z\",\n      \"updated_at\": \"1998-09-11T22:51:53.764Z\"\n    }\n  ],\n  \"pagination\": {\n    \"count\": 7145,\n    \"next_page\": \"https://uaaqpIKDHQPojuOCwqnojtpgNDDQKGswG.eehcY7Jg8ITCg2,HxKg1vgPIDYAIaAe8farJfnGDAdxTR50hy5mvktqbeJ\",\n    \"previous_page\": \"http://BnCwOleaik.fnfyvfgyer6gpY2rjaiQAphIUi5SG1S2j7ZBNeVpjvRoBsFs5fmXf2dg1\",\n    \"next_page_token\": \"string\",\n    \"previous_page_token\": \"string\"\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"collection\": [\n    {\n      \"uri\": \"<uri>\",\n      \"role\": \"<string>\",\n      \"owner\": {\n        \"uri\": \"<uri>\",\n        \"role\": \"user\",\n        \"user\": {\n          \"uri\": \"<uri>\",\n          \"name\": \"<string>\",\n          \"slug\": \"<string>\",\n          \"email\": \"<email>\",\n          \"scheduling_url\": \"<uri>\",\n          \"timezone\": \"<string>\",\n          \"avatar_url\": \"<string,null-uri>\",\n          \"locale\": \"en\",\n          \"created_at\": \"<dateTime>\",\n          \"updated_at\": \"<dateTime>\"\n        },\n        \"organization\": \"<uri>\",\n        \"updated_at\": \"<dateTime>\",\n        \"created_at\": \"<dateTime>\",\n        \"type\": \"OrganizationMembership\"\n      },\n      \"organization\": \"<uri>\",\n      \"group\": \"<uri>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"uri\": \"<uri>\",\n      \"role\": \"<string>\",\n      \"owner\": {\n        \"uri\": \"<uri>\",\n        \"role\": \"owner\",\n        \"user\": {\n          \"uri\": \"<uri>\",\n          \"name\": \"<string>\",\n          \"slug\": \"<string>\",\n          \"email\": \"<email>\",\n          \"scheduling_url\": \"<uri>\",\n          \"timezone\": \"<string>\",\n          \"avatar_url\": \"<string,null-uri>\",\n          \"locale\": \"fr\",\n          \"created_at\": \"<dateTime>\",\n          \"updated_at\": \"<dateTime>\"\n        },\n        \"organization\": \"<uri>\",\n        \"updated_at\": \"<dateTime>\",\n        \"created_at\": \"<dateTime>\",\n        \"type\": \"OrganizationMembership\"\n      },\n      \"organization\": \"<uri>\",\n      \"group\": \"<uri>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ],\n  \"pagination\": {\n    \"count\": \"<integer>\",\n    \"next_page\": \"<string,null-uri>\",\n    \"previous_page\": \"<string,null-uri>\",\n    \"next_page_token\": \"<string,null>\",\n    \"previous_page_token\": \"<string,null>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:57:33.000Z",
+              "updatedAt": "2026-10-21T20:57:33.000Z",
+              "uid": "35240-f4d67804-d092-47b9-9c91-f59256c9e2c9"
             },
             {
-              "id": "3076aa98-cb21-4e3d-851a-18c56ec9526e",
-              "name": "Authentication failed. Verify that a valid access token is provided in the Authorization header.",
+              "id": "ea622012-de0f-4c83-8b22-466fb80cbe3d",
+              "name": "Request is not valid",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "group_relationships"
-                  ],
+                  "raw": "{{baseUrl}}/group_relationships?count=20&page_token=<string>&organization=<uri>&owner=<uri>&group=<uri>",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "group_relationships"
+                  ],
                   "query": [
                     {
-                      "key": "group",
-                      "value": "<uri>"
-                    },
-                    {
-                      "key": "organization",
-                      "value": "<uri>"
-                    },
-                    {
+                      "description": "The number of rows to return",
                       "key": "count",
                       "value": "20"
                     },
                     {
+                      "description": "The token to pass to get the next or previous portion of the collection",
                       "key": "page_token",
                       "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
                     },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                    {
+                      "description": "Indicates the results should be filtered by organization",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Indicates the results should be filtered by owner <br>\nOne Of:\n  - Organization Membership URI - `https://api.calendly.com/organization_memberships/AAAAAAAAAAAAAAAA`\n  - Organization Invitation URI - `https://api.calendly.com/organizations/AAAAAAAAAAAAAAAA/invitations/BBBBBBBBBBBBBBBB`\n",
+                      "key": "owner",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Indicates the results should be filtered by group",
+                      "key": "group",
+                      "value": "<uri>"
+                    }
+                  ]
+                }
               },
-              "status": "Unauthorized",
-              "code": 401,
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"title\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"parameter\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:57:33.000Z",
+              "updatedAt": "2026-10-21T20:57:33.000Z",
+              "uid": "35240-ea622012-de0f-4c83-8b22-466fb80cbe3d"
+            },
+            {
+              "id": "1a5ba674-2960-4bb0-9464-0faf3995f1d9",
+              "name": "Cannot authenticate caller",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/group_relationships?count=20&page_token=<string>&organization=<uri>&owner=<uri>&group=<uri>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "group_relationships"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates the results should be filtered by organization",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Indicates the results should be filtered by owner <br>\nOne Of:\n  - Organization Membership URI - `https://api.calendly.com/organization_memberships/AAAAAAAAAAAAAAAA`\n  - Organization Invitation URI - `https://api.calendly.com/organizations/AAAAAAAAAAAAAAAA/invitations/BBBBBBBBBBBBBBBB`\n",
+                      "key": "owner",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Indicates the results should be filtered by group",
+                      "key": "group",
+                      "value": "<uri>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:57:33.000Z",
+              "updatedAt": "2026-10-21T20:57:33.000Z",
+              "uid": "35240-1a5ba674-2960-4bb0-9464-0faf3995f1d9"
+            },
+            {
+              "id": "fc79bd0e-ce26-49e3-9d2b-42478fad1269",
+              "name": "Permission denied or insufficient scope",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/group_relationships?count=20&page_token=<string>&organization=<uri>&owner=<uri>&group=<uri>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "group_relationships"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates the results should be filtered by organization",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Indicates the results should be filtered by owner <br>\nOne Of:\n  - Organization Membership URI - `https://api.calendly.com/organization_memberships/AAAAAAAAAAAAAAAA`\n  - Organization Invitation URI - `https://api.calendly.com/organizations/AAAAAAAAAAAAAAAA/invitations/BBBBBBBBBBBBBBBB`\n",
+                      "key": "owner",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Indicates the results should be filtered by group",
+                      "key": "group",
+                      "value": "<uri>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Permission Denied\",\n  \"message\": \"You do not have permission\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:57:33.000Z",
+              "updatedAt": "2026-10-21T20:57:33.000Z",
+              "uid": "35240-fc79bd0e-ce26-49e3-9d2b-42478fad1269"
+            },
+            {
+              "id": "a3e322c9-b36f-4b63-8f63-dd4de317ee06",
+              "name": "An error has occurred on the server",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/group_relationships?count=20&page_token=<string>&organization=<uri>&owner=<uri>&group=<uri>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "group_relationships"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of rows to return",
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The token to pass to get the next or previous portion of the collection",
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates the results should be filtered by organization",
+                      "key": "organization",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Indicates the results should be filtered by owner <br>\nOne Of:\n  - Organization Membership URI - `https://api.calendly.com/organization_memberships/AAAAAAAAAAAAAAAA`\n  - Organization Invitation URI - `https://api.calendly.com/organizations/AAAAAAAAAAAAAAAA/invitations/BBBBBBBBBBBBBBBB`\n",
+                      "key": "owner",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Indicates the results should be filtered by group",
+                      "key": "group",
+                      "value": "<uri>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition that prevented it from fulfilling the request.\",\n  \"details\": [\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"parameter\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:57:33.000Z",
+              "updatedAt": "2026-10-21T20:57:33.000Z",
+              "uid": "35240-a3e322c9-b36f-4b63-8f63-dd4de317ee06"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:57:33.000Z",
+          "updatedAt": "2026-10-21T20:57:33.000Z",
+          "uid": "35240-b9ca68fd-25aa-42b3-b7f9-ad2aecd75840"
         }
       ],
-      "event": []
+      "id": "3c3245e1-8131-492c-9bb1-30a9c682181e",
+      "createdAt": "2026-10-21T20:57:33.000Z",
+      "updatedAt": "2026-10-21T20:57:33.000Z",
+      "uid": "35240-3c3245e1-8131-492c-9bb1-30a9c682181e"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://api.calendly.com",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://api.calendly.com"
     }
-  ],
-  "auth": {
-    "type": "bearer",
-    "bearer": [
-      {
-        "key": "token",
-        "value": "{{bearerToken}}"
-      }
-    ]
-  },
-  "info": {
-    "_postman_id": "49dc8748-d6be-48d6-b952-4ee34078eb00",
-    "name": "Calendly Scheduling Activity Log Groups API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Calendly Scheduling API (v2) is a RESTful API that allows developers to programmatically manage scheduling workflows. It provides endpoints for managing users, organizations, event types, scheduled events, invitees, routing forms, availability schedules, and webhook subscriptions. The API uses JSON for request and response bodies, standard HTTP methods, and supports authentication via personal access tokens and OAuth 2.1. Developers can use it to create events on behalf of invitees, retrieve scheduling data, and integrate Calendly functionality directly into their applications.\n\nContact Support:\n Name: Calendly Developer Support",
-      "type": "text/plain"
-    }
-  }
+  ]
 }
