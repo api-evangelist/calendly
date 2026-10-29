@@ -1,4 +1,4 @@
-# Calendly (calendly)
+# Calendly
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,110 +66,186 @@
 
 Calendly is a scheduling automation platform that helps individuals, teams, and organizations automate the meeting lifecycle by removing the back-and-forth of scheduling. Their developer platform provides APIs for programmatically managing scheduling workflows, receiving real-time event notifications via webhooks, and embedding scheduling interfaces directly into third-party applications.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/calendly/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/calendly/refs/heads/main/apis.yml)
+**Areas:** Appointments · Automation · Booking · Calendar · Meetings · Scheduling
 
-## Scope
+## Calendly on APIs.io
 
-- **Type:** Index
+Everything profiled for Calendly is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/calendly/](https://apis.io/providers/calendly/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (14)
 
-- Appointments
-- Automation
-- Booking
-- Calendars
-- Meetings
-- Scheduling
+- [Calendly Webhook API](https://apis.io/apis/calendly/webhook-api/) — The Calendly Webhook API enables developers to receive real-time notifications when scheduling events occur in Calendly. By creating webhook subscriptions,…
+- [Calendly Embed API](https://apis.io/apis/calendly/embed-api/) — The Calendly Embed API allows developers to integrate Calendly scheduling pages directly into their websites and applications. It supports inline embeds,…
+- [Calendly Activity Log API](https://apis.io/apis/calendly/calendly-activity-log-api/) — Endpoints for retrieving activity log entries for an organization.
+- [Calendly Availability API](https://apis.io/apis/calendly/calendly-availability-api/) — Endpoints for viewing available times for event types and managing user availability schedules.
+- [Calendly Data Compliance API](https://apis.io/apis/calendly/calendly-data-compliance-api/) — Endpoints for handling data compliance requests such as deletion and retrieval of invitee data.
+- [Calendly Event Types API](https://apis.io/apis/calendly/calendly-event-types-api/) — Endpoints for listing, retrieving, and managing event types that define the kinds of meetings users can schedule.
+- [Calendly Groups API](https://apis.io/apis/calendly/calendly-groups-api/) — Endpoints for listing and retrieving organization groups.
+- [Calendly Invitees API](https://apis.io/apis/calendly/calendly-invitees-api/) — Endpoints for listing, retrieving, and creating invitees on scheduled events.
+- [Calendly Organizations API](https://apis.io/apis/calendly/calendly-organizations-api/) — Endpoints for managing organization memberships, invitations, and organization-level settings.
+- [Calendly Routing Forms API](https://apis.io/apis/calendly/calendly-routing-forms-api/) — Endpoints for listing and retrieving routing forms and their submissions.
+- [Calendly Scheduled Events API](https://apis.io/apis/calendly/calendly-scheduled-events-api/) — Endpoints for listing, retrieving, and canceling scheduled events (booked meetings).
+- [Calendly Shares API](https://apis.io/apis/calendly/calendly-shares-api/) — Endpoints for creating and managing shareable scheduling links.
+- [Calendly Users API](https://apis.io/apis/calendly/calendly-users-api/) — Endpoints for retrieving user information and managing user accounts within Calendly.
+- [Calendly Webhook Subscriptions API](https://apis.io/apis/calendly/calendly-webhook-subscriptions-api/) — Endpoints for creating, listing, retrieving, and deleting webhook subscriptions that receive real-time event notifications.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-20
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (1)
 
-### Calendly Scheduling API
+Event-driven and webhook contracts.
 
-The Calendly Scheduling API (v2) is a RESTful API that allows developers to programmatically manage scheduling workflows. It provides endpoints for managing users, organizations, event types, scheduled events, invitees, and routing forms. The API uses JSON for request and response bodies, standard HTTP methods, and supports authentication via personal access tokens and OAuth 2.1.
+- [Calendly Webhook Events](https://apis.io/asyncapis/calendly/calendly-webhook-api-asyncapi/)
 
-- **Human URL:** [https://developer.calendly.com/api-docs](https://developer.calendly.com/api-docs)
-- **Base URL:** `https://api.calendly.com`
+#### Event channels (3)
 
-#### Tags
+Individual events and webhooks the provider emits.
 
-- Appointments
-- Automation
-- Booking
-- Calendars
-- Meetings
-- Scheduling
+- [/webhook/invitee-canceled](https://apis.io/channels/calendly/webhook-invitee-canceled/)
+- [/webhook/invitee-created](https://apis.io/channels/calendly/webhook-invitee-created/)
+- [/webhook/routing-form-submission-created](https://apis.io/channels/calendly/webhook-routing-form-submission-created/)
 
-#### Properties
+#### MCP servers (1)
 
-- [Documentation](https://developer.calendly.com/api-docs)
-- [OpenAPI](openapi/calendly-scheduling-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/calendly-scheduling-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/calendly-scheduling-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Model Context Protocol servers that expose the API to agents.
 
-### Calendly Webhook API
+- [calendly](https://apis.io/servers/calendly/calendly/)
 
-The Calendly Webhook API enables developers to receive real-time notifications when scheduling events occur in Calendly. By creating webhook subscriptions, applications can automatically receive data whenever invitees schedule, cancel, or reschedule meetings. This eliminates the need for polling the API and allows for event-driven integrations that respond immediately to changes in scheduling activity.
+#### Agentic access (1)
 
-- **Human URL:** [https://developer.calendly.com/api-docs](https://developer.calendly.com/api-docs)
-- **Base URL:** `https://api.calendly.com`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Calendly Agentic Access](https://apis.io/agentic-access/calendly/calendly-agentic-access/)
 
-- Events
-- Notifications
-- Scheduling
-- Webhooks
+#### JSON Schema (3)
 
-#### Properties
+The data models the API reads and writes.
 
-- [Documentation](https://developer.calendly.com/api-docs)
-- [AsyncAPI](asyncapi/calendly-webhook-api-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Postman Collection](collections/calendly-scheduling-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/calendly-scheduling-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Calendly Event Type](https://apis.io/schemas/calendly/calendly-event-type/)
+- [Calendly Invitee](https://apis.io/schemas/calendly/calendly-invitee/)
+- [Calendly Scheduled Event](https://apis.io/schemas/calendly/calendly-scheduled-event/)
 
-### Calendly Embed API
+#### JSON-LD (1)
 
-The Calendly Embed API allows developers to integrate Calendly scheduling pages directly into their websites and applications. It supports inline embeds, popup widgets, and popup text options, giving developers flexibility in how they present scheduling interfaces to users. The Embed API enables customization of the embedded experience and provides JavaScript callbacks for tracking when events are scheduled, allowing seamless integration of Calendly booking flows within third-party applications.
+Linked-data contexts for the provider's vocabulary.
 
-- **Human URL:** [https://developer.calendly.com/](https://developer.calendly.com/)
-- **Base URL:** `https://api.example.com`
+- [Calendly Context](https://apis.io/jsonld/calendly/calendly-context/)
 
-#### Tags
+#### Collections (13)
 
-- Embedding
-- Scheduling
-- Web Components
-- Widgets
+Postman and Open Collection request collections.
 
-#### Properties
+- [Calendly Scheduling Activity Log API](https://apis.io/collections/calendly/open-calendly-activity-log-api/)
+- [Calendly Scheduling Activity Log Availability API](https://apis.io/collections/calendly/open-calendly-availability-api/)
+- [Calendly Scheduling Activity Log Data Compliance API](https://apis.io/collections/calendly/open-calendly-data-compliance-api/)
+- [Calendly Scheduling Activity Log Event Types API](https://apis.io/collections/calendly/open-calendly-event-types-api/)
+- [Calendly Scheduling Activity Log Groups API](https://apis.io/collections/calendly/open-calendly-groups-api/)
+- [Calendly Scheduling Activity Log Invitees API](https://apis.io/collections/calendly/open-calendly-invitees-api/)
+- [Calendly Scheduling Activity Log Organizations API](https://apis.io/collections/calendly/open-calendly-organizations-api/)
+- [Calendly Scheduling Activity Log Routing Forms API](https://apis.io/collections/calendly/open-calendly-routing-forms-api/)
+- [Calendly Scheduling Activity Log Scheduled Events API](https://apis.io/collections/calendly/open-calendly-scheduled-events-api/)
+- [Calendly Scheduling API](https://apis.io/collections/calendly/open-calendly-scheduling-api/)
+- [Calendly Scheduling Activity Log Shares API](https://apis.io/collections/calendly/open-calendly-shares-api/)
+- [Calendly Scheduling Activity Log Users API](https://apis.io/collections/calendly/open-calendly-users-api/)
+- [Calendly Scheduling Activity Log Webhook Subscriptions API](https://apis.io/collections/calendly/open-calendly-webhook-subscriptions-api/)
 
-- [Documentation](https://developer.calendly.com/)
-- [Postman Collection](collections/calendly-scheduling-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/calendly-scheduling-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Governance rules (2)
 
-## Common Properties
+Spectral rulesets for the provider's contracts.
 
-- [GitHub Organization](https://github.com/calendly)
-- [LinkedIn](https://www.linkedin.com/company/calendly)
-- [Portal](https://developer.calendly.com/)
-- [Documentation](https://developer.calendly.com/api-docs)
+- [Calendly — asyncapi rules](https://apis.io/rules/calendly/calendly-asyncapi-spectral-rules/)
+- [Calendly — jsonschema rules](https://apis.io/rules/calendly/calendly-jsonschema-spectral-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Calendly Authentication](https://apis.io/security/calendly/calendly-authentication/)
+- [Calendly Domain Security](https://apis.io/security/calendly/calendly-domain-security/)
+- [Calendly Vulnerability Disclosure](https://apis.io/security/calendly/calendly-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Calendly Plans Pricing](https://apis.io/plans/calendly/calendly-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Calendly Rate Limits](https://apis.io/rate-limits/calendly/calendly-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Calendly Finops](https://apis.io/finops/calendly/calendly-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://calendly.com/)
-- [Privacy Policy](https://calendly.com/privacy)
-- [Terms of Service](https://calendly.com/terms)
+- [Documentation](https://developer.calendly.com/api-docs)
 - [Blog](https://calendly.com/blog)
-- [Login](https://calendly.com/login)
-- [JSON-LD](json-ld/calendly-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON Schema](json-schema/calendly-event-type-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/calendly-scheduled-event-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/calendly-invitee-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [L L Ms Txt](https://developer.calendly.com/llms.txt)
+- [Terms of service](https://calendly.com/terms)
+- [Privacy policy](https://calendly.com/privacy)
+- [GitHub](https://github.com/calendly)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 40.6** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 61.7 |
+| Contract governance | 13.6 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 25.0 |
+| Access clarity | 35.5 |
+
+**Agent readiness 48.1** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 30.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/calendly/](https://apis.io/providers/calendly/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Calendly: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/calendly/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
